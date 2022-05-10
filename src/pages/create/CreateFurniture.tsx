@@ -56,8 +56,8 @@ const CreateProject: FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setFromError(null);
+    // setIsLoading(true);
+    // setFromError(null);
     if (!category) {
       setFromError("Please select a furniture category");
       return;
@@ -81,7 +81,7 @@ const CreateProject: FC = () => {
     /**
      * データを圧縮する画像を返す
      */
-
+    console.log(photos, "photos");
     const promises = photos.map(
       async (file): Promise<any> => {
         const data = await loadImage(file, {
@@ -93,9 +93,14 @@ const CreateProject: FC = () => {
             async (blob) => {
               if (!blob) return reject("error");
               const uploadPath = `photos/${user.uid}/${file.name}`;
-              const img = await projectStorage.ref(uploadPath).put(blob);
-              const imgUrl = await img.ref.getDownloadURL();
-              resolve(imgUrl);
+              console.log(blob, "blob");
+              try {
+                const img = await projectStorage.ref(uploadPath).put(blob);
+                const imgUrl = await img.ref.getDownloadURL();
+                resolve(imgUrl);
+              } catch (error) {
+                reject();
+              }
             },
             file.type,
             0.7
@@ -118,25 +123,28 @@ const CreateProject: FC = () => {
       random: cookies.random,
       category: category.value,
     };
+    console.log(furniture, "furniture");
 
-    try {
-      const headers = {
-        Authorization: `Bearer ${cookies.jwt}`,
-      };
-      const result = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/stripe-post`,
-        furniture,
-        { headers }
-      );
-      console.log(result);
-    } catch (error) {
-      alert("Error on CreateFurniture");
-      logout();
-      history.push("/login");
-    } finally {
-      setIsLoading(false);
-      history.push("/");
-    }
+    // try {
+    const headers = {
+      Authorization: `Bearer ${cookies.jwt}`,
+    };
+    const result = await axios.post(
+      // `${process.env.REACT_APP_BASE_URL}/api/stripe-post`,
+      "https://us-central1-temanashi-phase2.cloudfunctions.net/api/stripe-post",
+      // "http://localhost:5001/temanashi-phase2/us-central1/api/stripe-post",
+      furniture,
+      { headers }
+    );
+    console.log(result);
+    // } catch (error) {
+    //   alert("Error on CreateFurniture");
+    //   logout();
+    //   history.push("/login");
+    // } finally {
+    //   setIsLoading(false);
+    //   history.push("/");
+    // }
   };
   return (
     <div className="common-container">

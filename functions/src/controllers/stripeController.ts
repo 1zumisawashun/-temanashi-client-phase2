@@ -1,16 +1,14 @@
 import Stripe from "stripe";
 // import { STRIPE_API } from "../env";
-import * as functions from "firebase-functions";
 import { RequestHandler } from "express";
 
 const cors = require("cors");
 const stripe = new Stripe(
-  "sk_test_51JBawwHlnbfxWLbN9zSs5c550PmsFCSVGLvQOR4wc5jb9FeMBZlMUMXcByo61YUVa7MhvzyOaJzHG8QOrJXSXRO20021tgTFeg",
+  "sk_test_51KxuCZHP3rLi02bMPsXkxYmv7nmYP9KMWh0iUBcieRpbWsF1qQ0D7A34C2DuUlSzHTWsJ1oKegzQb5A8G7U67eBo002RjqHENT",
   { apiVersion: "2020-08-27" }
 );
 
 const stripe_post: RequestHandler = (req, res) => {
-  functions.logger.info(req.body);
   cors()(req, res, async () => {
     // cors解除のためにラップする
     const { photos, name, price, description, ...body } = req.body;
