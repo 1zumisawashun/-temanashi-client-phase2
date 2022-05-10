@@ -1,0 +1,30 @@
+.user-tab-bar {
+  margin-top: 30px;
+  line-height: 50px;
+  background: #fafafa;
+  display: flex;
+  justify-content: space-between;
+
+  > a {
+    width: 100%;
+    color: $basalt-grey;
+    border-bottom: 3px solid $basalt-grey;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  > a:hover {
+    background: $black-shadow;
+  }
+
+  > .active {
+    background: $vintage-blue;
+    color: white;
+    border-bottom: 3px solid $vintage-blue;
+  }
+  .active:hover {
+    background: $vintage-blue;
+  }
+}

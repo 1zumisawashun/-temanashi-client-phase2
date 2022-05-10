@@ -1,0 +1,47 @@
+.product-filter-container {
+  margin: 30px auto 0;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: $vintage-blue;
+  }
+
+  > nav {
+    width: fit-content;
+    display: flex;
+    padding: 10px;
+    background-color: $white;
+    border-radius: 4px;
+  }
+
+  > nav > .title {
+    width: 80px;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+
+  > nav > button {
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    font-weight: bold;
+    color: $basalt-grey;
+    cursor: pointer;
+    border-right: 1px solid #e4e4e4;
+    font-size: 0.9em;
+  }
+
+  > nav > button:last-child {
+    border: 0;
+  }
+
+  > nav > button.active {
+    color: $vintage-blue;
+  }
+}

@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Poppins:wght@900&display=swap");
+
+.auth-container {
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  background: linear-gradient(
+    to right,
+    $vintage-blue,
+    $vintage-blue,
+    $vintage-blue
+  );
+  > .wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    &.-w25 {
+      width: 25%;
+      @include sp {
+        width: 100%;
+      }
+    }
+    &.-w30 {
+      width: 30%;
+      @include sp {
+        width: 100%;
+      }
+    }
+  }
+
+  > .wrapper > .form {
+    margin: auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
+    font-family: "Montserrat", sans-serif;
+    @include sp {
+      width: 70%;
+    }
+  }
+
+  > .wrapper > .form > h1 {
+    font-family: "Poppins", sans-serif;
+    color: white;
+    letter-spacing: 2px;
+    margin-top: 0;
+  }
+
+  > .wrapper > .form > form > input {
+    font-size: 16px;
+    display: block;
+    box-sizing: border-box;
+    margin: 20px auto;
+    padding: 12px 20px;
+    border: none;
+    background: rgba(133, 48, 48, 0.1);
+    border-radius: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 13px 21px rgba(0, 0, 0, 0.05);
+  }
+
+  > .wrapper > .form > form > button {
+    width: 100%;
+    font-size: 16px;
+    display: block;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 13px 21px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    background: #f64f59;
+    color: white;
+    transition: 0.5s;
+  }
+
+  > .wrapper > .form > form > input:focus {
+    outline: none;
+  }
+
+  > .wrapper > .form > form > input::placeholder {
+    color: white;
+  }
+
+  > .wrapper > .form > form > button:hover {
+    background: #12c2e9;
+  }
+
+  > .wrapper > .form > form > .forgot-signup {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  > .wrapper > .form > form > .forgot-signup > a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+}
