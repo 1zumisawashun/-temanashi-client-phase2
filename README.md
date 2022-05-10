@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# phase-1
 
-採用している技術スタック
+![image](https://user-images.githubusercontent.com/65071534/167672720-c0ba2b9b-020e-4e94-b73c-79280ba7f0ef.png)
+
+- https://github.com/1zumisawashun/temanashi-client
+
+- https://temanashi-phase2.web.app/
+
+- https://qiita.com/1zushun/items/9b52fee68489a5cf33f8
+
+# phase-2
+
+### 採用している技術スタック
 
 ```
 言語： TypeScript
@@ -18,20 +28,26 @@ E2Eテスト： Cypress
 
 # Available Scripts
 
-### `npm install`
+### Install the dependencies
 
-clone した後にパッケージをインストールする
+```
+npm install
+```
 
-### `npm run start`
+### Compiles and hot-reloads for development
 
-local の開発環境を実行する
+```
+npm run start
+```
 
-### `npm run build:firebase`
+### Compiles and minifies for production1
 
-root ディレクトリで指定のコマンドを実行する。  
-Cloud Functions の TypeScript をコンパイルし作成した関数のみのデプロイを実行する。
+```
+npm run build:firebase
+```
 
-### `npm run deploy:firebase`
+### Compiles and minifies for production2
 
-root ディレクトリで指定のコマンドを実行する。  
-src ディレクトリをビルドして Firebase Hosting へのデプロイを実行する
+```
+npm run deploy:firebase
+```
