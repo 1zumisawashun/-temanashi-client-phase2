@@ -5,7 +5,7 @@ import {
   ProductItemWithoutComment,
 } from "../../../utilities/stripeClient";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { taxIncludedPrice } from "../../../utilities/convertValue";
+import { taxIncludedPrice } from "../../../utilities/utilities";
 import Counter from "../../ui/Counter";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";

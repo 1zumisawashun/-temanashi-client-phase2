@@ -7,7 +7,7 @@ import FlatButton from "../../ui/Button/FlatButton";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
 import { useSubCollection } from "../../../hooks/useSubCollection";
-import { convertedPath } from "../../../utilities/convertValue";
+import { convertedPath } from "../../../utilities/utilities";
 import PersonIcon from "../../../assets/icon/icon_person.svg";
 import { ja } from "date-fns/locale";
 

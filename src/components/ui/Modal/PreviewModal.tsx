@@ -3,7 +3,7 @@ import { useAuthContext } from "../../../hooks/useAuthContext";
 import CloseButton from "../Button/CloseButton";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { scrollTop } from "../../../utilities/convertValue";
+import { scrollTop } from "../../../utilities/utilities";
 
 type Props = {
   src: Array<string>;

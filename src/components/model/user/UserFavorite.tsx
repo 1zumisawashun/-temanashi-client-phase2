@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useSubCollection } from "../../../hooks/useSubCollection";
-import { convertedPath } from "../../../utilities/convertValue";
+import { convertedPath } from "../../../utilities/utilities";
 import { User, likedFurnitures } from "../../../@types/dashboard";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import ProductList from "../dashboard/DashboardList";

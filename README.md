@@ -1,30 +1,30 @@
-# phase-1
+# ■ phase-1
 
 ![image](https://user-images.githubusercontent.com/65071534/167672720-c0ba2b9b-020e-4e94-b73c-79280ba7f0ef.png)
 
+### phase-1 のリポジトリ
+
 - https://github.com/1zumisawashun/temanashi-client
+
+### phase-1 のデプロイ済みアプリケーション
 
 - https://temanashi-39b3f.web.app/
 
+### phase-1 の詳細
+
 - https://qiita.com/1zushun/items/9b52fee68489a5cf33f8
 
-# phase-2
+# ■ phase-2
+
+### デプロイ済みアプリケーション
 
 - https://temanashi-phase2.web.app/
 
-# 課題
-
-- CircleCI にテストを組み込む
-- @types を分離させる
-- MUIの導入
-- ディレクトリ構造をよしこ式にリプレイスする
-- polymorphic-componentの作成をして再利用可能なコンポーネントを作る
-
-### 採用している技術スタック
+### 採用している技術スタック(未実装含む)
 
 ```
 言語： TypeScript
-CSSアーキテクチャ： ITCSS, RSCSS
+CSSフレームワーク： MUI
 ライブラリ： React
 ホスティング： Firebase Hosting
 DB： Firestore

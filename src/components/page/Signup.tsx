@@ -1,5 +1,5 @@
 import { FC, FormEvent, useState } from "react";
-import { useSignup } from "../../hooks/useSignup";
+import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 const Signup: FC = () => {
@@ -8,7 +8,7 @@ const Signup: FC = () => {
   const [displayName, setDisplayName] = useState<string>("");
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [thumbnailError, setThumbnailError] = useState<string | null>(null);
-  const { signup, isPending, error } = useSignup();
+  const { signup, isPending, error } = useAuth();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

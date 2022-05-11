@@ -11,7 +11,7 @@ import UserAccount from "../model/user/UserAccount";
 
 const Dashboard: FC = () => {
   const { user } = useAuthContext();
-  const [currentFilter, setCurrentFilter] = useState<String>("all");
+  const [currentFilter, setCurrentFilter] = useState<String>("favorite");
   const [isPending, setIsPending] = useState<boolean>(false);
   const [productItems, setProductItems] = useState<ProductItem[]>([]);
   /* eslint-disable */

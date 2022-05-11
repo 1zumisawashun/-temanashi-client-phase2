@@ -32,6 +32,7 @@ export const useToken = () => {
         `${process.env.REACT_APP_BASE_URL}/api/jwt/check`,
         { headers }
       );
+      console.log(result, "result");
       return result.data.message; // Promise.resolveを返す
     } catch (error) {
       return null; // Promise.rejectを返す

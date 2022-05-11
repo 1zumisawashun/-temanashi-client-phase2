@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { db, recommendation } from "../../../utilities/dammyData";
-import { taxIncludedPrice } from "../../../utilities/convertValue";
+import { db, recommendation } from "../../../utilities/constant";
+import { taxIncludedPrice } from "../../../utilities/utilities";
 import Loading from "../../ui/Loading";
 import Image from "../../ui/Image";
 

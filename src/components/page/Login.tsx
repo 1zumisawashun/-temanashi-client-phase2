@@ -1,12 +1,12 @@
 import { FC, FormEvent } from "react";
 import { useState } from "react";
-import { useLogin } from "../../hooks/useLogin";
+import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 const Login: FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { login, error, isPending } = useLogin();
+  const { login, error, isPending } = useAuth();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

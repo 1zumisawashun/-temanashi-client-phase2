@@ -14,19 +14,16 @@ const firebaseConfig = {
   useFirebaseEmulator: window.location.hostname === "localhost",
 };
 
-// init firebase
 firebase.initializeApp(firebaseConfig);
 
-// init service
 const projectFirestore = firebase.firestore();
 const projectAuth = firebase.auth();
 const projectStorage = firebase.storage();
 const projectFunctions = firebase.app().functions();
 
-//timestamp
 const timestamp = firebase.firestore.Timestamp;
 
-// functions側でfirebase emulator:startするなら意味がない？
+// NOTE:functions側でfirebase emulator:startするなら意味がない？
 const isEmulating = firebaseConfig.useFirebaseEmulator;
 if (isEmulating) {
   firebase.functions().useEmulator("localhost", 5001);

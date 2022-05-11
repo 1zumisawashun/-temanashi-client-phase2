@@ -5,7 +5,7 @@ import ThumbDown from "../../../assets/icon/icon_thumb_down.svg";
 import Undo from "../../../assets/icon/icon_undo.svg";
 import { ProductDoc } from "../../../@types/stripe";
 import ProgressBar from "../../ui/ProgressBar";
-import { delay } from "../../../utilities/convertValue";
+import { delay } from "../../../utilities/utilities";
 import Loading from "../../ui/Loading";
 // import TinderCard from '../react-tinder-card/index'
 

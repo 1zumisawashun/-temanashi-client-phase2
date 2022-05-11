@@ -7,7 +7,7 @@ import PreviewModal from "../../ui/Modal/PreviewModal";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
 import Loading from "../../ui/Loading";
-import { taxIncludedPrice } from "../../../utilities/convertValue";
+import { taxIncludedPrice } from "../../../utilities/utilities";
 import { useCookies } from "react-cookie";
 import ExecuteModal from "../../ui/Modal/ExecuteModal";
 
@@ -42,7 +42,7 @@ const ProductSummary: FC<Props> = ({ furniture }) => {
       alert(error);
     } finally {
       setIsPending(false);
-      history.push(`/users/${user.uid}/cart`);
+      history.push(`/cart`);
     }
   };
 

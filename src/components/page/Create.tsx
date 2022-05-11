@@ -1,7 +1,7 @@
 import { FC, useState, FormEvent } from "react";
 import Select from "react-select";
 import { projectStorage } from "../../firebase/config";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Loading from "../ui/Loading";
 import InputText from "../ui/Input/InputText";
@@ -10,7 +10,7 @@ import InputTextarea from "../ui/Input/InputTextarea";
 import InputFileMulti from "../ui/Input/InputFileMulti";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { useLogout } from "../../hooks/useLogout";
+// import { useAuth } from "../../hooks/useAuth";
 import loadImage from "blueimp-load-image";
 
 const categories = [
@@ -30,8 +30,8 @@ type CategoryOp = {
 };
 
 const CreateProject: FC = () => {
-  const history = useHistory();
-  const { logout } = useLogout();
+  // const history = useHistory();
+  // const { logout } = useAuth();
 
   const [name, setName] = useState<string>("");
   const [photos, setPhotos] = useState<File[]>([]);
@@ -56,7 +56,7 @@ const CreateProject: FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // setIsLoading(true);
+    setIsLoading(true);
     // setFromError(null);
     if (!category) {
       setFromError("Please select a furniture category");
@@ -142,7 +142,7 @@ const CreateProject: FC = () => {
     //   logout();
     //   history.push("/login");
     // } finally {
-    //   setIsLoading(false);
+    setIsLoading(false);
     //   history.push("/");
     // }
   };

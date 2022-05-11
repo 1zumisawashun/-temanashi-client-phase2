@@ -2,7 +2,7 @@ import { useCollection } from "../../hooks/useCollection";
 import Avatar from "./Avatar";
 import { User } from "../../@types/dashboard";
 import { FC } from "react";
-import { convertedPath } from "../../utilities/convertValue";
+import { convertedPath } from "../../utilities/utilities";
 
 const OnlineUsers: FC = () => {
   const { error, documents } = useCollection<User>(convertedPath("/users"));

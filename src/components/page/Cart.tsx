@@ -7,20 +7,19 @@ import {
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCartDocument } from "../../hooks/useCartDocument";
 import Loading from "../ui/Loading";
-import InpuCheckbox from "../ui/Input/InputCheckbox";
 import { useToken } from "../../hooks/useToken";
-import { useLogout } from "../../hooks/useLogout";
-import { useHistory } from "react-router-dom";
+// import { useAuth } from "../../hooks/useAuth";
+// import { useHistory } from "react-router-dom";
 import CartList from "../model/cart/CartList";
 import NotFound from "../ui/NotFound";
+import CartPaymentArea from "../model/cart/CartPaymentArea";
 
 const Cart: FC = () => {
-  const [isAccepted, setIsAccepted] = useState<boolean>(false);
   const [isPendingBuy, setIsPendingBuy] = useState<boolean>(false);
   const [line_items, setLinetems] = useState<Array<line_item>>([]);
   const { verifyJWT } = useToken();
-  const { logout } = useLogout();
-  const history = useHistory();
+  // const { logout } = useAuth();
+  // const history = useHistory();
 
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
@@ -57,13 +56,13 @@ const Cart: FC = () => {
       (item: line_item) => formatlineItems[item.price] ?? item
     );
     const token = await verifyJWT();
-
-    if (!token) {
-      alert("認証トークンが有効期限切れです。ログインしなおしてください。");
-      logout();
-      history.push("/login");
-      return;
-    }
+    console.log(token);
+    // if (!token) {
+    //   alert("認証トークンが有効期限切れです。ログインしなおしてください。");
+    //   logout();
+    //   history.push("/login");
+    //   return;
+    // }
     try {
       setIsPendingBuy(true);
       const uid = user.uid;
@@ -100,40 +99,19 @@ const Cart: FC = () => {
     const result = await checkSameProduct(price);
     setLinetems(result);
   };
-
-  const handleAlert = () => {
-    alert("利用規約に同意してください");
-  };
-
   return (
     <div className="common-container">
       {isPendingBuy && <Loading />}
       {documents.length === 0 && <NotFound />}
       {documents.length !== 0 && (
-        <CartList
-          productItems={documents}
-          selectProduct={selectProduct}
-          removeProduct={removeProduct}
-        />
-      )}
-      {documents.length !== 0 && (
-        <div className="accept-block">
-          <InpuCheckbox
-            state={isAccepted}
-            setState={setIsAccepted}
-            text="利用規約・個人情報の取り扱いについて同意しますか？"
+        <>
+          <CartList
+            productItems={documents}
+            selectProduct={selectProduct}
+            removeProduct={removeProduct}
           />
-          {isAccepted && (
-            <button className="btn" onClick={onClickBuy}>
-              購入する
-            </button>
-          )}
-          {!isAccepted && (
-            <button className="btn -disabled" onClick={handleAlert}>
-              購入する
-            </button>
-          )}
-        </div>
+          <CartPaymentArea onClick={onClickBuy} />
+        </>
       )}
     </div>
   );

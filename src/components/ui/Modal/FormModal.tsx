@@ -5,7 +5,7 @@ import { CommentToAdd } from "../../../@types/dashboard";
 import FlatButton from "../Button/FlatButton";
 import CloseButton from "../Button/CloseButton";
 import { ProductItem } from "../../../utilities/stripeClient";
-import { scrollTop } from "../../../utilities/convertValue";
+import { scrollTop } from "../../../utilities/utilities";
 
 type Props = {
   referense: firebase.firestore.CollectionReference<CommentToAdd>;

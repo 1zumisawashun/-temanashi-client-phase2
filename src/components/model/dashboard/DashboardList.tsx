@@ -5,7 +5,7 @@ import {
   ProductItemWithoutComment,
 } from "../../../utilities/stripeClient";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import { taxIncludedPrice } from "../../../utilities/convertValue";
+import { taxIncludedPrice } from "../../../utilities/utilities";
 import Image from "../../ui/Image";
 
 type Props = {

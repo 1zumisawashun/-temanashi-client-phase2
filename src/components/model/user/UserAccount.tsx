@@ -3,7 +3,7 @@ import { projectFunctions, isEmulating } from "../../../firebase/config";
 import axios from "axios";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useCookies } from "react-cookie";
-import { useLogout } from "../../../hooks/useLogout";
+import { useAuth } from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 
 type Response = {
@@ -15,7 +15,7 @@ const UserAccount: FC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
   const [cookies, setCookie, removeCookie] = useCookies(["jwt", "productId"]);
-  const { logout, isPending } = useLogout();
+  const { logout, isPending } = useAuth();
   const history = useHistory();
 
   const handleSubmit = (e: FormEvent) => {
