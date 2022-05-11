@@ -4,11 +4,21 @@
 
 - https://github.com/1zumisawashun/temanashi-client
 
-- https://temanashi-phase2.web.app/
+- https://temanashi-39b3f.web.app/
 
 - https://qiita.com/1zushun/items/9b52fee68489a5cf33f8
 
 # phase-2
+
+- https://temanashi-phase2.web.app/
+
+# 課題
+
+- CircleCI でデプロイ
+- CircleCI にテストを組み込む
+- firebase.json に cloud functions の自動デプロイを組み込む
+- @types を分離させる
+- リムーブパッケージの導入しビルド時の実行に混ぜる
 
 ### 採用している技術スタック
 

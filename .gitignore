@@ -9,7 +9,7 @@
 /coverage
 
 # production
-# /build
+/build
 
 # misc
 .DS_Store
@@ -26,5 +26,3 @@ yarn-error.log*
 .env
 /.firebase
 /.vscode
-/public
-/build

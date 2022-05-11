@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: envの追加
+          name: .envファイルへAPIキーを追加する
           command: |
             echo DEBUG=${ENV} > ~/.env
             echo REACT_APP_API_KEY=${REACT_APP_API_KEY} >> ~/.env
@@ -19,26 +19,19 @@ jobs:
             echo REACT_APP_STRIPE_API_KEY=${REACT_APP_STRIPE_API_KEY} >> ~/.env
             ls -al
       - run:
-          name: node_modulesのインストール
+          name: npmパッケージをインストールする
           command: |
-            npm i && cd functions && npm i
-            ls -al
+            npm i
       - run:
-          name: ビルド
+          name: ビルドを実行する
           command: |
             npm run build
-            ls -al
-            cd functions && npm run build
-            ls -al
-      - run:
-          name: buildフォルダの確認
-          command: ls -la build
       - run:
           name: firebase-toolsのインストール
           command: |
             npm install --dev firebase-tools
       - run:
-          name: firebaseへデプロイ
+          name: firebase hostingへデプロイする
           command: |
             ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 workflows:
