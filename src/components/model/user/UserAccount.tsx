@@ -1,10 +1,9 @@
 import { FC, FormEvent } from "react";
-import UserNavbar from "../../components/UserNavbar";
-import { projectFunctions, isEmulating } from "../../firebase/config";
+import { projectFunctions, isEmulating } from "../../../firebase/config";
 import axios from "axios";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useCookies } from "react-cookie";
-import { useLogout } from "../../hooks/useLogout";
+import { useLogout } from "../../../hooks/useLogout";
 import { useHistory } from "react-router-dom";
 
 type Response = {
@@ -82,7 +81,6 @@ const UserAccount: FC = () => {
   };
   return (
     <>
-      <UserNavbar />
       <div className="user-container">
         <div className="inner">
           <button onClick={onCallTest} className="btn">

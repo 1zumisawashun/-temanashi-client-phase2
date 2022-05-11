@@ -1,14 +1,13 @@
 import { FC } from "react";
-import UserNavbar from "../../components/UserNavbar";
-import { useSubCollection } from "../../hooks/useSubCollection";
-import { convertedPath } from "../../utilities/convertValue";
-import { User, likedFurnitures } from "../../@types/dashboard";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import ProductList from "../../components/DefinitionList/ProductList";
-import { ProductItem } from "../../utilities/stripeClient";
+import { useSubCollection } from "../../../hooks/useSubCollection";
+import { convertedPath } from "../../../utilities/convertValue";
+import { User, likedFurnitures } from "../../../@types/dashboard";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import ProductList from "../../../components/DefinitionList/ProductList";
+import { ProductItem } from "../../../utilities/stripeClient";
 // pendingを追加したい
 // import Loading from "../../components/Loading";
-import NotFound from "../../components/NotFound";
+import NotFound from "../../../components/NotFound";
 
 const UserFavorite: FC = () => {
   const { user } = useAuthContext();
@@ -34,7 +33,6 @@ const UserFavorite: FC = () => {
 
   return (
     <>
-      <UserNavbar />
       <div className="user-container">
         <div className="inner">
           {documents.length === 0 && <NotFound />}

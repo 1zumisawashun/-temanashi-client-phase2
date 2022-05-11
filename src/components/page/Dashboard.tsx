@@ -1,9 +1,9 @@
 import { FC, useEffect } from "react";
-import ProductFilter from "./ProductFilter";
+import DashboardFilter from "../../components/model/dashboard/DashboardFilter";
 import { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
-import ProductList from "../../components/DefinitionList/ProductList";
+import DashboardList from "../../components/model/dashboard/DashboardList";
 import Loading from "../../components/Loading";
 import { useCookies } from "react-cookie";
 
@@ -12,9 +12,9 @@ const Dashboard: FC = () => {
   const [currentFilter, setCurrentFilter] = useState<String>("all");
   const [isPending, setIsPending] = useState<boolean>(false);
   const [productItems, setProductItems] = useState<ProductItem[]>([]);
+  /* eslint-disable */
   const [cookies, setCookie] = useCookies(["random"]);
-  console.log(cookies);
-  //cookieのレンダリングが激しいのでチェックoptionのpathが怪しい。もしくはuseRefに入れる
+  /* eslint-enable */
 
   const changeFilter = (newFilter: String) => {
     setCurrentFilter(newFilter);
@@ -68,13 +68,13 @@ const Dashboard: FC = () => {
     <div className="common-container">
       {isPending && <Loading />}
       {filteredProductItems && (
-        <ProductFilter
+        <DashboardFilter
           currentFilter={currentFilter}
           changeFilter={changeFilter}
         />
       )}
       {filteredProductItems && (
-        <ProductList productItems={filteredProductItems} />
+        <DashboardList productItems={filteredProductItems} />
       )}
     </div>
   );

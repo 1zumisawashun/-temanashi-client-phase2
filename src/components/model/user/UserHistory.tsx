@@ -1,10 +1,9 @@
 import { FC, useEffect, useState } from "react";
-import UserNavbar from "../../components/UserNavbar";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { productUseCase } from "../../utilities/stripeClient";
-import PaymentList from "../../components/DefinitionList/PaymentList";
-import Loading from "../../components/Loading";
-import NotFound from "../../components/NotFound";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { productUseCase } from "../../../utilities/stripeClient";
+import PaymentList from "../../../components/DefinitionList/PaymentList";
+import Loading from "../../../components/Loading";
+import NotFound from "../../../components/NotFound";
 
 const UserHistory: FC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -30,7 +29,6 @@ const UserHistory: FC = () => {
 
   return (
     <>
-      <UserNavbar />
       {isPending && <Loading />}
       <div className="user-container">
         <div className="inner">

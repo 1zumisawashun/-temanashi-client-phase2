@@ -1,24 +1,22 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 
-import Dashboard from "./pages/dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import CreateFurniture from "./pages/create/CreateFurniture";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-import Furniture from "./pages/furniture/Furniture";
+import Furniture from "./pages/Product";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import OnlineUsers from "./components/OnlineUsers";
 import Diagnose from "./pages/diagnose/Diagnose";
-import UserFavorite from "./pages/user/UserFavorite";
-import UserAccount from "./pages/user/UserAccount";
-import UserHistory from "./pages/user/UserHistory";
 import Cart from "./pages/cart/Cart";
 import Complete from "./pages/cart/Complete";
 import DiagnoseResult from "./pages/diagnose/DiagnoseResult";
 import Terms from "./pages/terms";
 import Privacy from "./pages/privacy";
 import Error from "./pages/error";
+import User from "./pages/User";
 
 const App = () => {
   const { user, authIsReady } = useAuthContext();
@@ -145,30 +143,12 @@ const App = () => {
               </div>
               {user && <OnlineUsers />}
             </Route>
-            <Route path="/users/:id/history">
+            <Route path="/users/:id">
               {user && <Sidebar />}
               <div className="container">
                 <Navbar />
                 {!user && <Redirect to="/login" />}
-                {user && <UserHistory />}
-              </div>
-              {user && <OnlineUsers />}
-            </Route>
-            <Route path="/users/:id/account">
-              {user && <Sidebar />}
-              <div className="container">
-                <Navbar />
-                {!user && <Redirect to="/login" />}
-                {user && <UserAccount />}
-              </div>
-              {user && <OnlineUsers />}
-            </Route>
-            <Route path="/users/:id/favorite">
-              {user && <Sidebar />}
-              <div className="container">
-                <Navbar />
-                {!user && <Redirect to="/login" />}
-                {user && <UserFavorite />}
+                {user && <User />}
               </div>
               {user && <OnlineUsers />}
             </Route>
