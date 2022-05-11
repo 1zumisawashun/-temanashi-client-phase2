@@ -47,14 +47,14 @@ npm install
 npm run start
 ```
 
-### Compiles and minifies for production1
+### Run local test
 
 ```
-npm run build:firebase
+npm run cy:open
 ```
 
-### Compiles and minifies for production2
+### Compiles and minifies for production
 
 ```
-npm run deploy:firebase
+npm run deploy
 ```
