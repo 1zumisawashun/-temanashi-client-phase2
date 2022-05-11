@@ -14,11 +14,8 @@
 
 # 課題
 
-- CircleCI でデプロイ
 - CircleCI にテストを組み込む
-- firebase.json に cloud functions の自動デプロイを組み込む
 - @types を分離させる
-- リムーブパッケージの導入しビルド時の実行に混ぜる
 
 ### 採用している技術スタック
 
