@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../../hooks/useAuthContext";
 import FlatButton from "../Button/FlatButton";
-import { scrollTop } from "../../utilities/convertValue";
+import { scrollTop } from "../../../utilities/convertValue";
 
 type Props = {
   message: string;

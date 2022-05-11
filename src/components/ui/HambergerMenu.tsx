@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Hamburger from "hamburger-react";
-import WhiteTempleIcon from "../assets/icon/icon_temple_white.svg";
+import WhiteTempleIcon from "../../assets/icon/icon_temple_white.svg";
 import FlatButton from "./Button/FlatButton";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 
 type Prop = {

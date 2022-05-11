@@ -1,5 +1,5 @@
 import { FC } from "react";
-import NotFoundIcon from "../assets/icon/icon_not_found.svg";
+import NotFoundIcon from "../../assets/icon/icon_not_found.svg";
 
 const NotFound: FC = () => {
   return (

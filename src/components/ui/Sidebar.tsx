@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import Avatar from "./Avatar";
-import { useAuthContext } from "../hooks/useAuthContext";
-import DashboardIcon from "../assets/icon/icon_dashboard.svg";
-import AddCircleIcon from "../assets/icon/icon_add_circle.svg";
-import FeedbackIcon from "../assets/icon/icon_feedback.svg";
-import CartIcon from "../assets/icon/icon_cart.svg";
+import { useAuthContext } from "../../hooks/useAuthContext"
+import DashboardIcon from "../../assets/icon/icon_dashboard.svg";
+import AddCircleIcon from "../../assets/icon/icon_add_circle.svg";
+import FeedbackIcon from "../../assets/icon/icon_feedback.svg";
+import CartIcon from "../../assets/icon/icon_cart.svg";
 import { FC } from "react";
 
 const Sidebar: FC = () => {
@@ -30,7 +30,7 @@ const Sidebar: FC = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/create/furniture">
+              <NavLink to="/create/product">
                 <img src={AddCircleIcon} alt="add project icon" />
                 <span>New Furniture</span>
               </NavLink>
@@ -42,7 +42,7 @@ const Sidebar: FC = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={`/users/${user.uid}/cart`}>
+              <NavLink to="/cart">
                 <img src={CartIcon} alt="add project icon" />
                 <span>Shopping Cart</span>
               </NavLink>

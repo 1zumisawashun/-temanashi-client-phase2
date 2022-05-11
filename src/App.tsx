@@ -2,20 +2,19 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 
 import Dashboard from "./pages/Dashboard";
-import CreateFurniture from "./pages/create/CreateFurniture";
-import Login from "./pages/login/Login";
-import Signup from "./pages/signup/Signup";
+import Create from "./pages/Create";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Furniture from "./pages/Product";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import OnlineUsers from "./components/OnlineUsers";
-import Diagnose from "./pages/diagnose/Diagnose";
-import Cart from "./pages/cart/Cart";
-import Complete from "./pages/cart/Complete";
-import DiagnoseResult from "./pages/diagnose/DiagnoseResult";
-import Terms from "./pages/terms";
+import Navbar from "./components/ui/Navbar";
+import Sidebar from "./components/ui/Sidebar";
+import OnlineUsers from "./components/ui/OnlineUsers";
+import Diagnose from "./pages/Diagnose";
+import Cart from "./pages/Cart";
+import Complete from "./pages/Complete";
+import Terms from "./pages/Terms";
 import Privacy from "./pages/privacy";
-import Error from "./pages/error";
+import Error from "./pages/Error";
 import User from "./pages/User";
 
 const App = () => {
@@ -98,21 +97,12 @@ const App = () => {
               </div>
               {user && <OnlineUsers />}
             </Route>
-            <Route path="/diagnose/result">
+            <Route path="/create/product">
               {user && <Sidebar />}
               <div className="container">
                 <Navbar />
                 {!user && <Redirect to="/login" />}
-                {user && <DiagnoseResult />}
-              </div>
-              {user && <OnlineUsers />}
-            </Route>
-            <Route path="/create/furniture">
-              {user && <Sidebar />}
-              <div className="container">
-                <Navbar />
-                {!user && <Redirect to="/login" />}
-                {user && <CreateFurniture />}
+                {user && <Create />}
               </div>
               {user && <OnlineUsers />}
             </Route>
@@ -152,7 +142,7 @@ const App = () => {
               </div>
               {user && <OnlineUsers />}
             </Route>
-            <Route path="/users/:id/cart">
+            <Route path="/cart">
               {user && <Sidebar />}
               <div className="container">
                 <Navbar />

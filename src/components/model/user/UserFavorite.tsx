@@ -3,11 +3,11 @@ import { useSubCollection } from "../../../hooks/useSubCollection";
 import { convertedPath } from "../../../utilities/convertValue";
 import { User, likedFurnitures } from "../../../@types/dashboard";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import ProductList from "../../../components/DefinitionList/ProductList";
+import ProductList from "../dashboard/DashboardList";
 import { ProductItem } from "../../../utilities/stripeClient";
 // pendingを追加したい
 // import Loading from "../../components/Loading";
-import NotFound from "../../../components/NotFound";
+import NotFound from "../../ui/NotFound";
 
 const UserFavorite: FC = () => {
   const { user } = useAuthContext();

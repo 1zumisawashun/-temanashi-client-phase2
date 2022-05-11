@@ -2,14 +2,14 @@ import { useFirestore } from "../../../hooks/useFirestore";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 import { FC, useState } from "react";
-import LikeButton from "../../../components/Button/LikeButton";
-import PreviewModal from "../../../components/Modal/PreviewModal";
+import LikeButton from "../../ui/Button/LikeButton";
+import PreviewModal from "../../ui/Modal/PreviewModal";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
-import Loading from "../../../components/Loading";
+import Loading from "../../ui/Loading";
 import { taxIncludedPrice } from "../../../utilities/convertValue";
 import { useCookies } from "react-cookie";
-import ExecuteModal from "../../../components/Modal/ExecuteModal";
+import ExecuteModal from "../../ui/Modal/ExecuteModal";
 
 type Props = {
   furniture: ProductItem;

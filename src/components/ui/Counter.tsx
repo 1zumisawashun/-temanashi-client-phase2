@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
-import AddIcon from "../assets/icon/icon_add.svg";
-import RemoveIcon from "../assets/icon/icon_remove.svg";
+import AddIcon from "../../assets/icon/icon_add.svg";
+import RemoveIcon from "../../assets/icon/icon_remove.svg";
 
 type Prop = {
   add: Function;

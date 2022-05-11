@@ -1,21 +1,20 @@
 import React, { FC, useState, useRef, useMemo } from "react";
 import TinderCard from "react-tinder-card";
-import { useHistory } from "react-router-dom";
-import ThumbUp from "../assets/icon/icon_thumb_up.svg";
-import ThumbDown from "../assets/icon/icon_thumb_down.svg";
-import Undo from "../assets/icon/icon_undo.svg";
-import { ProductDoc } from "../@types/stripe";
-import ProgressBar from "./ProgressBar";
-import { delay } from "../utilities/convertValue";
-import Loading from "../components/Loading";
+import ThumbUp from "../../../assets/icon/icon_thumb_up.svg";
+import ThumbDown from "../../../assets/icon/icon_thumb_down.svg";
+import Undo from "../../../assets/icon/icon_undo.svg";
+import { ProductDoc } from "../../../@types/stripe";
+import ProgressBar from "../../ui/ProgressBar";
+import { delay } from "../../../utilities/convertValue";
+import Loading from "../../ui/Loading";
 // import TinderCard from '../react-tinder-card/index'
 
 type Props = {
   db: Array<ProductDoc>;
+  setIsPendingDiagnose: any;
 };
 
-const TinderSwipe: FC<Props> = ({ db }) => {
-  const history = useHistory();
+const TinderSwipe: FC<Props> = ({ db, setIsPendingDiagnose }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lastDirection, setLastDirection] = useState<string>();
   const [currentIndex, setCurrentIndex] = useState<number>(db.length - 1);
@@ -57,7 +56,7 @@ const TinderSwipe: FC<Props> = ({ db }) => {
       setIsLoading(true);
       await delay(2000); // NOTE:意図的ナビゲーションを遅らせないとレンダリングについてこれずに固まる
       setIsLoading(false);
-      history.push("/diagnose/result");
+      setIsPendingDiagnose(true);
     }
   };
   /**

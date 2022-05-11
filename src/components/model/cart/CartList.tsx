@@ -3,15 +3,15 @@ import { FC } from "react";
 import {
   ProductItem,
   ProductItemWithoutComment,
-} from "../../utilities/stripeClient";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { taxIncludedPrice } from "../../utilities/convertValue";
-import Counter from "../../components/Counter";
+} from "../../../utilities/stripeClient";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { taxIncludedPrice } from "../../../utilities/convertValue";
+import Counter from "../../ui/Counter";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
-import Divider from "../../components/Divider";
-import DeleteIcon from "../../assets/icon/icon_delete.svg";
-import Image from "../Image";
+import Divider from "../../ui/Divider";
+import DeleteIcon from "../../../assets/icon/icon_delete.svg";
+import Image from "../../ui/Image";
 
 type Props = {
   productItems: Array<ProductItem | ProductItemWithoutComment>;

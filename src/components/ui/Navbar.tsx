@@ -1,6 +1,6 @@
-import Temple from "../assets/icon/icon_temple.svg";
+import Temple from "../../assets/icon/icon_temple.svg";
 import { FC, useState } from "react";
-import HamburgerMenu from "../components/HambergerMenu";
+import HamburgerMenu from "./HambergerMenu";
 
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);

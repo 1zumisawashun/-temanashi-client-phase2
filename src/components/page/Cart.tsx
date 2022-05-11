@@ -6,13 +6,13 @@ import {
 } from "../../utilities/stripeClient";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCartDocument } from "../../hooks/useCartDocument";
-import Loading from "../../components/Loading";
-import InpuCheckbox from "../../components/Input/InputCheckbox";
+import Loading from "../ui/Loading";
+import InpuCheckbox from "../ui/Input/InputCheckbox";
 import { useToken } from "../../hooks/useToken";
 import { useLogout } from "../../hooks/useLogout";
 import { useHistory } from "react-router-dom";
-import CartList from "../../components/DefinitionList/CartList";
-import NotFound from "../../components/NotFound";
+import CartList from "../model/cart/CartList";
+import NotFound from "../ui/NotFound";
 
 const Cart: FC = () => {
   const [isAccepted, setIsAccepted] = useState<boolean>(false);

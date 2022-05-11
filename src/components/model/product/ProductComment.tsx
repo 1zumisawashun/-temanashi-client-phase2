@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
-import Avatar from "../../../components/Avatar";
+import Avatar from "../../ui/Avatar";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Comment } from "../../../@types/dashboard";
-import FormModal from "../../../components/Modal/FormModal";
-import FlatButton from "../../../components/Button/FlatButton";
+import FormModal from "../../ui/Modal/FormModal";
+import FlatButton from "../../ui/Button/FlatButton";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
 import { useSubCollection } from "../../../hooks/useSubCollection";

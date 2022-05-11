@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { db, recommendation } from "../../utilities/dammyData";
-import { taxIncludedPrice } from "../../utilities/convertValue";
-import Loading from "../../components/Loading";
-import Image from "../../components/Image";
+import { db, recommendation } from "../../../utilities/dammyData";
+import { taxIncludedPrice } from "../../../utilities/convertValue";
+import Loading from "../../ui/Loading";
+import Image from "../../ui/Image";
 
 const DiagnoseResult: FC = () => {
   return (

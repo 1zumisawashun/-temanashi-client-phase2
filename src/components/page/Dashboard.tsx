@@ -1,10 +1,10 @@
 import { FC, useEffect } from "react";
-import DashboardFilter from "../../components/model/dashboard/DashboardFilter";
+import DashboardFilter from "../model/dashboard/DashboardFilter";
 import { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
-import DashboardList from "../../components/model/dashboard/DashboardList";
-import Loading from "../../components/Loading";
+import DashboardList from "../model/dashboard/DashboardList";
+import Loading from "../ui/Loading";
 import { useCookies } from "react-cookie";
 
 const Dashboard: FC = () => {

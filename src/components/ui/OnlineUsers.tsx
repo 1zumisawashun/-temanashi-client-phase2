@@ -1,8 +1,8 @@
-import { useCollection } from "../hooks/useCollection";
-import Avatar from "../components/Avatar";
-import { User } from "../@types/dashboard";
+import { useCollection } from "../../hooks/useCollection";
+import Avatar from "./Avatar";
+import { User } from "../../@types/dashboard";
 import { FC } from "react";
-import { convertedPath } from "../utilities/convertValue";
+import { convertedPath } from "../../utilities/convertValue";
 
 const OnlineUsers: FC = () => {
   const { error, documents } = useCollection<User>(convertedPath("/users"));

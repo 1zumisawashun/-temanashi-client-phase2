@@ -1,11 +1,11 @@
 import { FC, useState, FormEvent } from "react";
-import { firebase, timestamp } from "../../firebase/config";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { CommentToAdd } from "../../@types/dashboard";
+import { firebase, timestamp } from "../../../firebase/config";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { CommentToAdd } from "../../../@types/dashboard";
 import FlatButton from "../Button/FlatButton";
 import CloseButton from "../Button/CloseButton";
-import { ProductItem } from "../../utilities/stripeClient";
-import { scrollTop } from "../../utilities/convertValue";
+import { ProductItem } from "../../../utilities/stripeClient";
+import { scrollTop } from "../../../utilities/convertValue";
 
 type Props = {
   referense: firebase.firestore.CollectionReference<CommentToAdd>;

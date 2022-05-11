@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Divider from "../components/Divider";
+import Divider from "../components/ui/Divider";
 
 const terms: FC = () => {
   return (
