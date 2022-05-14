@@ -3,15 +3,16 @@ import {
   User,
   likedFurnitures,
   likedUsers,
-} from "../../../@types/dashboard";
+} from "../../@types/dashboard";
 import { FC, useState, useEffect } from "react";
-import { timestamp, firebase } from "../../../firebase/config";
-import { useAuthContext } from "../../../hooks/useAuthContext";
-import AddFavoriteIcon from "../../../assets/icon/icon_add_favorite.svg";
-import RemoveFavoriteIcon from "../../../assets/icon/icon_remove_favorite.svg";
-import { convertedPath } from "../../../utilities/utilities";
-import { useSubDocument } from "../../../hooks/useSubDocument";
-import { ProductItem } from "../../../utilities/stripeClient";
+import { timestamp, firebase } from "../../firebase/config";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import IconButton from "@mui/material/IconButton";
+import { convertedPath } from "../../utilities/utilities";
+import { useSubDocument } from "../../hooks/useSubDocument";
+import { ProductItem } from "../../utilities/stripeClient";
 
 type Prop = {
   furniture: ProductItem;
@@ -107,16 +108,10 @@ const LikeButton: FC<Prop> = ({ furniture }) => {
   }, [likedFurniture.referense]);
 
   return (
-    <div className="like-button">
-      <span onClick={handleClick} className="favorite">
-        {like ? (
-          <img src={AddFavoriteIcon} alt="" />
-        ) : (
-          <img src={RemoveFavoriteIcon} alt="" />
-        )}
-        {error && <div className="error">{error}</div>}
-      </span>
-    </div>
+    <IconButton color="primary" onClick={handleClick}>
+      {like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+      {error && <div className="error">{error}</div>}
+    </IconButton>
   );
 };
 export default LikeButton;

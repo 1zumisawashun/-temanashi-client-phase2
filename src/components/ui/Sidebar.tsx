@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom";
 import Avatar from "./Avatar";
-import { useAuthContext } from "../../hooks/useAuthContext"
-import DashboardIcon from "../../assets/icon/icon_dashboard.svg";
-import AddCircleIcon from "../../assets/icon/icon_add_circle.svg";
-import FeedbackIcon from "../../assets/icon/icon_feedback.svg";
-import CartIcon from "../../assets/icon/icon_cart.svg";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import { FC } from "react";
+import TextButton from "./TextButton";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import SendIcon from "@mui/icons-material/Send";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 
 const Sidebar: FC = () => {
   const { user } = useAuthContext();
@@ -15,37 +15,32 @@ const Sidebar: FC = () => {
     <div className="sidebar">
       <div className="sidebar-content">
         <div className="user">
-          <NavLink exact to={`/users/${user.uid}`}>
-            {/* nullチェック */}
+          <TextButton path={`/users/${user.uid}`}>
             {user.photoURL && <Avatar src={user.photoURL} />}
             <p>hey {user.displayName}</p>
-          </NavLink>
+          </TextButton>
         </div>
         <nav className="links">
           <ul>
             <li>
-              <NavLink exact to="/">
-                <img src={DashboardIcon} alt="dashboard icon" />
-                <span>Dashboard</span>
-              </NavLink>
+              <TextButton path="/" icon={<DashboardIcon />}>
+                Dashboard
+              </TextButton>
             </li>
             <li>
-              <NavLink to="/create/product">
-                <img src={AddCircleIcon} alt="add project icon" />
-                <span>New Furniture</span>
-              </NavLink>
+              <TextButton path="/create/product" icon={<SendIcon />}>
+                New Product
+              </TextButton>
             </li>
             <li>
-              <NavLink to="/diagnose">
-                <img src={FeedbackIcon} alt="add project icon" />
-                <span>Diagnose</span>
-              </NavLink>
+              <TextButton path="/diagnose" icon={<ContentPasteSearchIcon />}>
+                Diagnose
+              </TextButton>
             </li>
             <li>
-              <NavLink to="/cart">
-                <img src={CartIcon} alt="add project icon" />
-                <span>Shopping Cart</span>
-              </NavLink>
+              <TextButton path="/cart" icon={<ShoppingCartIcon />}>
+                Shopping Cart
+              </TextButton>
             </li>
           </ul>
         </nav>

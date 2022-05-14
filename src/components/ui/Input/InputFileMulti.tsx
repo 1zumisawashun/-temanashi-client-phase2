@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import CloseButton from "../Button/CloseButton";
+import CloseButton from "../CloseButton";
 import ExecuteModal from "../Modal/ExecuteModal";
 
 interface Props {

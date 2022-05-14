@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import CloseButton from "../Button/CloseButton";
+import CloseButton from "../CloseButton";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { scrollTop } from "../../../utilities/utilities";

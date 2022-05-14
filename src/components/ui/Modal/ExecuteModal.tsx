@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import FlatButton from "../Button/FlatButton";
+import FlatButton from "../BasicButton";
 import { scrollTop } from "../../../utilities/utilities";
 
 type Props = {
