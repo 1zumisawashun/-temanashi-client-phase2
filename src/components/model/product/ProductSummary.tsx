@@ -3,6 +3,7 @@ import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 import { FC, useState } from "react";
 import LikeButton from "../../ui/LikeButton";
+import BasicButton from "../../ui/BasicButton";
 import PreviewModal from "../../ui/Modal/PreviewModal";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
@@ -92,9 +93,7 @@ const ProductSummary: FC<Props> = ({ furniture }) => {
             </div>
             <p className="details">{furniture.product.description}</p>
             <div className="btnarea">
-              <button className="btn" onClick={openExecuteModal}>
-                削除
-              </button>
+              <BasicButton onClick={openExecuteModal}>削除</BasicButton>
               {toggleExecuteModal && (
                 <ExecuteModal
                   message="本当に削除しますか？"
@@ -102,12 +101,9 @@ const ProductSummary: FC<Props> = ({ furniture }) => {
                   onClick={() => handleDelete()}
                 />
               )}
-              <button
-                className="btn"
-                onClick={() => addCart(furniture.product.id)}
-              >
+              <BasicButton onClick={() => addCart(furniture.product.id)}>
                 購入
-              </button>
+              </BasicButton>
               <LikeButton furniture={furniture} />
             </div>
           </div>

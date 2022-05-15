@@ -1,28 +1,41 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import Button from "@mui/material/Button";
+import { SvgIconProps } from "@mui/material";
 
 type Props = {
-  content: string;
+  children: ReactNode;
+  icon?: SvgIconProps;
+  onColor?:
+    | "inherit"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "error"
+    | "info"
+    | "warning";
   styleName?: string;
   isDisabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const FlatButton: FC<Props> = ({
+const BasicButton: FC<Props> = ({
   styleName,
-  content,
+  children,
+  icon,
+  onColor = "primary",
   isDisabled,
   onClick,
 }: Props) => {
   return (
     <Button
       variant="contained"
+      color={onColor}
       className={styleName + ` btn -mt10`}
       onClick={onClick}
       disabled={isDisabled}
     >
-      {content}
+      {children}
     </Button>
   );
 };
-export default FlatButton;
+export default BasicButton;

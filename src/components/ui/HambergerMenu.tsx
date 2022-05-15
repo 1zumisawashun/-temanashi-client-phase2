@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Hamburger from "hamburger-react";
 import WhiteTempleIcon from "../../assets/icon/icon_temple_white.svg";
-import FlatButton from "./BasicButton";
+import BasicButton from "./BasicButton";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 
@@ -51,39 +51,44 @@ const HamburgerMenu: FC<Prop> = ({ state, setState }) => {
           <div className="responsive-overlay" style={styles}>
             <ul className="menu">
               <li className="hamburger-link">
-                <FlatButton
+                <BasicButton
                   styleName="-link"
-                  content="Dashboard"
                   onClick={() => closeHamburger("/")}
-                />
+                >
+                  Dashboard
+                </BasicButton>
               </li>
               <li className="hamburger-link">
-                <FlatButton
+                <BasicButton
                   styleName="-link"
-                  content="New Furniture"
                   onClick={() => closeHamburger("/create/furniture")}
-                />
+                >
+                  New Furniture
+                </BasicButton>
               </li>
               <li className="hamburger-link">
-                <FlatButton
+                <BasicButton
                   styleName="-link"
-                  content="Diagnose"
                   onClick={() => closeHamburger("/diagnose")}
-                />
+                >
+                  Diagnose
+                </BasicButton>
               </li>
               <li className="hamburger-link">
-                <FlatButton
+                <BasicButton
                   styleName="-link"
-                  content="Shopping Cart"
                   onClick={() => closeHamburger(`/users/${user.uid}/cart`)}
-                />
+                >
+                  Shopping Cart
+                </BasicButton>
               </li>
               <li className="hamburger-link">
-                <FlatButton
+                <BasicButton
                   styleName="-link"
-                  content="My Page"
                   onClick={() => closeHamburger(`/users/${user.uid}/favorite`)}
-                />
+                >
+                  My Page
+                </BasicButton>
               </li>
             </ul>
           </div>

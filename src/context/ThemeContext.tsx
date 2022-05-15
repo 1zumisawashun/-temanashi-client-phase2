@@ -3,12 +3,23 @@ import { createTheme } from "@mui/material/styles";
 export const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#84bcb4",
     },
     secondary: {
-      // This is green.A700 as hex.
-      main: "#11cb5f",
+      main: "#ffffff",
+    },
+  },
+  // NOTE:https://mui.com/material-ui/api/button/#css
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {
+          color: "white",
+        },
+        containedSecondary: {
+          color: "#84bcb4",
+        },
+      },
     },
   },
 });

@@ -2,7 +2,7 @@ import { FC, useState, FormEvent } from "react";
 import { firebase, timestamp } from "../../../firebase/config";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { CommentToAdd } from "../../../@types/dashboard";
-import FlatButton from "../BasicButton";
+import BasicButton from "../BasicButton";
 import CloseButton from "../CloseButton";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { scrollTop } from "../../../utilities/utilities";
@@ -61,7 +61,7 @@ const FormModal: FC<Props> = ({ referense, item, setToggleModal }) => {
               value={newComment}
             ></textarea>
           </label>
-          <FlatButton content={"Add Comment"} />
+          <BasicButton>New Comment</BasicButton>
         </form>
       </div>
     </>

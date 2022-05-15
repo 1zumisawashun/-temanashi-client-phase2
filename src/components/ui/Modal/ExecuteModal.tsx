@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
-import FlatButton from "../BasicButton";
+import BasicButton from "../BasicButton";
 import { scrollTop } from "../../../utilities/utilities";
 
 type Props = {
@@ -20,22 +20,18 @@ const ExecuteModal: FC<Props> = ({ message, onClick, setToggleModal }) => {
 
   const styles = { top: scrollTop() };
 
+  // title
+  // content
+  // footer
+
   return (
     <div className="execute-modal">
       <div className="overlay" style={styles}>
         <div className="wrapper -form">
           <p className="message">{message}</p>
           <div className="buttons">
-            <FlatButton
-              styleName="-w200 -round -mt50"
-              content="はい"
-              onClick={onClick}
-            />
-            <FlatButton
-              styleName="-w200 -round -mt50"
-              content="いいえ"
-              onClick={closeModal}
-            />
+            <BasicButton onClick={onClick}>はい</BasicButton>
+            <BasicButton onClick={closeModal}>いいえ</BasicButton>
           </div>
         </div>
       </div>
