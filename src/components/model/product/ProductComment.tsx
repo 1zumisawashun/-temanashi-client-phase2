@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import Avatar from "../../ui/Avatar";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Comment } from "../../../@types/dashboard";
-import FormModal from "../../ui/Modal/FormModal";
+import FormModal from "../../ui/FormModal";
 import BasicButton from "../../ui/BasicButton";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";

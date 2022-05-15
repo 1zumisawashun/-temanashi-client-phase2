@@ -1,4 +1,5 @@
 import { Furniture } from "../@types/dashboard";
+import { OptionProps } from "../components/ui/InputSelect";
 import theme_1 from "../assets/image/furniture_1.jpg";
 import furniture_bed from "../assets/image/furniture_bed.jpg";
 import furniture_blanket from "../assets/image/furniture_blanket.jpg";
@@ -98,3 +99,18 @@ export const filterList: Array<string> = [
   "sofa",
 ];
 export const userList: Array<string> = ["favorite", "history", "account"];
+
+export const categories: Array<OptionProps> = [
+  { value: "bed", label: "Bed" },
+  { value: "blanket", label: "Blanket" },
+  { value: "chair", label: "Chair" },
+  { value: "lamp", label: "Lamp" },
+  { value: "plant", label: "Plant" },
+  { value: "rug", label: "Rug" },
+  { value: "table", label: "Table" },
+  { value: "shelf", label: "Shelf" },
+  { value: "sofa", label: "Sofa" },
+];
+
+export const text: string =
+  "Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";

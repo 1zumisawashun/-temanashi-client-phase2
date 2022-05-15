@@ -4,21 +4,22 @@ import { useHistory } from "react-router-dom";
 import { FC, useState } from "react";
 import LikeButton from "../../ui/LikeButton";
 import BasicButton from "../../ui/BasicButton";
-import PreviewModal from "../../ui/Modal/PreviewModal";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
 import Loading from "../../ui/Loading";
 import { taxIncludedPrice } from "../../../utilities/utilities";
 import { useCookies } from "react-cookie";
-import ExecuteModal from "../../ui/Modal/ExecuteModal";
+import { Modal } from "../../ui/BasicModal";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 type Props = {
   furniture: ProductItem;
 };
 
 const ProductSummary: FC<Props> = ({ furniture }) => {
-  const [togglePreviewModal, setTogglePreviewModal] = useState<boolean>(false);
-  const [toggleExecuteModal, setToggleExecuteModal] = useState<boolean>(false);
+  const [isOpenExecute, setIsOpenExecute] = useState<boolean>(false);
+  const [isOpenPreview, setIsOpenPreview] = useState<boolean>(false);
   const [isPending, setIsPending] = useState<boolean>(false);
   const [cookies, setCookie] = useCookies(["productId"]);
 
@@ -48,19 +49,20 @@ const ProductSummary: FC<Props> = ({ furniture }) => {
   };
 
   const handleDelete = () => {
-    document.body.style.overflow = "";
-    setToggleExecuteModal(false);
+    setIsOpenExecute(false);
     if (furniture.product) deleteDocument<ProductItem>("products", id);
     history.push("/");
   };
 
-  const openPreviewModal = () => {
-    setTogglePreviewModal(true);
-    document.body.style.overflow = "hidden";
+  const openModalPreview = () => {
+    setIsOpenPreview(true);
   };
-  const openExecuteModal = () => {
-    setToggleExecuteModal(true);
-    document.body.style.overflow = "hidden";
+  const openModalExecute = () => {
+    setIsOpenExecute(true);
+  };
+  const closeModal = () => {
+    setIsOpenPreview(false);
+    setIsOpenExecute(false);
   };
 
   return (
@@ -72,17 +74,30 @@ const ProductSummary: FC<Props> = ({ furniture }) => {
             <img
               src={furniture.product.images[0]}
               alt=""
-              onClick={openPreviewModal}
+              onClick={openModalPreview}
             />
           ) : (
             <img src="https://placehold.jp/200x160.png" alt="" />
           )}
-          {togglePreviewModal && (
-            <PreviewModal
-              src={furniture.product.images}
-              setToggleModal={setTogglePreviewModal}
-            />
-          )}
+          <Modal
+            title="詳細画面"
+            open={isOpenPreview}
+            handleOpen={closeModal}
+            contents={
+              <Carousel>
+                {furniture.product.images.map((item) => (
+                  <div>
+                    <img src={item} alt="" />
+                  </div>
+                ))}
+              </Carousel>
+            }
+            footer={
+              <div className="buttons">
+                <BasicButton onClick={closeModal}>閉じる</BasicButton>
+              </div>
+            }
+          />
         </div>
 
         <h2 className="title">{furniture.product.name}</h2>
@@ -93,14 +108,18 @@ const ProductSummary: FC<Props> = ({ furniture }) => {
             </div>
             <p className="details">{furniture.product.description}</p>
             <div className="btnarea">
-              <BasicButton onClick={openExecuteModal}>削除</BasicButton>
-              {toggleExecuteModal && (
-                <ExecuteModal
-                  message="本当に削除しますか？"
-                  setToggleModal={setToggleExecuteModal}
-                  onClick={() => handleDelete()}
-                />
-              )}
+              <BasicButton onClick={openModalExecute}>削除</BasicButton>
+              <Modal
+                title="本当に削除しますか？"
+                open={isOpenExecute}
+                handleOpen={closeModal}
+                footer={
+                  <div className="buttons">
+                    <BasicButton onClick={handleDelete}>はい</BasicButton>
+                    <BasicButton onClick={closeModal}>いいえ</BasicButton>
+                  </div>
+                }
+              />
               <BasicButton onClick={() => addCart(furniture.product.id)}>
                 購入
               </BasicButton>

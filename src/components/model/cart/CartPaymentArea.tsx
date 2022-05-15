@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import InpuCheckbox from "../../ui/Input/InputCheckbox";
+import InpuCheckbox from "../../ui/InputCheckbox";
 
 type Props = {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
