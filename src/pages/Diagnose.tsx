@@ -1,6 +1,6 @@
-import DiagnosePage from "../components/page/Diagnose";
+import DiagnoseTemplate from "../components/page/Diagnose";
 const Diagnose = () => {
-  return <DiagnosePage />;
+  return <DiagnoseTemplate />;
 };
 
 export default Diagnose;

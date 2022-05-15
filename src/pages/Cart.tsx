@@ -1,6 +1,6 @@
-import CartPage from "../components/page/Cart";
+import CartTemplate from "../components/page/Cart";
 const Cart = () => {
-  return <CartPage />;
+  return <CartTemplate />;
 };
 
 export default Cart;

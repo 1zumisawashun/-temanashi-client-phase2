@@ -1,6 +1,6 @@
-import UserPage from "../components/page/User";
+import UserTemplate from "../components/page/User";
 const User = () => {
-  return <UserPage />;
+  return <UserTemplate />;
 };
 
 export default User;

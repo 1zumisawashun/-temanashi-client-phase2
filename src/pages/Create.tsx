@@ -1,6 +1,6 @@
-import CreatePage from "../components/page/Create";
+import CreateTemplate from "../components/page/Create";
 const Create = () => {
-  return <CreatePage />;
+  return <CreateTemplate />;
 };
 
 export default Create;

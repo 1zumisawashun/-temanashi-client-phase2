@@ -1,6 +1,6 @@
-import ProductPage from "../components/page/Product";
+import ProductTemplate from "../components/page/Product";
 const Product = () => {
-  return <ProductPage />;
+  return <ProductTemplate />;
 };
 
 export default Product;
