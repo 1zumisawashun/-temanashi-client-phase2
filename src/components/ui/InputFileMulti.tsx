@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import CloseButton from "./CloseButton";
+import React, { VFC, useState } from "react";
+import { CloseButton } from "./IconButton";
 import { Modal } from "./BasicModal";
 import BasicButton from "./BasicButton";
 
@@ -17,7 +17,7 @@ const mineType = [
   "image/svg+xml",
 ];
 
-const PhotosUpload: FC<Props> = ({
+const PhotosUpload: VFC<Props> = ({
   name = "photos",
   photos,
   setPhotos,
@@ -151,10 +151,6 @@ const PhotosUpload: FC<Props> = ({
       {isFileTypeError && (
         <p>※jpeg, png, bmp, gif, svg以外のファイル形式は表示されません</p>
       )}
-
-      <label className="btn -upload" htmlFor={name}>
-        upload
-      </label>
 
       <input
         data-cy="file_upload"

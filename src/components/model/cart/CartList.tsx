@@ -10,8 +10,8 @@ import Counter from "../../ui/Counter";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 import Divider from "../../ui/Divider";
-import DeleteIcon from "../../../assets/icon/icon_delete.svg";
 import Image from "../../ui/Image";
+import { DeleteButton } from "../../ui/IconButton";
 
 type Props = {
   productItems: Array<ProductItem | ProductItemWithoutComment>;
@@ -77,10 +77,8 @@ const CartList: FC<Props> = ({
                       </div>
                     </div>
                     <div>
-                      <img
-                        src={DeleteIcon}
-                        alt=""
-                        className="delete-icon"
+                      <DeleteButton
+                        styleName="delete-icon"
                         onClick={() =>
                           HandleRemove(item.product.id, priceIndex)
                         }

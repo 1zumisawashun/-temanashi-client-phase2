@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { SvgIconProps } from "@mui/material";
 
@@ -8,6 +8,7 @@ type Props = {
   children: ReactNode;
   icon?: SvgIconProps;
 };
+// NOTE:MUIのLinkコンポーネントの場合iconの追加ができないためButtonを採用
 
 const LinkButton: FC<Props> = ({ path, children, icon }: Props) => {
   return (
@@ -16,4 +17,11 @@ const LinkButton: FC<Props> = ({ path, children, icon }: Props) => {
     </Button>
   );
 };
-export default LinkButton;
+const NavlinkButton: FC<Props> = ({ path, children, icon }: Props) => {
+  return (
+    <Button component={NavLink} exact to={`${path}`} startIcon={icon}>
+      {children}
+    </Button>
+  );
+};
+export { LinkButton, NavlinkButton };

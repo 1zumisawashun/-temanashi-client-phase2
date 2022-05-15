@@ -23,6 +23,7 @@
     border-bottom: 3px solid rgba(225, 225, 225, 0.2);
   }
   > .sidebar-content > .user > a {
+    display: block;
     text-decoration: none;
     color: $white;
   }
