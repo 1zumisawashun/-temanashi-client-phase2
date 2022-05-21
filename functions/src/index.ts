@@ -32,9 +32,13 @@ const helloOnCall = functions.https.onCall((data, context) => {
 });
 
 // Get Axios Test
-app.get("/hello", (req: any, res: any) => {
-  res.status(200).json({ message: "hello world" });
-});
+app.get(
+  "/hello",
+  [authenticateWithJWT, authenticateWithFirebase],
+  (req: any, res: any) => {
+    res.status(200).json({ message: "hello world" });
+  }
+);
 
 // jwtの発行
 app.post("/jwt", createJWT);

@@ -1,7 +1,7 @@
-import Avatar from "./Avatar";
+import Avatar from "../ui/Avatar";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { VFC } from "react";
-import { NavlinkButton } from "./TextLink";
+import { NavlinkButton } from "../ui/TextLink";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SendIcon from "@mui/icons-material/Send";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";

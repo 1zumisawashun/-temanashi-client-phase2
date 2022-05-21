@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Hamburger from "hamburger-react";
 import WhiteTempleIcon from "../../assets/icon/icon_temple_white.svg";
-import BasicButton from "./BasicButton";
+import BasicButton from "../ui/BasicButton";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 

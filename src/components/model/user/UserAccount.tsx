@@ -1,10 +1,10 @@
 import { FC, FormEvent } from "react";
 import { projectFunctions, isEmulating } from "../../../firebase/config";
-import axios from "axios";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useCookies } from "react-cookie";
 import { useAuth } from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
+import axios from "../../../utilities/axiosClient";
 
 type Response = {
   message: string;
@@ -14,7 +14,7 @@ type Response = {
 const UserAccount: FC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
-  const [cookies, setCookie, removeCookie] = useCookies(["jwt", "productId"]);
+  const [cookies, setCookie] = useCookies(["jwt"]);
   const { logout, isPending } = useAuth();
   const history = useHistory();
 
@@ -31,15 +31,11 @@ const UserAccount: FC = () => {
     });
   };
   const onRequestTest = async () => {
-    const result = await axios.get(
-      `${process.env.REACT_APP_BASE_URL_EMULATOR}/helloOnRequest`
-    );
+    const result = await axios.get(`/helloOnRequest`);
     console.log(result, "result");
   };
   const getAxiosTest = async () => {
-    const result = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/api/hello`
-    );
+    const result = await axios.get(`/api/hello`);
     console.log(result, "result");
   };
   const createJWT = async () => {
@@ -47,37 +43,33 @@ const UserAccount: FC = () => {
       uid: user.uid,
       name: user.displayName,
     };
-    const result = await axios.post<Response>(
-      `${process.env.REACT_APP_BASE_URL}/api/jwt`,
-      params
-    );
+    const result = await axios.post<Response>(`/api/jwt`, params);
     setCookie("jwt", result.data.jwt, { path: "/" });
     console.log(result, "result");
-    console.log(cookies, "cookies");
   };
+
+  // NOTE:検証済み_20220515
   const verifyJWT = async () => {
-    const headers = {
-      Authorization: `Bearer ${cookies.jwt}`,
-    };
-    const result = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/api/jwt/check`,
-      { headers }
-    );
-    console.log(result, "result");
+    const path = `/api/jwt/check`;
+    const result = await axios.get(path).catch((err) => {
+      return err.response;
+    });
+    if (result.status !== 200) {
+      history.push("/error");
+    }
+    console.log(result, "check JWT");
   };
 
-  const removeProductIdCookie = () => {
-    removeCookie("productId", { path: "/" });
-    console.log(cookies);
-  };
-
-  const emulatingTest = async () => {
-    const result = await axios.get(
-      `${process.env.REACT_APP_BASE_URL_EMULATOR}/api/hello`
-      // `${process.env.REACT_APP_BASE_URL_EMULATOR}/helloOnRequest`
-    );
-    console.log(process.env.REACT_APP_BASE_URL_EMULATOR);
-    console.log(result, "check on emulator");
+  // NOTE:検証済み_20220515
+  const Emulating = async () => {
+    const path = `/api/hello`;
+    const result = await axios.get(path).catch((err) => {
+      return err.response;
+    });
+    if (result.status !== 200) {
+      history.push("/error");
+    }
+    console.log(result, "check Emulator");
   };
   return (
     <>
@@ -98,16 +90,13 @@ const UserAccount: FC = () => {
           <button onClick={verifyJWT} className="btn">
             verifyJWT
           </button>
-          <button onClick={removeProductIdCookie} className="btn">
-            removeProductIdCookie
-          </button>
           {isEmulating && (
-            <button onClick={emulatingTest} className="btn">
+            <button onClick={Emulating} className="btn">
               emulatingTest
             </button>
           )}
           {!isEmulating && (
-            <button onClick={emulatingTest} className="btn -disabled" disabled>
+            <button onClick={Emulating} className="btn -disabled" disabled>
               not work emulating test...
             </button>
           )}

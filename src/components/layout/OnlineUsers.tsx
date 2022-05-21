@@ -1,5 +1,5 @@
 import { useCollection } from "../../hooks/useCollection";
-import Avatar from "./Avatar";
+import Avatar from "../ui/Avatar";
 import { User } from "../../@types/dashboard";
 import { FC } from "react";
 import { convertedPath } from "../../utilities/utilities";
