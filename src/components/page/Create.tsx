@@ -1,14 +1,12 @@
 import { FC, useState, FormEvent } from "react";
 import { useHistory } from "react-router-dom";
-import Loading from "../ui/Loading";
-import { InputText } from "../ui/InputText";
-import InputFileMulti from "../ui/InputFileMulti";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useAuth } from "../../hooks/useAuth";
 import { useStorage } from "../../hooks/useStorage";
 import { categories, text } from "../../utilities/constant";
-import { InputSelect, OptionProps } from "../ui/InputSelect";
+import { InputSelect, InputText, InputFileMulti, Loading } from "../ui";
+import { OptionProps } from "../ui/InputSelect";
 import { SingleValue } from "react-select";
 
 interface FormData {

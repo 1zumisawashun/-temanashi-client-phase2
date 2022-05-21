@@ -4,7 +4,7 @@ import {
   likedFurnitures,
   likedUsers,
 } from "../../@types/dashboard";
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { timestamp, firebase } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -14,7 +14,7 @@ import { convertedPath } from "../../utilities/utilities";
 import { useSubDocument } from "../../hooks/useSubDocument";
 import { ProductItem } from "../../utilities/stripeClient";
 
-type Prop = {
+type LikeButtonProp = {
   furniture: ProductItem;
 };
 type Id = {
@@ -31,7 +31,7 @@ type LikedFuritures = {
   referense: firebase.firestore.DocumentReference<likedFurnitures> | null;
 };
 
-const LikeButton: FC<Prop> = ({ furniture }) => {
+const LikeButton: React.VFC<LikeButtonProp> = ({ furniture }) => {
   const [like, setLike] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuthContext();

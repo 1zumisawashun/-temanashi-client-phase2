@@ -6,7 +6,7 @@ import {
 } from "../../../utilities/stripeClient";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { taxIncludedPrice } from "../../../utilities/utilities";
-import Image from "../../ui/Image";
+import { Image } from "../../ui";
 
 type Props = {
   productItems: Array<ProductItem | ProductItemWithoutComment>;
@@ -22,7 +22,7 @@ const DashboardList: FC<Props> = ({ productItems }) => {
       {productItems &&
         productItems.map((item: ProductItem | ProductItemWithoutComment) => (
           <Link
-            to={`/furnitures/${item.product.id}`}
+            to={`/products/${item.product.id}`}
             key={item.product.id}
             className="wrapper"
           >

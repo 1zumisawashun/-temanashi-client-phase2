@@ -1,5 +1,4 @@
 import { FC, useState, FormEvent } from "react";
-import Avatar from "../../ui/Avatar";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Comment } from "../../../@types/dashboard";
 import { useParams } from "react-router-dom";
@@ -10,10 +9,8 @@ import { ja } from "date-fns/locale";
 import { timestamp } from "../../../firebase/config";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { CommentToAdd } from "../../../@types/dashboard";
-import BasicButton from "../../ui/BasicButton";
+import { BasicButton, BasicModal, InputText, Avatar } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
-import { Modal } from "../../ui/BasicModal";
-import { InputText } from "../../ui/InputText";
 
 type Props = {
   furniture: ProductItem;
@@ -99,7 +96,7 @@ const ProductComments: FC<Props> = ({ furniture }) => {
             ))}
         </ul>
         <BasicButton onClick={openModal}>Comment</BasicButton>
-        <Modal
+        <BasicModal
           title="コメント入力フォーム"
           open={isOpen}
           handleOpen={closeModal}

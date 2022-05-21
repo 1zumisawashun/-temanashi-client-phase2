@@ -11,7 +11,8 @@ const Label = styled("p")(() => ({
   fontSize: "12px",
   fontWeight: "600",
 }));
-export type TextFieldProps = {
+
+export interface TextFieldProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -29,9 +30,9 @@ export type TextFieldProps = {
   maxLength?: number;
   inputRef?: React.RefObject<HTMLInputElement>;
   value?: string;
-};
+}
 
-export const InputText: React.VFC<TextFieldProps> = ({
+const InputText: React.VFC<TextFieldProps> = ({
   type = "text",
   name,
   label,
@@ -76,3 +77,5 @@ export const InputText: React.VFC<TextFieldProps> = ({
     </div>
   );
 };
+
+export default InputText;

@@ -1,7 +1,6 @@
-import { FC } from "react";
 import Divider from "../components/ui/Divider";
 
-const terms: FC = () => {
+const terms: React.VFC = () => {
   return (
     <>
       <div className="terms">

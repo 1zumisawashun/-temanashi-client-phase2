@@ -6,7 +6,7 @@ import { useToken } from "../../hooks/useToken";
 import { useAuth } from "../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 import CartList from "../model/cart/CartList";
-import NotFound from "../ui/NotFound";
+import { NotFound } from "../ui";
 import CartPaymentArea from "../model/cart/CartAgreement";
 import { useCartContext } from "../../hooks/useCartContext";
 

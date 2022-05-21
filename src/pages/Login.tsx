@@ -1,6 +1,17 @@
 import LoginTemplate from "../components/page/Login";
-const Login = () => {
-  return <LoginTemplate />;
+import { useAuthContext } from "../hooks/useAuthContext";
+import { Redirect } from "react-router-dom";
+
+const Login: React.VFC = () => {
+  const { user } = useAuthContext();
+
+  return user ? (
+    <Redirect to="/" />
+  ) : (
+    <div className="container -auth">
+      <LoginTemplate />
+    </div>
+  );
 };
 
 export default Login;

@@ -4,9 +4,8 @@ import ThumbUp from "../../../assets/icon/icon_thumb_up.svg";
 import ThumbDown from "../../../assets/icon/icon_thumb_down.svg";
 import Undo from "../../../assets/icon/icon_undo.svg";
 import { ProductDoc } from "../../../@types/stripe";
-import ProgressBar from "../../ui/ProgressBar";
+import { ProgressBar, Loading } from "../../ui";
 import { delay } from "../../../utilities/utilities";
-import Loading from "../../ui/Loading";
 // import TinderCard from '../react-tinder-card/index'
 
 type Props = {

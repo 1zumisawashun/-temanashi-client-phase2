@@ -1,10 +1,10 @@
-import { FC } from "react";
 import Loader from "react-loader-spinner";
-type Props = {
+
+type LoadingProps = {
   message?: string;
 };
 
-const Loading: FC<Props> = ({ message }: Props) => {
+const Loading: React.VFC<LoadingProps> = ({ message }) => {
   const scrollTop = (): number => {
     return Math.max(
       window.pageYOffset,

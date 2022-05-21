@@ -1,5 +1,5 @@
 import { useCartContext } from "../../../hooks/useCartContext";
-import { CountDownButton, CountUpButton } from "../../ui/IconButton";
+import { CountUpButton, CountDownButton } from "../../ui";
 
 interface CartCounterProps {
   productId: string;

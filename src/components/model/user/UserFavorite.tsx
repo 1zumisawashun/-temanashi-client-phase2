@@ -7,7 +7,7 @@ import ProductList from "../dashboard/DashboardList";
 import { ProductItem } from "../../../utilities/stripeClient";
 // pendingを追加したい
 // import Loading from "../../components/Loading";
-import NotFound from "../../ui/NotFound";
+import { NotFound } from "../../ui";
 
 const UserFavorite: FC = () => {
   const { user } = useAuthContext();

@@ -1,8 +1,8 @@
 import Temple from "../../assets/icon/icon_temple.svg";
-import { FC, useState } from "react";
+import { useState } from "react";
 import HamburgerMenu from "./HambergerMenu";
 
-const Navbar: FC = () => {
+const Navbar: React.VFC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

@@ -3,7 +3,7 @@ import UserFilter from "../model/user/UserFilter";
 import { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
-import Loading from "../ui/Loading";
+import { Loading } from "../ui";
 import { useCookies } from "react-cookie";
 import UserFavorite from "../model/user/UserFavorite";
 import UserHistory from "../model/user/UserHistory";

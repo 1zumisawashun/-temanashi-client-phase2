@@ -27,7 +27,7 @@ const PaymentList: FC<Prop> = ({ paymentItems }) => {
                   </span>
                 </p>
 
-                <Link to={`/furnitures/${item.price.product}`} className="link">
+                <Link to={`/products/${item.price.product}`} className="link">
                   詳細を見る
                 </Link>
               </div>

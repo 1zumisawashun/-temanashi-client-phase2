@@ -1,16 +1,15 @@
-import { FC } from "react";
 import Hamburger from "hamburger-react";
 import WhiteTempleIcon from "../../assets/icon/icon_temple_white.svg";
-import BasicButton from "../ui/BasicButton";
+import { BasicButton } from "../ui";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 
-type Prop = {
+interface HamburgerMenuProp {
   state: boolean;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
-const HamburgerMenu: FC<Prop> = ({ state, setState }) => {
+const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
   const history = useHistory();
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");

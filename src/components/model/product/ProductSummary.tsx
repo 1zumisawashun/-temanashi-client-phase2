@@ -2,12 +2,10 @@ import { useFirestore } from "../../../hooks/useFirestore";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import LikeButton from "../../ui/LikeButton";
-import BasicButton from "../../ui/BasicButton";
+import { BasicButton, LikeButton, BasicModal } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
 import { taxIncludedPrice } from "../../../utilities/utilities";
-import { Modal } from "../../ui/BasicModal";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useCartContext } from "../../../hooks/useCartContext";
@@ -69,7 +67,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
         ) : (
           <img src="https://placehold.jp/200x160.png" alt="" />
         )}
-        <Modal
+        <BasicModal
           title="詳細画面"
           open={isOpenPreview}
           handleOpen={closeModal}
@@ -99,7 +97,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
           <p className="details">{furniture.product.description}</p>
           <div className="btnarea">
             <BasicButton onClick={openModalExecute}>削除</BasicButton>
-            <Modal
+            <BasicModal
               title="本当に削除しますか？"
               open={isOpenExecute}
               handleOpen={closeModal}

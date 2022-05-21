@@ -1,10 +1,8 @@
-import { FC } from "react";
-
-type Props = {
+interface AvatarProps {
   src: string;
-};
+}
 
-const Avatar: FC<Props> = ({ src }) => {
+const Avatar: React.VFC<AvatarProps> = ({ src }) => {
   return (
     <>
       {src && (

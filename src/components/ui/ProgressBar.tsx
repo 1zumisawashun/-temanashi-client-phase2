@@ -1,11 +1,11 @@
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-type Props = {
+type ProgressBarProps = {
   width: number;
   percent: number;
 };
 
-const ProgressBar: FC<Props> = ({ width, percent }) => {
+const ProgressBar: React.VFC<ProgressBarProps> = ({ width, percent }) => {
   const [value, setValue] = useState<number>(0);
 
   useEffect(() => {

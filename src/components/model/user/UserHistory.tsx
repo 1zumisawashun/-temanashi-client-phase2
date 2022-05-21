@@ -2,8 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { productUseCase } from "../../../utilities/stripeClient";
 import PaymentList from "./UserPaymentList";
-import Loading from "../../ui/Loading";
-import NotFound from "../../ui/NotFound";
+import { Loading, NotFound } from "../../ui";
 
 const UserHistory: FC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);

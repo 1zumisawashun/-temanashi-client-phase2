@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import DashboardList from "../model/dashboard/DashboardList";
-import Loading from "../ui/Loading";
+import { Loading } from "../ui";
 import { useCookies } from "react-cookie";
 
 const Dashboard: FC = () => {

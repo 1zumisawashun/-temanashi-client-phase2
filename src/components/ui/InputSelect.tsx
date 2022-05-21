@@ -27,12 +27,12 @@ export type SelectFormProps = {
   defaultValue?: string;
 };
 
-export type OptionProps = {
+export interface OptionProps {
   value: string;
   label: string;
-};
+}
 
-export const InputSelect: React.VFC<SelectFormProps> = ({
+const InputSelect: React.VFC<SelectFormProps> = ({
   className,
   id,
   labelId,
@@ -67,3 +67,5 @@ export const InputSelect: React.VFC<SelectFormProps> = ({
     </StyledFormControl>
   );
 };
+
+export default InputSelect;

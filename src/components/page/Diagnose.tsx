@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import DiagnoseTinderSwipe from "../model/disgnose/DiagnoseTinderSwipe";
 import { useRandomDocument } from "../../hooks/useRandomDocument";
-import Loading from "../ui/Loading";
+import { Loading } from "../ui";
 import DiagnoseResult from "../model/disgnose/DiagnoseResult";
 
 const Diagnose: FC = () => {

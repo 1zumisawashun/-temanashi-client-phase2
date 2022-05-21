@@ -1,7 +1,6 @@
-import { FC } from "react";
 import NotFoundIcon from "../../assets/icon/icon_not_found.svg";
 
-const NotFound: FC = () => {
+const NotFound: React.VFC = () => {
   return (
     <div className="not-found-container">
       <img src={NotFoundIcon} alt="" />

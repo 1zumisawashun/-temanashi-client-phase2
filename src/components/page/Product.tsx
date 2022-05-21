@@ -3,7 +3,7 @@ import ProductComment from "../../components/model/product/ProductComment";
 import ProductSummary from "../../components/model/product/ProductSummary";
 import { FC, useEffect, useState, useCallback } from "react";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
-import Loading from "../ui/Loading";
+import { Loading } from "../ui";
 
 const Product: FC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);

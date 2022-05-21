@@ -1,8 +1,8 @@
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import Button from "@mui/material/Button";
 import { SvgIconProps } from "@mui/material";
 
-type ButtonProps = {
+interface BasicButtonProps {
   children: ReactNode;
   icon?: SvgIconProps;
   onColor?:
@@ -17,9 +17,9 @@ type ButtonProps = {
   styleName?: string;
   isDisabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-};
+}
 
-const BasicButton: FC<ButtonProps> = ({
+const BasicButton: React.VFC<BasicButtonProps> = ({
   styleName,
   children,
   icon,
@@ -41,4 +41,5 @@ const BasicButton: FC<ButtonProps> = ({
     </Button>
   );
 };
+
 export default BasicButton;

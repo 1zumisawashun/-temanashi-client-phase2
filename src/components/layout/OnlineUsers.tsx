@@ -1,10 +1,9 @@
 import { useCollection } from "../../hooks/useCollection";
-import Avatar from "../ui/Avatar";
+import { Avatar } from "../ui";
 import { User } from "../../@types/dashboard";
-import { FC } from "react";
 import { convertedPath } from "../../utilities/utilities";
 
-const OnlineUsers: FC = () => {
+const OnlineUsers: React.VFC = () => {
   const { error, documents } = useCollection<User>(convertedPath("/users"));
   return (
     <div className="user-list">

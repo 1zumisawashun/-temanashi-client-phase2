@@ -1,7 +1,6 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
 
-const Complete: FC = () => {
+const Complete: React.VFC = () => {
   return (
     <>
       <div className="error-container">

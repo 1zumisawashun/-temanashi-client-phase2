@@ -2,7 +2,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 import styled from "@emotion/styled";
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
-export type CheckBoxProps = {
+export interface CheckBoxProps {
   label: string | ReactJSXElement;
   disabled?: boolean;
   checked: boolean;
@@ -17,7 +17,7 @@ export type CheckBoxProps = {
     | "warning";
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 const StyledFormControlLabel = styled(FormControlLabel)`
   font-size: 16px;
@@ -26,7 +26,7 @@ const StyledCheckBox = styled(Checkbox)`
   padding: 6px;
 `;
 
-export const InputCheckbox: React.VFC<CheckBoxProps> = ({
+const InputCheckbox: React.VFC<CheckBoxProps> = ({
   label = "",
   checked = false,
   disabled = false,
@@ -51,3 +51,5 @@ export const InputCheckbox: React.VFC<CheckBoxProps> = ({
     />
   );
 };
+
+export default InputCheckbox;

@@ -1,6 +1,6 @@
 import React, { VFC, useState } from "react";
 import { CloseButton } from "./IconButton";
-import { Modal } from "./BasicModal";
+import BasicModal from "./BasicModal";
 import BasicButton from "./BasicButton";
 
 interface Props {
@@ -107,7 +107,7 @@ const PhotosUpload: VFC<Props> = ({
             <div>
               <CloseButton styleName="close-upload" onClick={openModal} />
               <div className="wrapper" key={index}>
-                <Modal
+                <BasicModal
                   title="本当に削除しますか？"
                   open={isOpenExecute}
                   handleOpen={closeModal}

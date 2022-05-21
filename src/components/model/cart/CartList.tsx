@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { taxIncludedPrice } from "../../../utilities/utilities";
 import CartCounter from "./CartCounter";
-import Divider from "../../ui/Divider";
-import Image from "../../ui/Image";
-import { DeleteButton } from "../../ui/IconButton";
+import { Divider, Image, DeleteButton } from "../../ui";
 import { useCartContext } from "../../../hooks/useCartContext";
 
 interface Product {
@@ -36,7 +34,7 @@ const CartList: React.VFC<CartListProps> = ({ productItems }) => {
           <>
             <div className="wrapper">
               <Link
-                to={`/furnitures/${item.id}`}
+                to={`/products/${item.id}`}
                 key={item.id}
                 className="thumbnail"
               >

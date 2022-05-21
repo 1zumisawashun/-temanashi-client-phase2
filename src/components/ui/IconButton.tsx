@@ -3,7 +3,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 interface IconButtonProps {
   styleName?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -52,4 +53,34 @@ const CountDownButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-export { CloseButton, DeleteButton, CountUpButton, CountDownButton };
+const FavoriteButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+  return (
+    <div className={styleName}>
+      <IconButton aria-label="delete" onClick={onClick}>
+        <FavoriteIcon />
+      </IconButton>
+    </div>
+  );
+};
+
+const NoFaviruteButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+}) => {
+  return (
+    <div className={styleName}>
+      <IconButton aria-label="delete" onClick={onClick}>
+        <FavoriteBorderIcon />
+      </IconButton>
+    </div>
+  );
+};
+
+export {
+  CloseButton,
+  DeleteButton,
+  CountUpButton,
+  CountDownButton,
+  FavoriteButton,
+  NoFaviruteButton,
+};

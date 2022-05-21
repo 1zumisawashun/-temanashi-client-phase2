@@ -1,10 +1,8 @@
-import { FC } from "react";
-
-type Props = {
+interface DividerProps {
   styleName?: string;
-};
+}
 
-const Divider: FC<Props> = ({ styleName }) => {
+const Divider: React.VFC<DividerProps> = ({ styleName }) => {
   return (
     <>
       <div className={`divider ${styleName}`} />

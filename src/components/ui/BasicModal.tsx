@@ -61,7 +61,7 @@ const FooterWrapper = styled("div")`
   padding-top: 30px;
 `;
 
-export type ModalProps = {
+export interface BasicModalProps {
   className?: string;
   title: string;
   subtitle?: string;
@@ -70,9 +70,9 @@ export type ModalProps = {
   open: boolean;
   size?: "small" | "medium";
   handleOpen: () => void;
-};
+}
 
-export const Modal: React.VFC<ModalProps> = ({
+const BasicModal: React.VFC<BasicModalProps> = ({
   open = false,
   title,
   subtitle,
@@ -103,3 +103,5 @@ export const Modal: React.VFC<ModalProps> = ({
     </StyledModal>
   );
 };
+
+export default BasicModal;
