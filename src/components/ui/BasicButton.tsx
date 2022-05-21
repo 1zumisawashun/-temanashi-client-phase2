@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import Button from "@mui/material/Button";
 import { SvgIconProps } from "@mui/material";
 
-type Props = {
+type ButtonProps = {
   children: ReactNode;
   icon?: SvgIconProps;
   onColor?:
@@ -13,23 +13,26 @@ type Props = {
     | "error"
     | "info"
     | "warning";
+  size?: "small" | "medium" | "large";
   styleName?: string;
   isDisabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const BasicButton: FC<Props> = ({
+const BasicButton: FC<ButtonProps> = ({
   styleName,
   children,
   icon,
   onColor = "primary",
+  size = "medium",
   isDisabled,
   onClick,
-}: Props) => {
+}) => {
   return (
     <Button
       variant="contained"
       color={onColor}
+      size={size}
       className={styleName + ` btn -mt10`}
       onClick={onClick}
       disabled={isDisabled}

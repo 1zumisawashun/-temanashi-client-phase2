@@ -1,14 +1,15 @@
-import { VFC } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-type Props = {
+interface IconButtonProps {
   styleName?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-};
+}
 
-const CloseButton: VFC<Props> = ({ styleName, onClick }: Props) => {
+const CloseButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
   return (
     <div className={styleName}>
       <IconButton aria-label="delete" onClick={onClick}>
@@ -18,7 +19,7 @@ const CloseButton: VFC<Props> = ({ styleName, onClick }: Props) => {
   );
 };
 
-const DeleteButton: VFC<Props> = ({ styleName, onClick }: Props) => {
+const DeleteButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
   return (
     <div className={styleName}>
       <IconButton aria-label="delete" onClick={onClick}>
@@ -27,4 +28,28 @@ const DeleteButton: VFC<Props> = ({ styleName, onClick }: Props) => {
     </div>
   );
 };
-export { CloseButton, DeleteButton };
+
+const CountUpButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+  return (
+    <div className={styleName}>
+      <IconButton aria-label="delete" onClick={onClick}>
+        <AddCircleOutlineIcon />
+      </IconButton>
+    </div>
+  );
+};
+
+const CountDownButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+}) => {
+  return (
+    <div className={styleName}>
+      <IconButton aria-label="delete" onClick={onClick}>
+        <RemoveCircleOutlineIcon />
+      </IconButton>
+    </div>
+  );
+};
+
+export { CloseButton, DeleteButton, CountUpButton, CountDownButton };

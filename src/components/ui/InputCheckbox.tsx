@@ -1,36 +1,53 @@
-import { FC } from "react";
+import { Checkbox, FormControlLabel } from "@mui/material";
+import styled from "@emotion/styled";
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
-interface Props {
-  state: boolean;
-  setState: React.Dispatch<React.SetStateAction<boolean>>;
-  text: string;
-}
-
-const InputCheckbox: FC<Props> = ({ state, setState, text }) => {
-  return (
-    <>
-      <div className="checkbox-container">
-        {state && (
-          <label htmlFor="checkbox-area" className="checkbox">
-            <span className="icon -checked"></span>
-          </label>
-        )}
-        {!state && (
-          <label htmlFor="checkbox-area" className="checkbox">
-            <span className="icon"></span>
-          </label>
-        )}
-        <input
-          required
-          type="checkbox"
-          onChange={() => setState(!state)}
-          id="checkbox-area"
-          hidden
-        />
-        <p className="text">{text}</p>
-      </div>
-    </>
-  );
+export type CheckBoxProps = {
+  label: string | ReactJSXElement;
+  disabled?: boolean;
+  checked: boolean;
+  size?: "small" | "medium";
+  color?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "error"
+    | "info"
+    | "success"
+    | "warning";
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default InputCheckbox;
+const StyledFormControlLabel = styled(FormControlLabel)`
+  font-size: 16px;
+`;
+const StyledCheckBox = styled(Checkbox)`
+  padding: 6px;
+`;
+
+export const InputCheckbox: React.VFC<CheckBoxProps> = ({
+  label = "",
+  checked = false,
+  disabled = false,
+  size = "small",
+  color = "primary",
+  value = "",
+  onChange,
+}) => {
+  return (
+    <StyledFormControlLabel
+      control={
+        <StyledCheckBox
+          onChange={onChange}
+          checked={checked}
+          disabled={disabled}
+          size={size}
+          color={color}
+          value={value}
+        />
+      }
+      label={label}
+    />
+  );
+};
