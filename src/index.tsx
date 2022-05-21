@@ -7,16 +7,19 @@ import { CookiesProvider } from "react-cookie";
 // for connecting user and authIsReady propaties from all components
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./context/ThemeContext";
+import { CartContextProvider } from "./context/CartContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <ThemeProvider theme={theme}>
-        <CookiesProvider>
-          <App />
-        </CookiesProvider>
-      </ThemeProvider>
-    </AuthContextProvider>
+    <CartContextProvider>
+      <AuthContextProvider>
+        <ThemeProvider theme={theme}>
+          <CookiesProvider>
+            <App />
+          </CookiesProvider>
+        </ThemeProvider>
+      </AuthContextProvider>
+    </CartContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
