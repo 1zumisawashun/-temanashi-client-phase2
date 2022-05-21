@@ -1,91 +1,74 @@
 import { Link } from "react-router-dom";
-import { FC } from "react";
-import {
-  ProductItem,
-  ProductItemWithoutComment,
-} from "../../../utilities/stripeClient";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { taxIncludedPrice } from "../../../utilities/utilities";
-import Counter from "../../ui/Counter";
-import { useCookies } from "react-cookie";
-import { useHistory } from "react-router-dom";
+import CartCounter from "./CartCounter";
 import Divider from "../../ui/Divider";
 import Image from "../../ui/Image";
 import { DeleteButton } from "../../ui/IconButton";
+import { useCartContext } from "../../../hooks/useCartContext";
 
-type Props = {
-  productItems: Array<ProductItem | ProductItemWithoutComment>;
-  selectProduct: Function;
-  removeProduct: Function;
-};
+interface Product {
+  id: string;
+  title: string;
+  price: number;
+  priceIndex: string;
+  quantity?: number;
+  image: string;
+}
+interface CartListProps {
+  productItems: Array<Product>;
+}
 
-const CartList: FC<Props> = ({
-  productItems,
-  selectProduct,
-  removeProduct,
-}) => {
-  const [cookies, setCookie] = useCookies(["productId"]);
+const CartList: React.VFC<CartListProps> = ({ productItems }) => {
   const { user } = useAuthContext();
-  const history = useHistory();
+  const { removeProductFromCart } = useCartContext();
 
-  // nullチェック・通常のreturnだとエラーになる
   if (!user) throw new Error("we cant find your account");
 
-  const HandleRemove = (productId: string, priceId: string) => {
-    const result = cookies.productId.filter((item: string) => {
-      return item !== productId;
-    });
-    setCookie("productId", result);
-    removeProduct(priceId);
-    // NOTE:全て削除されたたらdashboardにリダイレクトさせる
-    if (result.length === 0) {
-      history.push(`/`);
-    }
+  const HandleRemove = (productId: string) => {
+    removeProductFromCart(productId);
   };
 
   return (
     <div className="cart-list">
       {productItems &&
-        productItems.map((item: ProductItem | ProductItemWithoutComment) => (
+        productItems.map((item: Product) => (
           <>
             <div className="wrapper">
               <Link
-                to={`/furnitures/${item.product.id}`}
-                key={item.product.id}
+                to={`/furnitures/${item.id}`}
+                key={item.id}
                 className="thumbnail"
               >
-                {item.product.images.length > 0 ? (
-                  <Image src={item.product.images[0]} />
+                {item.image ? (
+                  <Image src={item.image} />
                 ) : (
                   <Image src="https://placehold.jp/230x160.png" />
                 )}
               </Link>
               <div className="content">
-                {Object.keys(item.prices).map((priceIndex) => (
-                  <>
-                    <div className="details">
-                      <p className="name">
-                        {item.product.name}
-                        <span className="price">
-                          {taxIncludedPrice(
-                            item.prices[priceIndex].unit_amount
-                          )}
-                        </span>
-                      </p>
-                      <div className="btnarea">
-                        <Counter add={selectProduct} priceIndex={priceIndex} />
-                      </div>
-                    </div>
-                    <div>
-                      <DeleteButton
-                        styleName="delete-icon"
-                        onClick={() =>
-                          HandleRemove(item.product.id, priceIndex)
-                        }
+                <div className="details">
+                  <p className="name">
+                    {item.title}
+                    <span className="price">
+                      {taxIncludedPrice(item.price)}
+                    </span>
+                  </p>
+                  <div className="btnarea">
+                    {item.quantity && (
+                      <CartCounter
+                        quantity={item.quantity}
+                        productId={item.id}
                       />
-                    </div>
-                  </>
-                ))}
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <DeleteButton
+                    styleName="delete-icon"
+                    onClick={() => HandleRemove(item.id)}
+                  />
+                </div>
               </div>
             </div>
             <Divider />

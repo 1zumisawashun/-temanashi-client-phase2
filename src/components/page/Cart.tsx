@@ -1,74 +1,48 @@
-import { FC, useState } from "react";
-import {
-  line_item,
-  productUseCase,
-  ProductItemWithoutComment,
-} from "../../utilities/stripeClient";
+import { useState } from "react";
+import { productUseCase } from "../../utilities/stripeClient";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useCartDocument } from "../../hooks/useCartDocument";
 import Loading from "../ui/Loading";
 import { useToken } from "../../hooks/useToken";
-// import { useAuth } from "../../hooks/useAuth";
-// import { useHistory } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useHistory } from "react-router-dom";
 import CartList from "../model/cart/CartList";
 import NotFound from "../ui/NotFound";
-import CartPaymentArea from "../model/cart/CartPaymentArea";
+import CartPaymentArea from "../model/cart/CartAgreement";
+import { useCartContext } from "../../hooks/useCartContext";
 
-const Cart: FC = () => {
-  const [isPendingBuy, setIsPendingBuy] = useState<boolean>(false);
-  const [line_items, setLinetems] = useState<Array<line_item>>([]);
+const Cart: React.VFC = () => {
+  const history = useHistory();
   const { verifyJWT } = useToken();
-  // const { logout } = useAuth();
-  // const history = useHistory();
-
+  const { logout } = useAuth();
+  const { cart } = useCartContext();
   const { user } = useAuthContext();
+
+  const [isPendingBuy, setIsPendingBuy] = useState<boolean>(false);
+
   if (!user) throw new Error("we cant find your account");
 
-  const { documents } = useCartDocument();
-
   const onClickBuy = async () => {
-    // NOTE:2n・n2乗のパフォーマンス改善でループを分けている
-    const priceIndexArray = documents.map(
-      (document: ProductItemWithoutComment): string => {
-        return Object.keys(document.prices)[0];
-      }
-    );
+    const line_items = cart.map((item) => {
+      return {
+        price: item.priceIndex,
+        quantity: item.quantity ?? 0,
+      };
+    });
 
-    const documentsLineItems = priceIndexArray.map(
-      (priceIndex): line_item => {
-        return { price: priceIndex, quantity: 1 };
-      }
-    );
-
-    let formatlineItems: { [key: string]: line_item } = {};
-
-    if (line_items.length === 0) {
-      formatlineItems = line_items.reduce(
-        (acc: { [key: string]: line_item }, v: line_item) => {
-          acc[v.price] = v;
-          return acc;
-        },
-        {}
-      );
-    }
-
-    const resultsLineItems = documentsLineItems.map(
-      (item: line_item) => formatlineItems[item.price] ?? item
-    );
     const token = await verifyJWT();
-    console.log(token);
-    // if (!token) {
-    //   alert("認証トークンが有効期限切れです。ログインしなおしてください。");
-    //   logout();
-    //   history.push("/login");
-    //   return;
-    // }
+    console.log(token); // FIXME:今はトークン認証バグっているのであとで修正が必要
+    if (token) {
+      alert("認証トークンが有効期限切れです。ログインしなおしてください。");
+      logout();
+      history.push("/login");
+      return;
+    }
     try {
       setIsPendingBuy(true);
       const uid = user.uid;
       const seccess_url = `${window.location.origin}/complete`;
       const cancel_url = `${window.location.origin}/error`;
-      await productUseCase.buy(uid, resultsLineItems, seccess_url, cancel_url);
+      await productUseCase.buy(uid, line_items, seccess_url, cancel_url);
     } catch (error) {
       if (error instanceof Error) {
         alert(`Error: ${!!error.message ? error.message : error}`);
@@ -78,38 +52,13 @@ const Cart: FC = () => {
     }
   };
 
-  const checkSameProduct = (price: string): Array<line_item> => {
-    const result = line_items.filter((item: line_item) => {
-      return item.price !== price;
-    });
-    return result;
-  };
-
-  const selectProduct = async (price: string, quantity: number) => {
-    const lineItem: line_item = {
-      price,
-      quantity,
-    };
-    const checkedProduct = await checkSameProduct(price);
-    const result = [...checkedProduct, lineItem];
-    await setLinetems(result);
-  };
-
-  const removeProduct = async (price: string) => {
-    const result = await checkSameProduct(price);
-    setLinetems(result);
-  };
   return (
     <div className="common-container">
       {isPendingBuy && <Loading />}
-      {documents.length === 0 && <NotFound />}
-      {documents.length !== 0 && (
+      {cart.length === 0 && <NotFound />}
+      {cart.length !== 0 && (
         <>
-          <CartList
-            productItems={documents}
-            selectProduct={selectProduct}
-            removeProduct={removeProduct}
-          />
+          <CartList productItems={cart} />
           <CartPaymentArea onClick={onClickBuy} />
         </>
       )}
