@@ -97,7 +97,6 @@ const LikeButton: React.VFC<LikeButtonProp> = ({ furniture }) => {
         }
       },
       (error) => {
-        console.log(error);
         setError("could not push like button, try again");
       }
     );

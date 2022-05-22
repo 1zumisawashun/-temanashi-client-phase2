@@ -19,9 +19,8 @@
 ### デプロイ済みアプリケーション
 
 - https://temanashi-phase2.web.app/
-- input・button は全て MUI に統一させる
 
-### 採用している技術スタック(未実装含む)
+### 採用している技術スタック
 
 ```
 言語： TypeScript

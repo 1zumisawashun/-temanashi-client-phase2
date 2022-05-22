@@ -6,7 +6,6 @@ interface UserFavoriteProps {
 }
 
 const UserFavorite: React.VFC<UserFavoriteProps> = ({ productItems }) => {
-  console.log(productItems);
   return (
     <div className="user-container">
       <div className="inner">
