@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import TinderCard from "react-tinder-card";
 import { ProductDoc } from "../../../@types/stripe";
 import {
@@ -10,13 +10,24 @@ import {
 } from "../../ui";
 import { delay } from "../../../utilities/utilities";
 // import TinderCard from '../react-tinder-card/index'
+import styled from "@emotion/styled";
 
-type Props = {
+const ButtonWrapper = styled("div")`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 30px;
+`;
+
+type TinderSwipeProps = {
   db: Array<ProductDoc>;
   setIsPendingDiagnose: any;
 };
 
-const TinderSwipe: FC<Props> = ({ db, setIsPendingDiagnose }) => {
+const TinderSwipe: React.VFC<TinderSwipeProps> = ({
+  db,
+  setIsPendingDiagnose,
+}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [lastDirection, setLastDirection] = useState<string>();
   const [currentIndex, setCurrentIndex] = useState<number>(db.length - 1);
@@ -126,11 +137,11 @@ const TinderSwipe: FC<Props> = ({ db, setIsPendingDiagnose }) => {
             </TinderCard>
           ))}
         </div>
-        <div className="buttons">
-          <ThumbDownButton onClick={() => swipe("left")} />
-          <UndoButton onClick={() => goBack()} />
-          <ThumbUpButton onClick={() => swipe("right")} />
-        </div>
+        <ButtonWrapper>
+          <ThumbDownButton size="large" onClick={() => swipe("left")} />
+          <UndoButton size="large" onClick={() => goBack()} />
+          <ThumbUpButton size="large" onClick={() => swipe("right")} />
+        </ButtonWrapper>
       </div>
     </div>
   );

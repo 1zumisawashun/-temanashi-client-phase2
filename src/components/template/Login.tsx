@@ -2,6 +2,7 @@ import { FC, FormEvent } from "react";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { InputText, BasicButton, LikeButton, LinkButton } from "../ui";
 
 const Login: FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -19,37 +20,31 @@ const Login: FC = () => {
         <div className="form" data-cy="login">
           <h1>login</h1>
           <form onSubmit={handleSubmit}>
-            <input
-              required
+            <InputText
               type="email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder="xyz@gmail.com"
               data-cy="email"
             />
-            <input
-              required
+            <InputText
               type="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               placeholder="Must have atleast 6 characters"
               data-cy="password"
             />
-
-            {!isPending && (
-              <button type="submit" data-cy="login">
-                Login
-              </button>
-            )}
-            {isPending && (
-              <button type="submit" disabled>
-                Loading
-              </button>
-            )}
+            <BasicButton
+              isDisabled={isPending}
+              data-cy="login"
+              onClick={handleSubmit}
+            >
+              Login
+            </BasicButton>
             {error && <div className="error">{error}</div>}
             <div className="forgot-signup">
-              <Link to="/signup">Forgot password?</Link>
-              <Link to="/signup">Sign Up</Link>
+              <LinkButton path="/signup">Forgot password?</LinkButton>
+              <LinkButton path="/signup">Sign Up</LinkButton>
             </div>
           </form>
         </div>

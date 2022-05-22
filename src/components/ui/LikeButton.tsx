@@ -7,12 +7,10 @@ import {
 import { useState, useEffect } from "react";
 import { timestamp, firebase } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import IconButton from "@mui/material/IconButton";
 import { convertedPath } from "../../utilities/utilities";
 import { useSubDocument } from "../../hooks/useSubDocument";
 import { ProductItem } from "../../utilities/stripeClient";
+import { FavoriteButton, NoFaviruteButton } from "../ui";
 
 type LikeButtonProp = {
   furniture: ProductItem;
@@ -103,15 +101,18 @@ const LikeButton: React.VFC<LikeButtonProp> = ({ furniture }) => {
         setError("could not push like button, try again");
       }
     );
-    // unsubscribe on unmount and clean a function
     return () => unsubscribe();
   }, [likedFurniture.referense]);
 
   return (
-    <IconButton color="primary" onClick={handleClick}>
-      {like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+    <>
+      {like ? (
+        <FavoriteButton color="primary" size="large" onClick={handleClick} />
+      ) : (
+        <NoFaviruteButton color="primary" size="large" onClick={handleClick} />
+      )}
       {error && <div className="error">{error}</div>}
-    </IconButton>
+    </>
   );
 };
 export default LikeButton;

@@ -1,4 +1,4 @@
-import { FC, FormEvent } from "react";
+import { FormEvent } from "react";
 import { projectFunctions, isEmulating } from "../../../firebase/config";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useCookies } from "react-cookie";
@@ -11,9 +11,10 @@ type Response = {
   jwt: string;
 };
 
-const UserAccount: FC = () => {
+const UserAccount: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
+  // eslint-disable-next-line
   const [cookies, setCookie] = useCookies(["jwt"]);
   const { logout, isPending } = useAuth();
   const history = useHistory();

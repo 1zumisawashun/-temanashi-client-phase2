@@ -9,6 +9,12 @@ import { taxIncludedPrice } from "../../../utilities/utilities";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useCartContext } from "../../../hooks/useCartContext";
+import styled from "@emotion/styled";
+
+const ButtonWrapper = styled("div")`
+  display: flex;
+  gap: 30px;
+`;
 
 interface ProductSummaryProps {
   furniture: ProductItem;
@@ -68,7 +74,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
           <img src="https://placehold.jp/200x160.png" alt="" />
         )}
         <BasicModal
-          title="詳細画面"
+          title="プレビュー画面"
           open={isOpenPreview}
           handleOpen={closeModal}
           contents={
@@ -81,9 +87,9 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
             </Carousel>
           }
           footer={
-            <div className="buttons">
-              <BasicButton onClick={closeModal}>閉じる</BasicButton>
-            </div>
+            <BasicButton size="large" onClick={closeModal}>
+              閉じる
+            </BasicButton>
           }
         />
       </div>
@@ -95,20 +101,27 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
             {taxIncludedPrice(furniture.prices[priceIndex].unit_amount)}
           </div>
           <p className="details">{furniture.product.description}</p>
-          <div className="btnarea">
-            <BasicButton onClick={openModalExecute}>削除</BasicButton>
+          <ButtonWrapper>
+            <BasicButton size="large" onClick={openModalExecute}>
+              削除
+            </BasicButton>
             <BasicModal
               title="本当に削除しますか？"
               open={isOpenExecute}
               handleOpen={closeModal}
               footer={
-                <div className="buttons">
-                  <BasicButton onClick={handleDelete}>はい</BasicButton>
-                  <BasicButton onClick={closeModal}>いいえ</BasicButton>
-                </div>
+                <>
+                  <BasicButton size="large" onClick={handleDelete}>
+                    はい
+                  </BasicButton>
+                  <BasicButton size="large" onClick={closeModal}>
+                    いいえ
+                  </BasicButton>
+                </>
               }
             />
             <BasicButton
+              size="large"
               onClick={() =>
                 addCart({
                   id: furniture.product.id,
@@ -122,7 +135,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
               購入
             </BasicButton>
             <LikeButton furniture={furniture} />
-          </div>
+          </ButtonWrapper>
         </div>
       ))}
     </div>

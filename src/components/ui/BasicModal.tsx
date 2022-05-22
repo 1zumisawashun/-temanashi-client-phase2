@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
-import Fade from "@mui/material/Fade";
 // 参考記事:https://mui.com/base/react-modal/
 
 const StyledModal = styled(ModalUnstyled)`
@@ -90,16 +89,14 @@ const BasicModal: React.VFC<BasicModalProps> = ({
       BackdropComponent={Backdrop}
       closeAfterTransition
     >
-      <Fade in={open} timeout={500}>
-        <ModalInner size={size}>
-          <div>
-            <Title>{title}</Title>
-            {subtitle && <SubTitle>{subtitle}</SubTitle>}
-          </div>
-          <ContentWrapper>{contents}</ContentWrapper>
-          <FooterWrapper>{footer}</FooterWrapper>
-        </ModalInner>
-      </Fade>
+      <ModalInner size={size}>
+        <div>
+          <Title>{title}</Title>
+          {subtitle && <SubTitle>{subtitle}</SubTitle>}
+        </div>
+        <ContentWrapper>{contents}</ContentWrapper>
+        <FooterWrapper>{footer}</FooterWrapper>
+      </ModalInner>
     </StyledModal>
   );
 };

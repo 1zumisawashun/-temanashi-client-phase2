@@ -1,12 +1,14 @@
-import { FC } from "react";
 import { filterList } from "../../../utilities/constant";
 
-type Props = {
+type DashboardFilterProps = {
   currentFilter: String;
   changeFilter: Function;
 };
 
-const DashboardFilter: FC<Props> = ({ currentFilter, changeFilter }) => {
+const DashboardFilter: React.VFC<DashboardFilterProps> = ({
+  currentFilter,
+  changeFilter,
+}) => {
   const handleClick = (newFilter: String) => {
     changeFilter(newFilter);
   };

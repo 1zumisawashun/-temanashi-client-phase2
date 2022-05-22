@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { FC } from "react";
 import {
   ProductItem,
   ProductItemWithoutComment,
@@ -8,11 +7,11 @@ import { useAuthContext } from "../../../hooks/useAuthContext";
 import { taxIncludedPrice } from "../../../utilities/utilities";
 import { Image } from "../../ui";
 
-type Props = {
+type DashboardListProps = {
   productItems: Array<ProductItem | ProductItemWithoutComment>;
 };
 
-const DashboardList: FC<Props> = ({ productItems }) => {
+const DashboardList: React.VFC<DashboardListProps> = ({ productItems }) => {
   const { user } = useAuthContext();
   // nullチェック・通常のreturnだとエラーになる
   if (!user) throw new Error("we cant find your account");

@@ -1,6 +1,16 @@
 import { useCartContext } from "../../../hooks/useCartContext";
 import { CountUpButton, CountDownButton } from "../../ui";
+import styled from "@emotion/styled";
 
+const CounterWrapper = styled("div")`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+`;
+const Quantity = styled("p")`
+  display: block;
+  margin: auto;
+`;
 interface CartCounterProps {
   productId: string;
   quantity: number;
@@ -17,11 +27,11 @@ const CartCounter: React.VFC<CartCounterProps> = ({ quantity, productId }) => {
   };
 
   return (
-    <div className="counter-container">
+    <CounterWrapper>
       <CountDownButton onClick={handleCountDown} />
-      <span className="count">{quantity}</span>
+      <Quantity>{quantity}</Quantity>
       <CountUpButton onClick={handleCountUp} />
-    </div>
+    </CounterWrapper>
   );
 };
 

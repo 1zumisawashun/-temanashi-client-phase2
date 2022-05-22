@@ -1,10 +1,9 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
 import { db, recommendation } from "../../../utilities/constant";
 import { taxIncludedPrice } from "../../../utilities/utilities";
 import { Loading, Image } from "../../ui";
 
-const DiagnoseResult: FC = () => {
+const DiagnoseResult: React.VFC = () => {
   return (
     <div className="common-container">
       {db.length === 0 && recommendation && <Loading />}

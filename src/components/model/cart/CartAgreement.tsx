@@ -5,7 +5,7 @@ interface CartAgreementProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Cart: React.VFC<CartAgreementProps> = ({ onClick }) => {
+const CartAgreement: React.VFC<CartAgreementProps> = ({ onClick }) => {
   const [isAccepted, setIsAccepted] = useState<boolean>(false);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,10 +21,10 @@ const Cart: React.VFC<CartAgreementProps> = ({ onClick }) => {
         size="medium"
         onChange={(e) => onInputChange(e)}
       />
-      <BasicButton isDisabled={!isAccepted} onClick={onClick}>
+      <BasicButton size="large" isDisabled={!isAccepted} onClick={onClick}>
         購入する
       </BasicButton>
     </div>
   );
 };
-export default Cart;
+export default CartAgreement;

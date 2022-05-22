@@ -14,32 +14,72 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 interface IconButtonProps {
   styleName?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  color?:
+    | "inherit"
+    | "default"
+    | "primary"
+    | "secondary"
+    | "error"
+    | "info"
+    | "success"
+    | "warning";
+  size?: "small" | "medium" | "large";
 }
 
-const CloseButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+const CloseButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+  color,
+  size,
+}) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <CloseIcon />
       </IconButton>
     </div>
   );
 };
 
-const DeleteButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+const DeleteButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+  color,
+  size,
+}) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <DeleteIcon />
       </IconButton>
     </div>
   );
 };
 
-const CountUpButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+const CountUpButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+  color,
+  size,
+}) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <AddCircleOutlineIcon />
       </IconButton>
     </div>
@@ -49,20 +89,37 @@ const CountUpButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
 const CountDownButton: React.VFC<IconButtonProps> = ({
   styleName,
   onClick,
+  color,
+  size,
 }) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <RemoveCircleOutlineIcon />
       </IconButton>
     </div>
   );
 };
 
-const FavoriteButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+const FavoriteButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+  color,
+  size,
+}) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <FavoriteIcon />
       </IconButton>
     </div>
@@ -72,20 +129,37 @@ const FavoriteButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
 const NoFaviruteButton: React.VFC<IconButtonProps> = ({
   styleName,
   onClick,
+  color,
+  size,
 }) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <FavoriteBorderIcon />
       </IconButton>
     </div>
   );
 };
 
-const PersonButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+const PersonButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+  color,
+  size,
+}) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <AccountCircleIcon />
       </IconButton>
     </div>
@@ -95,37 +169,69 @@ const PersonButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
 const ThumbDownButton: React.VFC<IconButtonProps> = ({
   styleName,
   onClick,
+  color,
+  size,
 }) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <ThumbDownIcon />
       </IconButton>
     </div>
   );
 };
 
-const ThumbUpButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+const ThumbUpButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+  color,
+  size,
+}) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <ThumbUpIcon />
       </IconButton>
     </div>
   );
 };
 
-const UndoButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+const UndoButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+  color,
+  size,
+}) => {
   return (
     <div className={styleName}>
-      <IconButton aria-label="delete" onClick={onClick}>
+      <IconButton
+        aria-label="delete"
+        onClick={onClick}
+        color={color}
+        size={size}
+      >
         <UndoIcon />
       </IconButton>
     </div>
   );
 };
 
-const StoreButton: React.VFC<IconButtonProps> = ({ styleName, onClick }) => {
+const StoreButton: React.VFC<IconButtonProps> = ({
+  styleName,
+  onClick,
+  color,
+  size,
+}) => {
   return (
     <div className={styleName}>
       <IconButton aria-label="delete" onClick={onClick}>

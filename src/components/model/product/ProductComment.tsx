@@ -1,4 +1,4 @@
-import { FC, useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Comment } from "../../../@types/dashboard";
 import { useParams } from "react-router-dom";
@@ -17,16 +17,18 @@ import {
 } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
 
-type Props = {
+type ProductCommentProps = {
   furniture: ProductItem;
 };
 
-const ProductComments: FC<Props> = ({ furniture }) => {
+const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
+  const { user } = useAuthContext();
+  const { id } = useParams<{ id: string }>();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [newComment, setNewComment] = useState("");
-  const { user } = useAuthContext();
+
   if (!user) throw new Error("we cant find your account");
-  const { id }: { id: string } = useParams();
 
   const { referense } = useSubCollection<any, any>(
     convertedPath(`/products/${id}/comments`)
@@ -100,7 +102,9 @@ const ProductComments: FC<Props> = ({ furniture }) => {
               </li>
             ))}
         </ul>
-        <BasicButton onClick={openModal}>Comment</BasicButton>
+        <BasicButton size="large" onClick={openModal}>
+          コメントする
+        </BasicButton>
         <BasicModal
           title="コメント入力フォーム"
           open={isOpen}
@@ -112,10 +116,14 @@ const ProductComments: FC<Props> = ({ furniture }) => {
             ></InputText>
           }
           footer={
-            <div className="buttons">
-              <BasicButton onClick={handleSubmit}>はい</BasicButton>
-              <BasicButton onClick={closeModal}>いいえ</BasicButton>
-            </div>
+            <>
+              <BasicButton size="large" onClick={handleSubmit}>
+                コメントする
+              </BasicButton>
+              <BasicButton size="large" onClick={closeModal}>
+                閉じる
+              </BasicButton>
+            </>
           }
         />
       </div>
@@ -123,4 +131,4 @@ const ProductComments: FC<Props> = ({ furniture }) => {
   );
 };
 
-export default ProductComments;
+export default ProductComment;

@@ -55,12 +55,13 @@ const Cart: React.VFC = () => {
   return (
     <div className="common-container">
       {isPendingBuy && <Loading />}
-      {cart.length === 0 && <NotFoundItem />}
-      {cart.length !== 0 && (
+      {cart.length !== 0 ? (
         <>
           <CartList productItems={cart} />
           <CartPaymentArea onClick={onClickBuy} />
         </>
+      ) : (
+        <NotFoundItem />
       )}
     </div>
   );

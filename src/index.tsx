@@ -5,7 +5,7 @@ import App from "./App";
 import { AuthContextProvider } from "./context/AuthContext";
 import { CookiesProvider } from "react-cookie";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./context/ThemeContext";
+import { theme } from "./utilities/themeClient";
 import { CartContextProvider } from "./context/CartContext";
 
 ReactDOM.render(

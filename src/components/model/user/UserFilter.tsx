@@ -1,13 +1,14 @@
-import { FC } from "react";
 import { userList } from "../../../utilities/constant";
-
-type Props = {
+interface UserFilterProps {
   currentFilter: String;
   changeFilter: Function;
-};
+}
 
-const UserFilter: FC<Props> = ({ currentFilter, changeFilter }) => {
-  const handleClick = (newFilter: String) => {
+const UserFilter: React.VFC<UserFilterProps> = ({
+  currentFilter,
+  changeFilter,
+}) => {
+  const handleClick = (newFilter: string) => {
     changeFilter(newFilter);
   };
   return (

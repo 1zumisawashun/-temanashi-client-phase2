@@ -1,13 +1,11 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { ja } from "date-fns/locale";
+interface PaymentListProp {
+  paymentItems: Array<any>;
+}
 
-type Prop = {
-  paymentItems: any;
-};
-
-const PaymentList: FC<Prop> = ({ paymentItems }) => {
+const PaymentList: React.VFC<PaymentListProp> = ({ paymentItems }) => {
   return (
     <div className="payment-list">
       {paymentItems &&
