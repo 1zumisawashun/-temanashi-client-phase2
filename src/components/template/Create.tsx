@@ -1,8 +1,8 @@
 import { FC, useState, FormEvent } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+// import { useHistory } from "react-router-dom";
+// import axios from "axios";
 import { useCookies } from "react-cookie";
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
 import { useStorage } from "../../hooks/useStorage";
 import { categories, text } from "../../utilities/constant";
 import { InputSelect, InputText, InputFileMulti, Loading } from "../ui";
@@ -21,8 +21,8 @@ interface FormData {
 }
 
 const CreateProject: FC = () => {
-  const history = useHistory();
-  const { logout } = useAuth();
+  // const history = useHistory();
+  // const { logout } = useAuth();
   const { getStorageUrl, error } = useStorage();
 
   const [formError, setFromError] = useState<string | null>(null);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { subCollectionPoint } from "../utilities/converter";
+import { subCollectionPoint } from "../utilities/converterClient";
 import { firebase } from "../firebase/config";
 import { firebasePath } from "../@types/dashboard";
 

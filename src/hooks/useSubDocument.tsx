@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { subDocumentPoint } from "../utilities/converter";
+import { subDocumentPoint } from "../utilities/converterClient";
 import { firebase } from "../firebase/config";
 import { firebasePath } from "../@types/dashboard";
 

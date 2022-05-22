@@ -1,8 +1,7 @@
 import { FC, FormEvent } from "react";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
-import { InputText, BasicButton, LikeButton, LinkButton } from "../ui";
+import { InputText, BasicButton, LinkButton } from "../ui";
 
 const Login: FC = () => {
   const [email, setEmail] = useState<string>("");

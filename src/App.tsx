@@ -7,10 +7,8 @@ import {
   Diagnose,
   Error,
   Login,
-  Privacy,
   Product,
   Signup,
-  Terms,
   User,
 } from "./pages";
 
@@ -18,19 +16,13 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Route path="/error">
-          <Error />
-        </Route>
-        <Route path="/terms">
-          <Terms />
-        </Route>
-        <Route path="/privacy">
-          <Privacy />
-        </Route>
-        <Route path="/complete">
-          <Complete />
-        </Route>
         <Switch>
+          <Route path="/error">
+            <Error />
+          </Route>
+          <Route path="/complete">
+            <Complete />
+          </Route>
           <Route exact path="/">
             <Dashboard />
           </Route>

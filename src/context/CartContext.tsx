@@ -114,27 +114,21 @@ export const cartReducer = (state: State, action: Action) => {
   }
 };
 
-export const CartContextProvider = (props: any) => {
+export const CartContextProvider: React.VFC<
+  React.PropsWithChildren<React.ReactNode>
+> = (props) => {
   const [cartState, dispatch] = useReducer(cartReducer, { cart: [] });
   const addProductToCart = (product: Product) => {
-    setTimeout(() => {
-      dispatch({ type: "ADD_PRODUCT", product: product }); // actionはdispatchの引数を指している;
-    }, 300);
+    dispatch({ type: "ADD_PRODUCT", product: product }); // actionはdispatchの引数を指している;
   };
   const countUpProduct = (productId: string) => {
-    setTimeout(() => {
-      dispatch({ type: COUNT_UP_PRODUCT, productId: productId });
-    }, 300);
+    dispatch({ type: COUNT_UP_PRODUCT, productId: productId });
   };
   const countDownProduct = (productId: string) => {
-    setTimeout(() => {
-      dispatch({ type: COUNT_DOWN_PRODUCT, productId: productId });
-    }, 300);
+    dispatch({ type: COUNT_DOWN_PRODUCT, productId: productId });
   };
   const removeProductFromCart = (productId: string) => {
-    setTimeout(() => {
-      dispatch({ type: REMOVE_PRODUCT, productId: productId });
-    }, 300);
+    dispatch({ type: REMOVE_PRODUCT, productId: productId });
   };
 
   return (

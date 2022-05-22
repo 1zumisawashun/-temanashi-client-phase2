@@ -7,6 +7,4 @@ export { default as Error } from "./StripeError";
 export { default as Login } from "./Login";
 export { default as Product } from "./Product";
 export { default as Signup } from "./Signup";
-export { default as Terms } from "./Terms";
 export { default as User } from "./User";
-export { default as Privacy } from "./Privacy";

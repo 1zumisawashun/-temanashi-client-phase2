@@ -1,32 +1,23 @@
-import React, { createContext, useReducer, useEffect, FC } from "react";
+import { createContext, useReducer, useEffect } from "react";
 import { firebase, projectAuth } from "../firebase/config";
 
-type Action = {
+interface Action {
   type: string;
   payload: firebase.User | null;
-};
-
-type State = {
+}
+interface State {
   user: firebase.User | null;
   authIsReady?: boolean;
-};
-
-// authIsReadyはdispatchでのみトグルしている
+}
 interface ContextInterface {
-  dispatch: React.Dispatch<Action>; // dispatch: (value: Action) => void;
+  dispatch: (value: Action) => void; // dispatch: React.Dispatch<Action>;
   user: firebase.User | null;
   authIsReady?: boolean;
 }
 
-const initState: State = {
-  user: null,
-  authIsReady: false,
-};
-
 export const AuthContext = createContext<ContextInterface | undefined>(
   undefined
 );
-// 初期値undefinedだがuseAuthContextで型ガードしている
 
 export const authReducer: React.Reducer<State, Action> = (state, action) => {
   switch (action.type) {
@@ -41,8 +32,13 @@ export const authReducer: React.Reducer<State, Action> = (state, action) => {
   }
 };
 
-export const AuthContextProvider: FC = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initState);
+export const AuthContextProvider: React.VFC<
+  React.PropsWithChildren<React.ReactNode>
+> = (props) => {
+  const [state, dispatch] = useReducer(authReducer, {
+    user: null,
+    authIsReady: false,
+  });
 
   useEffect(() => {
     const unsub = projectAuth.onAuthStateChanged((user) => {
@@ -57,7 +53,7 @@ export const AuthContextProvider: FC = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
-      {children}
+      {props.children}
     </AuthContext.Provider>
   );
 };
