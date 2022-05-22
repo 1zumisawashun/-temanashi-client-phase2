@@ -1,6 +1,6 @@
 import DashboardTemplate from "../components/page/Dashboard";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Sidebar, OnlineUsers, Navbar } from "../components/layout";
+import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";
 
 const Dashboard: React.VFC = () => {
@@ -10,8 +10,9 @@ const Dashboard: React.VFC = () => {
     <>
       <Sidebar />
       <div className="container">
-        <Navbar />
+        <Header />
         <DashboardTemplate />
+        <Footer />
       </div>
       <OnlineUsers />
     </>

@@ -2,7 +2,7 @@ import Temple from "../../assets/icon/icon_temple.svg";
 import { useState } from "react";
 import HamburgerMenu from "./HambergerMenu";
 
-const Navbar: React.VFC = () => {
+const Header: React.VFC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -22,4 +22,4 @@ const Navbar: React.VFC = () => {
   );
 };
 
-export default Navbar;
+export default Header;

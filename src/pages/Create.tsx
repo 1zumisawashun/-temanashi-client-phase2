@@ -1,6 +1,6 @@
 import CreateTemplate from "../components/page/Create";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Sidebar, OnlineUsers, Navbar } from "../components/layout";
+import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";
 
 const Create: React.VFC = () => {
@@ -10,8 +10,9 @@ const Create: React.VFC = () => {
     <>
       <Sidebar />
       <div className="container">
-        <Navbar />
+        <Header />
         <CreateTemplate />
+        <Footer />
       </div>
       <OnlineUsers />
     </>

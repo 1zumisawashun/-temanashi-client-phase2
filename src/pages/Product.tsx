@@ -1,6 +1,6 @@
 import ProductTemplate from "../components/page/Product";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Sidebar, OnlineUsers, Navbar } from "../components/layout";
+import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";
 
 const Product: React.VFC = () => {
@@ -10,8 +10,9 @@ const Product: React.VFC = () => {
     <>
       <Sidebar />
       <div className="container">
-        <Navbar />
+        <Header />
         <ProductTemplate />
+        <Footer />
       </div>
       <OnlineUsers />
     </>

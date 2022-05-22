@@ -1,6 +1,6 @@
 import CartTemplate from "../components/page/Cart";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Sidebar, OnlineUsers, Navbar } from "../components/layout";
+import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";
 
 const Cart: React.VFC = () => {
@@ -10,8 +10,9 @@ const Cart: React.VFC = () => {
     <>
       <Sidebar />
       <div className="container">
-        <Navbar />
+        <Header />
         <CartTemplate />
+        <Footer />
       </div>
       <OnlineUsers />
     </>

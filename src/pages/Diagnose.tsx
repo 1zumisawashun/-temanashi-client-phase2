@@ -1,6 +1,6 @@
 import DiagnoseTemplate from "../components/page/Diagnose";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Sidebar, OnlineUsers, Navbar } from "../components/layout";
+import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";
 
 const Diagnose: React.VFC = () => {
@@ -10,8 +10,9 @@ const Diagnose: React.VFC = () => {
     <>
       <Sidebar />
       <div className="container">
-        <Navbar />
+        <Header />
         <DiagnoseTemplate />
+        <Footer />
       </div>
       <OnlineUsers />
     </>
