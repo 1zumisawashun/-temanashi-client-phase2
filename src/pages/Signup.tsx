@@ -1,4 +1,4 @@
-import SignupTemplate from "../components/page/Signup";
+import SignupTemplate from "../components/template/Signup";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Redirect } from "react-router-dom";
 

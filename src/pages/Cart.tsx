@@ -1,4 +1,4 @@
-import CartTemplate from "../components/page/Cart";
+import CartTemplate from "../components/template/Cart";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";

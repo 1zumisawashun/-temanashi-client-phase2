@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import ProductComment from "../../components/model/product/ProductComment";
-import ProductSummary from "../../components/model/product/ProductSummary";
+import ProductComment from "../model/product/ProductComment";
+import ProductSummary from "../model/product/ProductSummary";
 import { FC, useEffect, useState, useCallback } from "react";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import { Loading } from "../ui";

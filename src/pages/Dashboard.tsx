@@ -1,4 +1,4 @@
-import DashboardTemplate from "../components/page/Dashboard";
+import DashboardTemplate from "../components/template/Dashboard";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";

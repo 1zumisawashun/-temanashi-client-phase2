@@ -1,4 +1,4 @@
-import CreateTemplate from "../components/page/Create";
+import CreateTemplate from "../components/template/Create";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";

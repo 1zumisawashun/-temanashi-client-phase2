@@ -19,4 +19,4 @@ export { default as LikeButton } from "./LikeButton";
 export { default as Loading } from "./Loading";
 export { default as NotFound } from "./NotFound";
 export { default as ProgressBar } from "./ProgressBar";
-export { LinkButton, NavlinkButton } from "./TextLink";
+export { LinkButton, NavlinkButton } from "./TextButton";

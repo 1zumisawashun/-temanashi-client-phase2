@@ -1,4 +1,4 @@
-import ProductTemplate from "../components/page/Product";
+import ProductTemplate from "../components/template/Product";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
 import { Redirect } from "react-router-dom";

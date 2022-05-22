@@ -1,4 +1,4 @@
-import LoginTemplate from "../components/page/Login";
+import LoginTemplate from "../components/template/Login";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Redirect } from "react-router-dom";
 
