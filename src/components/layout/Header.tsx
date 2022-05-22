@@ -1,8 +1,10 @@
-import Temple from "../../assets/icon/icon_temple.svg";
 import { useState } from "react";
 import HamburgerMenu from "./HambergerMenu";
+import { StoreButton } from "../ui";
+import { useHistory } from "react-router-dom";
 
 const Header: React.VFC = () => {
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -10,7 +12,7 @@ const Header: React.VFC = () => {
       <ul className="wrapper">
         {!isOpen && (
           <li className="logo">
-            <img src={Temple} alt="" />
+            <StoreButton onClick={() => history.push("/")} />
             <span>Temanashi</span>
           </li>
         )}

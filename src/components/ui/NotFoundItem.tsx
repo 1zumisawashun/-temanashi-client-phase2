@@ -1,6 +1,6 @@
 import NotFoundIcon from "../../assets/icon/icon_not_found.svg";
 
-const NotFound: React.VFC = () => {
+const NotFoundItem: React.VFC = () => {
   return (
     <div className="not-found-container">
       <img src={NotFoundIcon} alt="" />
@@ -8,4 +8,4 @@ const NotFound: React.VFC = () => {
     </div>
   );
 };
-export default NotFound;
+export default NotFoundItem;

@@ -1,9 +1,9 @@
 export { default as Cart } from "./Cart";
-export { default as Complete } from "./Complete";
+export { default as Complete } from "./StripeComplete";
 export { default as Create } from "./Create";
 export { default as Dashboard } from "./Dashboard";
 export { default as Diagnose } from "./Diagnose";
-export { default as Error } from "./Error";
+export { default as Error } from "./StripeError";
 export { default as Login } from "./Login";
 export { default as Product } from "./Product";
 export { default as Signup } from "./Signup";

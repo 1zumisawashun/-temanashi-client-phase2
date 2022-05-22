@@ -1,6 +1,6 @@
 import Divider from "../components/ui/Divider";
 
-const privacy: React.VFC = () => {
+const Privacy: React.VFC = () => {
   return (
     <>
       <div className="terms">
@@ -63,4 +63,4 @@ const privacy: React.VFC = () => {
     </>
   );
 };
-export default privacy;
+export default Privacy;

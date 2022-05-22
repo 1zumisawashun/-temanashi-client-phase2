@@ -7,7 +7,7 @@ import ProductList from "../dashboard/DashboardList";
 import { ProductItem } from "../../../utilities/stripeClient";
 // pendingを追加したい
 // import Loading from "../../components/Loading";
-import { NotFound } from "../../ui";
+import { NotFoundItem } from "../../ui";
 
 const UserFavorite: FC = () => {
   const { user } = useAuthContext();
@@ -35,7 +35,7 @@ const UserFavorite: FC = () => {
     <>
       <div className="user-container">
         <div className="inner">
-          {documents.length === 0 && <NotFound />}
+          {documents.length === 0 && <NotFoundItem />}
           {/* {documents.length === 0 && <Loading />} */}
           {documents.length !== 0 && (
             <ProductList productItems={getLikedFurnitures(documents)} />

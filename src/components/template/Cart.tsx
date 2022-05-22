@@ -6,7 +6,7 @@ import { useToken } from "../../hooks/useToken";
 import { useAuth } from "../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 import CartList from "../model/cart/CartList";
-import { NotFound } from "../ui";
+import { NotFoundItem } from "../ui";
 import CartPaymentArea from "../model/cart/CartAgreement";
 import { useCartContext } from "../../hooks/useCartContext";
 
@@ -55,7 +55,7 @@ const Cart: React.VFC = () => {
   return (
     <div className="common-container">
       {isPendingBuy && <Loading />}
-      {cart.length === 0 && <NotFound />}
+      {cart.length === 0 && <NotFoundItem />}
       {cart.length !== 0 && (
         <>
           <CartList productItems={cart} />

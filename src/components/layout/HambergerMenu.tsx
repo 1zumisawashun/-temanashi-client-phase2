@@ -1,6 +1,5 @@
 import Hamburger from "hamburger-react";
-import WhiteTempleIcon from "../../assets/icon/icon_temple_white.svg";
-import { BasicButton } from "../ui";
+import { BasicButton, StoreButton } from "../ui";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useHistory } from "react-router-dom";
 
@@ -39,7 +38,7 @@ const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
       <div className="responsive-header">
         <ul className="head">
           <li className="logo">
-            <img src={WhiteTempleIcon} alt="" />
+            <StoreButton onClick={() => history.push("/")} />
             <span>Temanashi</span>
           </li>
           <li className="hamburger-box" onClick={handleClick}>

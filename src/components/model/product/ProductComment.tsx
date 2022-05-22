@@ -4,12 +4,17 @@ import { Comment } from "../../../@types/dashboard";
 import { useParams } from "react-router-dom";
 import { useSubCollection } from "../../../hooks/useSubCollection";
 import { convertedPath } from "../../../utilities/utilities";
-import PersonIcon from "../../../assets/icon/icon_person.svg";
 import { ja } from "date-fns/locale";
 import { timestamp } from "../../../firebase/config";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { CommentToAdd } from "../../../@types/dashboard";
-import { BasicButton, BasicModal, InputText, Avatar } from "../../ui";
+import {
+  BasicButton,
+  BasicModal,
+  InputText,
+  Avatar,
+  PersonButton,
+} from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
 
 type Props = {
@@ -64,7 +69,7 @@ const ProductComments: FC<Props> = ({ furniture }) => {
         <ul className="comment-list">
           <li>
             <div className="auther">
-              <Avatar src={PersonIcon} />
+              <PersonButton />
               <p>temanashi-tester</p>
             </div>
             <div className="date">

@@ -1,10 +1,13 @@
 import React, { FC, useState, useRef, useMemo } from "react";
 import TinderCard from "react-tinder-card";
-import ThumbUp from "../../../assets/icon/icon_thumb_up.svg";
-import ThumbDown from "../../../assets/icon/icon_thumb_down.svg";
-import Undo from "../../../assets/icon/icon_undo.svg";
 import { ProductDoc } from "../../../@types/stripe";
-import { ProgressBar, Loading } from "../../ui";
+import {
+  ProgressBar,
+  Loading,
+  ThumbDownButton,
+  ThumbUpButton,
+  UndoButton,
+} from "../../ui";
 import { delay } from "../../../utilities/utilities";
 // import TinderCard from '../react-tinder-card/index'
 
@@ -124,15 +127,9 @@ const TinderSwipe: FC<Props> = ({ db, setIsPendingDiagnose }) => {
           ))}
         </div>
         <div className="buttons">
-          <button onClick={() => swipe("left")}>
-            <img src={ThumbDown} alt="" />
-          </button>
-          <button onClick={() => goBack()}>
-            <img src={Undo} alt="" />
-          </button>
-          <button onClick={() => swipe("right")}>
-            <img src={ThumbUp} alt="" />
-          </button>
+          <ThumbDownButton onClick={() => swipe("left")} />
+          <UndoButton onClick={() => goBack()} />
+          <ThumbUpButton onClick={() => swipe("right")} />
         </div>
       </div>
     </div>

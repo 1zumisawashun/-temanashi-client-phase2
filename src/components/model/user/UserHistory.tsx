@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { productUseCase } from "../../../utilities/stripeClient";
 import PaymentList from "./UserPaymentList";
-import { Loading, NotFound } from "../../ui";
+import { Loading, NotFoundItem } from "../../ui";
 
 const UserHistory: FC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -23,6 +23,7 @@ const UserHistory: FC = () => {
 
   useEffect(() => {
     fetchPayments();
+    // NOTE:初回レンダリングのみ発火させる
     // eslint-disable-next-line
   }, []);
 
@@ -32,7 +33,7 @@ const UserHistory: FC = () => {
       <div className="user-container">
         <div className="inner">
           {payments.length !== 0 && <PaymentList paymentItems={payments} />}
-          {payments.length === 0 && <NotFound />}
+          {payments.length === 0 && <NotFoundItem />}
         </div>
       </div>
     </>

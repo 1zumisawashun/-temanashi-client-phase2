@@ -1,6 +1,6 @@
 import Divider from "../components/ui/Divider";
 
-const terms: React.VFC = () => {
+const Terms: React.VFC = () => {
   return (
     <>
       <div className="terms">
@@ -63,4 +63,4 @@ const terms: React.VFC = () => {
     </>
   );
 };
-export default terms;
+export default Terms;
