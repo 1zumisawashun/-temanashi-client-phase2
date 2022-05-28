@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useAuthContext } from "../../hooks/useContextClient";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import { Loading } from "../ui";
-import UserFavorite from "../model/user/UserFavorite";
-import UserHistory from "../model/user/UserHistory";
-import UserAccount from "../model/user/UserAccount";
-import UserFilter from "../model/user/UserFilter";
+import {
+  UserFavorite,
+  UserHistory,
+  UserAccount,
+  UserFilter,
+} from "../model/user";
 import { User, likedFurnitures } from "../../@types/dashboard";
 import { useSubCollection } from "../../hooks/useSubCollection";
 import { convertedPath } from "../../utilities/utilities";
@@ -18,6 +20,7 @@ const UserTemplate: React.VFC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
   const [payments, setPayments] = useState<any[]>([]);
   const [productItems, setProductItems] = useState<ProductItem[]>([]);
+  const [isError, setIsError] = useState<string>("");
 
   const changeFilter = (newFilter: String) => {
     setCurrentFilter(newFilter);
@@ -37,15 +40,17 @@ const UserTemplate: React.VFC = () => {
   };
 
   const fetchProducts = async () => {
+    setIsError("");
+    setIsPending(true);
     try {
-      setIsPending(true);
-      const results = await productUseCase.fetchPayments(user.uid);
-      const results2 = getLikedFurnitures(documents);
-      setPayments(results);
-      setProductItems(results2);
+      const paymentsList = await productUseCase.fetchPayments(user.uid);
+      const likedProductsList = getLikedFurnitures(documents);
+      setPayments(paymentsList);
+      setProductItems(likedProductsList);
       setIsPending(false);
     } catch (error) {
-      // エラーページへリダイレクトさせる
+      setIsError("fetchに失敗しました。");
+      setIsPending(false);
     }
   };
 
@@ -71,6 +76,7 @@ const UserTemplate: React.VFC = () => {
           {currentFilter === "account" && <UserAccount />}
         </>
       )}
+      {isError.length !== 0 && <p>{isError}</p>}
     </div>
   );
 };

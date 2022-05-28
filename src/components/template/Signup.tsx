@@ -12,7 +12,6 @@ const Signup: FC = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // nullチェックで早期リターン
     if (thumbnail === null) return;
     signup(email, password, displayName, thumbnail);
   };
@@ -20,7 +19,6 @@ const Signup: FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setThumbnail(null);
     let selected;
-    // NOTE:型定義のnullエラー対策
     if (e.target.files !== null) {
       selected = e.target.files[0];
     }

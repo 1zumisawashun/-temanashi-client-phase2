@@ -1,6 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DashboardFilter from "../model/dashboard/DashboardFilter";
-import { useState } from "react";
 import { useAuthContext, useRandomContext } from "../../hooks/useContextClient";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import DashboardList from "../model/dashboard/DashboardList";
@@ -13,6 +12,7 @@ const Dashboard: React.VFC = () => {
   const [currentFilter, setCurrentFilter] = useState<String>("all");
   const [isPending, setIsPending] = useState<boolean>(false);
   const [productItems, setProductItems] = useState<ProductItem[]>([]);
+  const [isError, setIsError] = useState<string>("");
 
   const changeFilter = (newFilter: String) => {
     setCurrentFilter(newFilter);
@@ -20,8 +20,21 @@ const Dashboard: React.VFC = () => {
 
   useEffect(() => {
     (async () => {
-      setIsPending(true);
-      const productItems = await productUseCase.fetchAll();
+      try {
+        setIsError("");
+        setIsPending(true);
+        const productItems = await productUseCase.fetchAll();
+        setProductItems(productItems);
+        setIsPending(false);
+      } catch (error) {
+        setIsError("fetchに失敗しました。");
+        setIsPending(false);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
       const productsRef = projectFirestore.collection("products");
       const querySnapshot = await productsRef.get();
       const results = querySnapshot.docs.map((doc, index) => {
@@ -29,8 +42,6 @@ const Dashboard: React.VFC = () => {
         return { name, image: images[0], id: doc.id, random: index };
       });
       addProductWithRandom(results);
-      setProductItems(productItems);
-      setIsPending(false);
     })();
   }, [addProductWithRandom]);
 
@@ -74,6 +85,7 @@ const Dashboard: React.VFC = () => {
       {filteredProductItems && (
         <DashboardList productItems={filteredProductItems} />
       )}
+      {isError.length !== 0 && <p>{isError}</p>}
     </div>
   );
 };

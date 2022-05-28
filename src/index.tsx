@@ -9,7 +9,7 @@ import {
 } from "./context";
 import { CookiesProvider } from "react-cookie";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./utilities/themeClient";
+import { theme } from "./utilities/muiThemeClient";
 
 ReactDOM.render(
   <React.StrictMode>

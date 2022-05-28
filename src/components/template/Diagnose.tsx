@@ -17,6 +17,7 @@ const Diagnose: React.VFC = () => {
 
   useEffect(() => {
     if (products.length <= 5) return;
+    setIsPendingDiagnose(true);
     let randomDocument: Array<Product> = [];
     let indexs: Array<number> = [];
     while (randomDocument.length <= 5) {
@@ -28,15 +29,22 @@ const Diagnose: React.VFC = () => {
           randomDocument.push(results);
           if (randomDocument.length === 5) {
             setDocuments(randomDocument);
+            setIsPendingDiagnose(false);
+          } else {
+            // エラー
           }
+        } else {
+          // エラー
         }
+      } else {
+        // エラー
       }
     }
   }, [products]);
 
   return (
     <main className="root">
-      {documents.length === 0 && <Loading />}
+      {isPendingDiagnose && <Loading />}
       {!isPendingDiagnose && documents.length > 0 && (
         <DiagnoseTinderSwipe
           db={documents}

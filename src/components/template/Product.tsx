@@ -1,25 +1,30 @@
 import { useParams } from "react-router-dom";
 import ProductComment from "../model/product/ProductComment";
 import ProductSummary from "../model/product/ProductSummary";
-import { FC, useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import { Loading } from "../ui";
 
-const Product: FC = () => {
+const ProductTemplate: React.VFC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
   const [productItem, setProductItem] = useState<ProductItem>();
+  const [isError, setIsError] = useState<string>("");
 
-  const { id }: { id: string } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const fetchProductItem = useCallback(async () => {
+    setIsPending(true);
+    setIsError("");
     try {
-      setIsPending(true);
       const productItem = await productUseCase.fetchProductItem(id);
       setProductItem(productItem);
-    } finally {
+      setIsPending(false);
+    } catch (error) {
+      setIsError("fetchに失敗しました");
       setIsPending(false);
     }
-  }, [id]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     fetchProductItem();
@@ -36,8 +41,9 @@ const Product: FC = () => {
       <div className="product-container">
         <ProductSummary furniture={productItem} />
         <ProductComment furniture={productItem} />
+        {isError.length !== 0 && <p>{isError}</p>}
       </div>
     </div>
   );
 };
-export default Product;
+export default ProductTemplate;

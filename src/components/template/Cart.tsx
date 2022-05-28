@@ -1,26 +1,25 @@
 import { useState } from "react";
 import { productUseCase } from "../../utilities/stripeClient";
 import { useAuthContext, useCartContext } from "../../hooks/useContextClient";
-import Loading from "../ui/Loading";
 import { useToken } from "../../hooks/useToken";
-import { useAuth } from "../../hooks/useAuth";
-import { useHistory } from "react-router-dom";
 import CartList from "../model/cart/CartList";
-import { NotFoundItem } from "../ui";
+import { NotFoundItem, Loading } from "../ui";
 import CartPaymentArea from "../model/cart/CartAgreement";
 
 const Cart: React.VFC = () => {
-  const history = useHistory();
   const { verifyJWT } = useToken();
-  const { logout } = useAuth();
   const { cart } = useCartContext();
   const { user } = useAuthContext();
 
   const [isPendingBuy, setIsPendingBuy] = useState<boolean>(false);
+  const [isError, setIsError] = useState<string>("");
 
   if (!user) throw new Error("we cant find your account");
 
   const onClickBuy = async () => {
+    setIsError("");
+    setIsPendingBuy(true);
+
     const line_items = cart.map((item) => {
       return {
         price: item.priceIndex,
@@ -28,25 +27,21 @@ const Cart: React.VFC = () => {
       };
     });
 
-    const token = await verifyJWT();
-    console.log(token); // FIXME:今はトークン認証バグっているのであとで修正が必要
+    const token = await verifyJWT(); // FIXME:今はトークン認証バグっているのであとで修正が必要
     if (token) {
-      alert("認証トークンが有効期限切れです。ログインしなおしてください。");
-      logout();
-      history.push("/login");
+      setIsError(
+        "認証トークンが有効期限切れです。ログインしなおしてください。"
+      );
       return;
     }
     try {
-      setIsPendingBuy(true);
       const uid = user.uid;
       const seccess_url = `${window.location.origin}/complete`;
       const cancel_url = `${window.location.origin}/error`;
       await productUseCase.buy(uid, line_items, seccess_url, cancel_url);
+      setIsPendingBuy(false);
     } catch (error) {
-      if (error instanceof Error) {
-        alert(`Error: ${!!error.message ? error.message : error}`);
-      }
-    } finally {
+      setIsError("Stripeページへの遷移が失敗しました。");
       setIsPendingBuy(false);
     }
   };
@@ -62,6 +57,7 @@ const Cart: React.VFC = () => {
       ) : (
         <NotFoundItem />
       )}
+      {isError.length !== 0 && <p>{isError}</p>}
     </div>
   );
 };

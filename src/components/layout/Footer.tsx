@@ -15,7 +15,7 @@ const Copyright = styled("div")`
 const Footer: React.VFC = () => {
   return (
     <FooterContainer>
-      <Copyright>Copyright 2022 cafelog</Copyright>
+      <Copyright>Copyright 2022 temanashi</Copyright>
     </FooterContainer>
   );
 };
