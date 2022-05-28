@@ -15,6 +15,7 @@ import styled from "@emotion/styled";
 
 const AppContainer = styled("div")`
   display: flex;
+  min-height: 100vh;
 `;
 
 const App = () => {

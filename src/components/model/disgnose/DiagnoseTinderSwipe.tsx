@@ -17,6 +17,7 @@ const ButtonWrapper = styled("div")`
   gap: 30px;
   padding-top: 30px;
 `;
+const CommonWrapper = styled("div")``;
 
 interface Product {
   id: string;
@@ -121,7 +122,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
   };
 
   return (
-    <div className="common-container">
+    <CommonWrapper>
       {isLoading && <Loading message="loading" />}
       <div className="tinder-swipe">
         <ProgressBar width={100} percent={percent} />
@@ -149,7 +150,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
           <ThumbUpButton size="large" onClick={() => swipe("right")} />
         </ButtonWrapper>
       </div>
-    </div>
+    </CommonWrapper>
   );
 };
 

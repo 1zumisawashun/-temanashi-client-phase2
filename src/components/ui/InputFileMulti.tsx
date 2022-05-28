@@ -1,11 +1,11 @@
-import React, { VFC, useState } from "react";
+import { useState } from "react";
 import { CloseButton } from "./IconButton";
 import BasicModal from "./BasicModal";
 import BasicButton from "./BasicButton";
 
-interface Props {
+interface PhotosUploadProps {
   name?: string; // NOTE:input["file"]とlabelをリンクさせるためのフラグ
-  photos: File[] | null;
+  photos: File[];
   setPhotos: (files: File[]) => void;
 }
 
@@ -17,18 +17,16 @@ const mineType = [
   "image/svg+xml",
 ];
 
-const PhotosUpload: VFC<Props> = ({
+const PhotosUpload: React.VFC<PhotosUploadProps> = ({
   name = "photos",
   photos,
   setPhotos,
 }): React.ReactElement => {
   const [isOpenExecute, setIsOpenExecute] = useState(false);
-  const [isSameError, setIsSameError] = useState(false);
-  const [isNumberError, setIsNumberError] = useState(false);
-  const [isFileTypeError, setIsFileTypeError] = useState(false);
+  const [isError, setIsError] = useState<string>("");
 
   const handleCancel = (photoIndex: number) => {
-    resetErrors();
+    setIsError("");
     if (!photos) return;
     const modifyPhotos = photos.filter((photo, index) => photoIndex !== index);
     setPhotos(modifyPhotos);
@@ -42,34 +40,28 @@ const PhotosUpload: VFC<Props> = ({
     setIsOpenExecute(false);
   };
 
-  const resetErrors = () => {
-    setIsSameError(false);
-    setIsNumberError(false);
-    setIsFileTypeError(false);
-  };
-
   const handleFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("動いています。");
+    let addedPhotos: File[] = [];
+
     if (event.target.files === null || event.target.files.length === 0) {
       return;
     }
-    const files = Object.values(event.target.files).concat();
-    // 初期化することで同じファイルを連続で選択してもonChagngeが発動するように設定し、画像をキャンセルしてすぐに同じ画像を選ぶ動作に対応
-    event.target.value = "";
-    resetErrors();
 
-    // NOTE:filterを通さずに行うとpromiseが帰ってしまう
-    const pickedPhotos = files.filter(async (file) => {
-      // first validation
+    const files = Object.values(event.target.files).concat();
+    event.target.value = "";
+    setIsError("");
+
+    const pickedPhotos = files.filter((file) => {
       if (!mineType.includes(file.type)) {
-        setIsFileTypeError(true);
+        setIsError(
+          "※jpeg, png, bmp, gif, svg以外のファイル形式は表示されません"
+        );
         return false;
       }
-      // second validation
-      if (photos) {
+      if (photos.length !== 0) {
         const existsSameSize = photos.some((photo) => photo.size === file.size);
         if (existsSameSize) {
-          setIsSameError(true);
+          setIsError("※既に選択された画像と同じものは表示されません");
           return false;
         }
       }
@@ -79,28 +71,18 @@ const PhotosUpload: VFC<Props> = ({
     if (pickedPhotos.length === 0) {
       return;
     }
-    // FIXME
-    let addedPhotos: File[];
-    if (!photos) {
-      addedPhotos = [...pickedPhotos];
-      if (addedPhotos.length >= 4) {
-        setIsNumberError(true);
-      }
-      //無限に追加することができるがsliceで強制的に3枚にする
-      setPhotos(addedPhotos.slice(0, 3));
+
+    addedPhotos = [...photos, ...pickedPhotos];
+
+    if (addedPhotos.length >= 4) {
+      setIsError("※3枚を超えて選択された画像は表示されません");
+      return;
     }
-    if (photos) {
-      addedPhotos = [...photos, ...pickedPhotos];
-      if (addedPhotos.length >= 4) {
-        setIsNumberError(true);
-      }
-      //無限に追加することができるがsliceで強制的に3枚にする
-      setPhotos(addedPhotos.slice(0, 3));
-    }
+
+    setPhotos(addedPhotos.slice(0, 3));
   };
   return (
     <>
-      {/* モーダルを別のreturnとして切り出す */}
       <div className="photos-container">
         {[...Array(3)].map((_: number, index: number) =>
           photos !== null && index < photos.length ? (
@@ -120,7 +102,6 @@ const PhotosUpload: VFC<Props> = ({
                     </div>
                   }
                 />
-                {/* 速度改善でfileを直接入れ込む必要あり */}
                 <img
                   src={URL.createObjectURL(photos[index])}
                   alt={`あなたの写真 ${index + 1}`}
@@ -146,11 +127,8 @@ const PhotosUpload: VFC<Props> = ({
           )
         )}
       </div>
-      {isSameError && <p>※既に選択された画像と同じものは表示されません</p>}
-      {isNumberError && <p>※3枚を超えて選択された画像は表示されません</p>}
-      {isFileTypeError && (
-        <p>※jpeg, png, bmp, gif, svg以外のファイル形式は表示されません</p>
-      )}
+
+      {isError.length !== 0 && <p>{isError}</p>}
 
       <input
         data-cy="file_upload"
