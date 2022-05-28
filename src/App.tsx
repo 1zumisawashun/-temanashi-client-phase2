@@ -11,10 +11,15 @@ import {
   Signup,
   User,
 } from "./pages";
+import styled from "@emotion/styled";
+
+const AppContainer = styled("div")`
+  display: flex;
+`;
 
 const App = () => {
   return (
-    <div className="App">
+    <AppContainer>
       <BrowserRouter>
         <Switch>
           <Route path="/error">
@@ -49,7 +54,7 @@ const App = () => {
           </Route>
         </Switch>
       </BrowserRouter>
-    </div>
+    </AppContainer>
   );
 };
 

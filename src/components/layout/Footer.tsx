@@ -1,16 +1,15 @@
 import styled from "@emotion/styled";
 
 const FooterContainer = styled("footer")`
-  padding: 40px;
+  padding-bottom: 20px;
   text-align: center;
-  background: $lighthouse;
 `;
 const Copyright = styled("div")`
-  color: $shale;
+  color: gray;
   font-size: 14px;
   display: inline-block;
   padding: 20px;
-  border-top: 1px solid $shale;
+  border-top: 1px solid gray;
 `;
 
 const Footer: React.VFC = () => {

@@ -5,10 +5,13 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import SendIcon from "@mui/icons-material/Send";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
+import { useCartContext } from "../../hooks/useContextClient";
+import Badge from "@mui/material/Badge";
 
 const Sidebar: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
+  const { cart } = useCartContext();
 
   return (
     <div className="sidebar">
@@ -37,7 +40,14 @@ const Sidebar: React.VFC = () => {
               </NavlinkButton>
             </li>
             <li>
-              <NavlinkButton path="/cart" icon={<ShoppingCartIcon />}>
+              <NavlinkButton
+                path="/cart"
+                icon={
+                  <Badge badgeContent={cart.length} color="secondary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                }
+              >
                 Shopping Cart
               </NavlinkButton>
             </li>

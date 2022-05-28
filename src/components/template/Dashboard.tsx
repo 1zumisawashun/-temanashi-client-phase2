@@ -34,7 +34,6 @@ const Dashboard: React.VFC = () => {
     })();
   }, [addProductWithRandom]);
 
-  // nullチェック・通常のreturnだとエラーになる
   if (!user) throw new Error("we cant find your account");
 
   const filteredProductItems = productItems
