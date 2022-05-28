@@ -1,6 +1,6 @@
 import Hamburger from "hamburger-react";
 import { BasicButton, StoreButton } from "../ui";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useContextClient";
 import { useHistory } from "react-router-dom";
 
 interface HamburgerMenuProp {

@@ -6,7 +6,7 @@ import {
 } from "../../@types/dashboard";
 import { useState, useEffect } from "react";
 import { timestamp, firebase } from "../../firebase/config";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useContextClient";
 import { convertedPath } from "../../utilities/utilities";
 import { useSubDocument } from "../../hooks/useSubDocument";
 import { ProductItem } from "../../utilities/stripeClient";

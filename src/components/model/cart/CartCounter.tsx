@@ -1,4 +1,4 @@
-import { useCartContext } from "../../../hooks/useCartContext";
+import { useCartContext } from "../../../hooks/useContextClient";
 import { CountUpButton, CountDownButton } from "../../ui";
 import styled from "@emotion/styled";
 

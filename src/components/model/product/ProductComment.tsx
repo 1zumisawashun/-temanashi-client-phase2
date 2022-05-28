@@ -6,7 +6,7 @@ import { useSubCollection } from "../../../hooks/useSubCollection";
 import { convertedPath } from "../../../utilities/utilities";
 import { ja } from "date-fns/locale";
 import { timestamp } from "../../../firebase/config";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useAuthContext } from "../../../hooks/useContextClient";
 import { CommentToAdd } from "../../../@types/dashboard";
 import {
   BasicButton,

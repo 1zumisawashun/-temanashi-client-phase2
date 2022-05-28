@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { projectStorage } from "../firebase/config";
-import { useAuthContext } from "./useAuthContext";
+import { useAuthContext } from "./useContextClient";
 import loadImage from "blueimp-load-image";
 
 type addPhoto = File[] | null;

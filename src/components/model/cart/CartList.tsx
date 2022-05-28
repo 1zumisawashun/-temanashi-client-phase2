@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import {
+  useAuthContext,
+  useCartContext,
+} from "../../../hooks/useContextClient";
 import { taxIncludedPrice } from "../../../utilities/utilities";
 import CartCounter from "./CartCounter";
 import { Divider, Image, DeleteButton } from "../../ui";
-import { useCartContext } from "../../../hooks/useCartContext";
 interface Product {
   id: string;
   title: string;

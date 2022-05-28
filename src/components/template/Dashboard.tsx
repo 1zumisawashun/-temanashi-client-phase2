@@ -1,14 +1,13 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import DashboardFilter from "../model/dashboard/DashboardFilter";
 import { useState } from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext, useRandomContext } from "../../hooks/useContextClient";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import DashboardList from "../model/dashboard/DashboardList";
 import { Loading } from "../ui";
-import { useRandomContext } from "../../hooks/useRandomContext";
 import { projectFirestore } from "../../firebase/config";
 
-const Dashboard: FC = () => {
+const Dashboard: React.VFC = () => {
   const { user } = useAuthContext();
   const { addProductWithRandom } = useRandomContext();
   const [currentFilter, setCurrentFilter] = useState<String>("all");

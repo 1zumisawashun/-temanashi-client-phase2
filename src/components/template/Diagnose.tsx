@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import DiagnoseTinderSwipe from "../model/disgnose/DiagnoseTinderSwipe";
 import { Loading } from "../ui";
 import DiagnoseResult from "../model/disgnose/DiagnoseResult";
-import { useRandomContext } from "../../hooks/useRandomContext";
+import { useRandomContext } from "../../hooks/useContextClient";
 interface Product {
   id: string;
   name: string;

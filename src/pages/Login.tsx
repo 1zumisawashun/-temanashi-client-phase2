@@ -1,5 +1,5 @@
 import LoginTemplate from "../components/template/Login";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../hooks/useContextClient";
 import { Redirect } from "react-router-dom";
 
 const Login: React.VFC = () => {

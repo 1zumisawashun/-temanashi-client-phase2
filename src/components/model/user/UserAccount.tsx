@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 import { projectFunctions, isEmulating } from "../../../firebase/config";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useAuthContext } from "../../../hooks/useContextClient";
 import { useCookies } from "react-cookie";
 import { useAuth } from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";

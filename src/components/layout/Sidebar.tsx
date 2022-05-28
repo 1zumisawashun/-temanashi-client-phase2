@@ -1,5 +1,5 @@
 import Avatar from "../ui/Avatar";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useContextClient";
 import { NavlinkButton } from "../ui";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SendIcon from "@mui/icons-material/Send";

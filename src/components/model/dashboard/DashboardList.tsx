@@ -3,7 +3,7 @@ import {
   ProductItem,
   ProductItemWithoutComment,
 } from "../../../utilities/stripeClient";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useAuthContext } from "../../../hooks/useContextClient";
 import { taxIncludedPrice } from "../../../utilities/utilities";
 import { Image } from "../../ui";
 

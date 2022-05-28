@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { productUseCase } from "../../utilities/stripeClient";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext, useCartContext } from "../../hooks/useContextClient";
 import Loading from "../ui/Loading";
 import { useToken } from "../../hooks/useToken";
 import { useAuth } from "../../hooks/useAuth";
@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 import CartList from "../model/cart/CartList";
 import { NotFoundItem } from "../ui";
 import CartPaymentArea from "../model/cart/CartAgreement";
-import { useCartContext } from "../../hooks/useCartContext";
 
 const Cart: React.VFC = () => {
   const history = useHistory();

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { projectAuth, projectStorage } from "../firebase/config";
-import { useAuthContext } from "./useAuthContext";
+import { useAuthContext } from "./useContextClient";
 import { documentPoint } from "../utilities/converterClient";
 import { User } from "../@types/dashboard";
 import { useToken } from "../hooks/useToken";

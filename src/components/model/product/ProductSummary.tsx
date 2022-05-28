@@ -1,5 +1,8 @@
 import { useFirestore } from "../../../hooks/useFirestore";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import {
+  useAuthContext,
+  useCartContext,
+} from "../../../hooks/useContextClient";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { BasicButton, LikeButton, BasicModal } from "../../ui";
@@ -8,7 +11,6 @@ import { useParams } from "react-router-dom";
 import { taxIncludedPrice } from "../../../utilities/utilities";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { useCartContext } from "../../../hooks/useCartContext";
 import styled from "@emotion/styled";
 
 const ButtonWrapper = styled("div")`

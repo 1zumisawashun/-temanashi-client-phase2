@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useContextClient";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import { Loading } from "../ui";
 import UserFavorite from "../model/user/UserFavorite";
