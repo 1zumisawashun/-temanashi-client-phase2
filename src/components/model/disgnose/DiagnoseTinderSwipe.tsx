@@ -1,6 +1,5 @@
 import React, { useState, useRef, useMemo } from "react";
 import TinderCard from "react-tinder-card";
-import { ProductDoc } from "../../../@types/stripe";
 import {
   ProgressBar,
   Loading,
@@ -19,8 +18,15 @@ const ButtonWrapper = styled("div")`
   padding-top: 30px;
 `;
 
+interface Product {
+  id: string;
+  name: string;
+  random: number;
+  image: string;
+}
+
 type TinderSwipeProps = {
-  db: Array<ProductDoc>;
+  db: Array<Product>;
   setIsPendingDiagnose: any;
 };
 
@@ -129,7 +135,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
               onCardLeftScreen={() => outOfFrame(index)}
             >
               <div
-                style={{ backgroundImage: "url(" + character.images[0] + ")" }}
+                style={{ backgroundImage: "url(" + character.image + ")" }}
                 className="card"
               >
                 <h3>{character.name}</h3>

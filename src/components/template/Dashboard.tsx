@@ -5,35 +5,35 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import DashboardList from "../model/dashboard/DashboardList";
 import { Loading } from "../ui";
-import { useCookies } from "react-cookie";
+import { useRandomContext } from "../../hooks/useRandomContext";
+import { projectFirestore } from "../../firebase/config";
 
 const Dashboard: FC = () => {
   const { user } = useAuthContext();
+  const { addProductWithRandom } = useRandomContext();
   const [currentFilter, setCurrentFilter] = useState<String>("all");
   const [isPending, setIsPending] = useState<boolean>(false);
   const [productItems, setProductItems] = useState<ProductItem[]>([]);
-  /* eslint-disable */
-  const [cookies, setCookie] = useCookies(["random"]);
-  /* eslint-enable */
 
   const changeFilter = (newFilter: String) => {
     setCurrentFilter(newFilter);
   };
 
-  const fetchProducts = async () => {
-    try {
+  useEffect(() => {
+    (async () => {
       setIsPending(true);
       const productItems = await productUseCase.fetchAll();
+      const productsRef = projectFirestore.collection("products");
+      const querySnapshot = await productsRef.get();
+      const results = querySnapshot.docs.map((doc, index) => {
+        const { name, images } = doc.data();
+        return { name, image: images[0], id: doc.id, random: index };
+      });
+      addProductWithRandom(results);
       setProductItems(productItems);
-    } finally {
       setIsPending(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-    setCookie("random", productItems.length, { path: "/" });
-  }, [setCookie, productItems.length]);
+    })();
+  }, [addProductWithRandom]);
 
   // nullチェック・通常のreturnだとエラーになる
   if (!user) throw new Error("we cant find your account");

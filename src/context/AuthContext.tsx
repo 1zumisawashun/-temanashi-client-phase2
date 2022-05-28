@@ -57,3 +57,5 @@ export const AuthContextProvider: React.VFC<
     </AuthContext.Provider>
   );
 };
+
+export default AuthContextProvider;

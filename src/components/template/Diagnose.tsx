@@ -1,12 +1,38 @@
-import { FC, useState } from "react";
+import { useState, useEffect } from "react";
 import DiagnoseTinderSwipe from "../model/disgnose/DiagnoseTinderSwipe";
-import { useRandomDocument } from "../../hooks/useRandomDocument";
 import { Loading } from "../ui";
 import DiagnoseResult from "../model/disgnose/DiagnoseResult";
+import { useRandomContext } from "../../hooks/useRandomContext";
+interface Product {
+  id: string;
+  name: string;
+  random: number;
+  image: string;
+}
 
-const Diagnose: FC = () => {
-  const { documents } = useRandomDocument();
+const Diagnose: React.VFC = () => {
+  const { products } = useRandomContext();
   const [isPendingDiagnose, setIsPendingDiagnose] = useState<boolean>(false);
+  const [documents, setDocuments] = useState<Array<Product>>([]);
+
+  useEffect(() => {
+    if (products.length <= 5) return;
+    let randomDocument: Array<Product> = [];
+    let indexs: Array<number> = [];
+    while (randomDocument.length <= 5) {
+      const queryIndex = Math.floor(Math.random() * products.length - 1);
+      if (!indexs.includes(queryIndex)) {
+        indexs = [...indexs, queryIndex];
+        const results = products.find((item) => item.random === queryIndex);
+        if (results) {
+          randomDocument.push(results);
+          if (randomDocument.length === 5) {
+            setDocuments(randomDocument);
+          }
+        }
+      }
+    }
+  }, [products]);
 
   return (
     <main className="root">

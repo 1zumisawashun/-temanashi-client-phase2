@@ -119,7 +119,7 @@ export const CartContextProvider: React.VFC<
 > = (props) => {
   const [cartState, dispatch] = useReducer(cartReducer, { cart: [] });
   const addProductToCart = (product: Product) => {
-    dispatch({ type: "ADD_PRODUCT", product: product }); // actionはdispatchの引数を指している;
+    dispatch({ type: ADD_PRODUCT, product: product }); // actionはdispatchの引数を指している;
   };
   const countUpProduct = (productId: string) => {
     dispatch({ type: COUNT_UP_PRODUCT, productId: productId });

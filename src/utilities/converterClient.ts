@@ -1,5 +1,5 @@
 import { firebase, projectFirestore } from "../firebase/config";
-import { User, ProjectType } from "../@types/dashboard";
+import { User } from "../@types/dashboard";
 
 const converter = <T>() => ({
   // NOTE:toFirestore: (data: Partial<T>) => data,で曖昧にすることもできる
@@ -45,7 +45,6 @@ const subDocumentPoint = <T, U>(
 
 const db = {
   users: collectionPoint<User>("users"),
-  projects: collectionPoint<ProjectType>("projects"),
 };
 
 export {
