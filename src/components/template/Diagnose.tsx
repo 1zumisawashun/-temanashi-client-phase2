@@ -31,12 +31,15 @@ const Diagnose: React.VFC = () => {
             setDocuments(randomDocument);
             setIsPendingDiagnose(false);
           } else {
+            console.log("1個目のエラー");
             // エラー
           }
         } else {
+          console.log("2個目のエラー");
           // エラー
         }
       } else {
+        console.log("3個目のエラー");
         // エラー
       }
     }
@@ -44,7 +47,7 @@ const Diagnose: React.VFC = () => {
 
   return (
     <main className="root">
-      {isPendingDiagnose && <Loading />}
+      {documents.length === 0 && <Loading />}
       {!isPendingDiagnose && documents.length > 0 && (
         <DiagnoseTinderSwipe
           db={documents}

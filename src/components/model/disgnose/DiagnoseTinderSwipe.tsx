@@ -17,7 +17,9 @@ const ButtonWrapper = styled("div")`
   gap: 30px;
   padding-top: 30px;
 `;
-const CommonWrapper = styled("div")``;
+const CommonWrapper = styled("div")`
+  width: 100%;
+`;
 
 interface Product {
   id: string;
@@ -36,6 +38,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
   setIsPendingDiagnose,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  // eslint-disable-next-line
   const [lastDirection, setLastDirection] = useState<string>();
   const [currentIndex, setCurrentIndex] = useState<number>(db.length - 1);
   const [percent, setPercent] = useState<number>(0);
@@ -100,7 +103,6 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
   const swiped = (direction: string, index: number) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
-    console.log(lastDirection);
   };
   /**
    *　ライブラリのonSwipeメソッドを叩く>ローカルのswipeメソッドを叩く
@@ -108,6 +110,9 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
   const swipe = async (direction: string) => {
     if (canSwipe && currentIndex < db.length) {
       await childRefs[currentIndex].current.swipe(direction);
+      // NOTE:swipeの処理が終わる前に別のページに遷移するとバグる
+      // NOTE:cartでのみ発生して他のページはレンダリングするからなかったことになるっぽい
+      console.log("swipeが完了しました");
     }
   };
   /**

@@ -61,7 +61,7 @@ const UserTemplate: React.VFC = () => {
 
   return (
     <div className="common-container">
-      {isPending ? (
+      {isPending && productItems.length === 0 ? (
         <Loading />
       ) : (
         <>
