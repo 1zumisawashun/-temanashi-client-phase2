@@ -10,7 +10,7 @@ let initialState = {
 };
 
 type CreatedAt = {
-  createdAt: firebase.firestore.Timestamp; // 追加したい型
+  createdAt: firebase.firestore.Timestamp;
 };
 
 const firestoreReducer = (state: any, action: any) => {
@@ -45,20 +45,18 @@ const firestoreReducer = (state: any, action: any) => {
   }
 };
 
+// NOTE:reducerもhooksディレクトリとして切り出している
 export const useFirestore = () => {
   const [response, dispatch] = useReducer(firestoreReducer, initialState);
   const [isCancelled, setIsCancelled] = useState(false);
 
-  // only dispatch is not cancelled
   const dispatchIfNotCancelled = (action: any) => {
     if (!isCancelled) {
       dispatch(action);
     }
   };
 
-  // add a document
   const addDocument = async <T,>(collection: string, doc: T) => {
-    // 型定義の拡張
     type TWithCreatedAt = CreatedAt & T;
     dispatch({ type: "IS_PENDING" });
     try {
@@ -78,7 +76,6 @@ export const useFirestore = () => {
     }
   };
 
-  // delete a document
   const deleteDocument = async <T,>(collection: string, id: string) => {
     dispatch({ type: "IS_PENDING" });
     try {
@@ -89,7 +86,6 @@ export const useFirestore = () => {
     }
   };
 
-  // update a document
   const updateDocument = async <T,>(
     collection: string,
     id: string,
@@ -97,7 +93,6 @@ export const useFirestore = () => {
   ) => {
     dispatch({ type: "IS_PENDING" });
     try {
-      // const updatedDocument = await ref.doc(id).update(updates);
       const updatedDocument = await documentPoint<T>(collection, id).update(
         updates
       );

@@ -14,6 +14,7 @@ const Container = styled("div")`
 const Login: React.VFC = () => {
   const { user } = useAuthContext();
 
+  // NOTE:リロードするとユーザ取得が遅れてログイン画面に飛ばされる＞ログインユーザだからトップページに繊維する
   return user ? (
     <Redirect to="/" />
   ) : (

@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStorage } from "../../hooks/useStorage";
@@ -13,6 +13,11 @@ import {
 import { OptionProps } from "../ui/InputSelect";
 import { SingleValue } from "react-select";
 import { useCookies } from "react-cookie";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import { useForm, SubmitHandler } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface FormData {
   name: string;
@@ -28,6 +33,28 @@ const CreateProject: React.VFC = () => {
   const history = useHistory();
   const { getStorageUrl } = useStorage();
   const [cookies] = useCookies(["jwt"]);
+
+  // NOTE:yupバリデーションを強化したい
+  const getSchema = () => {
+    return yup.object({
+      name: yup.string().required("名前を入力してください。"),
+      description: yup.string().required("説明を入力してください。"),
+      price: yup.string().required("価格を入力してください。"),
+      width: yup.string().required("幅を入力してください。"),
+      length: yup.string().required("深さを入力してください。"),
+      height: yup.string().required("高さを入力してください。"),
+      stock: yup.string().required("在庫を入力してください。"),
+    });
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    mode: "onChange",
+    resolver: yupResolver(getSchema()),
+  });
 
   const [formError, setFromError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -56,8 +83,12 @@ const CreateProject: React.VFC = () => {
     setCategory(value);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const onPreSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data, "onPreSubmit");
+    onSubmit();
+  };
+
+  const onSubmit = async () => {
     setIsLoading(true);
     setFromError("");
 
@@ -108,58 +139,85 @@ const CreateProject: React.VFC = () => {
         <InputFileMulti photos={photos} setPhotos={setPhotos} />
         <InputText
           label="name"
-          name="name"
+          register={register("name", {
+            onChange: (e) => onInputChange(e),
+          })}
           value={formData.name}
-          onChange={(e) => onInputChange(e)}
+          error={"name" in errors}
+          helperText={errors.name?.message}
         />
         <InputText
           label="description"
-          name="description"
+          register={register("description", {
+            onChange: (e) => onInputChange(e),
+          })}
           value={formData.description}
-          onChange={(e) => onInputChange(e)}
+          error={"description" in errors}
+          helperText={errors.description?.message}
         />
         <InputText
           label="price"
-          name="price"
-          type="number"
+          register={register("price", {
+            onChange: (e) => onInputChange(e),
+          })}
           value={formData.price}
-          onChange={(e) => onInputChange(e)}
+          error={"price" in errors}
+          helperText={errors.price?.message}
         />
         <InputText
-          label="strock"
-          name="strock"
-          type="number"
+          label="stock"
+          register={register("stock", {
+            onChange: (e) => onInputChange(e),
+          })}
           value={formData.stock}
-          onChange={(e) => onInputChange(e)}
+          error={"stock" in errors}
+          helperText={errors.stock?.message}
         />
         <InputText
           label="width"
-          name="width"
-          type="number"
+          register={register("width", {
+            onChange: (e) => onInputChange(e),
+          })}
           value={formData.width}
-          onChange={(e) => onInputChange(e)}
+          error={"width" in errors}
+          helperText={errors.width?.message}
         />
         <InputText
           label="length"
-          name="length"
-          type="number"
+          register={register("length", {
+            onChange: (e) => onInputChange(e),
+          })}
           value={formData.length}
-          onChange={(e) => onInputChange(e)}
+          error={"length" in errors}
+          helperText={errors.length?.message}
         />
         <InputText
           label="height"
-          name="height"
-          type="number"
+          register={register("height", {
+            onChange: (e) => onInputChange(e),
+          })}
           value={formData.height}
-          onChange={(e) => onInputChange(e)}
+          error={"height" in errors}
+          helperText={errors.height?.message}
         />
         <InputSelect
           label="Category"
           onChange={(e) => onInputChangeSelect(e)}
           options={categories}
         />
-        <BasicButton onClick={handleSubmit}>Add Funiture</BasicButton>
-        {formError && <p className="error">{formError}</p>}
+        <BasicButton
+          onClick={() => {
+            handleSubmit(onPreSubmit)();
+          }}
+        >
+          完了
+        </BasicButton>
+        {formError && (
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>
+            {formError}
+          </Alert>
+        )}
       </form>
     </div>
   );

@@ -33,7 +33,6 @@ export const useSubCollection = <T, U>({
           setError("could not fetch the data");
         }
       );
-      // unsubscribe on unmount and clean a function
       return () => unsubscribe();
     }
   }, [collection, document, subCollection]);

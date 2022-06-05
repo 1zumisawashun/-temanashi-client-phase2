@@ -17,6 +17,7 @@ interface BasicButtonProps {
   styleName?: string;
   isDisabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  fullWidth?: boolean;
 }
 
 const BasicButton: React.VFC<BasicButtonProps> = ({
@@ -27,6 +28,7 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
   size = "medium",
   isDisabled,
   onClick,
+  fullWidth = false,
 }) => {
   return (
     <Button
@@ -36,6 +38,7 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
       className={styleName + ` btn -mt10`}
       onClick={onClick}
       disabled={isDisabled}
+      fullWidth={fullWidth}
     >
       {children}
     </Button>

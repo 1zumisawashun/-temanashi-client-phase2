@@ -46,7 +46,6 @@ export const useSubDocument = <T, U>({
           setError("failed to get document");
         }
       );
-      // clean a function
       return () => unsubscribe();
     }
   }, [collection, document, subCollection, subDocument]);

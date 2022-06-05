@@ -1,89 +1,145 @@
-import { FC, FormEvent, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { InputText, BasicButton, LinkButton, InputFileSingle } from "../ui";
+import styled from "@emotion/styled";
 
-const Signup: FC = () => {
+const Container = styled("div")`
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);
+`;
+const Inner = styled("div")`
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+`;
+const FormContainer = styled("form")`
+  margin: auto;
+  padding: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat", sans-serif;
+`;
+const Title = styled("h1")`
+  font-family: "Poppins", sans-serif;
+  color: white;
+  letter-spacing: 2px;
+  margin-top: 0;
+`;
+interface FormData {
+  email: string;
+  password: string;
+  displayName: string;
+  thumbnail: File | null;
+}
+
+const Signup: React.VFC = () => {
+  const { signup, isPending, error } = useAuth();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [displayName, setDisplayName] = useState<string>("");
   const [thumbnail, setThumbnail] = useState<File | null>(null);
-  const [thumbnailError, setThumbnailError] = useState<string | null>(null);
-  const { signup, isPending, error } = useAuth();
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const getSchema = () => {
+    return yup.object({
+      email: yup.string().email("emailの形式で入力してください。"),
+      password: yup.string().required("パスワードを入力してください。"),
+      displayName: yup.string().required("名前を入力してください。"),
+    });
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    mode: "onChange",
+    resolver: yupResolver(getSchema()),
+  });
+
+  const onPreSubmit: SubmitHandler<FormData> = () => {
+    onSubmit();
+  };
+
+  const onSubmit = () => {
     if (thumbnail === null) return;
     signup(email, password, displayName, thumbnail);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setThumbnail(null);
-    let selected;
-    if (e.target.files !== null) {
-      selected = e.target.files[0];
-    }
-    if (!selected) {
-      setThumbnailError("please select a file");
-      return;
-    }
-    if (!selected.type.includes("image")) {
-      setThumbnailError("selected file must be an image");
-      return;
-    }
-    if (selected.size > 1000000) {
-      setThumbnailError("image file size must be less than 100kb");
-      return;
-    }
-    setThumbnailError(null);
-    setThumbnail(selected);
+  const onInputFileChange = (file: File) => {
+    setThumbnail(file);
   };
 
   return (
-    <div className="auth-container">
-      <div className="wrapper -w30">
-        <div className="form">
-          <h1>Sign up</h1>
-          <form onSubmit={handleSubmit}>
-            <input
-              required
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="xyz@gmail.com"
-            />
-            <input
-              required
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              placeholder="Must have atleast 6 characters"
-            />
-            <input
-              required
-              type="text"
-              onChange={(e) => setDisplayName(e.target.value)}
-              value={displayName}
-              placeholder="your name"
-            />
-            <input required type="file" onChange={handleFileChange} />
-            {thumbnailError && <div className="error">{thumbnailError}</div>}
-
-            {!isPending && <button type="submit">Sign up</button>}
-            {isPending && (
-              <button type="submit" disabled>
-                loading
-              </button>
-            )}
-            {error && <div className="error">{error}</div>}
-
-            <div className="forgot-signup">
-              <Link to="/login">Forgot password?</Link>
-              <Link to="/login">Login</Link>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <Container>
+      <Inner>
+        <FormContainer>
+          <Title>Sign Up</Title>
+          <InputText
+            size="small"
+            register={register("email", {
+              onChange: (e) => setEmail(e.target.value),
+            })}
+            value={email}
+            error={"email" in errors}
+            helperText={errors.email?.message}
+            placeholder="xyz@gmail.com"
+          />
+          <InputText
+            size="small"
+            register={register("password", {
+              onChange: (e) => setPassword(e.target.value),
+            })}
+            value={password}
+            error={"password" in errors}
+            helperText={errors.password?.message}
+            placeholder="Must have atleast 6 characters"
+          />
+          <InputText
+            size="small"
+            register={register("displayName", {
+              onChange: (e) => setDisplayName(e.target.value),
+            })}
+            value={displayName}
+            error={"displayName" in errors}
+            helperText={errors.displayName?.message}
+            placeholder="your name or nick name"
+          />
+          <InputFileSingle
+            thumbnail={thumbnail}
+            onInputFileChange={onInputFileChange}
+          />
+          <BasicButton
+            isDisabled={isPending}
+            size="large"
+            onColor="secondary"
+            fullWidth={true}
+            onClick={() => {
+              handleSubmit(onPreSubmit)();
+            }}
+          >
+            Sign Up
+          </BasicButton>
+          {error && <div className="error">{error}</div>}
+          <LinkButton path="/login" color="secondary">
+            Move To Login
+          </LinkButton>
+        </FormContainer>
+      </Inner>
+    </Container>
   );
 };
 

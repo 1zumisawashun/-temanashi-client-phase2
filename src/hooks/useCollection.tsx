@@ -38,7 +38,6 @@ export const useCollection = <T,>(
         setError("could not fetch the data");
       }
     );
-    // unsubscribe on unmount and clean a function
     return () => unsubscribe();
   }, [collection, query, orderBy]);
 

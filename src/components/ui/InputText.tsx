@@ -1,23 +1,24 @@
 import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
+import { UseFormRegisterReturn } from "react-hook-form";
 
-const Text = styled(TextField)(() => ({
-  width: "100%",
-  marginTop: 6,
-  backgroundColor: "white",
-}));
+const Text = styled(TextField)`
+  width: 100%;
+  margin-top: 6px;
+  background-color: "white";
+`;
 
-const Label = styled("p")(() => ({
-  fontSize: "12px",
-  fontWeight: "600",
-}));
+const Label = styled("p")`
+  font-size: 12px;
+  font-weight: bold;
+`;
 
 export interface TextFieldProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  // register?: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
   name?: string;
   type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search";
   label?: string;
@@ -25,11 +26,12 @@ export interface TextFieldProps {
   placeholder?: string;
   autoFocus?: boolean;
   error?: boolean;
-  pattern?: string;
   helperText?: string;
+  pattern?: string;
   maxLength?: number;
   inputRef?: React.RefObject<HTMLInputElement>;
   value?: string;
+  size?: "small";
 }
 
 const InputText: React.VFC<TextFieldProps> = ({
@@ -45,11 +47,12 @@ const InputText: React.VFC<TextFieldProps> = ({
   pattern,
   helperText = "",
   inputRef = null,
-  // register,
+  register,
   onChange,
   onKeyDown,
   onBlur,
   onFocus,
+  size,
 }) => {
   return (
     <div>
@@ -68,11 +71,12 @@ const InputText: React.VFC<TextFieldProps> = ({
         error={error}
         helperText={helperText}
         inputRef={inputRef}
+        size={size}
         inputProps={{
           maxLength,
           pattern,
         }}
-        // {...register}
+        {...register}
       />
     </div>
   );

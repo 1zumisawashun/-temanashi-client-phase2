@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { CloseButton } from "./IconButton";
-import BasicModal from "./BasicModal";
-import BasicButton from "./BasicButton";
+import { CloseButton, BasicButton, BasicModal } from "../ui";
 
 interface PhotosUploadProps {
   name?: string; // NOTE:input["file"]とlabelをリンクさせるためのフラグ
@@ -88,7 +86,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
           photos !== null && index < photos.length ? (
             <div>
               <CloseButton styleName="close-upload" onClick={openModal} />
-              <div className="wrapper" key={index}>
+              <div className="wrapper">
                 <BasicModal
                   title="本当に削除しますか？"
                   open={isOpenExecute}
@@ -116,7 +114,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
                 styleName="close-upload -disable"
                 onClick={openModal}
               />
-              <label className="wrapper" htmlFor={name} key={index}>
+              <label className="wrapper" htmlFor={name}>
                 <img
                   src="https://placehold.jp/200x200.png"
                   alt=""
