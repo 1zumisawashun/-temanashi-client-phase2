@@ -23,16 +23,6 @@ const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
     console.log("handleClick");
   };
 
-  const scrollTop = (): number => {
-    return Math.max(
-      window.pageYOffset,
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
-  };
-
-  const styles = { top: scrollTop() };
-
   return (
     <>
       <div className="responsive-header">
@@ -46,7 +36,7 @@ const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
           </li>
         </ul>
         {state && (
-          <div className="responsive-overlay" style={styles}>
+          <div className="responsive-overlay">
             <ul className="menu">
               <li className="hamburger-link">
                 <BasicButton

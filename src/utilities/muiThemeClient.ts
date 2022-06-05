@@ -19,6 +19,10 @@ export const theme = createTheme({
         containedSecondary: {
           color: "#84bcb4",
         },
+        sizeMedium: {
+          width: 130,
+          height: 40,
+        },
       },
     },
   },

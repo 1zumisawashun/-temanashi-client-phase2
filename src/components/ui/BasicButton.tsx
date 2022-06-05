@@ -39,6 +39,7 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
       onClick={onClick}
       disabled={isDisabled}
       fullWidth={fullWidth}
+      startIcon={icon}
     >
       {children}
     </Button>

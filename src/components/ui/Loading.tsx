@@ -1,48 +1,52 @@
 import Loader from "react-loader-spinner";
+import styled from "@emotion/styled";
 
-type LoadingProps = {
-  message?: string;
-};
+const LoadingContainer = styled("div")`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-const Loading: React.VFC<LoadingProps> = ({ message }) => {
-  const scrollTop = (): number => {
-    return Math.max(
-      window.pageYOffset,
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
-  };
-  const styles = { top: scrollTop() };
+const Backdrop = styled("div")`
+  // NOTE:z-indexを-1にすることでInner以降でのz-indexの影響をなくす
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+`;
 
+const Inner = styled("div")`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+`;
+
+const Loading: React.VFC = () => {
   return (
-    <>
-      <div className="overlay" style={styles}>
-        <div className="wrapper">
+    <LoadingContainer>
+      <Backdrop>
+        <Inner>
           <Loader
             type="RevolvingDot"
             color="#84bcb4"
             height={100}
             width={100}
           />
-          {message ? (
-            <div className="message">
-              <span className="animation type1">L</span>
-              <span className="animation type2">o</span>
-              <span className="animation type3">a</span>
-              <span className="animation type4">d</span>
-              <span className="animation type5">i</span>
-              <span className="animation type6">n</span>
-              <span className="animation type7">g</span>
-              <span className="animation type8">.</span>
-              <span className="animation type9">.</span>
-              <span className="animation type10">.</span>
-            </div>
-          ) : (
-            <div className="message">{message}</div>
-          )}
-        </div>
-      </div>
-    </>
+        </Inner>
+      </Backdrop>
+    </LoadingContainer>
   );
 };
 export default Loading;

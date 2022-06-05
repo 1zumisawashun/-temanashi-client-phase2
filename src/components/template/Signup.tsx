@@ -124,8 +124,8 @@ const Signup: React.VFC = () => {
           />
           <BasicButton
             isDisabled={isPending}
-            size="large"
             onColor="secondary"
+            size="large"
             fullWidth={true}
             onClick={() => {
               handleSubmit(onPreSubmit)();

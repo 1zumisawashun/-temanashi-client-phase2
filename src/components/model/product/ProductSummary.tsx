@@ -15,7 +15,7 @@ import styled from "@emotion/styled";
 
 const ButtonWrapper = styled("div")`
   display: flex;
-  gap: 30px;
+  gap: 20px;
 `;
 
 interface ProductSummaryProps {
@@ -88,11 +88,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
               ))}
             </Carousel>
           }
-          footer={
-            <BasicButton size="large" onClick={closeModal}>
-              閉じる
-            </BasicButton>
-          }
+          footer={<BasicButton onClick={closeModal}>閉じる</BasicButton>}
         />
       </div>
 
@@ -104,26 +100,19 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
           </div>
           <p className="details">{furniture.product.description}</p>
           <ButtonWrapper>
-            <BasicButton size="large" onClick={openModalExecute}>
-              削除
-            </BasicButton>
+            <BasicButton onClick={openModalExecute}>削除</BasicButton>
             <BasicModal
               title="本当に削除しますか？"
               open={isOpenExecute}
               handleOpen={closeModal}
               footer={
                 <>
-                  <BasicButton size="large" onClick={handleDelete}>
-                    はい
-                  </BasicButton>
-                  <BasicButton size="large" onClick={closeModal}>
-                    いいえ
-                  </BasicButton>
+                  <BasicButton onClick={handleDelete}>はい</BasicButton>
+                  <BasicButton onClick={closeModal}>いいえ</BasicButton>
                 </>
               }
             />
             <BasicButton
-              size="large"
               onClick={() =>
                 addCart({
                   id: furniture.product.id,

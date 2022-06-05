@@ -44,11 +44,6 @@ const FooterContent = styled("div")`
   text-align: center;
 `;
 
-// interface ForbiddenErrorProps {
-//   path: string;
-//   text: string;
-// }
-
 const ForbiddenError: React.VFC = () => {
   const history = useHistory();
   return (
@@ -67,7 +62,7 @@ const ForbiddenError: React.VFC = () => {
           引き続き1つ前のページから本サービスをご利用ください。
         </FirstParagraph>
         <FooterContent>
-          <BasicButton size="large" onClick={() => history.push("/")}>
+          <BasicButton onClick={() => history.push("/")}>
             前の画面に戻る
           </BasicButton>
         </FooterContent>

@@ -1,5 +1,27 @@
 import { useState } from "react";
 import { CloseButton, BasicButton, BasicModal } from "../ui";
+import styled from "@emotion/styled";
+
+const CloseButtonContainer = styled("div")`
+  position: relative;
+  font-size: 30px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  top: 11%;
+  left: 79%;
+`;
+const CloseButtonContainerHidden = styled("div")`
+  position: relative;
+  font-size: 30px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  top: 11%;
+  left: 79%;
+  opacity: 0;
+  pointer-events: none;
+`;
 
 interface PhotosUploadProps {
   name?: string; // NOTE:input["file"]とlabelをリンクさせるためのフラグ
@@ -85,19 +107,21 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
         {[...Array(3)].map((_: number, index: number) =>
           photos !== null && index < photos.length ? (
             <div>
-              <CloseButton styleName="close-upload" onClick={openModal} />
+              <CloseButtonContainer>
+                <CloseButton onClick={openModal} />
+              </CloseButtonContainer>
               <div className="wrapper">
                 <BasicModal
                   title="本当に削除しますか？"
                   open={isOpenExecute}
                   handleOpen={closeModal}
                   footer={
-                    <div className="buttons">
+                    <>
                       <BasicButton onClick={() => handleCancel(index)}>
                         はい
                       </BasicButton>
                       <BasicButton onClick={closeModal}>いいえ</BasicButton>
-                    </div>
+                    </>
                   }
                 />
                 <img
@@ -110,10 +134,9 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
             </div>
           ) : (
             <div>
-              <CloseButton
-                styleName="close-upload -disable"
-                onClick={openModal}
-              />
+              <CloseButtonContainerHidden>
+                <CloseButton onClick={openModal} />
+              </CloseButtonContainerHidden>
               <label className="wrapper" htmlFor={name}>
                 <img
                   src="https://placehold.jp/200x200.png"

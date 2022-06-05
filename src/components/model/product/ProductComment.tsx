@@ -102,9 +102,7 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
               </li>
             ))}
         </ul>
-        <BasicButton size="large" onClick={openModal}>
-          コメントする
-        </BasicButton>
+        <BasicButton onClick={openModal}>コメント</BasicButton>
         <BasicModal
           title="コメント入力フォーム"
           open={isOpen}
@@ -113,16 +111,13 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
             <InputText
               onChange={(e) => setNewComment(e.target.value)}
               value={newComment}
+              multiline={true}
             ></InputText>
           }
           footer={
             <>
-              <BasicButton size="large" onClick={handleSubmit}>
-                コメントする
-              </BasicButton>
-              <BasicButton size="large" onClick={closeModal}>
-                閉じる
-              </BasicButton>
+              <BasicButton onClick={handleSubmit}>コメントする</BasicButton>
+              <BasicButton onClick={closeModal}>閉じる</BasicButton>
             </>
           }
         />

@@ -1,19 +1,7 @@
 import { useState } from "react";
 import { BasicButton } from "../ui";
-import styled from "@emotion/styled";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
 
-const Container = styled("div")`
-  font-size: 16px;
-  display: block;
-  box-sizing: border-box;
-  margin: 20px auto;
-  padding: 12px 20px;
-  border: none;
-  background: rgba(133, 48, 48, 0.1);
-  border-radius: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 13px 21px rgba(0, 0, 0, 0.05);
-`;
 interface InputFileSingleProps {
   thumbnail: File | null;
   onInputFileChange: (e: File) => void;
@@ -50,7 +38,12 @@ const InputFileSingle: React.VFC<InputFileSingleProps> = ({
 
   return (
     <>
-      <BasicButton fullWidth={true} onColor="secondary" size="large">
+      <BasicButton
+        fullWidth={true}
+        onColor="secondary"
+        icon={<UploadFileIcon />}
+        size="large"
+      >
         <label htmlFor="singleFile">
           {thumbnail ? <p>{thumbnail.name}</p> : <p>UPLOAD</p>}
         </label>

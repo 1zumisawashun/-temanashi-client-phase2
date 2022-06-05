@@ -21,7 +21,7 @@ const CartAgreement: React.VFC<CartAgreementProps> = ({ onClick }) => {
         size="medium"
         onChange={(e) => onInputChange(e)}
       />
-      <BasicButton size="large" isDisabled={!isAccepted} onClick={onClick}>
+      <BasicButton isDisabled={!isAccepted} onClick={onClick}>
         購入する
       </BasicButton>
     </div>

@@ -128,7 +128,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
 
   return (
     <CommonWrapper>
-      {isLoading && <Loading message="loading" />}
+      {isLoading && <Loading />}
       <div className="tinder-swipe">
         <ProgressBar width={100} percent={percent} />
         <div className="cardContainer">

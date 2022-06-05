@@ -34,7 +34,6 @@ const CreateProject: React.VFC = () => {
   const { getStorageUrl } = useStorage();
   const [cookies] = useCookies(["jwt"]);
 
-  // NOTE:yupバリデーションを強化したい
   const getSchema = () => {
     return yup.object({
       name: yup.string().required("名前を入力してください。"),
@@ -148,6 +147,7 @@ const CreateProject: React.VFC = () => {
         />
         <InputText
           label="description"
+          multiline={true}
           register={register("description", {
             onChange: (e) => onInputChange(e),
           })}

@@ -33,14 +33,15 @@ const ProductTemplate: React.VFC = () => {
   if (isPending) {
     return <Loading />;
   }
-  if (!productItem) {
-    return <div className="loading">Loading...</div>;
-  }
   return (
     <div className="common-container">
       <div className="product-container">
-        <ProductSummary furniture={productItem} />
-        <ProductComment furniture={productItem} />
+        {productItem && (
+          <>
+            <ProductSummary furniture={productItem} />
+            <ProductComment furniture={productItem} />
+          </>
+        )}
         {isError.length !== 0 && <p>{isError}</p>}
       </div>
     </div>

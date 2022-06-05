@@ -32,6 +32,7 @@ export interface TextFieldProps {
   inputRef?: React.RefObject<HTMLInputElement>;
   value?: string;
   size?: "small";
+  multiline?: boolean;
 }
 
 const InputText: React.VFC<TextFieldProps> = ({
@@ -53,6 +54,7 @@ const InputText: React.VFC<TextFieldProps> = ({
   onBlur,
   onFocus,
   size,
+  multiline = false,
 }) => {
   return (
     <div>
@@ -72,6 +74,7 @@ const InputText: React.VFC<TextFieldProps> = ({
         helperText={helperText}
         inputRef={inputRef}
         size={size}
+        multiline={multiline}
         inputProps={{
           maxLength,
           pattern,

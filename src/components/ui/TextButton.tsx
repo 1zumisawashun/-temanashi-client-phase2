@@ -25,19 +25,32 @@ const LinkButton: React.VFC<LinkButtonProps> = ({
   color,
 }) => {
   return (
-    <Button component={Link} to={`${path}`} startIcon={icon} color={color}>
+    <Button
+      component={Link}
+      to={`${path}`}
+      startIcon={icon}
+      color={color}
+      size="large"
+    >
       {children}
     </Button>
   );
 };
 
+// NOTE:NavLinkの場合activeという選択した・していないの判定が可能
 const NavlinkButton: React.VFC<LinkButtonProps> = ({
   path,
   children,
   icon,
 }) => {
   return (
-    <Button component={NavLink} exact to={`${path}`} startIcon={icon}>
+    <Button
+      component={NavLink}
+      exact
+      to={`${path}`}
+      startIcon={icon}
+      size="large"
+    >
       {children}
     </Button>
   );
