@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuthContext } from "../../hooks/useContextClient";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import { Loading } from "../ui";
@@ -39,7 +39,7 @@ const UserTemplate: React.VFC = () => {
     return likedFurnitures;
   };
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setIsError("");
     setIsPending(true);
     try {
@@ -52,12 +52,11 @@ const UserTemplate: React.VFC = () => {
       setIsError("fetchに失敗しました。");
       setIsPending(false);
     }
-  };
+  }, [documents, user.uid]);
 
   useEffect(() => {
     fetchProducts();
-    // eslint-disable-next-line
-  }, [documents]);
+  }, [fetchProducts]);
 
   return (
     <div className="common-container">

@@ -23,8 +23,7 @@ const ProductTemplate: React.VFC = () => {
       setIsError("fetchに失敗しました");
       setIsPending(false);
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     fetchProductItem();

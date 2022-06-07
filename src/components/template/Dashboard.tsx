@@ -43,7 +43,9 @@ const Dashboard: React.VFC = () => {
       });
       addProductWithRandom(results);
     })();
-  }, [addProductWithRandom]);
+    // NOTE:依存配列にaddProductWithRandomを突っ込んで請求100円きた泣
+    // eslint-disable-next-line
+  }, []);
 
   if (!user) throw new Error("we cant find your account");
 
