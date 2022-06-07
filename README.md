@@ -6,19 +6,11 @@
 
 - https://github.com/1zumisawashun/temanashi-client
 
-### phase-1 のデプロイ済みアプリケーション
-
-- https://temanashi-39b3f.web.app/
-
 ### phase-1 の詳細
 
 - https://qiita.com/1zushun/items/9b52fee68489a5cf33f8
 
 # ■ phase-2
-
-### デプロイ済みアプリケーション
-
-- https://temanashi-phase2.web.app/
 
 ### 採用している技術スタック
 

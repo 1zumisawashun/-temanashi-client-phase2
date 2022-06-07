@@ -82,6 +82,11 @@ const CreateProject: React.VFC = () => {
     setCategory(value);
   };
 
+  const onInputFileChange = (value: File[]) => {
+    console.log(value, "value");
+    setPhotos(value);
+  };
+
   const onPreSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data, "onPreSubmit");
     onSubmit();
@@ -135,7 +140,10 @@ const CreateProject: React.VFC = () => {
     <div className="common-container">
       {isLoading && <Loading />}
       <form>
-        <InputFileMulti photos={photos} setPhotos={setPhotos} />
+        <InputFileMulti
+          photos={photos}
+          onInputFileChange={(value) => onInputFileChange(value)}
+        />
         <InputText
           label="name"
           register={register("name", {

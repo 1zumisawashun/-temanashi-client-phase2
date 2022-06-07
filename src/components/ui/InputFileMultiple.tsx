@@ -26,7 +26,7 @@ const CloseButtonContainerHidden = styled("div")`
 interface PhotosUploadProps {
   name?: string; // NOTE:input["file"]とlabelをリンクさせるためのフラグ
   photos: File[];
-  setPhotos: (files: File[]) => void;
+  onInputFileChange: (files: File[]) => void;
 }
 
 const mineType = [
@@ -40,7 +40,7 @@ const mineType = [
 const PhotosUpload: React.VFC<PhotosUploadProps> = ({
   name = "photos",
   photos,
-  setPhotos,
+  onInputFileChange,
 }): React.ReactElement => {
   const [isOpenExecute, setIsOpenExecute] = useState(false);
   const [isError, setIsError] = useState<string>("");
@@ -49,7 +49,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
     setIsError("");
     if (!photos) return;
     const modifyPhotos = photos.filter((photo, index) => photoIndex !== index);
-    setPhotos(modifyPhotos);
+    onInputFileChange(modifyPhotos);
     closeModal();
   };
 
@@ -99,7 +99,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
       return;
     }
 
-    setPhotos(addedPhotos.slice(0, 3));
+    onInputFileChange(addedPhotos.slice(0, 3));
   };
   return (
     <>
