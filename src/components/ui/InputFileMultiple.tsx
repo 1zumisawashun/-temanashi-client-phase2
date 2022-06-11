@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CloseButton, BasicButton, BasicModal } from "../ui";
+import { useDisclosure } from "../../hooks";
 import styled from "@emotion/styled";
 
 const CloseButtonContainer = styled("div")`
@@ -42,7 +43,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
   photos,
   onInputFileChange,
 }): React.ReactElement => {
-  const [isOpenExecute, setIsOpenExecute] = useState(false);
+  const executeModal = useDisclosure();
   const [isError, setIsError] = useState<string>("");
 
   const handleCancel = (photoIndex: number) => {
@@ -50,14 +51,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
     if (!photos) return;
     const modifyPhotos = photos.filter((photo, index) => photoIndex !== index);
     onInputFileChange(modifyPhotos);
-    closeModal();
-  };
-
-  const openModal = () => {
-    setIsOpenExecute(true);
-  };
-  const closeModal = () => {
-    setIsOpenExecute(false);
+    executeModal.close();
   };
 
   const handleFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,19 +102,21 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
           photos !== null && index < photos.length ? (
             <div>
               <CloseButtonContainer>
-                <CloseButton onClick={openModal} />
+                <CloseButton onClick={() => executeModal.open()} />
               </CloseButtonContainer>
               <div className="wrapper">
                 <BasicModal
                   title="本当に削除しますか？"
-                  open={isOpenExecute}
-                  handleOpen={closeModal}
+                  open={executeModal.isOpen}
+                  handleOpen={() => executeModal.close()}
                   footer={
                     <>
                       <BasicButton onClick={() => handleCancel(index)}>
                         はい
                       </BasicButton>
-                      <BasicButton onClick={closeModal}>いいえ</BasicButton>
+                      <BasicButton onClick={() => executeModal.close()}>
+                        いいえ
+                      </BasicButton>
                     </>
                   }
                 />
@@ -135,7 +131,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
           ) : (
             <div>
               <CloseButtonContainerHidden>
-                <CloseButton onClick={openModal} />
+                <CloseButton onClick={() => executeModal.open()} />
               </CloseButtonContainerHidden>
               <label className="wrapper" htmlFor={name}>
                 <img

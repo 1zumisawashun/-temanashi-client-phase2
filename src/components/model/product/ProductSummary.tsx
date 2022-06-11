@@ -1,10 +1,10 @@
-import { useFirestore } from "../../../hooks/useFirestore";
 import {
   useAuthContext,
   useCartContext,
-} from "../../../hooks/useContextClient";
+  useFirestore,
+  useDisclosure,
+} from "../../../hooks";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
 import { BasicButton, LikeButton, BasicModal } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
@@ -36,9 +36,8 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
   const { deleteDocument } = useFirestore();
   const { id } = useParams<{ id: string }>();
   const { user } = useAuthContext();
-
-  const [isOpenExecute, setIsOpenExecute] = useState<boolean>(false);
-  const [isOpenPreview, setIsOpenPreview] = useState<boolean>(false);
+  const executeModal = useDisclosure();
+  const previewModal = useDisclosure();
 
   if (!user) throw new Error("we cant find your account");
 
@@ -47,20 +46,9 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
   };
 
   const handleDelete = async () => {
-    setIsOpenExecute(false);
+    executeModal.close();
     if (furniture.product) await deleteDocument<ProductItem>("products", id);
     history.push("/");
-  };
-
-  const openModalPreview = () => {
-    setIsOpenPreview(true);
-  };
-  const openModalExecute = () => {
-    setIsOpenExecute(true);
-  };
-  const closeModal = () => {
-    setIsOpenPreview(false);
-    setIsOpenExecute(false);
   };
 
   return (
@@ -70,15 +58,15 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
           <img
             src={furniture.product.images[0]}
             alt=""
-            onClick={openModalPreview}
+            onClick={() => previewModal.open()}
           />
         ) : (
           <img src="https://placehold.jp/200x160.png" alt="" />
         )}
         <BasicModal
           title="プレビュー画面"
-          open={isOpenPreview}
-          handleOpen={closeModal}
+          open={previewModal.isOpen}
+          handleOpen={() => previewModal.close()}
           contents={
             <Carousel>
               {furniture.product.images.map((item) => (
@@ -88,7 +76,11 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
               ))}
             </Carousel>
           }
-          footer={<BasicButton onClick={closeModal}>閉じる</BasicButton>}
+          footer={
+            <BasicButton onClick={() => previewModal.close()}>
+              閉じる
+            </BasicButton>
+          }
         />
       </div>
 
@@ -100,15 +92,17 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
           </div>
           <p className="details">{furniture.product.description}</p>
           <ButtonWrapper>
-            <BasicButton onClick={openModalExecute}>削除</BasicButton>
+            <BasicButton onClick={() => executeModal.open()}>削除</BasicButton>
             <BasicModal
               title="本当に削除しますか？"
-              open={isOpenExecute}
-              handleOpen={closeModal}
+              open={executeModal.isOpen}
+              handleOpen={() => executeModal.close()}
               footer={
                 <>
                   <BasicButton onClick={handleDelete}>はい</BasicButton>
-                  <BasicButton onClick={closeModal}>いいえ</BasicButton>
+                  <BasicButton onClick={() => executeModal.close()}>
+                    いいえ
+                  </BasicButton>
                 </>
               }
             />

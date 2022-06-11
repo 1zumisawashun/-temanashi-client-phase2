@@ -2,7 +2,7 @@ import { useState, FormEvent } from "react";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Comment } from "../../../@types/dashboard";
 import { useParams } from "react-router-dom";
-import { useSubCollection } from "../../../hooks/useSubCollection";
+import { useSubCollection, useDisclosure } from "../../../hooks";
 import { convertedPath } from "../../../utilities/utilities";
 import { ja } from "date-fns/locale";
 import { timestamp } from "../../../firebase/config";
@@ -23,9 +23,9 @@ type ProductCommentProps = {
 
 const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
   const { user } = useAuthContext();
+  const commentModal = useDisclosure();
   const { id } = useParams<{ id: string }>();
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [newComment, setNewComment] = useState("");
 
   if (!user) throw new Error("we cant find your account");
@@ -53,16 +53,8 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
         setNewComment("");
       }
     } finally {
-      closeModal();
+      commentModal.close();
     }
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
-  const openModal = () => {
-    setIsOpen(true);
   };
 
   return (
@@ -102,11 +94,11 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
               </li>
             ))}
         </ul>
-        <BasicButton onClick={openModal}>コメント</BasicButton>
+        <BasicButton onClick={() => commentModal.open()}>コメント</BasicButton>
         <BasicModal
           title="コメント入力フォーム"
-          open={isOpen}
-          handleOpen={closeModal}
+          open={commentModal.isOpen}
+          handleOpen={() => commentModal.close()}
           contents={
             <InputText
               onChange={(e) => setNewComment(e.target.value)}
@@ -117,7 +109,9 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
           footer={
             <>
               <BasicButton onClick={handleSubmit}>コメントする</BasicButton>
-              <BasicButton onClick={closeModal}>閉じる</BasicButton>
+              <BasicButton onClick={() => commentModal.close()}>
+                閉じる
+              </BasicButton>
             </>
           }
         />
