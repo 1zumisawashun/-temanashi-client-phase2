@@ -100,7 +100,7 @@ export const filterList: Array<string> = [
 ];
 export const userList: Array<string> = ["favorite", "history", "account"];
 
-export const categories: Array<OptionProps> = [
+export const categoryOptions: Array<OptionProps> = [
   { value: "bed", label: "Bed" },
   { value: "blanket", label: "Blanket" },
   { value: "chair", label: "Chair" },

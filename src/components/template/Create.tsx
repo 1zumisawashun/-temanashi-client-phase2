@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStorage } from "../../hooks/useStorage";
-import { categories, text } from "../../utilities/constant";
+import { categoryOptions, text } from "../../utilities/constant";
 import {
   InputSelect,
   InputText,
@@ -12,10 +12,8 @@ import {
   BasicButton,
 } from "../ui";
 import { OptionProps } from "../ui/InputSelect";
-import { SingleValue } from "react-select";
+import { MultiValue } from "react-select";
 import { useCookies } from "react-cookie";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -68,7 +66,7 @@ const CreateProject: React.VFC = () => {
     stock: String(Math.floor(Math.random() * 10)),
   });
   const [photos, setPhotos] = useState<File[]>([]);
-  const [category, setCategory] = useState<SingleValue<string>>();
+  const [categories, setCategories] = useState<MultiValue<string>>([]);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -78,18 +76,16 @@ const CreateProject: React.VFC = () => {
     }));
   };
 
-  const onInputChangeSelect = (option: SingleValue<OptionProps>) => {
-    const value = option?.value;
-    setCategory(value);
+  const onInputChangeSelect = (option: MultiValue<OptionProps>) => {
+    const multivalue = option.map((item) => item.value);
+    setCategories(multivalue);
   };
 
   const onInputFileChange = (value: File[]) => {
-    console.log(value, "value");
     setPhotos(value);
   };
 
   const onPreSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data, "onPreSubmit");
     onSubmit();
   };
 
@@ -97,8 +93,8 @@ const CreateProject: React.VFC = () => {
     setIsLoading(true);
     setFromError("");
 
-    if (!category) {
-      setFromError("Please select a furniture category");
+    if (categories.length === 0) {
+      setFromError("カテゴリーを選択してください。");
       setIsLoading(false);
       return;
     }
@@ -114,7 +110,8 @@ const CreateProject: React.VFC = () => {
     const furniture = {
       ...formData,
       photos: result,
-      category,
+      // NOTE:複数選択できるが全体の型は修正していないので一旦一個のみポストする
+      category: categories[0],
     };
 
     try {
@@ -211,7 +208,9 @@ const CreateProject: React.VFC = () => {
         <InputSelect
           label="Category"
           onChange={(e) => onInputChangeSelect(e)}
-          options={categories}
+          options={categoryOptions}
+          error={formError.length !== 0}
+          helperText={formError}
         />
         <BasicButton
           onClick={() => {
@@ -220,12 +219,6 @@ const CreateProject: React.VFC = () => {
         >
           完了
         </BasicButton>
-        {formError && (
-          <Alert severity="error">
-            <AlertTitle>Error</AlertTitle>
-            {formError}
-          </Alert>
-        )}
       </form>
     </div>
   );

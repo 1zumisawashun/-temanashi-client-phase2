@@ -1,69 +1,92 @@
 import FormControl from "@mui/material/FormControl";
 import styled from "@emotion/styled";
-import Select, { SingleValue } from "react-select";
+import Select, { MultiValue, StylesConfig } from "react-select";
+import { CSSProperties } from "react";
 
 const StyledFormControl = styled(FormControl)`
   width: 100%;
-  // background-color: white;
+  font-size: 16px;
+  margin-top: 6px;
 `;
 
-const StyledLabel = styled("p")`
+const StyledLabel = styled("label")`
   margin-bottom: 4px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: bold;
 `;
 
+const ErrorText = styled("p")`
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+  margin-top: 3px;
+  margin-right: 14px;
+  margin-bottom: 0;
+  margin-left: 14px;
+  color: #d32f2f;
+`;
+
+const customControlStyles: CSSProperties = {
+  color: "#84bcb4",
+  height: "56px",
+  marginTop: "6px",
+};
+
+// https://react-select.com/styles#style-object
+const selectStyle: StylesConfig<OptionProps> = {
+  control: (provided, state) => {
+    return {
+      ...provided,
+      ...customControlStyles,
+    };
+  },
+};
+
+export type OptionProps = {
+  value: string;
+  label: string;
+};
+
 export type SelectFormProps = {
-  className?: string;
-  id?: string;
-  labelId?: string;
-  label?: string;
   // value: string;
-  onChange: (event: SingleValue<OptionProps>) => void;
+  label?: string;
+  onChange: (event: MultiValue<OptionProps>) => void;
   options: OptionProps[];
   placeholder?: string;
   disabled?: boolean;
   isLoading?: boolean;
-  defaultValue?: string;
+  error?: boolean;
+  helperText?: string;
 };
 
-export interface OptionProps {
-  value: string;
-  label: string;
-}
-
 const InputSelect: React.VFC<SelectFormProps> = ({
-  className,
-  id,
-  labelId,
-  label,
   // value,
+  label,
   onChange,
   options,
-  placeholder,
+  placeholder = "カテゴリーを選択してください。",
   disabled = false,
   isLoading = false,
-  defaultValue = "",
+  error = false,
+  helperText,
 }) => {
   return (
-    <StyledFormControl className={className}>
-      {label && <StyledLabel id={labelId}>{label}</StyledLabel>}
+    <StyledFormControl>
+      {label && <StyledLabel htmlFor={label}>{label}</StyledLabel>}
       <Select
-        // id={id}
-        // labelId={labelId}
         // value={value}
+        id={label}
+        placeholder={placeholder}
         options={options}
         onChange={onChange}
-        // disabled={disabled || options.length === 0 || isLoading}
-        // defaultValue={defaultValue}
-        // displayEmpty
-        // renderValue={() => {
-        //   // NOTE: 下記コードが原因で不必要なレンダリング起きているかもしれない
-        //   if (isLoading) return <CircularProgress size={20} />;
-        //   if (value === "") return <Placehoplder>{placeholder}</Placehoplder>;
-        //   return options.find((option) => option.value === value)?.label;
-        // }}
+        isMulti
+        isDisabled={disabled}
+        isLoading={isLoading}
+        styles={selectStyle}
       />
+      {error && <ErrorText>{helperText}</ErrorText>}
     </StyledFormControl>
   );
 };
