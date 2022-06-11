@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { useAuth } from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 import axios from "../../../utilities/axiosClient";
+import { SwitchForm } from "./../../ui";
 
 type Response = {
   message: string;
@@ -72,6 +73,9 @@ const UserAccount: React.VFC = () => {
     }
     console.log(result, "check Emulator");
   };
+  const handleSwitchForm = () => {
+    console.log("動いている");
+  };
   return (
     <>
       <div className="user-container">
@@ -112,6 +116,7 @@ const UserAccount: React.VFC = () => {
               Logging out...
             </button>
           )}
+          <SwitchForm onChange={handleSwitchForm} />
         </div>
       </div>
     </>

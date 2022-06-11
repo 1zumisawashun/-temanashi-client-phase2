@@ -28,3 +28,4 @@ export { LinkButton, NavlinkButton } from "./TextButton";
 export { default as ForbiddenError } from "./ForbiddenError";
 export { default as InputFileSingle } from "./InputFileSingle";
 export { InputTextarea } from "./InputTextarea";
+export { SwitchForm } from "./SwitchForm";
