@@ -1,26 +1,27 @@
+import React from "react";
 import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
-import { UseFormRegisterReturn } from "react-hook-form";
+import type { UseFormRegisterReturn } from "react-hook-form";
 
-const Text = styled(TextField)`
+const StyledTextField = styled(TextField)`
   width: 100%;
   font-size: 16px;
   margin-top: 6px;
   background-color: white;
 `;
 
-const Label = styled("label")`
+const StyledLabelText = styled("label")`
   margin-bottom: 4px;
   font-size: 12px;
   font-weight: bold;
 `;
 
-export interface InputTextProps {
+export type InputTextareaProps = {
   // NOTE:アクション
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   // NOTE:エラーハンドリング
   register?: UseFormRegisterReturn;
   error?: boolean;
@@ -33,14 +34,12 @@ export interface InputTextProps {
   type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search";
   //NOTE:追加項目
   autoFocus?: boolean;
-  name?: string;
-  pattern?: string;
   maxLength?: number;
-  inputRef?: React.RefObject<HTMLInputElement>;
-  size?: "small";
-}
+  maxRows?: number;
+  readOnly?: boolean;
+};
 
-const InputText: React.VFC<InputTextProps> = ({
+export const InputTextarea: React.VFC<InputTextareaProps> = ({
   onChange,
   onKeyDown,
   onBlur,
@@ -54,39 +53,39 @@ const InputText: React.VFC<InputTextProps> = ({
   placeholder,
   type = "text",
   autoFocus = false,
-  name,
-  pattern,
-  maxLength = 255,
-  inputRef = null,
-  size,
+  maxLength = 1000,
+  maxRows = 50,
+  readOnly,
 }) => {
   return (
     <div>
-      {label && <Label htmlFor={label}>{label}</Label>}
-      <Text
+      {label && <StyledLabelText htmlFor={label}>{label}</StyledLabelText>}
+      <StyledTextField
+        error={error}
+        helperText={helperText}
+        multiline
+        rows={4}
         onChange={onChange}
-        onKeyDown={onKeyDown}
+        onKeyDown={() => onKeyDown}
+        tabIndex={0}
         onBlur={onBlur}
         onFocus={onFocus}
-        type={type}
-        name={name}
         id={label}
+        type={type}
         disabled={disabled}
         autoFocus={autoFocus}
         placeholder={placeholder}
         value={value}
-        error={error}
-        helperText={helperText}
-        inputRef={inputRef}
-        size={size}
+        maxRows={maxRows}
         inputProps={{
           maxLength,
-          pattern,
+          style: {
+            height: "127px",
+          },
+          readOnly,
         }}
         {...register}
       />
     </div>
   );
 };
-
-export default InputText;

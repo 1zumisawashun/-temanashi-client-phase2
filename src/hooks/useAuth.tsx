@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { projectAuth, projectStorage } from "../firebase/config";
-import { useAuthContext } from "./useContextClient";
 import { documentPoint } from "../utilities/converterClient";
 import { User } from "../@types/dashboard";
-import { useToken } from "../hooks/useToken";
+import { useToken, useAuthContext } from "../hooks";
 
 // FIXME:関係ないプロパティも追加・更新できてしまう
 type addUser = Omit<User, "id">;

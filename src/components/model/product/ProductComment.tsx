@@ -11,7 +11,7 @@ import { CommentToAdd } from "../../../@types/dashboard";
 import {
   BasicButton,
   BasicModal,
-  InputText,
+  InputTextarea,
   Avatar,
   PersonButton,
 } from "../../ui";
@@ -100,11 +100,10 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
           open={commentModal.isOpen}
           handleOpen={() => commentModal.close()}
           contents={
-            <InputText
+            <InputTextarea
               onChange={(e) => setNewComment(e.target.value)}
               value={newComment}
-              multiline={true}
-            ></InputText>
+            ></InputTextarea>
           }
           footer={
             <>

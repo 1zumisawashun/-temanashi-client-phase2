@@ -6,6 +6,7 @@ import { categories, text } from "../../utilities/constant";
 import {
   InputSelect,
   InputText,
+  InputTextarea,
   InputFileMulti,
   Loading,
   BasicButton,
@@ -153,9 +154,8 @@ const CreateProject: React.VFC = () => {
           error={"name" in errors}
           helperText={errors.name?.message}
         />
-        <InputText
+        <InputTextarea
           label="description"
-          multiline={true}
           register={register("description", {
             onChange: (e) => onInputChange(e),
           })}
