@@ -10,7 +10,7 @@ import {
 } from "../model/user";
 import { User, likedFurnitures } from "../../@types/dashboard";
 import { useSubCollection } from "../../hooks/useSubCollection";
-import { convertedPath } from "../../utilities/utilities";
+import { formatFirebasePath } from "../../utilities";
 
 const UserTemplate: React.VFC = () => {
   const { user } = useAuthContext();
@@ -27,7 +27,7 @@ const UserTemplate: React.VFC = () => {
   };
 
   const { documents } = useSubCollection<User, likedFurnitures>(
-    convertedPath(`/users/${user.uid}/liked_furnitures`)
+    formatFirebasePath(`/users/${user.uid}/liked_furnitures`)
   );
 
   const getLikedFurnitures = (

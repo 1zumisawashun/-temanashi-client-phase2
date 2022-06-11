@@ -10,7 +10,7 @@ import {
   Product,
   Signup,
   User,
-} from "./pages";
+} from "../pages";
 import styled from "@emotion/styled";
 
 const AppContainer = styled("div")`

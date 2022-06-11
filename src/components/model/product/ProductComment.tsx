@@ -3,7 +3,7 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Comment } from "../../../@types/dashboard";
 import { useParams } from "react-router-dom";
 import { useSubCollection, useDisclosure } from "../../../hooks";
-import { convertedPath } from "../../../utilities/utilities";
+import { formatFirebasePath } from "../../../utilities";
 import { ja } from "date-fns/locale";
 import { timestamp } from "../../../firebase/config";
 import { useAuthContext } from "../../../hooks/useContextClient";
@@ -31,7 +31,7 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
   if (!user) throw new Error("we cant find your account");
 
   const { referense } = useSubCollection<any, any>(
-    convertedPath(`/products/${id}/comments`)
+    formatFirebasePath(`/products/${id}/comments`)
   );
 
   const handleSubmit = async (e: FormEvent) => {

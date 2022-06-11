@@ -7,7 +7,6 @@ import {
   ThumbUpButton,
   UndoButton,
 } from "../../ui";
-import { delay } from "../../../utilities/utilities";
 // import TinderCard from '../react-tinder-card/index'
 import styled from "@emotion/styled";
 
@@ -42,6 +41,8 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
   const [lastDirection, setLastDirection] = useState<string>();
   const [currentIndex, setCurrentIndex] = useState<number>(db.length - 1);
   const [percent, setPercent] = useState<number>(0);
+
+  const delay = (t: number) => new Promise((r) => setTimeout(r, t));
   /**
    * レンダリングされても状態を保つ（記録する）
    *

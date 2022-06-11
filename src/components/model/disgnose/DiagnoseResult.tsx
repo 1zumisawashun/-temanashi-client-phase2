@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { db, recommendation } from "../../../utilities/constant";
-import { taxIncludedPrice } from "../../../utilities/utilities";
+import { formatTaxIncludedPrice } from "../../../utilities";
 import { Loading, Image } from "../../ui";
 
 const DiagnoseResult: React.VFC = () => {
@@ -27,7 +27,7 @@ const DiagnoseResult: React.VFC = () => {
           <div className="price">
             <p className="item">
               この組み合わせで
-              <span className="total">{taxIncludedPrice(1200000)}円</span>
+              <span className="total">{formatTaxIncludedPrice(1200000)}円</span>
             </p>
           </div>
         </div>
@@ -41,7 +41,9 @@ const DiagnoseResult: React.VFC = () => {
             <div className="content">
               <h4 className="name">{furniture.name}</h4>
               {furniture.price && (
-                <p className="price">{taxIncludedPrice(furniture.price)}</p>
+                <p className="price">
+                  {formatTaxIncludedPrice(furniture.price)}
+                </p>
               )}
               <div className="dimentions">
                 <ul>

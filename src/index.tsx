@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import "./assets/sass/app.scss";
-import App from "./App";
+import App from "./router/App";
 import {
   AuthContextProvider,
   CartContextProvider,

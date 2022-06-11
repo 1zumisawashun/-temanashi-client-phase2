@@ -3,7 +3,7 @@ import {
   useAuthContext,
   useCartContext,
 } from "../../../hooks/useContextClient";
-import { taxIncludedPrice } from "../../../utilities/utilities";
+import { formatTaxIncludedPrice } from "../../../utilities";
 import CartCounter from "./CartCounter";
 import { Divider, Image, DeleteButton } from "../../ui";
 interface Product {
@@ -50,7 +50,7 @@ const CartList: React.VFC<CartListProps> = ({ productItems }) => {
                   <p className="name">
                     {item.title}
                     <span className="price">
-                      {taxIncludedPrice(item.price)}
+                      {formatTaxIncludedPrice(item.price)}
                     </span>
                   </p>
                   <div className="btnarea">

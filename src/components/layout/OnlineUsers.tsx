@@ -1,10 +1,12 @@
 import { useCollection } from "../../hooks/useCollection";
 import { Avatar } from "../ui";
 import { User } from "../../@types/dashboard";
-import { convertedPath } from "../../utilities/utilities";
+import { formatFirebasePath } from "../../utilities";
 
 const OnlineUsers: React.VFC = () => {
-  const { error, documents } = useCollection<User>(convertedPath("/users"));
+  const { error, documents } = useCollection<User>(
+    formatFirebasePath("/users")
+  );
   return (
     <div className="user-list">
       <h2>All Users</h2>

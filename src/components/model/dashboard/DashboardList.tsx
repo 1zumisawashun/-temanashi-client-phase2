@@ -4,7 +4,7 @@ import {
   ProductItemWithoutComment,
 } from "../../../utilities/stripeClient";
 import { useAuthContext } from "../../../hooks/useContextClient";
-import { taxIncludedPrice } from "../../../utilities/utilities";
+import { formatTaxIncludedPrice } from "../../../utilities";
 import { Image } from "../../ui";
 
 type DashboardListProps = {
@@ -36,7 +36,7 @@ const DashboardList: React.VFC<DashboardListProps> = ({ productItems }) => {
               <h4 className="name">{item.product.name}</h4>
               {Object.keys(item.prices).map((priceIndex) => (
                 <p key={priceIndex} className="price">
-                  {taxIncludedPrice(item.prices[priceIndex].unit_amount)}
+                  {formatTaxIncludedPrice(item.prices[priceIndex].unit_amount)}
                 </p>
               ))}
               <div className="dimentions">

@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { BasicButton, LikeButton, BasicModal } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { useParams } from "react-router-dom";
-import { taxIncludedPrice } from "../../../utilities/utilities";
+import { formatTaxIncludedPrice } from "../../../utilities";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from "@emotion/styled";
@@ -88,7 +88,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
       {Object.keys(furniture.prices).map((priceIndex) => (
         <div key={priceIndex} className="content">
           <div className="price">
-            {taxIncludedPrice(furniture.prices[priceIndex].unit_amount)}
+            {formatTaxIncludedPrice(furniture.prices[priceIndex].unit_amount)}
           </div>
           <p className="details">{furniture.product.description}</p>
           <ButtonWrapper>

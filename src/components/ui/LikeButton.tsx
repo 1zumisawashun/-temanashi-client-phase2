@@ -7,7 +7,7 @@ import {
 import { useState, useEffect } from "react";
 import { timestamp, firebase } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useContextClient";
-import { convertedPath } from "../../utilities/utilities";
+import { formatFirebasePath } from "../../utilities";
 import { useSubDocument } from "../../hooks/useSubDocument";
 import { ProductItem } from "../../utilities/stripeClient";
 import { FavoriteButton, NoFaviruteButton } from "../ui";
@@ -36,11 +36,15 @@ const LikeButton: React.VFC<LikeButtonProp> = ({ furniture }) => {
   if (!user) throw new Error("we cant find your account");
 
   const likedUser: LikedUser = useSubDocument<ProjectType, likedUsers>(
-    convertedPath(`/products/${furniture.product.id}/liked_users/${user.uid}`)
+    formatFirebasePath(
+      `/products/${furniture.product.id}/liked_users/${user.uid}`
+    )
   );
 
   const likedFurniture: LikedFuritures = useSubDocument<User, likedFurnitures>(
-    convertedPath(`/users/${user.uid}/liked_furnitures/${furniture.product.id}`)
+    formatFirebasePath(
+      `/users/${user.uid}/liked_furnitures/${furniture.product.id}`
+    )
   );
 
   const addLikedUser = () => {
