@@ -17,13 +17,16 @@ type LinkButtonProps = {
     | "warning";
   onClick?: () => void;
 };
-// NOTE:MUIのLinkコンポーネントの場合iconの追加ができないためButtonを採用
 
+/**
+ * MUIのLinkコンポーネントの場合iconの追加ができないためButtonを採用
+ * 初期カラーを白にするためにvariant = secondaryを当てている
+ */
 const LinkButton: React.VFC<LinkButtonProps> = ({
   path,
   children,
   icon,
-  variant = "secondary", // NOTE:白にするためにsecondaryを使用する
+  variant = "secondary",
   onClick,
 }) => {
   return (
@@ -40,7 +43,9 @@ const LinkButton: React.VFC<LinkButtonProps> = ({
   );
 };
 
-// NOTE:NavLinkの場合activeという選択した・していないの判定が可能
+/**
+ * NavLinkの場合「active」というクラスの付与が可能になる
+ */
 const NavlinkButton: React.VFC<LinkButtonProps> = ({
   path,
   children,

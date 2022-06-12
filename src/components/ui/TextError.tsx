@@ -18,6 +18,10 @@ export type TextErrorProps = {
   helperText?: string | null;
 };
 
+/**
+ * MUIと同じレイアウトのエラーメッセージ
+ * react-hook-formとyupでのバリデーションに組み込めないローカルバリデーションに当てる
+ */
 export const TextError: React.VFC<TextErrorProps> = ({
   error = false,
   helperText = "エラーが発生しました",
