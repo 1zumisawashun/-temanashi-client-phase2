@@ -46,6 +46,7 @@ const LinkButton: React.VFC<LinkButtonProps> = ({
 
 /**
  * NavLinkの場合「active」というクラスの付与が可能になる
+ * styledNameにお使い方に関してはProgressbarコンポーネントを見た方が良いかもしれない
  */
 const NavlinkButton: React.VFC<LinkButtonProps> = ({
   path,
@@ -61,6 +62,7 @@ const NavlinkButton: React.VFC<LinkButtonProps> = ({
       startIcon={icon}
       size="large"
       fullWidth
+      style={styledName}
     >
       {children}
     </Button>
