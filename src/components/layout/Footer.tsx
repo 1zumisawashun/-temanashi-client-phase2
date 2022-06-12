@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Divider } from "../ui";
 
 const FooterContainer = styled("footer")`
   padding-bottom: 20px;
@@ -9,12 +10,12 @@ const Copyright = styled("div")`
   font-size: 14px;
   display: inline-block;
   padding: 20px;
-  border-top: 1px solid gray;
 `;
 
 const Footer: React.VFC = () => {
   return (
     <FooterContainer>
+      <Divider />
       <Copyright>Copyright 2022 temanashi</Copyright>
     </FooterContainer>
   );

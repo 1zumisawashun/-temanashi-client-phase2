@@ -1,12 +1,53 @@
 import Avatar from "../ui/Avatar";
 import { useAuthContext } from "../../hooks/useContextClient";
-import { NavlinkButton } from "../ui";
+import { NavlinkButton, Divider } from "../ui";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SendIcon from "@mui/icons-material/Send";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 import { useCartContext } from "../../hooks/useContextClient";
+import styled from "@emotion/styled";
 import Badge from "@mui/material/Badge";
+
+const SidebarContainer = styled("div")`
+  width: 300px;
+  min-width: 300px;
+  background: #84bcb4;
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+`;
+const SidebarInner = styled("div")`
+  position: fixed;
+  width: inherit;
+`;
+const SidebarUser = styled("div")`
+  /* font-weight: bold; */
+  text-align: center;
+  letter-spacing: 1px;
+  padding: 40px 30px;
+`;
+const SidebarUserInner = styled("div")`
+  text-decoration: none;
+  font-weight: bold;
+  color: #f4f4f4;
+`;
+const SidebarLinks = styled("nav")`
+  margin-top: 30px;
+  margin-left: 30px;
+`;
+const SidebarLinkItem = styled("li")`
+  padding: 10px 0;
+  > a {
+    color: #f4f4f4;
+  }
+  > a.active {
+    color: #555;
+    border-radius: 20px 0 0 20px;
+    background: #f4f4f4;
+  }
+`;
+
 
 const Sidebar: React.VFC = () => {
   const { user } = useAuthContext();
@@ -14,32 +55,35 @@ const Sidebar: React.VFC = () => {
   const { cart } = useCartContext();
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-content">
-        <div className="user">
+    <SidebarContainer>
+      <SidebarInner>
+        <SidebarUser>
           <NavlinkButton path={`/users/${user.uid}`}>
-            {user.photoURL && <Avatar src={user.photoURL} />}
-            <p>hey {user.displayName}</p>
+            <SidebarUserInner>
+              {user.photoURL && <Avatar src={user.photoURL} />}
+              <p>hey {user.displayName}</p>
+            </SidebarUserInner>
           </NavlinkButton>
-        </div>
-        <nav className="links">
+          <Divider />
+        </SidebarUser>
+        <SidebarLinks>
           <ul>
-            <li>
+            <SidebarLinkItem>
               <NavlinkButton path="/" icon={<DashboardIcon />}>
                 Dashboard
               </NavlinkButton>
-            </li>
-            <li>
+            </SidebarLinkItem>
+            <SidebarLinkItem>
               <NavlinkButton path="/create/product" icon={<SendIcon />}>
                 New Product
               </NavlinkButton>
-            </li>
-            <li>
+            </SidebarLinkItem>
+            <SidebarLinkItem>
               <NavlinkButton path="/diagnose" icon={<ContentPasteSearchIcon />}>
                 Diagnose
               </NavlinkButton>
-            </li>
-            <li>
+            </SidebarLinkItem>
+            <SidebarLinkItem>
               <NavlinkButton
                 path="/cart"
                 icon={
@@ -50,11 +94,11 @@ const Sidebar: React.VFC = () => {
               >
                 Shopping Cart
               </NavlinkButton>
-            </li>
+            </SidebarLinkItem>
           </ul>
-        </nav>
-      </div>
-    </div>
+        </SidebarLinks>
+      </SidebarInner>
+    </SidebarContainer>
   );
 };
 
