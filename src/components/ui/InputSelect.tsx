@@ -1,6 +1,6 @@
 import FormControl from "@mui/material/FormControl";
 import styled from "@emotion/styled";
-import Select, { MultiValue, StylesConfig } from "react-select";
+import Select, { MultiValue } from "react-select";
 import { CSSProperties } from "react";
 
 const StyledFormControl = styled(FormControl)`
@@ -28,20 +28,17 @@ const ErrorText = styled("p")`
   color: #d32f2f;
 `;
 
-const customControlStyles: CSSProperties = {
-  color: "#84bcb4",
-  height: "56px",
-  marginTop: "6px",
-};
-
 // https://react-select.com/styles#style-object
-const selectStyle: StylesConfig<OptionProps> = {
-  control: (provided, state) => {
-    return {
+const customStyles = (error = false) => {
+  return {
+    control: (provided: CSSProperties) => ({
       ...provided,
-      ...customControlStyles,
-    };
-  },
+      color: "#84bcb4",
+      height: "56px",
+      marginTop: "6px",
+      borderColor: error ? "#d32f2f" : "#999",
+    }),
+  };
 };
 
 export type OptionProps = {
@@ -84,7 +81,7 @@ const InputSelect: React.VFC<SelectFormProps> = ({
         isMulti
         isDisabled={disabled}
         isLoading={isLoading}
-        styles={selectStyle}
+        styles={customStyles(error)}
       />
       {error && <ErrorText>{helperText}</ErrorText>}
     </StyledFormControl>

@@ -102,7 +102,7 @@ const Login: React.VFC = () => {
             isDisabled={isPending}
             data-cy="login"
             size="large"
-            onColor="secondary"
+            variant="secondary"
             fullWidth={true}
             onClick={() => {
               handleSubmit(onPreSubmit)();
@@ -111,9 +111,7 @@ const Login: React.VFC = () => {
             Login
           </BasicButton>
           {error && <div className="error">{error}</div>}
-          <LinkButton path="/signup" color="secondary">
-            Move To Sign Up
-          </LinkButton>
+          <LinkButton path="/signup">Move To Sign Up</LinkButton>
         </FormContainer>
       </Inner>
     </Container>

@@ -40,7 +40,7 @@ const InputFileSingle: React.VFC<InputFileSingleProps> = ({
     <>
       <BasicButton
         fullWidth={true}
-        onColor="secondary"
+        variant="secondary"
         icon={<UploadFileIcon />}
         size="large"
       >

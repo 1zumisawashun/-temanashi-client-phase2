@@ -5,7 +5,7 @@ import { SvgIconProps } from "@mui/material";
 interface BasicButtonProps {
   children: ReactNode;
   icon?: SvgIconProps;
-  onColor?:
+  variant?:
     | "inherit"
     | "primary"
     | "secondary"
@@ -14,17 +14,19 @@ interface BasicButtonProps {
     | "info"
     | "warning";
   size?: "small" | "medium" | "large";
-  styleName?: string;
+  type?: "button" | "submit" | "reset";
+  styledName?: string;
   isDisabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   fullWidth?: boolean;
 }
 
 const BasicButton: React.VFC<BasicButtonProps> = ({
-  styleName,
+  styledName,
   children,
   icon,
-  onColor = "primary",
+  type = "button",
+  variant = "primary",
   size = "medium",
   isDisabled,
   onClick,
@@ -33,13 +35,18 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
   return (
     <Button
       variant="contained"
-      color={onColor}
+      color={variant}
       size={size}
-      className={styleName + ` btn -mt10`}
+      type={type}
+      className={styledName}
       onClick={onClick}
       disabled={isDisabled}
       fullWidth={fullWidth}
       startIcon={icon}
+      sx={{
+        marginTop: () => (size === "medium" || fullWidth ? "10px" : "0px"),
+        marginBottom: () => (size === "medium" || fullWidth ? "10px" : "0px"),
+      }}
     >
       {children}
     </Button>

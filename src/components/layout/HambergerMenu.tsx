@@ -1,5 +1,5 @@
 import Hamburger from "hamburger-react";
-import { BasicButton, StoreButton } from "../ui";
+import { LinkButton, StoreButton } from "../ui";
 import { useAuthContext } from "../../hooks/useContextClient";
 import { useHistory } from "react-router-dom";
 
@@ -39,44 +39,35 @@ const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
           <div className="responsive-overlay">
             <ul className="menu">
               <li className="hamburger-link">
-                <BasicButton
-                  styleName="-link"
-                  onClick={() => closeHamburger("/")}
-                >
+                <LinkButton onClick={() => closeHamburger("/")}>
                   Dashboard
-                </BasicButton>
+                </LinkButton>
               </li>
               <li className="hamburger-link">
-                <BasicButton
-                  styleName="-link"
+                <LinkButton
                   onClick={() => closeHamburger("/create/furniture")}
                 >
                   New Furniture
-                </BasicButton>
+                </LinkButton>
               </li>
               <li className="hamburger-link">
-                <BasicButton
-                  styleName="-link"
-                  onClick={() => closeHamburger("/diagnose")}
-                >
+                <LinkButton onClick={() => closeHamburger("/diagnose")}>
                   Diagnose
-                </BasicButton>
+                </LinkButton>
               </li>
               <li className="hamburger-link">
-                <BasicButton
-                  styleName="-link"
+                <LinkButton
                   onClick={() => closeHamburger(`/users/${user.uid}/cart`)}
                 >
                   Shopping Cart
-                </BasicButton>
+                </LinkButton>
               </li>
               <li className="hamburger-link">
-                <BasicButton
-                  styleName="-link"
+                <LinkButton
                   onClick={() => closeHamburger(`/users/${user.uid}/favorite`)}
                 >
                   My Page
-                </BasicButton>
+                </LinkButton>
               </li>
             </ul>
           </div>

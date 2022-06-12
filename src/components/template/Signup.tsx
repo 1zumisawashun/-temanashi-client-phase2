@@ -124,7 +124,7 @@ const Signup: React.VFC = () => {
           />
           <BasicButton
             isDisabled={isPending}
-            onColor="secondary"
+            variant="secondary"
             size="large"
             fullWidth={true}
             onClick={() => {
@@ -134,9 +134,7 @@ const Signup: React.VFC = () => {
             Sign Up
           </BasicButton>
           {error && <div className="error">{error}</div>}
-          <LinkButton path="/login" color="secondary">
-            Move To Login
-          </LinkButton>
+          <LinkButton path="/login">Move To Login</LinkButton>
         </FormContainer>
       </Inner>
     </Container>

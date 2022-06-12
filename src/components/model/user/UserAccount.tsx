@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import { useAuth } from "../../../hooks/useAuth";
 import { useHistory } from "react-router-dom";
 import axios from "../../../utilities/axiosClient";
-import { SwitchForm } from "./../../ui";
+import { SwitchForm, BasicButton } from "./../../ui";
 
 type Response = {
   message: string;
@@ -80,42 +80,17 @@ const UserAccount: React.VFC = () => {
     <>
       <div className="user-container">
         <div className="inner">
-          <button onClick={onCallTest} className="btn">
-            OnCallTest
-          </button>
-          <button onClick={onRequestTest} className="btn">
-            OnRequestTest
-          </button>
-          <button onClick={getAxiosTest} className="btn">
-            GetAxiosTest
-          </button>
-          <button onClick={createJWT} className="btn">
-            CreateJWT
-          </button>
-          <button onClick={verifyJWT} className="btn">
-            verifyJWT
-          </button>
-          {isEmulating && (
-            <button onClick={Emulating} className="btn">
-              emulatingTest
-            </button>
-          )}
-          {!isEmulating && (
-            <button onClick={Emulating} className="btn -disabled" disabled>
-              not work emulating test...
-            </button>
-          )}
-
-          {!isPending && (
-            <button onClick={handleSubmit} className="btn">
-              Logout
-            </button>
-          )}
-          {isPending && (
-            <button onClick={handleSubmit} className="btn -disabled" disabled>
-              Logging out...
-            </button>
-          )}
+          <BasicButton onClick={onCallTest}>OnCallTest</BasicButton>
+          <BasicButton onClick={onRequestTest}>OnRequestTest</BasicButton>
+          <BasicButton onClick={getAxiosTest}>GetAxiosTest</BasicButton>
+          <BasicButton onClick={createJWT}>CreateJWT</BasicButton>
+          <BasicButton onClick={verifyJWT}>verifyJWT</BasicButton>
+          <BasicButton onClick={Emulating} isDisabled={isEmulating}>
+            emulatingTest
+          </BasicButton>
+          <BasicButton onClick={handleSubmit} isDisabled={isPending}>
+            Logout
+          </BasicButton>
           <SwitchForm onChange={handleSwitchForm} />
         </div>
       </div>

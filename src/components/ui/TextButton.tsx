@@ -4,10 +4,10 @@ import Button from "@mui/material/Button";
 import { SvgIconProps } from "@mui/material";
 
 type LinkButtonProps = {
-  path: string;
+  path?: string;
   children: ReactNode;
   icon?: SvgIconProps;
-  color?:
+  variant?:
     | "inherit"
     | "primary"
     | "secondary"
@@ -15,6 +15,7 @@ type LinkButtonProps = {
     | "error"
     | "info"
     | "warning";
+  onClick?: () => void;
 };
 // NOTE:MUIのLinkコンポーネントの場合iconの追加ができないためButtonを採用
 
@@ -22,15 +23,17 @@ const LinkButton: React.VFC<LinkButtonProps> = ({
   path,
   children,
   icon,
-  color,
+  variant = "secondary", // NOTE:白にするためにsecondaryを使用する
+  onClick,
 }) => {
   return (
     <Button
       component={Link}
       to={`${path}`}
       startIcon={icon}
-      color={color}
+      color={variant}
       size="large"
+      onClick={onClick}
     >
       {children}
     </Button>
