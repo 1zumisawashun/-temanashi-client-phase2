@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { InputText, BasicButton, LinkButton } from "../ui";
+import { InputText, BasicButton, LinkButton, TextError } from "../ui";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -110,7 +110,7 @@ const Login: React.VFC = () => {
           >
             Login
           </BasicButton>
-          {error && <div className="error">{error}</div>}
+          <TextError error={error} helperText={error} />
           <LinkButton path="/signup">Move To Sign Up</LinkButton>
         </FormContainer>
       </Inner>

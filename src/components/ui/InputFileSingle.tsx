@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BasicButton } from "../ui";
+import { BasicButton, TextError } from "../ui";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 
 interface InputFileSingleProps {
@@ -49,7 +49,7 @@ const InputFileSingle: React.VFC<InputFileSingleProps> = ({
         </label>
       </BasicButton>
 
-      {thumbnailError && <div className="error">{thumbnailError}</div>}
+      <TextError error={thumbnailError} helperText={thumbnailError} />
 
       <input
         type="file"

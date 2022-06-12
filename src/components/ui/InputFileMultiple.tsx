@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CloseButton, BasicButton, BasicModal } from "../ui";
+import { CloseButton, BasicButton, BasicModal, TextError } from "../ui";
 import { useDisclosure } from "../../hooks";
 import styled from "@emotion/styled";
 
@@ -145,7 +145,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
         )}
       </div>
 
-      {isError.length !== 0 && <p>{isError}</p>}
+      <TextError error={isError} helperText={isError} />
 
       <input
         data-cy="file_upload"

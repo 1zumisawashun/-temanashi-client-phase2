@@ -2,6 +2,7 @@ import FormControl from "@mui/material/FormControl";
 import styled from "@emotion/styled";
 import Select, { MultiValue } from "react-select";
 import { CSSProperties } from "react";
+import { TextError } from "./TextError";
 
 const StyledFormControl = styled(FormControl)`
   width: 100%;
@@ -13,19 +14,6 @@ const StyledLabel = styled("label")`
   margin-bottom: 4px;
   font-size: 12px;
   font-weight: bold;
-`;
-
-const ErrorText = styled("p")`
-  font-weight: 400;
-  font-size: 0.75rem;
-  line-height: 1.66;
-  letter-spacing: 0.03333em;
-  text-align: left;
-  margin-top: 3px;
-  margin-right: 14px;
-  margin-bottom: 0;
-  margin-left: 14px;
-  color: #d32f2f;
 `;
 
 // https://react-select.com/styles#style-object
@@ -47,7 +35,6 @@ export type OptionProps = {
 };
 
 export type SelectFormProps = {
-  // value: string;
   label?: string;
   onChange: (event: MultiValue<OptionProps>) => void;
   options: OptionProps[];
@@ -59,7 +46,6 @@ export type SelectFormProps = {
 };
 
 const InputSelect: React.VFC<SelectFormProps> = ({
-  // value,
   label,
   onChange,
   options,
@@ -73,7 +59,6 @@ const InputSelect: React.VFC<SelectFormProps> = ({
     <StyledFormControl>
       {label && <StyledLabel htmlFor={label}>{label}</StyledLabel>}
       <Select
-        // value={value}
         id={label}
         placeholder={placeholder}
         options={options}
@@ -83,7 +68,7 @@ const InputSelect: React.VFC<SelectFormProps> = ({
         isLoading={isLoading}
         styles={customStyles(error)}
       />
-      {error && <ErrorText>{helperText}</ErrorText>}
+      <TextError error={error} helperText={helperText} />
     </StyledFormControl>
   );
 };

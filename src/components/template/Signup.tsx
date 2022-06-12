@@ -3,7 +3,13 @@ import { useAuth } from "../../hooks/useAuth";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { InputText, BasicButton, LinkButton, InputFileSingle } from "../ui";
+import {
+  InputText,
+  BasicButton,
+  LinkButton,
+  InputFileSingle,
+  TextError,
+} from "../ui";
 import styled from "@emotion/styled";
 
 const Container = styled("div")`
@@ -133,7 +139,7 @@ const Signup: React.VFC = () => {
           >
             Sign Up
           </BasicButton>
-          {error && <div className="error">{error}</div>}
+          <TextError error={error} helperText={error} />
           <LinkButton path="/login">Move To Login</LinkButton>
         </FormContainer>
       </Inner>

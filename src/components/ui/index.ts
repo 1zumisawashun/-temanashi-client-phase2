@@ -29,3 +29,4 @@ export { default as ForbiddenError } from "./ForbiddenError";
 export { default as InputFileSingle } from "./InputFileSingle";
 export { InputTextarea } from "./InputTextarea";
 export { SwitchForm } from "./SwitchForm";
+export { TextError } from "./TextError";
