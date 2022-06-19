@@ -1,16 +1,16 @@
 import styled from "@emotion/styled";
 
 const ErrorText = styled("p")`
-  font-weight: 400;
+  color: #d32f2f;
   font-size: 0.75rem;
-  line-height: 1.66;
+  font-weight: 400;
   letter-spacing: 0.03333em;
-  text-align: left;
-  margin-top: 3px;
-  margin-right: 14px;
+  line-height: 1.66;
   margin-bottom: 0;
   margin-left: 14px;
-  color: #d32f2f;
+  margin-right: 14px;
+  margin-top: 3px;
+  text-align: left;
 `;
 
 export type TextErrorProps = {

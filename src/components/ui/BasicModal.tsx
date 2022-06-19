@@ -3,60 +3,60 @@ import ModalUnstyled from "@mui/base/ModalUnstyled";
 // 参考記事:https://mui.com/base/react-modal/
 
 const StyledModal = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
   align-items: center;
+  bottom: 0;
+  display: flex;
   justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1300;
 `;
 
 const Backdrop = styled("div")`
-  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
   position: fixed;
   right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: transparent;
+  top: 0;
+  z-index: -1;
 `;
 
 const ModalInner = styled("div")<{ size: string }>`
-  width: ${({ size }) => (size === "small" ? "600px" : "800px")};
-  max-height: calc(100vh - 64px);
-  padding: 30px 0;
   background-color: white;
   border-radius: 10px;
+  max-height: calc(100vh - 64px);
+  padding: 30px 0;
+  width: ${({ size }) => (size === 'small' ? '600px' : '800px')};
 `;
 
 const Title = styled("div")`
-  margin-bottom: 20px;
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 20px;
   text-align: center;
 `;
 
 const SubTitle = styled("div")`
-  margin-bottom: 30px;
   font-size: 16px;
+  margin-bottom: 30px;
   text-align: center;
   white-space: pre-line;
 `;
 
 const ContentWrapper = styled("div")`
-  padding: 0 30px;
   max-height: calc(100vh - 300px);
   overflow-y: scroll;
+  padding: 0 30px;
 `;
 
 const FooterWrapper = styled("div")`
   display: flex;
-  justify-content: center;
   gap: 30px;
+  justify-content: center;
   padding-top: 30px;
 `;
 

@@ -10,31 +10,31 @@ import styled from "@emotion/styled";
 import Badge from "@mui/material/Badge";
 
 const SidebarContainer = styled("div")`
-  width: 300px;
-  min-width: 300px;
   background: #84bcb4;
-  min-height: 100vh;
   box-sizing: border-box;
+  min-height: 100vh;
+  min-width: 300px;
   position: relative;
+  width: 300px;
 `;
 const SidebarInner = styled("div")`
   position: fixed;
   width: inherit;
 `;
 const SidebarUser = styled("div")`
-  /* font-weight: bold; */
-  text-align: center;
   letter-spacing: 1px;
   padding: 40px 30px;
+  /* font-weight: bold; */
+  text-align: center;
 `;
 const SidebarUserInner = styled("div")`
-  text-decoration: none;
-  font-weight: bold;
   color: #f4f4f4;
+  font-weight: bold;
+  text-decoration: none;
 `;
 const SidebarLinks = styled("nav")`
-  margin-top: 30px;
   margin-left: 30px;
+  margin-top: 30px;
 `;
 const SidebarLinkItem = styled("li")`
   padding: 10px 0;
@@ -42,9 +42,9 @@ const SidebarLinkItem = styled("li")`
     color: #f4f4f4;
   }
   > a.active {
-    color: #555;
-    border-radius: 20px 0 0 20px;
     background: #f4f4f4;
+    border-radius: 20px 0 0 20px;
+    color: #555;
   }
 `;
 

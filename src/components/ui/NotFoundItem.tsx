@@ -9,9 +9,9 @@ const Image = styled("img")`
   width: 35%;
 `;
 const Message = styled("p")`
+  color: #84bcb4;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #84bcb4;
   margin: 30px 0;
 `;
 

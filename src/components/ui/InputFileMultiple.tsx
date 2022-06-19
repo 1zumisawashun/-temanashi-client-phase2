@@ -5,24 +5,24 @@ import styled from "@emotion/styled";
 import { v4 as uuidv4 } from "uuid";
 
 const CloseButtonContainer = styled("div")`
-  position: relative;
-  font-size: 30px;
-  cursor: pointer;
-  border: none;
   background: none;
-  top: 11%;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
   left: 79%;
+  position: relative;
+  top: 11%;
 `;
 const CloseButtonContainerHidden = styled("div")`
-  position: relative;
-  font-size: 30px;
-  cursor: pointer;
-  border: none;
   background: none;
-  top: 11%;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
   left: 79%;
   opacity: 0;
   pointer-events: none;
+  position: relative;
+  top: 11%;
 `;
 
 interface PhotosUploadProps {

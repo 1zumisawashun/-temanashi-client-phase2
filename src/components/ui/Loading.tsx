@@ -2,35 +2,34 @@ import Loader from "react-loader-spinner";
 import styled from "@emotion/styled";
 
 const LoadingContainer = styled("div")`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
   align-items: center;
+  bottom: 0;
+  display: flex;
   justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1300;
 `;
 
 const Backdrop = styled("div")`
-  // NOTE:z-indexを-1にすることでInner以降でのz-indexの影響をなくす
-  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
   position: fixed;
   right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: transparent;
+  top: 0;
+  z-index: -1;
 `;
 
 const Inner = styled("div")`
-  position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
   text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const Loading: React.VFC = () => {

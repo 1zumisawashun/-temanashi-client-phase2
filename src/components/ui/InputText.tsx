@@ -3,16 +3,16 @@ import styled from "@emotion/styled";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 const Text = styled(TextField)`
-  width: 100%;
+  background-color: white;
   font-size: 16px;
   margin-top: 6px;
-  background-color: white;
+  width: 100%;
 `;
 
 const Label = styled("label")`
-  margin-bottom: 4px;
   font-size: 12px;
   font-weight: bold;
+  margin-bottom: 4px;
 `;
 
 export interface InputTextProps {

@@ -9,31 +9,31 @@ const FilterContainer = styled("div")`
     height: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    border-radius: 100px;
     background-color: #84bcb4;
+    border-radius: 100px;
   }
 `;
 const FilterNav = styled("nav")`
-  width: fit-content;
-  display: flex;
-  padding: 10px;
   background-color: white;
   border-radius: 4px;
+  display: flex;
+  padding: 10px;
+  width: fit-content;
 `;
 const FilterTitle = styled("p")`
-  width: 90px;
-  font-weight: bold;
   font-size: 0.9em;
+  font-weight: bold;
+  width: 90px;
 `;
 const FilterButton = styled("button")`
   background: transparent;
   border: 0;
-  font-family: inherit;
-  font-weight: bold;
+  border-right: 1px solid #e4e4e4;
   color: #999;
   cursor: pointer;
-  border-right: 1px solid #e4e4e4;
+  font-family: inherit;
   font-size: 0.9em;
+  font-weight: bold;
   padding: 0 15px;
   &:last-child {
     border: 0;

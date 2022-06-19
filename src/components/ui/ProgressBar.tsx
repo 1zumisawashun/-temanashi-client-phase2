@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 
 const ProgressWrapper = styled("div")<{ width: number }>`
-  max-width: 350px;
-  width: 100%;
   background-color: rgb(233, 233, 233);
   border-radius: 0.5rem;
   margin: 20px auto;
+  max-width: 350px;
+  width: 100%;
   width: ${(p) => p.width}%;
 `;
 const Progress = styled("div")<{ width: number }>`
-  height: 10px;
   background-color: #84bcb4;
   border-radius: 1rem;
+  height: 10px;
   transition: 0.2s ease;
   transition-delay: 0.1s;
   width: ${(p) => p.width}%;

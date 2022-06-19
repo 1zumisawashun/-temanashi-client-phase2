@@ -4,8 +4,8 @@ import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
 
 const Container = styled("div")`
-  width: calc(100% - 650px);
   flex-grow: 1;
+  width: calc(100% - 650px);
   @media (min-width: 576px) {
     display: block;
   }

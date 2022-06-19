@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import { Switch, FormControlLabel, styled as muiStyled } from "@mui/material";
 
 const Container = styled(FormControlLabel)`
-  width: 72px;
   margin-left: 0;
+  width: 72px;
 `;
 
 const SwitchContainer = styled("div")`
@@ -11,9 +11,9 @@ const SwitchContainer = styled("div")`
 `;
 
 const Label = styled("p")`
-  margin-bottom: 4px;
   font-size: 12px;
   font-weight: 600;
+  margin-bottom: 4px;
 `;
 interface SwitchFormProps {
   label?: string;
@@ -26,58 +26,58 @@ interface SwitchFormProps {
 }
 
 const CustomSwitch = muiStyled(Switch)(
-  (props: { on: string; off: string }) => ({
-    width: "72px",
-    height: "28px",
-    padding: "0px",
-    "& .MuiSwitch-switchBase": {
-      color: "#818181",
-      padding: "2px",
-      "&.Mui-checked": {
-        color: "#005BAC !important",
-        transform: "translateX(44px) !important",
-      },
-      "&.Mui-checked + .MuiSwitch-track": {
-        "&:after": {
-          fontSize: "12px",
-          color: "white",
-          content: `"${props.on}"`,
-          left: "11px",
-        },
-        "&:before": {
-          display: "none",
-        },
-      },
-      "&$checked": {
-        "& + $track": {
-          backgroundColor: "#005BAC",
-        },
-      },
-    },
-    "& .MuiSwitch-track": {
-      display: "flex",
-      alignItems: "center",
-      borderRadius: "20px",
-      backgroundColor: "#B5B5B5",
-      opacity: "1 !important",
-      "&:after, &:before": {
-        position: "absolute",
-        fontWeight: "bold",
-      },
-      "&:before": {
-        fontSize: "12px",
-        color: "black",
-        content: `"${props.off}"`,
-        right: "8px",
-      },
-    },
-    "& .MuiSwitch-thumb": {
-      color: "white",
-      width: "22px",
-      height: "22px",
-      margin: "1px",
-    },
-  })
+  // (props: { on: string; off: string }) => ({
+  //   width: "72px",
+  //   height: "28px",
+  //   padding: "0px",
+  //   "& .MuiSwitch-switchBase": {
+  //     color: "#818181",
+  //     padding: "2px",
+  //     "&.Mui-checked": {
+  //       color: "#005BAC !important",
+  //       transform: "translateX(44px) !important",
+  //     },
+  //     "&.Mui-checked + .MuiSwitch-track": {
+  //       "&:after": {
+  //         color: "white",
+  //         content: `'${props.on}'`,
+  //         fontSize: "12px",
+  //         left: "11px",
+  //       },
+  //       "&:before": {
+  //         display: "none",
+  //       },
+  //     },
+  //     "&$checked": {
+  //       "& + $track": {
+  //         backgroundColor: "#005BAC",
+  //       },
+  //     },
+  //   },
+  //   "& .MuiSwitch-track": {
+  //     alignItems: "center",
+  //     backgroundColor: "#B5B5B5",
+  //     borderRadius: "20px",
+  //     display: "flex",
+  //     opacity: "1 !important",
+  //     "&:after, &:before": {
+  //       fontWeight: "bold",
+  //       position: "absolute",
+  //     },
+  //     "&:before": {
+  //       color: "black",
+  //       content: `'${props.off}'`,
+  //       fontSize: "12px",
+  //       right: "8px",
+  //     },
+  //   },
+  //   "& .MuiSwitch-thumb": {
+  //     color: "white",
+  //     height: "22px",
+  //     margin: "1px",
+  //     width: "22px",
+  //   },
+  // })
 );
 
 export const SwitchForm: React.VFC<SwitchFormProps> = ({

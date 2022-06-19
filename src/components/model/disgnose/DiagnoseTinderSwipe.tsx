@@ -12,8 +12,8 @@ import styled from "@emotion/styled";
 
 const ButtonWrapper = styled("div")`
   display: flex;
-  justify-content: center;
   gap: 30px;
+  justify-content: center;
   padding-top: 30px;
 `;
 const CommonWrapper = styled("div")`
@@ -142,7 +142,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
               onCardLeftScreen={() => outOfFrame(index)}
             >
               <div
-                style={{ backgroundImage: "url(" + character.image + ")" }}
+                style={{ backgroundImage: 'url(' + character.image + ')' }}
                 className="card"
               >
                 <h3>{character.name}</h3>

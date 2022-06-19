@@ -4,43 +4,43 @@ import styled from "@emotion/styled";
 import { BasicButton } from "../ui";
 
 const ContentWrapper = styled("div")`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
   background: #84bcb4;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
 `;
 
 const Content = styled("div")`
-  width: 100%;
-  max-width: 1100px;
-  margin: 120px 340px;
-  height: 388px;
   background-color: white;
   border-radius: 10px;
+  height: 388px;
+  margin: 120px 340px;
+  max-width: 1100px;
+  width: 100%;
 `;
 
 const Title = styled("h1")`
-  text-align: center;
-  margin-top: 40px;
   font-size: 24px;
   font-weight: 700;
+  margin-top: 40px;
+  text-align: center;
 `;
 
 const FirstParagraph = styled("p")`
   color: black;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
   line-height: 21px;
-  text-align: center;
   margin-top: 63px;
+  text-align: center;
 `;
 
 const FooterContent = styled("div")`
-  margin-top: 47px;
   margin-bottom: 40px;
+  margin-top: 47px;
   text-align: center;
 `;
 

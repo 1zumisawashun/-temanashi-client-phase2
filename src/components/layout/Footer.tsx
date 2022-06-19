@@ -7,8 +7,8 @@ const FooterContainer = styled("footer")`
 `;
 const Copyright = styled("div")`
   color: gray;
-  font-size: 14px;
   display: inline-block;
+  font-size: 14px;
   padding: 20px;
 `;
 

@@ -7,29 +7,29 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
 
 const Container = styled("div")`
+  background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);
   height: 100vh;
   margin: 0;
   position: relative;
-  background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);
 `;
 const Inner = styled("div")`
-  width: 30%;
+  left: 50%;
   position: absolute;
   top: 50%;
-  left: 50%;
   transform: translateY(-50%) translateX(-50%);
+  width: 30%;
 `;
 const FormContainer = styled("form")`
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
   margin: auto;
   padding: 50px;
-  background: rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
 `;
 const Title = styled("h1")`
   color: white;

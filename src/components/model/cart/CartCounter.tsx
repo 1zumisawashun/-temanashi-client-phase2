@@ -4,8 +4,8 @@ import styled from "@emotion/styled";
 
 const CounterWrapper = styled("div")`
   display: flex;
-  justify-content: center;
   gap: 10px;
+  justify-content: center;
 `;
 const Quantity = styled("p")`
   display: block;

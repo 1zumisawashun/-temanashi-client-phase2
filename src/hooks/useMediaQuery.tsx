@@ -35,12 +35,12 @@ export const mediaQuery = (key: keyof typeof breakpoints) =>
 
 // eslint-disable-next-line
 const SecondTestWrapper = styled("div")`
+  color: 'green';
   margin: auto;
-  color: "green";
   ${mediaQuery("iphone5")}: {
-    color: "gray";
+    color: 'gray';
   }
   ${mediaQuery("sp")}: {
-    color: "hotpink";
+    color: 'hotpink';
   }
 `;

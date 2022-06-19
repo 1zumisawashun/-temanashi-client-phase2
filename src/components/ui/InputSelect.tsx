@@ -5,15 +5,15 @@ import { CSSProperties } from "react";
 import { TextError } from "./TextError";
 
 const StyledFormControl = styled(FormControl)`
-  width: 100%;
   font-size: 16px;
   margin-top: 6px;
+  width: 100%;
 `;
 
 const StyledLabel = styled("label")`
-  margin-bottom: 4px;
   font-size: 12px;
   font-weight: bold;
+  margin-bottom: 4px;
 `;
 
 // https://react-select.com/styles#style-object
