@@ -69,7 +69,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
     setPercent(result3);
   };
   /**
-   *　useRefを更新する（valは基本1 or -1になる）
+   * useRefを更新する（valは基本1 or -1になる）
    */
   const updateCurrentIndex = async (val: number) => {
     setCurrentIndex(val);
@@ -106,7 +106,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
     updateCurrentIndex(index - 1);
   };
   /**
-   *　ライブラリのonSwipeメソッドを叩く>ローカルのswipeメソッドを叩く
+   * ライブラリのonSwipeメソッドを叩く>ローカルのswipeメソッドを叩く
    */
   const swipe = async (direction: string) => {
     if (canSwipe && currentIndex < db.length) {
