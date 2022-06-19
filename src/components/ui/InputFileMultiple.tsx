@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { CloseButton, BasicButton, BasicModal, TextError } from "../ui";
-import { useDisclosure } from "../../hooks";
+import { useDisclosure, useDragAndDrop } from "../../hooks";
 import styled from "@emotion/styled";
+import { v4 as uuidv4 } from "uuid";
 
 const CloseButtonContainer = styled("div")`
   position: relative;
@@ -44,6 +45,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
   onInputFileChange,
 }): React.ReactElement => {
   const executeModal = useDisclosure();
+  const { dragRef } = useDragAndDrop();
   const [isError, setIsError] = useState<string>("");
 
   const handleCancel = (photoIndex: number) => {
@@ -97,10 +99,10 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
   };
   return (
     <>
-      <div className="photos-container">
+      <div className="photos-container" ref={dragRef}>
         {[...Array(3)].map((_: number, index: number) =>
           photos !== null && index < photos.length ? (
-            <div>
+            <div key={uuidv4()}>
               <CloseButtonContainer>
                 <CloseButton onClick={() => executeModal.open()} />
               </CloseButtonContainer>
@@ -129,7 +131,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
               </div>
             </div>
           ) : (
-            <div>
+            <div key={uuidv4()}>
               <CloseButtonContainerHidden>
                 <CloseButton onClick={() => executeModal.open()} />
               </CloseButtonContainerHidden>
