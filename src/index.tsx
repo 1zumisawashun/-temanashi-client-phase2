@@ -6,7 +6,7 @@ import {
   AuthContextProvider,
   CartContextProvider,
   RandomContextProvider,
-} from "./context";
+} from "./contexts";
 import { CookiesProvider } from "react-cookie";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./utilities/muiThemeClient";

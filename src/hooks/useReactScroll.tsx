@@ -2,7 +2,8 @@ import { scroller, Element } from "react-scroll";
 
 export const useReactScroll = (data: string) => {
   /**
-   *
+   * render-hooksパターンを採用している
+   * https://engineering.linecorp.com/ja/blog/line-securities-frontend-3/
    */
   const options = {
     duration: 1000,
