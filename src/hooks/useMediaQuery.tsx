@@ -8,7 +8,7 @@ const breakpoints = {
 } as const;
 
 /**
- * deviceの方が直感的に使いやすいので下記を採用する
+ * mediaQueryの方が直感的に使いやすいのでそちらを採用する
  * deviceもmediaQueryも補完（予測変換）できている
  * https://github.com/emotion-js/emotion/blob/main/docs/media-queries.mdx
  */

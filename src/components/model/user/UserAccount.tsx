@@ -1,8 +1,6 @@
 import { FormEvent } from "react";
 import { projectFunctions, isEmulating } from "../../../firebase/config";
-import { useAuthContext } from "../../../hooks/useContextClient";
-import { useCookies } from "react-cookie";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuthContext, useToken, useAuth } from "../../../hooks";
 import { useHistory } from "react-router-dom";
 import axios from "../../../utilities/axiosClient";
 import { SwitchForm, BasicButton } from "./../../ui";
@@ -15,9 +13,8 @@ type Response = {
 const UserAccount: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
-  // eslint-disable-next-line
-  const [cookies, setCookie] = useCookies(["jwt"]);
   const { logout, isPending } = useAuth();
+  const { setJWT } = useToken();
   const history = useHistory();
 
   const handleSubmit = (e: FormEvent) => {
@@ -46,7 +43,7 @@ const UserAccount: React.VFC = () => {
       name: user.displayName,
     };
     const result = await axios.post<Response>(`/api/jwt`, params);
-    setCookie("jwt", result.data.jwt, { path: "/" });
+    setJWT(result.data.jwt);
     console.log(result, "result");
   };
 

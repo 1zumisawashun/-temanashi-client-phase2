@@ -11,6 +11,10 @@ type Params = {
   name: string;
 };
 
+/**
+ * useCookieの責務をこのファイルに閉じ込める
+ */
+
 export const useToken = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
 
@@ -43,5 +47,9 @@ export const useToken = () => {
     removeCookie("jwt", { path: "/" });
   };
 
-  return { verifyJWT, createJWT, removeJWT };
+  const setJWT = (jwt: string) => {
+    setCookie("jwt", jwt, { path: "/" });
+  };
+
+  return { cookies, verifyJWT, createJWT, removeJWT, setJWT };
 };

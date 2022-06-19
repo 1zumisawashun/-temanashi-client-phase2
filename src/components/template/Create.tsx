@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useStorage, useReactScroll } from "../../hooks";
+import { useStorage, useReactScroll, useToken } from "../../hooks";
 import { categoryOptions, text } from "../../utilities/constant";
 import {
   InputSelect,
@@ -13,7 +13,6 @@ import {
 } from "../ui";
 import { OptionProps } from "../ui/InputSelect";
 import { MultiValue } from "react-select";
-import { useCookies } from "react-cookie";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -31,7 +30,7 @@ interface FormData {
 const CreateProject: React.VFC = () => {
   const history = useHistory();
   const { getStorageUrl } = useStorage();
-  const [cookies] = useCookies(["jwt"]);
+  const { cookies } = useToken();
 
   const scrollToPhotos = useReactScroll("photos");
   const scrollToName = useReactScroll("name");
