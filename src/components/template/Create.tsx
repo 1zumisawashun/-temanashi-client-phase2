@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { useStorage } from "../../hooks/useStorage";
+import { useStorage, useReactScroll } from "../../hooks";
 import { categoryOptions, text } from "../../utilities/constant";
 import {
   InputSelect,
@@ -32,6 +32,11 @@ const CreateProject: React.VFC = () => {
   const history = useHistory();
   const { getStorageUrl } = useStorage();
   const [cookies] = useCookies(["jwt"]);
+
+  const scrollToPhotos = useReactScroll("photos");
+  const scrollToName = useReactScroll("name");
+  const scrollToDescription = useReactScroll("description");
+  const scrollToPrice = useReactScroll("price");
 
   const getSchema = () => {
     return yup.object({
@@ -138,10 +143,12 @@ const CreateProject: React.VFC = () => {
     <div className="common-container">
       {isLoading && <Loading />}
       <form>
+        {scrollToPhotos.renderScrollElement()}
         <InputFileMulti
           photos={photos}
           onInputFileChange={(value) => onInputFileChange(value)}
         />
+        {scrollToName.renderScrollElement()}
         <InputText
           label="name"
           register={register("name", {
@@ -151,6 +158,7 @@ const CreateProject: React.VFC = () => {
           error={"name" in errors}
           helperText={errors.name?.message}
         />
+        {scrollToDescription.renderScrollElement()}
         <InputTextarea
           label="description"
           register={register("description", {
@@ -160,6 +168,7 @@ const CreateProject: React.VFC = () => {
           error={"description" in errors}
           helperText={errors.description?.message}
         />
+        {scrollToPrice.renderScrollElement()}
         <InputText
           label="price"
           register={register("price", {
@@ -214,6 +223,10 @@ const CreateProject: React.VFC = () => {
         />
         <BasicButton
           onClick={() => {
+            if (photos.length === 0) scrollToPhotos.scrollHook();
+            if (formData.name === "") scrollToName.scrollHook();
+            if (formData.description === "") scrollToDescription.scrollHook();
+            if (formData.price === "") scrollToPrice.scrollHook();
             handleSubmit(onPreSubmit)();
           }}
         >
