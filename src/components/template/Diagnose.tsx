@@ -18,7 +18,7 @@ const Diagnose: React.VFC = () => {
   useEffect(() => {
     if (products.length <= 5) return;
     setIsPendingDiagnose(true);
-    let randomDocument: Array<Product> = [];
+    const randomDocument: Array<Product> = [];
     let indexs: Array<number> = [];
     while (randomDocument.length <= 5) {
       const queryIndex = Math.floor(Math.random() * products.length - 1);

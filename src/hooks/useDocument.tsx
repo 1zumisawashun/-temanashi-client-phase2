@@ -11,7 +11,7 @@ export const useDocument = <T,>({ collection, document }: firebasePath) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let ref = documentPoint<T>(collection, document);
+    const ref = documentPoint<T>(collection, document);
     if (ref !== undefined) {
       const unsubscribe = ref.onSnapshot(
         (snapshot) => {

@@ -89,10 +89,6 @@ const CreateProject: React.VFC = () => {
     setPhotos(value);
   };
 
-  const onPreSubmit: SubmitHandler<FormData> = (data) => {
-    onSubmit();
-  };
-
   const onSubmit = async () => {
     setIsLoading(true);
     setFromError("");
@@ -136,6 +132,10 @@ const CreateProject: React.VFC = () => {
       setFromError("Axios Error");
       setIsLoading(false);
     }
+  };
+
+  const onPreSubmit: SubmitHandler<FormData> = (data) => {
+    onSubmit();
   };
 
   return (

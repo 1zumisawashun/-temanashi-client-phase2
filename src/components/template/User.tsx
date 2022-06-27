@@ -16,13 +16,13 @@ const UserTemplate: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
 
-  const [currentFilter, setCurrentFilter] = useState<String>("favorite");
+  const [currentFilter, setCurrentFilter] = useState<string>("favorite");
   const [isPending, setIsPending] = useState<boolean>(false);
   const [payments, setPayments] = useState<any[]>([]);
   const [productItems, setProductItems] = useState<ProductItem[]>([]);
   const [isError, setIsError] = useState<string>("");
 
-  const changeFilter = (newFilter: String) => {
+  const changeFilter = (newFilter: string) => {
     setCurrentFilter(newFilter);
   };
 

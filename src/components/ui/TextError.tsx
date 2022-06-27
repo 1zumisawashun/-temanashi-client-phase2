@@ -26,5 +26,5 @@ export const TextError: React.VFC<TextErrorProps> = ({
   error = false,
   helperText = "エラーが発生しました",
 }) => {
-  return error ? <ErrorText>{helperText}</ErrorText> : <></>;
+  return error ? <ErrorText>{helperText}</ErrorText> : <ErrorText />;
 };

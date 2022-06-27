@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { CloseButton, BasicButton, BasicModal, TextError } from "../ui";
+
+import { CloseButton, BasicButton, BasicModal, TextError } from ".";
 import { useDisclosure, useDragAndDrop } from "../../hooks";
 import styled from "@emotion/styled";
 import { v4 as uuidv4 } from "uuid";
@@ -39,7 +40,7 @@ const mineType = [
   "image/svg+xml",
 ];
 
-const PhotosUpload: React.VFC<PhotosUploadProps> = ({
+export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
   name = "photos",
   photos,
   onInputFileChange,
@@ -64,7 +65,7 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
     }
 
     const files = Object.values(event.target.files).concat();
-    event.target.value = "";
+    // event.target.value = "";
     setIsError("");
 
     const pickedPhotos = files.filter((file) => {
@@ -162,5 +163,3 @@ const PhotosUpload: React.VFC<PhotosUploadProps> = ({
     </>
   );
 };
-
-export default PhotosUpload;

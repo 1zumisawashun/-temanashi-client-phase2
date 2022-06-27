@@ -1,11 +1,10 @@
 import Avatar from "../ui/Avatar";
-import { useAuthContext } from "../../hooks/useContextClient";
+import { useAuthContext , useCartContext } from "../../hooks/useContextClient";
 import { NavlinkButton, Divider } from "../ui";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SendIcon from "@mui/icons-material/Send";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
-import { useCartContext } from "../../hooks/useContextClient";
 import styled from "@emotion/styled";
 import Badge from "@mui/material/Badge";
 

@@ -1,4 +1,4 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useEffect, useMemo } from "react";
 import { firebase, projectAuth } from "../firebase/config";
 
 interface Action {
@@ -47,15 +47,21 @@ export const AuthContextProvider: React.VFC<
         type: "AUTH_IS_READY",
         payload: user,
       });
+      console.log(user, "========");
       unsub();
     });
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
-      {props.children}
-    </AuthContext.Provider>
+  const foo = useMemo(
+    () => ({
+      ...state,
+      dispatch,
+    }),
+    []
   );
+  const { children } = props;
+
+  return <AuthContext.Provider value={foo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthContextProvider;

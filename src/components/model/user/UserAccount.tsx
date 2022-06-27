@@ -3,7 +3,7 @@ import { projectFunctions, isEmulating } from "../../../firebase/config";
 import { useAuthContext, useToken, useAuth } from "../../../hooks";
 import { useHistory } from "react-router-dom";
 import axios from "../../../utilities/axiosClient";
-import { SwitchForm, BasicButton } from "./../../ui";
+import { SwitchForm, BasicButton } from "../../ui";
 
 type Response = {
   message: string;
@@ -74,8 +74,7 @@ const UserAccount: React.VFC = () => {
     console.log("動いている");
   };
   return (
-    <>
-      <div className="user-container">
+    <div className="user-container">
         <div className="inner">
           <BasicButton onClick={onCallTest}>OnCallTest</BasicButton>
           <BasicButton onClick={onRequestTest}>OnRequestTest</BasicButton>
@@ -91,7 +90,6 @@ const UserAccount: React.VFC = () => {
           <SwitchForm onChange={handleSwitchForm} />
         </div>
       </div>
-    </>
   );
 };
 export default UserAccount;

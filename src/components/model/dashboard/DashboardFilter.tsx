@@ -46,15 +46,15 @@ const FilterButton = styled("button")`
 `;
 
 type DashboardFilterProps = {
-  currentFilter: String;
-  changeFilter: Function;
+  currentFilter: string;
+  changeFilter: (newFilter: string) => void;
 };
 
 const DashboardFilter: React.VFC<DashboardFilterProps> = ({
   currentFilter,
   changeFilter,
 }) => {
-  const handleClick = (newFilter: String) => {
+  const handleClick = (newFilter: string) => {
     changeFilter(newFilter);
   };
   return (

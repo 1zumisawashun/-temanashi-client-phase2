@@ -42,6 +42,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
   const [currentIndex, setCurrentIndex] = useState<number>(db.length - 1);
   const [percent, setPercent] = useState<number>(0);
 
+  // eslint-disable-next-line no-promise-executor-return
   const delay = (t: number) => new Promise((r) => setTimeout(r, t));
   /**
    * レンダリングされても状態を保つ（記録する）
@@ -142,7 +143,7 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
               onCardLeftScreen={() => outOfFrame(index)}
             >
               <div
-                style={{ backgroundImage: 'url(' + character.image + ')' }}
+                style={{ backgroundImage: `url(${character.image})` }}
                 className="card"
               >
                 <h3>{character.name}</h3>

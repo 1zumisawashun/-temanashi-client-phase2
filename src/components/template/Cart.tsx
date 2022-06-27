@@ -35,7 +35,7 @@ const Cart: React.VFC = () => {
       return;
     }
     try {
-      const uid = user.uid;
+      const {uid} = user;
       const seccess_url = `${window.location.origin}/complete`;
       const cancel_url = `${window.location.origin}/error`;
       await productUseCase.buy(uid, line_items, seccess_url, cancel_url);

@@ -1,7 +1,6 @@
-import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
-import { BasicButton } from "../ui";
+import { BasicButton } from "./index";
 
 const ContentWrapper = styled("div")`
   background: #84bcb4;
@@ -44,7 +43,7 @@ const FooterContent = styled("div")`
   text-align: center;
 `;
 
-const ForbiddenError: React.VFC = () => {
+export const ForbiddenError: React.VFC = () => {
   const history = useHistory();
   return (
     <ContentWrapper>
@@ -70,5 +69,3 @@ const ForbiddenError: React.VFC = () => {
     </ContentWrapper>
   );
 };
-
-export default ForbiddenError;

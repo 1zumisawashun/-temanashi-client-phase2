@@ -9,12 +9,12 @@ import { projectFirestore } from "../../firebase/config";
 const Dashboard: React.VFC = () => {
   const { user } = useAuthContext();
   const { addProductWithRandom } = useRandomContext();
-  const [currentFilter, setCurrentFilter] = useState<String>("all");
+  const [currentFilter, setCurrentFilter] = useState<string>("all");
   const [isPending, setIsPending] = useState<boolean>(false);
   const [productItems, setProductItems] = useState<ProductItem[]>([]);
   const [isError, setIsError] = useState<string>("");
 
-  const changeFilter = (newFilter: String) => {
+  const changeFilter = (newFilter: string) => {
     setCurrentFilter(newFilter);
   };
 

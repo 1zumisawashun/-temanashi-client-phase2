@@ -17,14 +17,12 @@ interface AvatarProps {
 }
 
 const Avatar: React.VFC<AvatarProps> = ({ src }) => {
-  return (
-    <>
-      {src && (
-        <AvatarWrapper>
-          <AvatarImage src={src} alt="user avatar" />
-        </AvatarWrapper>
-      )}
-    </>
+  return src ? (
+    <AvatarWrapper>
+      <AvatarImage src={src} alt="user avatar" />
+    </AvatarWrapper>
+  ) : (
+    <AvatarWrapper />
   );
 };
 export default Avatar;

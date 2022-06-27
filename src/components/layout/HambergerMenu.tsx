@@ -19,61 +19,53 @@ const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
     history.push(path);
   };
 
-  const handleClick = () => {
-    console.log("handleClick");
-  };
-
   return (
-    <>
-      <div className="responsive-header">
-        <ul className="head">
-          <li className="logo">
-            <StoreButton onClick={() => history.push("/")} />
-            <span>Temanashi</span>
-          </li>
-          <li className="hamburger-box" onClick={handleClick}>
-            <Hamburger toggled={state} toggle={setState} color="#f4f4f4" />
-          </li>
-        </ul>
-        {state && (
-          <div className="responsive-overlay">
-            <ul className="menu">
-              <li className="hamburger-link">
-                <LinkButton onClick={() => closeHamburger("/")}>
-                  Dashboard
-                </LinkButton>
-              </li>
-              <li className="hamburger-link">
-                <LinkButton
-                  onClick={() => closeHamburger("/create/furniture")}
-                >
-                  New Furniture
-                </LinkButton>
-              </li>
-              <li className="hamburger-link">
-                <LinkButton onClick={() => closeHamburger("/diagnose")}>
-                  Diagnose
-                </LinkButton>
-              </li>
-              <li className="hamburger-link">
-                <LinkButton
-                  onClick={() => closeHamburger(`/users/${user.uid}/cart`)}
-                >
-                  Shopping Cart
-                </LinkButton>
-              </li>
-              <li className="hamburger-link">
-                <LinkButton
-                  onClick={() => closeHamburger(`/users/${user.uid}/favorite`)}
-                >
-                  My Page
-                </LinkButton>
-              </li>
-            </ul>
-          </div>
-        )}
-      </div>
-    </>
+    <div className="responsive-header">
+      <ul className="head">
+        <li className="logo">
+          <StoreButton onClick={() => history.push("/")} />
+          <span>Temanashi</span>
+        </li>
+        <li className="hamburger-box">
+          <Hamburger toggled={state} toggle={setState} color="#f4f4f4" />
+        </li>
+      </ul>
+      {state && (
+        <div className="responsive-overlay">
+          <ul className="menu">
+            <li className="hamburger-link">
+              <LinkButton onClick={() => closeHamburger("/")}>
+                Dashboard
+              </LinkButton>
+            </li>
+            <li className="hamburger-link">
+              <LinkButton onClick={() => closeHamburger("/create/furniture")}>
+                New Furniture
+              </LinkButton>
+            </li>
+            <li className="hamburger-link">
+              <LinkButton onClick={() => closeHamburger("/diagnose")}>
+                Diagnose
+              </LinkButton>
+            </li>
+            <li className="hamburger-link">
+              <LinkButton
+                onClick={() => closeHamburger(`/users/${user.uid}/cart`)}
+              >
+                Shopping Cart
+              </LinkButton>
+            </li>
+            <li className="hamburger-link">
+              <LinkButton
+                onClick={() => closeHamburger(`/users/${user.uid}/favorite`)}
+              >
+                My Page
+              </LinkButton>
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
   );
 };
 

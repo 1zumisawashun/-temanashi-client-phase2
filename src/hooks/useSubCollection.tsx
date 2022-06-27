@@ -16,11 +16,11 @@ export const useSubCollection = <T, U>({
   ] = useState<firebase.firestore.CollectionReference<U> | null>(null);
 
   useEffect(() => {
-    let ref = subCollectionPoint<T, U>(collection, document, subCollection);
+    const ref = subCollectionPoint<T, U>(collection, document, subCollection);
     if (ref !== undefined) {
       const unsubscribe = ref.onSnapshot(
         (snapshot) => {
-          let results: Array<U> = [];
+          const results: Array<U> = [];
           snapshot.docs.forEach((doc) => {
             results.push({ ...doc.data(), id: doc.id });
           });

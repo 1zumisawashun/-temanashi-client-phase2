@@ -2,7 +2,7 @@ import { useReducer, useEffect, useState } from "react";
 import { firebase, timestamp } from "../firebase/config";
 import { documentPoint, collectionPoint } from "../utilities/converterClient";
 
-let initialState = {
+const initialState = {
   document: null,
   isPending: false,
   error: null,

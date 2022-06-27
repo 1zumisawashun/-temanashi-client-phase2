@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useMemo } from "react";
 
 interface Action {
   type: string;
@@ -50,18 +50,20 @@ export const RandomContextProvider: React.VFC<
 > = (props) => {
   const [randomState, dispatch] = useReducer(randomReducer, { products: [] });
   const addProductWithRandom = (products: Array<Product>) => {
-    dispatch({ type: ADD_PRODUCT, products: products });
+    dispatch({ type: ADD_PRODUCT, products });
   };
 
+  const foo = useMemo(
+    () => ({
+      products: randomState.products,
+      addProductWithRandom,
+    }),
+    []
+  );
+  const { children } = props;
+
   return (
-    <RandomContext.Provider
-      value={{
-        products: randomState.products,
-        addProductWithRandom: addProductWithRandom,
-      }}
-    >
-      {props.children}
-    </RandomContext.Provider>
+    <RandomContext.Provider value={foo}>{children}</RandomContext.Provider>
   );
 };
 

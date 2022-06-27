@@ -10,7 +10,7 @@ import { useAuthContext } from "../../hooks/useContextClient";
 import { formatFirebasePath } from "../../utilities";
 import { useSubDocument } from "../../hooks/useSubDocument";
 import { ProductItem } from "../../utilities/stripeClient";
-import { FavoriteButton, NoFaviruteButton } from "../ui";
+import { FavoriteButton, NoFaviruteButton } from ".";
 
 type LikeButtonProp = {
   furniture: ProductItem;

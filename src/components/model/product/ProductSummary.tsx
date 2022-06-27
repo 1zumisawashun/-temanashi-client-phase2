@@ -4,14 +4,14 @@ import {
   useFirestore,
   useDisclosure,
 } from "../../../hooks";
-import { useHistory } from "react-router-dom";
+import { useHistory , useParams } from "react-router-dom";
 import { BasicButton, LikeButton, BasicModal } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
-import { useParams } from "react-router-dom";
 import { formatTaxIncludedPrice } from "../../../utilities";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from "@emotion/styled";
+import { v4 as uuidv4 } from "uuid";
 
 const ButtonWrapper = styled("div")`
   display: flex;
@@ -59,6 +59,8 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
             src={furniture.product.images[0]}
             alt=""
             onClick={() => previewModal.open()}
+            // 追加しないとlintエラーになる
+            aria-hidden="true"
           />
         ) : (
           <img src="https://placehold.jp/200x160.png" alt="" />
@@ -70,7 +72,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
           contents={
             <Carousel>
               {furniture.product.images.map((item) => (
-                <div>
+                <div key={item}>
                   <img src={item} alt="" />
                 </div>
               ))}
@@ -112,7 +114,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
                   id: furniture.product.id,
                   title: furniture.product.name,
                   price: furniture.prices[priceIndex].unit_amount,
-                  priceIndex: priceIndex,
+                  priceIndex,
                   image: furniture.product.images[0],
                 })
               }

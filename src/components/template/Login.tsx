@@ -63,12 +63,13 @@ const Login: React.VFC = () => {
     resolver: yupResolver(getSchema()),
   });
 
-  const onPreSubmit: SubmitHandler<FormData> = () => {
-    onSubmit();
+  const onSubmit = () => {
+    console.log("onsubmit");
+    login(email, password);
   };
 
-  const onSubmit = () => {
-    login(email, password);
+  const onPreSubmit: SubmitHandler<FormData> = () => {
+    onSubmit();
   };
 
   return (
@@ -103,7 +104,7 @@ const Login: React.VFC = () => {
             data-cy="login"
             size="large"
             variant="secondary"
-            fullWidth={true}
+            fullWidth
             onClick={() => {
               handleSubmit(onPreSubmit)();
             }}

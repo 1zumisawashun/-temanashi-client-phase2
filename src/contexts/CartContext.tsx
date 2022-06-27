@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useMemo, useReducer } from "react";
 
 interface Action {
   type: string;
@@ -44,7 +44,7 @@ const addProductToCart = (product: Product, state: State) => {
       ...updatedCart[updatedItemIndex],
     };
     if (updatedItem.quantity) {
-      updatedItem.quantity++;
+      updatedItem.quantity += 1;
       updatedCart[updatedItemIndex] = updatedItem;
     }
   }
@@ -60,7 +60,7 @@ const countUpProduct = (productId: string, state: State) => {
     ...updatedCart[updatedItemIndex],
   };
   if (updatedItem.quantity) {
-    updatedItem.quantity++;
+    updatedItem.quantity += 1;
     updatedCart[updatedItemIndex] = updatedItem;
   }
   return { ...state, cart: updatedCart };
@@ -75,7 +75,7 @@ const countDownProduct = (productId: string, state: State) => {
     ...updatedCart[updatedItemIndex],
   };
   if (updatedItem.quantity) {
-    updatedItem.quantity--;
+    updatedItem.quantity -= 1;
     if (updatedItem.quantity <= 0) {
       updatedCart.splice(updatedItemIndex, 1);
     } else {
@@ -119,31 +119,31 @@ export const CartContextProvider: React.VFC<
 > = (props) => {
   const [cartState, dispatch] = useReducer(cartReducer, { cart: [] });
   const addProductToCart = (product: Product) => {
-    dispatch({ type: ADD_PRODUCT, product: product }); // actionはdispatchの引数を指している;
+    dispatch({ type: ADD_PRODUCT, product }); // actionはdispatchの引数を指している;
   };
   const countUpProduct = (productId: string) => {
-    dispatch({ type: COUNT_UP_PRODUCT, productId: productId });
+    dispatch({ type: COUNT_UP_PRODUCT, productId });
   };
   const countDownProduct = (productId: string) => {
-    dispatch({ type: COUNT_DOWN_PRODUCT, productId: productId });
+    dispatch({ type: COUNT_DOWN_PRODUCT, productId });
   };
   const removeProductFromCart = (productId: string) => {
-    dispatch({ type: REMOVE_PRODUCT, productId: productId });
+    dispatch({ type: REMOVE_PRODUCT, productId });
   };
 
-  return (
-    <CartContext.Provider
-      value={{
-        cart: cartState.cart,
-        addProductToCart: addProductToCart,
-        countUpProduct: countUpProduct,
-        countDownProduct: countDownProduct,
-        removeProductFromCart: removeProductFromCart,
-      }}
-    >
-      {props.children}
-    </CartContext.Provider>
+  const foo = useMemo(
+    () => ({
+      cart: cartState.cart,
+      addProductToCart,
+      countUpProduct,
+      countDownProduct,
+      removeProductFromCart,
+    }),
+    []
   );
+  const { children } = props;
+
+  return <CartContext.Provider value={foo}>{children}</CartContext.Provider>;
 };
 
 export default CartContextProvider;

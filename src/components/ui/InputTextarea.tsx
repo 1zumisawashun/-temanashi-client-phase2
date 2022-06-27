@@ -1,7 +1,6 @@
-import React from "react";
 import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
-import type { UseFormRegisterReturn } from "react-hook-form";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 const StyledTextField = styled(TextField)`
   background-color: white;
@@ -16,7 +15,7 @@ const StyledLabelText = styled("label")`
   margin-bottom: 4px;
 `;
 
-export type InputTextareaProps = {
+export interface InputTextareaProps {
   // NOTE:アクション
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
@@ -37,9 +36,9 @@ export type InputTextareaProps = {
   maxLength?: number;
   maxRows?: number;
   readOnly?: boolean;
-};
+}
 
-export const InputTextarea: React.VFC<InputTextareaProps> = ({
+const InputTextarea: React.VFC<InputTextareaProps> = ({
   onChange,
   onKeyDown,
   onBlur,
@@ -61,15 +60,15 @@ export const InputTextarea: React.VFC<InputTextareaProps> = ({
     <div>
       {label && <StyledLabelText htmlFor={label}>{label}</StyledLabelText>}
       <StyledTextField
+        onChange={onChange}
+        onKeyDown={() => onKeyDown}
+        onBlur={onBlur}
+        onFocus={onFocus}
         error={error}
         helperText={helperText}
         multiline
         rows={4}
-        onChange={onChange}
-        onKeyDown={() => onKeyDown}
         tabIndex={0}
-        onBlur={onBlur}
-        onFocus={onFocus}
         id={label}
         type={type}
         disabled={disabled}
@@ -89,3 +88,5 @@ export const InputTextarea: React.VFC<InputTextareaProps> = ({
     </div>
   );
 };
+
+export default InputTextarea;

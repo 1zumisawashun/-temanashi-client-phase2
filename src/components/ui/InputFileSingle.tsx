@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BasicButton, TextError } from "../ui";
+import { BasicButton, TextError } from ".";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 
 interface InputFileSingleProps {
@@ -17,7 +17,8 @@ const InputFileSingle: React.VFC<InputFileSingleProps> = ({
     let selected;
 
     if (e.target.files !== null) {
-      selected = e.target.files[0];
+      const copiedFile = e.target.files[0];
+      selected = copiedFile;
     }
     if (!selected) {
       setThumbnailError("please select a file");
@@ -39,7 +40,7 @@ const InputFileSingle: React.VFC<InputFileSingleProps> = ({
   return (
     <>
       <BasicButton
-        fullWidth={true}
+        fullWidth
         variant="secondary"
         icon={<UploadFileIcon />}
         size="large"

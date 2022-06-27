@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { projectAuth, projectStorage } from "../firebase/config";
 import { documentPoint } from "../utilities/converterClient";
 import { User } from "../@types/dashboard";
-import { useToken, useAuthContext } from "../hooks";
+import { useToken, useAuthContext } from ".";
 
 // FIXME:関係ないプロパティも追加・更新できてしまう
 type addUser = Omit<User, "id">;
@@ -26,6 +26,7 @@ export const useAuth = () => {
       });
       createJWT({ uid: res.user.uid, name: res.user.displayName! });
       dispatch({ type: "LOGIN", payload: res.user });
+      console.log("これはテスト");
       if (!isCancelled) {
         setIsPending(false);
         setError(null);

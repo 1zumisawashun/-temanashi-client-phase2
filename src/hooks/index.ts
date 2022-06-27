@@ -1,4 +1,3 @@
-export { useAuth } from "./useAuth";
 export { useCollection } from "./useCollection";
 export {
   useAuthContext,
@@ -14,3 +13,5 @@ export { useSubDocument } from "./useSubDocument";
 export { useToken } from "./useToken";
 export { useReactScroll } from "./useReactScroll";
 export { useDragAndDrop } from "./useDragAndDrop";
+/* eslint-disable import/no-cycle */
+export { useAuth } from "./useAuth";

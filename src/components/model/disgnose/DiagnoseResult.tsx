@@ -17,11 +17,11 @@ const DiagnoseResult: React.VFC = () => {
           <div className="colors">
             <div className="item">
               <p className="text">ベースカラー：{recommendation.baseColor}</p>
-              <span className="cercle -white"></span>
+              <span className="cercle -white" />
             </div>
             <div className="item">
               <p className="text">サブカラー：{recommendation.subColor}</p>
-              <span className="cercle -grey"></span>
+              <span className="cercle -grey" />
             </div>
           </div>
           <div className="price">

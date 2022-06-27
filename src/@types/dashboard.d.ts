@@ -1,4 +1,5 @@
 import { firebase } from "../firebase/config";
+/* eslint-disable import/no-cycle*/
 import { ProductItem } from "../utilities/stripeClient";
 
 // NOTE:CreatedByなどAssignedUserで使うためidを付与

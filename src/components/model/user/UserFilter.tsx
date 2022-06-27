@@ -46,8 +46,8 @@ const FilterButton = styled("button")`
 `;
 
 interface UserFilterProps {
-  currentFilter: String;
-  changeFilter: Function;
+  currentFilter: string;
+  changeFilter: (newFilter: string) => void;
 }
 
 const UserFilter: React.VFC<UserFilterProps> = ({

@@ -34,13 +34,13 @@ const FormContainer = styled("form")`
   border-right: 1px solid rgba(255, 255, 255, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: auto;
   padding: 50px;
 `;
 const Title = styled("h1")`
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   letter-spacing: 2px;
   margin-top: 0;
 `;
@@ -76,13 +76,13 @@ const Signup: React.VFC = () => {
     resolver: yupResolver(getSchema()),
   });
 
-  const onPreSubmit: SubmitHandler<FormData> = () => {
-    onSubmit();
-  };
-
   const onSubmit = () => {
     if (thumbnail === null) return;
     signup(email, password, displayName, thumbnail);
+  };
+
+  const onPreSubmit: SubmitHandler<FormData> = () => {
+    onSubmit();
   };
 
   const onInputFileChange = (file: File) => {
@@ -132,7 +132,7 @@ const Signup: React.VFC = () => {
             isDisabled={isPending}
             variant="secondary"
             size="large"
-            fullWidth={true}
+            fullWidth
             onClick={() => {
               handleSubmit(onPreSubmit)();
             }}

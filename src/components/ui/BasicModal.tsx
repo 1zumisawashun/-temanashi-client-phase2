@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
+import { ElementType } from "react";
 // 参考記事:https://mui.com/base/react-modal/
 
 const StyledModal = styled(ModalUnstyled)`
@@ -30,7 +31,7 @@ const ModalInner = styled("div")<{ size: string }>`
   border-radius: 10px;
   max-height: calc(100vh - 64px);
   padding: 30px 0;
-  width: ${({ size }) => (size === 'small' ? '600px' : '800px')};
+  width: ${({ size }) => (size === "small" ? "600px" : "800px")};
 `;
 
 const Title = styled("div")`
@@ -86,7 +87,8 @@ const BasicModal: React.VFC<BasicModalProps> = ({
       aria-describedby="transition-modal-description"
       open={open}
       onClose={handleOpen}
-      BackdropComponent={Backdrop}
+      // 型エラーでbackdrop入れられない
+      // BackdropComponent={Backdrop}
       closeAfterTransition
     >
       <ModalInner size={size}>

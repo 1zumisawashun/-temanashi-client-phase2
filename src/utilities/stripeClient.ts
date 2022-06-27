@@ -6,6 +6,7 @@ import {
   SubscriptionDoc,
 } from "../@types/stripe";
 import { projectFirestore } from "../firebase/config";
+/* eslint-disable import/no-cycle*/
 import { Comment } from "../@types/dashboard";
 
 export type ProductItem = {
@@ -27,6 +28,7 @@ export type line_item = {
   quantity: number;
 };
 
+/* eslint-disable */
 class ProductUseCase {
   /**
    * 参照①
@@ -37,7 +39,7 @@ class ProductUseCase {
       .orderBy("metadata.createdAt", "desc");
 
     const productSnapshot = await productQuery.get();
-    return await Promise.all(
+    return Promise.all(
       productSnapshot.docs.map(async (doc) => {
         const priceRef = doc.ref.collection("prices");
         const priceSnapshot = await priceRef.where("active", "==", true).get();
@@ -59,6 +61,7 @@ class ProductUseCase {
       })
     );
   }
+
   /**
    * 参照②
    */
@@ -89,6 +92,7 @@ class ProductUseCase {
     };
     return productItem;
   }
+
   /**
    * 参照③
    */
@@ -114,6 +118,7 @@ class ProductUseCase {
     };
     return productItem;
   }
+
   /**
    * 参照④
    */
@@ -132,6 +137,7 @@ class ProductUseCase {
     });
     return payments;
   }
+
   /**
    * 更新①
    */
@@ -158,7 +164,7 @@ class ProductUseCase {
       docRef.onSnapshot(async (snap) => {
         const { error, sessionId } = (await snap.data()) as CheckoutSessionDoc;
         if (error) return reject(error);
-        if (!!sessionId) {
+        if (sessionId) {
           const stripe = await loadStripe(
             process.env.REACT_APP_STRIPE_API_KEY || ""
           );
