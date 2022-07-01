@@ -47,21 +47,16 @@ export const AuthContextProvider: React.VFC<
         type: "AUTH_IS_READY",
         payload: user,
       });
-      console.log(user, "========");
       unsub();
     });
   }, []);
 
-  const foo = useMemo(
-    () => ({
-      ...state,
-      dispatch,
-    }),
-    []
-  );
   const { children } = props;
-
-  return <AuthContext.Provider value={foo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ ...state, dispatch }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthContextProvider;
