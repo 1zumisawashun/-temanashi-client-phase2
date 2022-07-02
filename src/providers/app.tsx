@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { ForbiddenError, Loading } from "../components/ui";
 import {
   AuthContextProvider,
@@ -12,11 +12,11 @@ import { CookiesProvider } from "react-cookie";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../utilities/muiThemeClient";
 
-export const ErrorFallback = () => {
+export const ErrorFallback: React.VFC = () => {
   return <ForbiddenError />;
 };
 
-export const SuspenseFallback = () => {
+export const SuspenseFallback: React.VFC = () => {
   return <Loading />;
 };
 
@@ -34,7 +34,7 @@ export const AppProvider: React.VFC<AppProviderProps> = ({ children }) => {
               <RandomContextProvider>
                 <ThemeProvider theme={theme}>
                   <CookiesProvider>
-                    <Router>{children}</Router>
+                    <BrowserRouter>{children}</BrowserRouter>
                   </CookiesProvider>
                 </ThemeProvider>
               </RandomContextProvider>
