@@ -1,6 +1,12 @@
 import ProductTemplate from "../components/template/Product";
 import { useAuthContext } from "../hooks/useContextClient";
-import { Sidebar, OnlineUsers, Header, Footer } from "../components/layout";
+import {
+  Sidebar,
+  OnlineUsers,
+  Header,
+  Footer,
+  Head,
+} from "../components/layout";
 import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
 
@@ -20,6 +26,7 @@ const Product: React.VFC = () => {
 
   return user ? (
     <>
+      <Head title="Product.tsx" />
       <Sidebar />
       <Container>
         <Inner>

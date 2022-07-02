@@ -18,7 +18,7 @@ const AppContainer = styled("div")`
   min-height: 100vh;
 `;
 
-const App = () => {
+export const AppRoute = () => {
   return (
     <AppContainer>
       <BrowserRouter>
@@ -58,5 +58,3 @@ const App = () => {
     </AppContainer>
   );
 };
-
-export default App;

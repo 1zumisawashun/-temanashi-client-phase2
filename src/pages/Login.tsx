@@ -2,6 +2,7 @@ import LoginTemplate from "../components/template/Login";
 import { useAuthContext } from "../hooks/useContextClient";
 import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
+import { Head } from "../components/layout";
 
 const Container = styled("div")`
   flex-grow: 1;
@@ -18,9 +19,12 @@ const Login: React.VFC = () => {
   return user ? (
     <Redirect to="/" />
   ) : (
-    <Container>
-      <LoginTemplate />
-    </Container>
+    <>
+      <Head title="Login.tsx" />
+      <Container>
+        <LoginTemplate />
+      </Container>
+    </>
   );
 };
 

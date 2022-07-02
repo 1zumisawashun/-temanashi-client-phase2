@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { Head } from "../components/layout";
 
 const Complete: React.VFC = () => {
   return (
-    <div className="error-container">
+    <>
+      <Head title="StripeComplete.tsx" />
+      <div className="error-container">
         <div className="error-block">
           <div className="main">
             <div className="bubble" />
@@ -19,6 +22,7 @@ const Complete: React.VFC = () => {
           </div>
         </div>
       </div>
+    </>
   );
 };
 export default Complete;
