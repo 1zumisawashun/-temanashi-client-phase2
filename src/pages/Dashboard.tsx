@@ -21,7 +21,7 @@ const Inner = styled("div")`
   padding: 0 50px 50px;
 `;
 
-const Dashboard: React.VFC = () => {
+export const Dashboard: React.VFC = () => {
   const { user } = useAuthContext();
 
   return user ? (
@@ -41,5 +41,3 @@ const Dashboard: React.VFC = () => {
     <Redirect to="/login" />
   );
 };
-
-export default Dashboard;

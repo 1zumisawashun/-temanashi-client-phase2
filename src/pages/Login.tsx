@@ -12,7 +12,7 @@ const Container = styled("div")`
   }
 `;
 
-const Login: React.VFC = () => {
+export const Login: React.VFC = () => {
   const { user } = useAuthContext();
   console.log(user, "login user");
   // NOTE:リロードするとユーザ取得が遅れてログイン画面に飛ばされる＞ログインユーザだからトップページに繊維する
@@ -27,5 +27,3 @@ const Login: React.VFC = () => {
     </>
   );
 };
-
-export default Login;

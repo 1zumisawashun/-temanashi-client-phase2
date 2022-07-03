@@ -21,7 +21,7 @@ const Inner = styled("div")`
   padding: 0 50px 50px;
 `;
 
-const Cart: React.VFC = () => {
+export const Cart: React.VFC = () => {
   const { user } = useAuthContext();
 
   return user ? (
@@ -41,5 +41,3 @@ const Cart: React.VFC = () => {
     <Redirect to="/login" />
   );
 };
-
-export default Cart;

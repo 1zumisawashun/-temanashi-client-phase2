@@ -1,7 +1,7 @@
 import { ForbiddenError } from "../components/ui";
 import { Head } from "../components/layout";
 
-const Error: React.VFC = () => {
+export const Error: React.VFC = () => {
   return (
     <>
       <Head title="StripeError.tsx" />
@@ -9,4 +9,3 @@ const Error: React.VFC = () => {
     </>
   );
 };
-export default Error;

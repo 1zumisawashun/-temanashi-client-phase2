@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Head } from "../components/layout";
 
-const Complete: React.VFC = () => {
+export const Complete: React.VFC = () => {
   return (
     <>
       <Head title="StripeComplete.tsx" />
@@ -25,4 +25,3 @@ const Complete: React.VFC = () => {
     </>
   );
 };
-export default Complete;

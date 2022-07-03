@@ -12,7 +12,7 @@ const Container = styled("div")`
   }
 `;
 
-const Signup: React.VFC = () => {
+export const Signup: React.VFC = () => {
   const { user } = useAuthContext();
 
   return user ? (
@@ -26,5 +26,3 @@ const Signup: React.VFC = () => {
     </>
   );
 };
-
-export default Signup;
