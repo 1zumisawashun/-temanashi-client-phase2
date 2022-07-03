@@ -26,7 +26,7 @@ type AppProviderProps = {
 
 export const AppProvider: React.VFC<AppProviderProps> = ({ children }) => {
   return (
-    <React.Suspense fallback={SuspenseFallback}>
+    <React.Suspense fallback={<div>loading...</div>}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <HelmetProvider>
           <CartContextProvider>

@@ -5,9 +5,11 @@ import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import DashboardList from "../model/dashboard/DashboardList";
 import { Loading } from "../ui";
 import { projectFirestore } from "../../firebase/config";
+import { useErrorHandler } from "react-error-boundary";
 
 const Dashboard: React.VFC = () => {
   const { user } = useAuthContext();
+  const handleError = useErrorHandler();
   const { addProductWithRandom } = useRandomContext();
   const [currentFilter, setCurrentFilter] = useState<string>("all");
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -15,6 +17,7 @@ const Dashboard: React.VFC = () => {
   const [isError, setIsError] = useState<string>("");
 
   const changeFilter = (newFilter: string) => {
+    handleError("test error");
     setCurrentFilter(newFilter);
   };
 
