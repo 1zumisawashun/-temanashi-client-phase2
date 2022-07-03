@@ -31,6 +31,7 @@
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "react/no-unescaped-entities": 0,
     "react/jsx-no-constructed-context-values": 0,
+    "@typescript-eslint/no-throw-literal": "off",
     // 追加終わり
     "no-control-regex": "off",
     "no-nested-ternary": "off",

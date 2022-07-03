@@ -6,6 +6,7 @@ import DashboardList from "../model/dashboard/DashboardList";
 import { Loading } from "../ui";
 import { projectFirestore } from "../../firebase/config";
 import { useErrorHandler } from "react-error-boundary";
+import { useData } from "../../hooks/useData";
 
 const Dashboard: React.VFC = () => {
   const { user } = useAuthContext();
@@ -15,6 +16,9 @@ const Dashboard: React.VFC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
   const [productItems, setProductItems] = useState<ProductItem[]>([]);
   const [isError, setIsError] = useState<string>("");
+  const data = useData<ProductItem[]>("DataLoader1", () =>
+    productUseCase.fetchAll()
+  );
 
   const changeFilter = (newFilter: string) => {
     handleError("test error");
@@ -88,7 +92,7 @@ const Dashboard: React.VFC = () => {
         />
       )}
       {filteredProductItems && (
-        <DashboardList productItems={filteredProductItems} />
+        <DashboardList productItems={data} />
       )}
       {isError.length !== 0 && <p>{isError}</p>}
     </div>

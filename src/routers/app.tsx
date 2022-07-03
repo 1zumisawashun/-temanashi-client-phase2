@@ -1,7 +1,5 @@
-import * as React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { lazyImport } from "../utilities";
-import { Loading } from "../components/ui";
 import styled from "@emotion/styled";
 
 const { Cart } = lazyImport(() => import("../pages"), "Cart");
@@ -23,43 +21,41 @@ const AppContainer = styled("div")`
 export const AppRoute: React.VFC = () => {
   return (
     <AppContainer>
-      <React.Suspense fallback={<Loading />}>
-        <Switch>
-          <Route path="/error">
-            <Error />
-          </Route>
-          <Route path="/complete">
-            <Complete />
-          </Route>
-          <Route exact path="/">
-            <Dashboard />
-          </Route>
-          <Route exact path="/diagnose">
-            <Diagnose />
-          </Route>
-          <Route path="/create/product">
-            <Create />
-          </Route>
-          <Route path="/products/:id">
-            <Product />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/users/:id">
-            <User />
-          </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
-          <Route path="*">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      </React.Suspense>
+      <Switch>
+        <Route path="/error">
+          <Error />
+        </Route>
+        <Route path="/complete">
+          <Complete />
+        </Route>
+        <Route exact path="/">
+          <Dashboard />
+        </Route>
+        <Route exact path="/diagnose">
+          <Diagnose />
+        </Route>
+        <Route path="/create/product">
+          <Create />
+        </Route>
+        <Route path="/products/:id">
+          <Product />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
+        <Route path="/users/:id">
+          <User />
+        </Route>
+        <Route path="/cart">
+          <Cart />
+        </Route>
+        <Route path="*">
+          <Redirect to="/" />
+        </Route>
+      </Switch>
     </AppContainer>
   );
 };
