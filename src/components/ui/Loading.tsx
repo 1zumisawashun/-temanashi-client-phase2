@@ -32,17 +32,16 @@ const Inner = styled("div")`
   transform: translate(-50%, -50%);
 `;
 
-const Loading: React.VFC = () => {
+type LoadingProps = {
+  color?: string;
+};
+
+const Loading: React.VFC<LoadingProps> = ({ color = "#84bcb4" }) => {
   return (
     <LoadingContainer>
       <Backdrop>
         <Inner>
-          <Loader
-            type="RevolvingDot"
-            color="#84bcb4"
-            height={100}
-            width={100}
-          />
+          <Loader type="RevolvingDot" color={color} height={100} width={100} />
         </Inner>
       </Backdrop>
     </LoadingContainer>

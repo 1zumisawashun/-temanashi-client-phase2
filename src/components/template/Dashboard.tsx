@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import DashboardFilter from "../model/dashboard/DashboardFilter";
 import { useAuthContext, useRandomContext } from "../../hooks/useContextClient";
-import { productUseCase, ProductItem } from "../../utilities/stripeClient";
+import {
+  productUseCase,
+  ProductItem,
+  StoreProductItem,
+} from "../../utilities/stripeClient";
 import DashboardList from "../model/dashboard/DashboardList";
-import { Loading } from "../ui";
-import { projectFirestore } from "../../firebase/config";
 import { useErrorHandler } from "react-error-boundary";
 import { useData } from "../../hooks/useData";
 
@@ -13,52 +15,29 @@ const Dashboard: React.VFC = () => {
   const handleError = useErrorHandler();
   const { addProductWithRandom } = useRandomContext();
   const [currentFilter, setCurrentFilter] = useState<string>("all");
-  const [isPending, setIsPending] = useState<boolean>(false);
-  const [productItems, setProductItems] = useState<ProductItem[]>([]);
-  const [isError, setIsError] = useState<string>("");
-  const data = useData<ProductItem[]>("DataLoader1", () =>
+
+  const productItems = useData<ProductItem[]>("productItems", () =>
     productUseCase.fetchAll()
   );
 
+  const storeProductItems = useData<StoreProductItem[]>(
+    "storeProductItems",
+    () => productUseCase.fetchAllForStore()
+  );
+
+  useEffect(() => {
+    addProductWithRandom(storeProductItems);
+  }, []);
+
   const changeFilter = (newFilter: string) => {
-    handleError("test error");
+    if (!newFilter) handleError("we cant find new filter");
     setCurrentFilter(newFilter);
   };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        setIsError("");
-        setIsPending(true);
-        const productItems = await productUseCase.fetchAll();
-        setProductItems(productItems);
-        setIsPending(false);
-      } catch (error) {
-        setIsError("fetchに失敗しました。");
-        setIsPending(false);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const productsRef = projectFirestore.collection("products");
-      const querySnapshot = await productsRef.get();
-      const results = querySnapshot.docs.map((doc, index) => {
-        const { name, images } = doc.data();
-        return { name, image: images[0], id: doc.id, random: index };
-      });
-      addProductWithRandom(results);
-    })();
-    // NOTE:依存配列にaddProductWithRandomを突っ込んで請求100円きた泣
-    // eslint-disable-next-line
-  }, []);
 
   if (!user) throw new Error("we cant find your account");
 
   const filteredProductItems = productItems
-    ? // eslint-disable-next-line
-      productItems.filter((productItem: ProductItem) => {
+    ? productItems.filter((productItem: ProductItem) => {
         switch (currentFilter) {
           case "all":
             return true;
@@ -84,7 +63,6 @@ const Dashboard: React.VFC = () => {
 
   return (
     <div className="common-container">
-      {isPending && <Loading />}
       {filteredProductItems && (
         <DashboardFilter
           currentFilter={currentFilter}
@@ -92,9 +70,8 @@ const Dashboard: React.VFC = () => {
         />
       )}
       {filteredProductItems && (
-        <DashboardList productItems={data} />
+        <DashboardList productItems={filteredProductItems} />
       )}
-      {isError.length !== 0 && <p>{isError}</p>}
     </div>
   );
 };

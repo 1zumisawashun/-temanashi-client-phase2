@@ -28,6 +28,13 @@ export type line_item = {
   quantity: number;
 };
 
+export type StoreProductItem = {
+  name: string;
+  image: string;
+  id: string;
+  random: number;
+};
+
 /* eslint-disable */
 class ProductUseCase {
   /**
@@ -136,6 +143,19 @@ class ProductUseCase {
       };
     });
     return payments;
+  }
+
+  /**
+   * 参照⑤
+   */
+  async fetchAllForStore(): Promise<Array<StoreProductItem>> {
+    const productsRef = projectFirestore.collection("products");
+    const querySnapshot = await productsRef.get();
+    const results = querySnapshot.docs.map((doc, index) => {
+      const { name, images } = doc.data();
+      return { name, image: images[0], id: doc.id, random: index };
+    });
+    return results;
   }
 
   /**

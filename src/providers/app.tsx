@@ -16,17 +16,13 @@ export const ErrorFallback: React.VFC = () => {
   return <ForbiddenError />;
 };
 
-export const SuspenseFallback: React.VFC = () => {
-  return <Loading />;
-};
-
 type AppProviderProps = {
   children: React.ReactNode;
 };
 
 export const AppProvider: React.VFC<AppProviderProps> = ({ children }) => {
   return (
-    <React.Suspense fallback={<div>loading...loading...loading...</div>}>
+    <React.Suspense fallback={<Loading color="blue" />}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <HelmetProvider>
           <CartContextProvider>
