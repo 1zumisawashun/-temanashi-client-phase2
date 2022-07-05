@@ -1,5 +1,5 @@
 import Avatar from "../ui/Avatar";
-import { useAuthContext , useCartContext } from "../../hooks/useContextClient";
+import { useAuthContext, useCartContext } from "../../hooks/useContextClient";
 import { NavlinkButton, Divider } from "../ui";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SendIcon from "@mui/icons-material/Send";
@@ -23,7 +23,6 @@ const SidebarInner = styled("div")`
 const SidebarUser = styled("div")`
   letter-spacing: 1px;
   padding: 40px 30px;
-  /* font-weight: bold; */
   text-align: center;
 `;
 const SidebarUserInner = styled("div")`
@@ -47,7 +46,6 @@ const SidebarLinkItem = styled("li")`
   }
 `;
 
-
 const Sidebar: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
@@ -59,7 +57,7 @@ const Sidebar: React.VFC = () => {
         <SidebarUser>
           <NavlinkButton path={`/users/${user.uid}`}>
             <SidebarUserInner>
-              {user.photoURL && <Avatar src={user.photoURL} />}
+              {user.photoURL && <Avatar src={user.photoURL} size="medium" />}
               <p>hey {user.displayName}</p>
             </SidebarUserInner>
           </NavlinkButton>
