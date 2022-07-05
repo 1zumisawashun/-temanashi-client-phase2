@@ -8,10 +8,6 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
-        "source": "/public/**",
-        "destination": "/public.html"
-      },
-      {
         "source": "**",
         "destination": "/index.html"
       }
@@ -44,6 +40,7 @@
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\" install",
       "npm --prefix \"$RESOURCE_DIR\" run build"
-    ]
+    ],
+    "source": "functions"
   }
 }
