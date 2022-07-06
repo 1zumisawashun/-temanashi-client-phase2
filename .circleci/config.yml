@@ -3,7 +3,7 @@ jobs:
   #-----------------------
   # jobs:prod
   #-----------------------
-  build_deploy_prod:
+  prod_app:
     working_directory: ~/sample/prod
     docker:
       - image: circleci/node:12-browsers
@@ -29,7 +29,7 @@ jobs:
     #-----------------------
     # jobs:dev
     #-----------------------
-    # build_deploy_dev:
+    #dev_app:
     # working_directory: ~/sample/dev
     # docker:
     #   - image: circleci/node:12-browsers
@@ -59,7 +59,7 @@ workflows:
       #------------------------
       # master branch to prod
       #------------------------
-      - build_deploy_prod:
+      - prod_app:
           filters:
             branches:
               only: master
@@ -67,7 +67,7 @@ workflows:
       #------------------------
       # develop branch to dev
       #------------------------
-      - build_deploy_dev:
+      - dev_app:
           filters:
             branches:
               only: develop
