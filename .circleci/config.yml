@@ -26,31 +26,31 @@ jobs:
           command: |
             ./node_modules/.bin/firebase deploy --project "$REACT_APP_PROJECT_ID" --token "$FIREBASE_TOKEN"
 
-   #-----------------------
-   # jobs:dev
-   #-----------------------
-    build_deploy_dev:
-    working_directory: ~/sample/dev
-    docker:
-      - image: circleci/node:12-browsers
-    steps:
-      - checkout
-      - run:
-          name: 【開発環境】npmパッケージをインストールする
-          command: |
-            npm ci
-      - run:
-          name: 【開発環境】ビルドを実行する
-          command: |
-            npm run build
-      - run:
-          name: 【開発環境】firebase-toolsのインストール
-          command: |
-            npm install --dev firebase-tools
-      - run:
-          name: 【開発環境】firebase hostingへデプロイする
-          command: |
-            ./node_modules/.bin/firebase deploy --project "$REACT_APP_PROJECT_ID_DEVELOPMENT" --token "$FIREBASE_TOKEN_DEVELOPMENT"
+    #-----------------------
+    # jobs:dev
+    #-----------------------
+    # build_deploy_dev:
+    # working_directory: ~/sample/dev
+    # docker:
+    #   - image: circleci/node:12-browsers
+    # steps:
+    #   - checkout
+    #   - run:
+    #       name: 【開発環境】npmパッケージをインストールする
+    #       command: |
+    #         npm ci
+    #   - run:
+    #       name: 【開発環境】ビルドを実行する
+    #       command: |
+    #         npm run build
+    #   - run:
+    #       name: 【開発環境】firebase-toolsのインストール
+    #       command: |
+    #         npm install --dev firebase-tools
+    #   - run:
+    #       name: 【開発環境】firebase hostingへデプロイする
+    #       command: |
+    #         ./node_modules/.bin/firebase deploy --project "$REACT_APP_PROJECT_ID_DEVELOPMENT" --token "$FIREBASE_TOKEN_DEVELOPMENT"
 
 workflows:
   version: 2.1
