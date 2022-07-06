@@ -54,9 +54,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run clean && react-scripts build",
-    "build:dev": "npm run clean && env-cmd -f .env.devlopment react-scripts build",
-    "build:stg": "npm run clean && env-cmd -f .env.staging react-scripts build",
-    "build:prod": "npm run clean && env-cmd -f .env.production react-scripts build",
+    "build:dev": "npm run clean && env-cmd -f .env.devlopment.local react-scripts build",
+    "build:stg": "npm run clean && env-cmd -f .env.staging.local react-scripts build",
+    "build:prod": "npm run clean && env-cmd -f .env.production.local react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
