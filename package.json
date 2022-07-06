@@ -1,7 +1,6 @@
 {
   "name": "temanashi-client",
   "version": "0.1.0",
-  "homepage": ".",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -27,6 +26,7 @@
     "blueimp-load-image": "^5.16.0",
     "csstype": "^3.0.10",
     "date-fns": "^2.27.0",
+    "env-cmd": "^10.1.0",
     "firebase": "8.5",
     "hamburger-react": "^2.4.1",
     "node-gyp": "^9.0.0",
@@ -54,9 +54,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run clean && react-scripts build",
+    "build:dev": "npm run clean && env-cmd -f .env.devlopment react-scripts build",
+    "build:prod": "npm run clean && env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
+    "deploy:dev": "npm run build:dev && firebase deploy --project=temanashi-phase2-development",
+    "deploy:prod": "npm run build:prod && firebase deploy --project=temanashi-phase2",
     "emulators": "cd functions && npm run emulators",
     "clean": "rimraf build",
     "cy:open": "cypress open",
