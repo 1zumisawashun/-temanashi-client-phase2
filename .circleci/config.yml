@@ -33,7 +33,7 @@ jobs:
       - run:
           name: firebase hostingへデプロイする
           command: |
-            ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+            ./node_modules/.bin/firebase deploy --project "$REACT_APP_PROJECT_ID" --token "$FIREBASE_TOKEN"
 workflows:
   version: 2.1
   build-deploy:

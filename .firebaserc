@@ -1,6 +1,5 @@
 {
   "projects": {
     "default": "temanashi-phase2"
-    "development": "temanashi-phase2-development"
   }
 }
