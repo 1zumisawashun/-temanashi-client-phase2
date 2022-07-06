@@ -42,7 +42,7 @@ jobs:
       - run:
           name: 【開発環境】ビルドを実行する
           command: |
-            npm run build
+            npm run build:stg
       - run:
           name: 【開発環境】firebase-toolsのインストール
           command: |
