@@ -4,6 +4,13 @@ import { useAuthContext, useToken, useAuth } from "../../../hooks";
 import { useHistory } from "react-router-dom";
 import axios from "../../../utilities/axiosClient";
 import { SwitchForm, BasicButton } from "../../ui";
+import styled from "@emotion/styled";
+
+const UserContaienr = styled("div")`
+  width: 100%;
+  min-height: 300px;
+  background: #f4f4f4;
+`;
 
 type Response = {
   message: string;
@@ -74,22 +81,20 @@ const UserAccount: React.VFC = () => {
     console.log("動いている");
   };
   return (
-    <div className="user-container">
-        <div className="inner">
-          <BasicButton onClick={onCallTest}>OnCallTest</BasicButton>
-          <BasicButton onClick={onRequestTest}>OnRequestTest</BasicButton>
-          <BasicButton onClick={getAxiosTest}>GetAxiosTest</BasicButton>
-          <BasicButton onClick={createJWT}>CreateJWT</BasicButton>
-          <BasicButton onClick={verifyJWT}>verifyJWT</BasicButton>
-          <BasicButton onClick={Emulating} isDisabled={isEmulating}>
-            emulatingTest
-          </BasicButton>
-          <BasicButton onClick={handleSubmit} isDisabled={isPending}>
-            Logout
-          </BasicButton>
-          <SwitchForm onChange={handleSwitchForm} />
-        </div>
-      </div>
+    <UserContaienr>
+      <BasicButton onClick={onCallTest}>OnCallTest</BasicButton>
+      <BasicButton onClick={onRequestTest}>OnRequestTest</BasicButton>
+      <BasicButton onClick={getAxiosTest}>GetAxiosTest</BasicButton>
+      <BasicButton onClick={createJWT}>CreateJWT</BasicButton>
+      <BasicButton onClick={verifyJWT}>verifyJWT</BasicButton>
+      <BasicButton onClick={Emulating} isDisabled={isEmulating}>
+        emulatingTest
+      </BasicButton>
+      <BasicButton onClick={handleSubmit} isDisabled={isPending}>
+        Logout
+      </BasicButton>
+      <SwitchForm onChange={handleSwitchForm} />
+    </UserContaienr>
   );
 };
 export default UserAccount;

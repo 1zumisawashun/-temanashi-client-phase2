@@ -1,20 +1,25 @@
 import PaymentList from "./UserPaymentList";
 import { NotFoundItem } from "../../ui";
+import styled from "@emotion/styled";
+
+const UserContaienr = styled("div")`
+  width: 100%;
+  min-height: 300px;
+  background: #f4f4f4;
+`;
 interface UserHistoryProps {
   payments: Array<any>;
 }
 
 const UserHistory: React.VFC<UserHistoryProps> = ({ payments }) => {
   return (
-    <div className="user-container">
-      <div className="inner">
-        {payments.length !== 0 ? (
-          <PaymentList paymentItems={payments} />
-        ) : (
-          <NotFoundItem />
-        )}
-      </div>
-    </div>
+    <UserContaienr>
+      {payments.length !== 0 ? (
+        <PaymentList paymentItems={payments} />
+      ) : (
+        <NotFoundItem />
+      )}
+    </UserContaienr>
   );
 };
 export default UserHistory;
