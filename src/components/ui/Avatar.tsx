@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 const AvatarWrapper = styled("div")<{ size: string }>`
   border-radius: 50%;
   display: inline-block;
-  margin: 10px;
+  margin: 0 10px;
   height: ${(p) => {
     if (p.size === "small") return 40;
     if (p.size === "medium") return 50;
