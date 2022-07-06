@@ -67,7 +67,7 @@ workflows:
       #------------------------
       # develop branch to dev
       #------------------------
-      - dev_app:
-          filters:
-            branches:
-              only: develop
+      # - dev_app:
+      #     filters:
+      #       branches:
+      #         only: develop
