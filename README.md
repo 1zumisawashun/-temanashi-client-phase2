@@ -12,7 +12,7 @@
 
 # ■ phase-2
 
-### phase-2で採用している技術スタック
+### phase-2 で採用している技術スタック
 
 ```
 言語： TypeScript
@@ -26,6 +26,89 @@ APIサーバー： Cloud Functions, Express
 ストレージ： Cloud Storage
 決済： Firebase Stripe Extention
 E2Eテスト： Cypress
+```
+
+### phase-2 で採用しているアーキテクチャ
+
+```
+└── src/
+    ├── assets/
+    │   │
+    │   ├── icon/...
+    │   │   ├── icon_not_found/
+    │   │   └── icon_favorite/
+    │   │
+    │   ├── image/...
+    │   │   ├── funituire1/
+    │   │   └── funituire2/
+    │   │
+    │   └── sass/...
+    │       ├── components/
+    │       └── elements/
+    │
+    ├── components/...
+    │   │
+    │   ├── layouts/...
+    │   │   ├── Footer/
+    │   │   ├── HambergerMenu/
+    │   │   └── Head/
+    │   │
+    │   ├── models/...
+    │   │   │
+    │   │   ├── Cart/...
+    │   │   │   ├── CartAgreemant/
+    │   │   │   ├── CartCounter/
+    │   │   │   └── CartList/
+    │   │   │
+    │   │   ├── Dashboard/...
+    │   │   │   ├── DashboardFilter/
+    │   │   │   └── DashboardList/
+    │   │   │
+    │   │   └── Product/...
+    │   │       ├── ProductComment/
+    │   │       └── ProductSummary/
+    │   │
+    │   ├── templates/...
+    │   │   ├── Cart/
+    │   │   ├── Dashboard/
+    │   │   └── Product/
+    │   │
+    │   └── uis/...
+    │       ├── Avatar/
+    │       ├── BasicButton/
+    │       └── BasicModal/
+    │
+    ├── functionals/
+    │   │
+    │   ├── contexts/...
+    │   │   ├── AuthContext/
+    │   │   ├── CartContext/
+    │   │   └── RandomContext/
+    │   │
+    │   ├── hooks/...
+    │   │   ├── useAuth/
+    │   │   ├── useCollection/
+    │   │   └── useContextClient/
+    │   │
+    │   └── utilities/...
+    │       ├── axiosClient/
+    │       ├── constant/
+    │       └── converterClient/
+    │
+    ├── pages/...
+    │   ├── Cart/
+    │   ├── Dashboard/
+    │   └── Product/
+    │
+    ├── firebase/...
+    │   └── config/
+    │
+    ├── providers/...
+    │   └── app/
+    │
+    ├── routers/...
+    │   └── app/
+    └── ...
 ```
 
 # Available Scripts
