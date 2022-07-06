@@ -25,6 +25,7 @@ jobs:
           name: 【本番環境】firebase hostingへデプロイする
           command: |
             ./node_modules/.bin/firebase deploy --project "$REACT_APP_PROJECT_ID" --token "$FIREBASE_TOKEN"
+
    #-----------------------
    # jobs:dev
    #-----------------------
@@ -62,6 +63,7 @@ workflows:
           filters:
             branches:
               only: master
+
       #------------------------
       # develop branch to dev
       #------------------------
