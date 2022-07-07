@@ -11,8 +11,8 @@ export const Head: React.VFC<HeadProps> = ({
 }) => {
   return (
     <Helmet
-      title={title ? `${title} | Temanashi` : undefined}
-      defaultTitle="Temanashi"
+      title={title ? `${title} | temanashi` : undefined}
+      defaultTitle="temanashi"
     >
       <meta name="description" content={description} />
     </Helmet>
