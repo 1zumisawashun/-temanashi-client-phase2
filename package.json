@@ -55,7 +55,7 @@
     "start": "react-scripts start",
     "start:stg": "dotenv -e .env.staging react-scripts start",
     "build": "npm run clean && react-scripts build",
-    "build:stg": "npm run clean && env-cmd -f .env.staging react-scripts build",
+    "build:stg": "npm run clean && env-cmd -f ./.env.staging react-scripts build",
     "deploy": "npm run build && firebase deploy",
     "deploy:stg": "npm run build:stg && firebase deploy --project=temanashi-phase2-development",
     "test": "react-scripts test",
