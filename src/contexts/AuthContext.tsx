@@ -42,7 +42,6 @@ export const AuthContextProvider: React.VFC<
 
   useEffect(() => {
     const unsub = projectAuth.onAuthStateChanged((user) => {
-      if (!user) return;
       dispatch({
         type: "AUTH_IS_READY",
         payload: user,

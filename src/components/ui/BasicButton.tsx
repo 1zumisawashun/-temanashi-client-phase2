@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Button from "@mui/material/Button";
 import { SvgIconProps } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface BasicButtonProps {
   children: ReactNode;
@@ -17,6 +18,7 @@ interface BasicButtonProps {
   type?: "button" | "submit" | "reset";
   styledName?: string;
   isDisabled?: boolean;
+  isLoading?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   fullWidth?: boolean;
 }
@@ -29,6 +31,7 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
   variant = "primary",
   size = "medium",
   isDisabled,
+  isLoading,
   onClick,
   fullWidth = false,
 }) => {
@@ -48,6 +51,7 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
         marginBottom: () => (size === "medium" || fullWidth ? "10px" : "0px"),
       }}
     >
+      {isLoading && <CircularProgress color="primary" />}
       {children}
     </Button>
   );
