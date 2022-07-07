@@ -25,65 +25,61 @@ interface SwitchFormProps {
   value?: string;
 }
 
-const CustomSwitch = muiStyled(Switch)(
-  // (props: { on: string; off: string }) => ({
-  //   width: "72px",
-  //   height: "28px",
-  //   padding: "0px",
-  //   "& .MuiSwitch-switchBase": {
-  //     color: "#818181",
-  //     padding: "2px",
-  //     "&.Mui-checked": {
-  //       color: "#005BAC !important",
-  //       transform: "translateX(44px) !important",
-  //     },
-  //     "&.Mui-checked + .MuiSwitch-track": {
-  //       "&:after": {
-  //         color: "white",
-  //         content: `'${props.on}'`,
-  //         fontSize: "12px",
-  //         left: "11px",
-  //       },
-  //       "&:before": {
-  //         display: "none",
-  //       },
-  //     },
-  //     "&$checked": {
-  //       "& + $track": {
-  //         backgroundColor: "#005BAC",
-  //       },
-  //     },
-  //   },
-  //   "& .MuiSwitch-track": {
-  //     alignItems: "center",
-  //     backgroundColor: "#B5B5B5",
-  //     borderRadius: "20px",
-  //     display: "flex",
-  //     opacity: "1 !important",
-  //     "&:after, &:before": {
-  //       fontWeight: "bold",
-  //       position: "absolute",
-  //     },
-  //     "&:before": {
-  //       color: "black",
-  //       content: `'${props.off}'`,
-  //       fontSize: "12px",
-  //       right: "8px",
-  //     },
-  //   },
-  //   "& .MuiSwitch-thumb": {
-  //     color: "white",
-  //     height: "22px",
-  //     margin: "1px",
-  //     width: "22px",
-  //   },
-  // })
-);
+const CustomSwitch = muiStyled(Switch)(() => ({
+  width: "72px",
+  height: "28px",
+  padding: "0px",
+  "& .MuiSwitch-switchBase": {
+    color: "#818181",
+    padding: "2px",
+    "&.Mui-checked": {
+      color: "#005BAC !important",
+      transform: "translateX(44px) !important",
+    },
+    "&.Mui-checked + .MuiSwitch-track": {
+      "&:after": {
+        color: "white",
+        content: `''`,
+        fontSize: "12px",
+        left: "11px",
+      },
+      "&:before": {
+        display: "none",
+      },
+    },
+    "&$checked": {
+      "& + $track": {
+        backgroundColor: "#005BAC",
+      },
+    },
+  },
+  "& .MuiSwitch-track": {
+    alignItems: "center",
+    backgroundColor: "#B5B5B5",
+    borderRadius: "20px",
+    display: "flex",
+    opacity: "1 !important",
+    "&:after, &:before": {
+      fontWeight: "bold",
+      position: "absolute",
+    },
+    "&:before": {
+      color: "black",
+      content: `''`,
+      fontSize: "12px",
+      right: "8px",
+    },
+  },
+  "& .MuiSwitch-thumb": {
+    color: "white",
+    height: "22px",
+    margin: "1px",
+    width: "22px",
+  },
+}));
 
 export const SwitchForm: React.VFC<SwitchFormProps> = ({
   label,
-  offLabel,
-  onLabel,
   checked,
   onChange,
   disabled = false,
@@ -97,8 +93,6 @@ export const SwitchForm: React.VFC<SwitchFormProps> = ({
           <SwitchContainer>
             <CustomSwitch
               onChange={onChange}
-              // on={onLabel}
-              // off={offLabel}
               checked={checked}
               disabled={disabled}
               value={value}

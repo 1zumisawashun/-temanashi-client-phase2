@@ -42,7 +42,6 @@ export const AuthContextProvider: React.VFC<
 
   useEffect(() => {
     const unsub = projectAuth.onAuthStateChanged((user) => {
-      if (!user) return;
       dispatch({
         type: "AUTH_IS_READY",
         payload: user,
@@ -51,11 +50,17 @@ export const AuthContextProvider: React.VFC<
     });
   }, []);
 
+  const currentUser = useMemo(
+    () => ({
+      ...state,
+      dispatch,
+    }),
+    [state]
+  );
+
   const { children } = props;
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>
   );
 };
 

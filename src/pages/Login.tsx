@@ -1,5 +1,5 @@
 import LoginTemplate from "../components/template/Login";
-import { useAuthContext } from "../hooks/useContextClient";
+import { useAuthContext } from "../hooks";
 import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
 import { Head } from "../components/layout";
@@ -14,8 +14,7 @@ const Container = styled("div")`
 
 export const Login: React.VFC = () => {
   const { user } = useAuthContext();
-  console.log(user, "login user");
-  // NOTE:リロードするとユーザ取得が遅れてログイン画面に飛ばされる＞ログインユーザだからトップページに繊維する
+
   return user ? (
     <Redirect to="/" />
   ) : (

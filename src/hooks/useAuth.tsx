@@ -26,7 +26,6 @@ export const useAuth = () => {
       });
       createJWT({ uid: res.user.uid, name: res.user.displayName! });
       dispatch({ type: "LOGIN", payload: res.user });
-      console.log("これはテスト");
       if (!isCancelled) {
         setIsPending(false);
         setError(null);

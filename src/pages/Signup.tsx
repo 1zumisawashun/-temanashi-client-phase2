@@ -1,5 +1,5 @@
 import SignupTemplate from "../components/template/Signup";
-import { useAuthContext } from "../hooks/useContextClient";
+import { useAuthContext } from "../hooks";
 import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
 import { Head } from "../components/layout";

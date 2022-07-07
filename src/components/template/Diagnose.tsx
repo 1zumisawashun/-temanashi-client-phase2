@@ -3,6 +3,8 @@ import DiagnoseTinderSwipe from "../model/disgnose/DiagnoseTinderSwipe";
 import { Loading } from "../ui";
 import DiagnoseResult from "../model/disgnose/DiagnoseResult";
 import { useRandomContext } from "../../hooks/useContextClient";
+import { useData } from "../../hooks/useData";
+import { productUseCase, StoreProductItem } from "../../utilities/stripeClient";
 interface Product {
   id: string;
   name: string;
@@ -11,9 +13,17 @@ interface Product {
 }
 
 const Diagnose: React.VFC = () => {
-  const { products } = useRandomContext();
+  const { products, addProductWithRandom } = useRandomContext();
   const [isPendingDiagnose, setIsPendingDiagnose] = useState<boolean>(false);
   const [documents, setDocuments] = useState<Array<Product>>([]);
+
+  if (products.length === 0) {
+    const storeProductItems = useData<StoreProductItem[]>(
+      "storeProductItems",
+      () => productUseCase.fetchAllForStore()
+    );
+    addProductWithRandom(storeProductItems);
+  }
 
   useEffect(() => {
     if (products.length <= 5) return;
@@ -30,17 +40,8 @@ const Diagnose: React.VFC = () => {
           if (randomDocument.length === 5) {
             setDocuments(randomDocument);
             setIsPendingDiagnose(false);
-          } else {
-            console.log("1個目のエラー");
-            // エラー
           }
-        } else {
-          console.log("2個目のエラー");
-          // エラー
         }
-      } else {
-        console.log("3個目のエラー");
-        // エラー
       }
     }
   }, [products]);

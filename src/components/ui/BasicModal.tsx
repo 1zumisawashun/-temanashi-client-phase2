@@ -87,8 +87,7 @@ const BasicModal: React.VFC<BasicModalProps> = ({
       aria-describedby="transition-modal-description"
       open={open}
       onClose={handleOpen}
-      // 型エラーでbackdrop入れられない
-      // BackdropComponent={Backdrop}
+      components={{ Backdrop }}
       closeAfterTransition
     >
       <ModalInner size={size}>
