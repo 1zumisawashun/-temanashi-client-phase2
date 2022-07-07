@@ -16,17 +16,29 @@
 
 ```
 言語： TypeScript
-CSSフレームワーク： MUI
+CSSフレームワーク： MUI, emotion
 ライブラリ： React
 ホスティング： Firebase Hosting
 DB： Firestore
 認証： Firebase Authentication
 トークン： JsonWebToken
-APIサーバー： Cloud Functions, Express
+サーバー： Cloud Functions, Express
 ストレージ： Cloud Storage
 決済： Firebase Stripe Extention
 E2Eテスト： Cypress
 ```
+
+### phase-2 でアップデートした内容（未実装も含む）
+
+- phase1 ではほぼ未実装だった useMemo, useCallback を用いたパフォーマンスチューニング
+- React.Suspense（react-query）, React.lazy を用いたダイナミックインポートの実装
+- エラーハンドリング（react-error-boundly）の強化
+- CSS フレームワークである MUI と CSSinJS（emotion）を用いた UI の改善・統一
+- Cypress のクオリティの強化
+- ディレクトリ構成の全面的な見直し（後述）
+- フォームバリデーションの強化（react-hook-form・yup）
+- リンター系の実装（StyleLint, ESLint, husky, Prettier）
+- Circle CIを活用し自動デプロイ・自動テストの実装、さらに本番環境だけでなく開発環境も設置
 
 ### phase-2 で採用しているアーキテクチャ
 

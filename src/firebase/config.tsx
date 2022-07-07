@@ -14,6 +14,8 @@ const firebaseConfig = {
   useFirebaseEmulator: window.location.hostname === "localhost",
 };
 
+console.log(process.env.REACT_APP_PROJECT_ID);
+
 firebase.initializeApp(firebaseConfig);
 
 const projectFirestore = firebase.firestore();
