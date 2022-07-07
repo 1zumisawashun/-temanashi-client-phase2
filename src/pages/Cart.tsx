@@ -1,5 +1,5 @@
 import CartTemplate from "../components/template/Cart";
-import { useAuthContext } from "../hooks/useContextClient";
+import { useAuthContext } from "../hooks";
 import {
   Sidebar,
   OnlineUsers,
@@ -7,6 +7,7 @@ import {
   Footer,
   Head,
 } from "../components/layout";
+import { Loading } from "../components/ui";
 import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
 
@@ -22,9 +23,17 @@ const Inner = styled("div")`
 `;
 
 export const Cart: React.VFC = () => {
-  const { user } = useAuthContext();
+  const { user, authIsReady } = useAuthContext();
 
-  return user ? (
+  if (!user && !authIsReady) {
+    return <Loading />;
+  }
+
+  if (!user && authIsReady) {
+    return <Redirect to="/login" />;
+  }
+
+  return (
     <>
       <Head title="Cart.tsx" />
       <Sidebar />
@@ -37,7 +46,5 @@ export const Cart: React.VFC = () => {
       </Container>
       <OnlineUsers />
     </>
-  ) : (
-    <Redirect to="/login" />
   );
 };

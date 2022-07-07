@@ -1,5 +1,5 @@
 import UserTemplate from "../components/template/User";
-import { useAuthContext } from "../hooks/useContextClient";
+import { useAuthContext } from "../hooks";
 import {
   Sidebar,
   OnlineUsers,
@@ -9,6 +9,7 @@ import {
 } from "../components/layout";
 import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
+import { Loading } from "../components/ui";
 
 const Container = styled("div")`
   flex-grow: 1;
@@ -22,9 +23,17 @@ const Inner = styled("div")`
 `;
 
 export const User: React.VFC = () => {
-  const { user } = useAuthContext();
+  const { user, authIsReady } = useAuthContext();
 
-  return user ? (
+  if (!user && !authIsReady) {
+    return <Loading />;
+  }
+
+  if (!user && authIsReady) {
+    return <Redirect to="/login" />;
+  }
+
+  return (
     <>
       <Head title="User.tsx" />
       <Sidebar />
@@ -37,7 +46,5 @@ export const User: React.VFC = () => {
       </Container>
       <OnlineUsers />
     </>
-  ) : (
-    <Redirect to="/login" />
   );
 };
