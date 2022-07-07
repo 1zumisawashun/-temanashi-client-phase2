@@ -1,7 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
-import { useAuthContext } from "../../hooks/useContextClient";
+import { useState } from "react";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
-import { Loading } from "../ui";
 import {
   UserFavorite,
   UserHistory,
@@ -9,7 +7,7 @@ import {
   UserFilter,
 } from "../model/user";
 import { User, likedFurnitures } from "../../@types/dashboard";
-import { useSubCollection } from "../../hooks/useSubCollection";
+import { useSubCollection, useAuthContext, useData } from "../../hooks";
 import { formatFirebasePath } from "../../utilities";
 
 const UserTemplate: React.VFC = () => {
@@ -17,10 +15,6 @@ const UserTemplate: React.VFC = () => {
   if (!user) throw new Error("we cant find your account");
 
   const [currentFilter, setCurrentFilter] = useState<string>("favorite");
-  const [isPending, setIsPending] = useState<boolean>(false);
-  const [payments, setPayments] = useState<any[]>([]);
-  const [productItems, setProductItems] = useState<ProductItem[]>([]);
-  const [isError, setIsError] = useState<string>("");
 
   const changeFilter = (newFilter: string) => {
     setCurrentFilter(newFilter);
@@ -28,6 +22,10 @@ const UserTemplate: React.VFC = () => {
 
   const { documents } = useSubCollection<User, likedFurnitures>(
     formatFirebasePath(`/users/${user.uid}/liked_furnitures`)
+  );
+
+  const paymentsList = useData<any[]>(user.uid, () =>
+    productUseCase.fetchPayments(user.uid)
   );
 
   const getLikedFurnitures = (
@@ -39,43 +37,16 @@ const UserTemplate: React.VFC = () => {
     return likedFurnitures;
   };
 
-  const fetchProducts = useCallback(async () => {
-    setIsError("");
-    setIsPending(true);
-    try {
-      const paymentsList = await productUseCase.fetchPayments(user.uid);
-      const likedProductsList = getLikedFurnitures(documents);
-      setPayments(paymentsList);
-      setProductItems(likedProductsList);
-      setIsPending(false);
-    } catch (error) {
-      setIsError("fetchに失敗しました。");
-      setIsPending(false);
-    }
-  }, [documents, user.uid]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+  const likedProductsList = getLikedFurnitures(documents);
 
   return (
     <div className="common-container">
-      {isPending && productItems.length === 0 ? (
-        <Loading />
-      ) : (
-        <>
-          <UserFilter
-            currentFilter={currentFilter}
-            changeFilter={changeFilter}
-          />
-          {currentFilter === "favorite" && (
-            <UserFavorite productItems={productItems} />
-          )}
-          {currentFilter === "history" && <UserHistory payments={payments} />}
-          {currentFilter === "account" && <UserAccount />}
-        </>
+      <UserFilter currentFilter={currentFilter} changeFilter={changeFilter} />
+      {currentFilter === "favorite" && (
+        <UserFavorite productItems={likedProductsList} />
       )}
-      {isError.length !== 0 && <p>{isError}</p>}
+      {currentFilter === "history" && <UserHistory payments={paymentsList} />}
+      {currentFilter === "account" && <UserAccount />}
     </div>
   );
 };
