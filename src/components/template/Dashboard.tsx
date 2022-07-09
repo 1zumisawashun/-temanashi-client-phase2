@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DashboardFilter from "../model/dashboard/DashboardFilter";
-import { useAuthContext, useRandomContext } from "../../hooks/useContextClient";
-import {
-  productUseCase,
-  ProductItem,
-  StoreProductItem,
-} from "../../utilities/stripeClient";
+import { useAuthContext } from "../../hooks/useContextClient";
+import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import DashboardList from "../model/dashboard/DashboardList";
 import { useErrorHandler } from "react-error-boundary";
 import { useData } from "../../hooks/useData";
@@ -13,21 +9,11 @@ import { useData } from "../../hooks/useData";
 const Dashboard: React.VFC = () => {
   const { user } = useAuthContext();
   const handleError = useErrorHandler();
-  const { addProductWithRandom } = useRandomContext();
   const [currentFilter, setCurrentFilter] = useState<string>("all");
 
   const productItems = useData<ProductItem[]>("productItems", () =>
     productUseCase.fetchAll()
   );
-
-  const storeProductItems = useData<StoreProductItem[]>(
-    "storeProductItems",
-    () => productUseCase.fetchAllForStore()
-  );
-
-  useEffect(() => {
-    addProductWithRandom(storeProductItems);
-  }, []);
 
   const changeFilter = (newFilter: string) => {
     if (!newFilter) handleError("we cant find new filter");

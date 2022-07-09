@@ -1,48 +1,37 @@
 import { useParams } from "react-router-dom";
 import ProductComment from "../model/product/ProductComment";
 import ProductSummary from "../model/product/ProductSummary";
-import { useEffect, useState, useCallback } from "react";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
-import { Loading } from "../ui";
+import { useData } from "../../hooks";
+import styled from "@emotion/styled";
+
+const ProductContainer = styled("div")`
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  align-items: start;
+  grid-gap: 60px;
+  @media (max-width: 576px) {
+    display: block;
+  }
+`;
 
 const ProductTemplate: React.VFC = () => {
-  const [isPending, setIsPending] = useState<boolean>(false);
-  const [productItem, setProductItem] = useState<ProductItem>();
-  const [isError, setIsError] = useState<string>("");
-
   const { id } = useParams<{ id: string }>();
 
-  const fetchProductItem = useCallback(async () => {
-    setIsPending(true);
-    setIsError("");
-    try {
-      const productItem = await productUseCase.fetchProductItem(id);
-      setProductItem(productItem);
-      setIsPending(false);
-    } catch (error) {
-      setIsError("fetchに失敗しました");
-      setIsPending(false);
-    }
-  }, [id]);
+  const productItem = useData<ProductItem>(id, () =>
+    productUseCase.fetchProductItem(id)
+  );
 
-  useEffect(() => {
-    fetchProductItem();
-  }, [fetchProductItem]);
-
-  if (isPending) {
-    return <Loading />;
-  }
   return (
     <div className="common-container">
-      <div className="product-container">
+      <ProductContainer>
         {productItem && (
           <>
             <ProductSummary furniture={productItem} />
             <ProductComment furniture={productItem} />
           </>
         )}
-        {isError.length !== 0 && <p>{isError}</p>}
-      </div>
+      </ProductContainer>
     </div>
   );
 };

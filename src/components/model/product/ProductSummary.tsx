@@ -11,7 +11,6 @@ import { formatTaxIncludedPrice } from "../../../utilities";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from "@emotion/styled";
-import { v4 as uuidv4 } from "uuid";
 
 const ButtonWrapper = styled("div")`
   display: flex;

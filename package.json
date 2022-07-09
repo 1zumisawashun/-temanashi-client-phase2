@@ -1,5 +1,6 @@
 {
   "name": "temanashi-client",
+  "homepage": "./",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,6 +27,7 @@
     "blueimp-load-image": "^5.16.0",
     "csstype": "^3.0.10",
     "date-fns": "^2.27.0",
+    "dotenv-cli": "^6.0.0",
     "env-cmd": "^10.1.0",
     "firebase": "8.5",
     "hamburger-react": "^2.4.1",
@@ -98,7 +100,6 @@
     "cross-env": "^7.0.3",
     "cypress": "^9.4.1",
     "cypress-file-upload": "^5.0.8",
-    "dotenv-cli": "^6.0.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",

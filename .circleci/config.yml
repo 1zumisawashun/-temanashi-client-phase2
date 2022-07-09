@@ -4,7 +4,7 @@ jobs:
   # jobs:prod
   #-----------------------
   prod_app:
-    working_directory: ~/prod
+    working_directory: ~/tmp/prod
     docker:
       - image: circleci/node:12-browsers
     steps:
@@ -30,7 +30,7 @@ jobs:
     # jobs:dev
     #-----------------------
   dev_app:
-    working_directory: ~/dev
+    working_directory: ~/tmp/dev
     docker:
       - image: circleci/node:12-browsers
     parameters:
