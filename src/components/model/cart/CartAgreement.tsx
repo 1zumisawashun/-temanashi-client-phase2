@@ -1,5 +1,16 @@
 import { useState } from "react";
 import { InputCheckbox, BasicButton } from "../../ui";
+import styled from "@emotion/styled";
+
+const CartAgreementContainer = styled("div")`
+  width: 100%;
+  margin: 30px auto 0;
+  padding: 20px 0;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 13px 21px rgba(0, 0, 0, 0.1);
+`;
 
 interface CartAgreementProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -13,7 +24,7 @@ const CartAgreement: React.VFC<CartAgreementProps> = ({ onClick }) => {
   };
 
   return (
-    <div className="accept-block">
+    <CartAgreementContainer>
       <InputCheckbox
         label="利用規約に同意しますか？"
         checked={isAccepted}
@@ -24,7 +35,7 @@ const CartAgreement: React.VFC<CartAgreementProps> = ({ onClick }) => {
       <BasicButton isDisabled={!isAccepted} onClick={onClick}>
         購入する
       </BasicButton>
-    </div>
+    </CartAgreementContainer>
   );
 };
 export default CartAgreement;

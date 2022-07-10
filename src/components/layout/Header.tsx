@@ -13,7 +13,7 @@ const Header: React.VFC = () => {
         {!isOpen && (
           <li className="logo">
             <StoreButton onClick={() => history.push("/")} />
-            <span>temanashi change pid</span>
+            <span>temanashi client</span>
           </li>
         )}
       </ul>

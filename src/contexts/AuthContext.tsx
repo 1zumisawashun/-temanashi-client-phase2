@@ -9,13 +9,13 @@ interface State {
   user: firebase.User | null;
   authIsReady?: boolean;
 }
-interface ContextInterface {
+interface AuthContextInterface {
   dispatch: (value: Action) => void; // dispatch: React.Dispatch<Action>;
   user: firebase.User | null;
   authIsReady?: boolean;
 }
 
-export const AuthContext = createContext<ContextInterface | undefined>(
+export const AuthContext = createContext<AuthContextInterface | undefined>(
   undefined
 );
 

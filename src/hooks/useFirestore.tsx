@@ -13,6 +13,10 @@ type CreatedAt = {
   createdAt: firebase.firestore.Timestamp;
 };
 
+/**
+ * useReducerのテスト
+ * reducerもhooksディレクトリとして切り出しているが正解かは不明
+ */
 const firestoreReducer = (state: any, action: any) => {
   switch (action.type) {
     case "IS_PENDING":
@@ -45,7 +49,6 @@ const firestoreReducer = (state: any, action: any) => {
   }
 };
 
-// NOTE:reducerもhooksディレクトリとして切り出している
 export const useFirestore = () => {
   const [response, dispatch] = useReducer(firestoreReducer, initialState);
   const [isCancelled, setIsCancelled] = useState(false);
