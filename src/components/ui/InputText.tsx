@@ -40,7 +40,7 @@ export interface InputTextProps {
   size?: "small";
 }
 
-const InputText: React.VFC<InputTextProps> = ({
+export const InputText: React.VFC<InputTextProps> = ({
   onChange,
   onKeyDown,
   onBlur,
@@ -88,5 +88,3 @@ const InputText: React.VFC<InputTextProps> = ({
     </div>
   );
 };
-
-export default InputText;

@@ -14,7 +14,7 @@ const UserTemplate: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
 
-  const [currentFilter, setCurrentFilter] = useState<string>("favorite");
+  const [currentFilter, setCurrentFilter] = useState<string>("account");
 
   const changeFilter = (newFilter: string) => {
     setCurrentFilter(newFilter);

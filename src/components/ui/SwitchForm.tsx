@@ -1,20 +1,16 @@
 import styled from "@emotion/styled";
 import { Switch, FormControlLabel, styled as muiStyled } from "@mui/material";
 
+const SwitchContainer = styled("div")``;
+
 const Container = styled(FormControlLabel)`
-  margin-left: 0;
-  width: 72px;
+  justify-content: space-between;
+  display: flex;
+  color: #84bcb4;
+  margin: 0 0 0 20px;
+  font-weight: bold;
 `;
 
-const SwitchContainer = styled("div")`
-  display: block;
-`;
-
-const Label = styled("p")`
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 4px;
-`;
 interface SwitchFormProps {
   label?: string;
   checked?: boolean;
@@ -22,85 +18,82 @@ interface SwitchFormProps {
   onLabel?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
-  value?: string;
+  value?: boolean;
 }
 
-const CustomSwitch = muiStyled(Switch)(() => ({
-  width: "72px",
-  height: "28px",
-  padding: "0px",
+const CustomSwitch = muiStyled(Switch)(({ theme }) => ({
+  width: 62, // width: 42,
+  height: 26,
+  padding: 0,
   "& .MuiSwitch-switchBase": {
-    color: "#818181",
-    padding: "2px",
+    padding: 0,
+    margin: 2,
+    transitionDuration: "300ms",
     "&.Mui-checked": {
-      color: "#005BAC !important",
-      transform: "translateX(44px) !important",
-    },
-    "&.Mui-checked + .MuiSwitch-track": {
-      "&:after": {
-        color: "white",
-        content: `''`,
-        fontSize: "12px",
-        left: "11px",
+      transform: "translateX(36px)", // transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        // NOTE:checkedcolor
+        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#84bcb4",
+        opacity: 1,
+        border: 0,
       },
-      "&:before": {
-        display: "none",
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: 0.5,
       },
     },
-    "&$checked": {
-      "& + $track": {
-        backgroundColor: "#005BAC",
-      },
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
     },
-  },
-  "& .MuiSwitch-track": {
-    alignItems: "center",
-    backgroundColor: "#B5B5B5",
-    borderRadius: "20px",
-    display: "flex",
-    opacity: "1 !important",
-    "&:after, &:before": {
-      fontWeight: "bold",
-      position: "absolute",
+    "&.Mui-disabled .MuiSwitch-thumb": {
+      color:
+        theme.palette.mode === "light"
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
     },
-    "&:before": {
-      color: "black",
-      content: `''`,
-      fontSize: "12px",
-      right: "8px",
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
     },
   },
   "& .MuiSwitch-thumb": {
-    color: "white",
-    height: "22px",
-    margin: "1px",
-    width: "22px",
+    boxSizing: "border-box",
+    width: 22,
+    height: 22,
+  },
+  "& .MuiSwitch-track": {
+    borderRadius: 26 / 2,
+    // NOTE:uncheckedcolor
+    backgroundColor: theme.palette.mode === "light" ? "#818181" : "#39393D",
+    opacity: 1,
+    transition: theme.transitions.create(["background-color"], {
+      duration: 500,
+    }),
   },
 }));
 
 export const SwitchForm: React.VFC<SwitchFormProps> = ({
-  label,
+  label = "最低注文金額",
   checked,
   onChange,
   disabled = false,
   value,
 }) => {
+  // m1以上で中央寄りになる＞mなし場合近すぎてラベルとスイッチの高さがずれて見える
   return (
-    <div>
-      {label && <Label>{label}</Label>}
+    <SwitchContainer>
       <Container
         control={
-          <SwitchContainer>
-            <CustomSwitch
-              onChange={onChange}
-              checked={checked}
-              disabled={disabled}
-              value={value}
-            />
-          </SwitchContainer>
+          <CustomSwitch
+            onChange={onChange}
+            checked={checked}
+            disabled={disabled}
+            sx={{ m: 2 }}
+          />
         }
-        label={""}
+        label={label}
+        labelPlacement="start"
       />
-    </div>
+    </SwitchContainer>
   );
 };
