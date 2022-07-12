@@ -1,36 +1,29 @@
 import { TextField, FormControlLabel } from "@mui/material";
 import styled from "@emotion/styled";
 import { UseFormRegisterReturn } from "react-hook-form";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
 
-const StyledFormControl = styled(FormControlLabel)`
+const StyledFormControl = styled("div")`
   background-color: transparent;
   justify-content: space-between;
   display: flex;
   color: #84bcb4;
   margin: 0 0 0 20px;
   font-weight: bold;
-  /* hover */
-  .MuiInput-underline:before {
-    border-bottom: none;
-  }
-  && .MuiInput-underline:hover:before {
-    border-bottom: none;
-  }
-  /* focused */
-  .MuiInput-underline:after {
-    border-bottom: none;
-    background: white;
-  }
-  .MuiInput-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #f4f4f4 inset;
-  }
   .MuiInput-input {
     text-align: end;
   }
 `;
 
-const TextNinja = styled(TextField)`
-  width: 60%;
+const Text = styled(TextField)`
+  width: 70%;
+`;
+
+const Label = styled("label")`
+  margin: auto auto auto 0;
+  font-size: 16px;
 `;
 
 export interface InputTextProps {
@@ -66,7 +59,7 @@ export const InputTextCustom: React.VFC<InputTextProps> = ({
   register,
   error = false,
   helperText = "",
-  label = "店舗名(30文字)",
+  label = "店舗名（30文字）",
   value,
   disabled = false,
   placeholder,
@@ -79,35 +72,39 @@ export const InputTextCustom: React.VFC<InputTextProps> = ({
   size,
 }) => {
   return (
-    <StyledFormControl
-      control={
-        <TextNinja
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          type={type}
-          name={name}
-          id={label}
-          disabled={disabled}
-          autoFocus={autoFocus}
-          placeholder={placeholder}
-          value={value}
-          error={error}
-          helperText={helperText}
-          inputRef={inputRef}
-          size={size}
-          variant="standard"
-          sx={{ m: 2 }}
-          inputProps={{
-            maxLength,
-            pattern,
-          }}
-          {...register}
-        />
-      }
-      label={label}
-      labelPlacement="start"
-    />
+    <StyledFormControl>
+      <Label htmlFor={label}>{label}</Label>
+      <Text
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        type={type}
+        name={name}
+        id={label}
+        disabled={disabled}
+        autoFocus={autoFocus}
+        placeholder={placeholder}
+        value={value}
+        error={error}
+        helperText={helperText}
+        inputRef={inputRef}
+        size={size}
+        variant="standard"
+        sx={{ m: 2 }}
+        inputProps={{
+          maxLength,
+          pattern,
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton>
+                <ArrowForwardIosIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        {...register}
+      />
+    </StyledFormControl>
   );
 };

@@ -1,21 +1,29 @@
 import MenuItem from "@mui/material/MenuItem";
-import { FormControlLabel } from "@mui/material";
+import { FormControlLabel, TextField, InputAdornment } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CircularProgress from "@mui/material/CircularProgress";
 import styled from "@emotion/styled";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import IconButton from "@mui/material/IconButton";
 
-const StyledFormControl = styled(FormControlLabel)`
+const StyledFormControl = styled("div")`
   background-color: transparent;
   justify-content: space-between;
   display: flex;
   color: #84bcb4;
   margin: 0 0 0 20px;
   font-weight: bold;
-  text-align: end;
+  .MuiInput-input {
+    text-align: end;
+  }
 `;
 
-const CustomSelect = styled(Select)`
-  width: 60%;
+const Text = styled(TextField)`
+  width: 70%;
+`;
+const Label = styled("label")`
+  margin: auto auto auto 0;
+  font-size: 16px;
 `;
 
 const Placehoplder = styled("p")`
@@ -28,7 +36,9 @@ export type SelectFormProps = {
   labelId?: string;
   label?: string;
   value: string;
-  onChange: (event: SelectChangeEvent<unknown>) => void;
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   options: OptionProps[];
   placeholder?: string;
   disabled?: boolean;
@@ -43,7 +53,7 @@ export type OptionProps = {
 
 export const SelectForm: React.VFC<SelectFormProps> = ({
   id,
-  labelId,
+  labelId = "select",
   label = "営業開始時間",
   value,
   onChange,
@@ -54,35 +64,45 @@ export const SelectForm: React.VFC<SelectFormProps> = ({
   defaultValue = "",
 }) => {
   return (
-    <StyledFormControl
-      control={
-        <CustomSelect
-          onChange={onChange}
-          id={id}
-          labelId={labelId}
-          value={value}
-          disabled={disabled || options.length === 0 || isLoading}
-          defaultValue={defaultValue}
-          displayEmpty
-          variant="standard"
-          disableUnderline
-          sx={{ m: 2 }}
-          renderValue={() => {
-            // NOTE: 下記コードが原因で不必要なレンダリング起きているかもしれない
+    <StyledFormControl>
+      <Label id={labelId}>{label}</Label>
+      <Text
+        id={id}
+        select
+        variant="standard"
+        sx={{ m: 2 }}
+        value={value}
+        disabled={disabled || options.length === 0 || isLoading}
+        onChange={onChange}
+        SelectProps={{
+          labelId,
+          MenuProps: {
+            disableScrollLock: true,
+          },
+          defaultValue,
+          IconComponent: () => null,
+          renderValue: () => {
             if (isLoading) return <CircularProgress size={20} />;
             if (value === "") return <Placehoplder>{placeholder}</Placehoplder>;
             return options.find((option) => option.value === value)?.label;
-          }}
-        >
-          {options.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </CustomSelect>
-      }
-      label={label}
-      labelPlacement="start"
-    />
+          },
+        }}
+        inputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton>
+                <ArrowForwardIosIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      >
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Text>
+    </StyledFormControl>
   );
 };

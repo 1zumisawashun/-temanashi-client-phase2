@@ -8,7 +8,9 @@ const Container = styled(FormControlLabel)`
   display: flex;
   color: #84bcb4;
   margin: 0 0 0 20px;
-  font-weight: bold;
+  .MuiTypography-root {
+    font-weight: bold;
+  }
 `;
 
 interface SwitchFormProps {
