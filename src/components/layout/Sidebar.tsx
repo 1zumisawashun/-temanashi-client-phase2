@@ -84,7 +84,7 @@ const Sidebar: React.VFC = () => {
               <NavlinkButton
                 path="/cart"
                 icon={
-                  <Badge badgeContent={cart.length} color="secondary">
+                  <Badge badgeContent={cart.length} color="error">
                     <ShoppingCartIcon />
                   </Badge>
                 }

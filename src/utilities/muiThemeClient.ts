@@ -25,5 +25,37 @@ export const theme = createTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          // fieldset: {
+          //   borderColor: "blue",
+          // },
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        input: {
+          "&:-webkit-autofill": {
+            WebkitBoxShadow: "0 0 0 100px #f4f4f4 inset",
+          },
+        },
+        underline: {
+          /* default */
+          "&:before": {
+            border: "none",
+          },
+          /* hover */
+          "&&:hover:before": {
+            borderBottom: "none",
+          },
+          /* focused */
+          "&:after": {
+            borderBottom: "none",
+          },
+        },
+      },
+    },
   },
 });

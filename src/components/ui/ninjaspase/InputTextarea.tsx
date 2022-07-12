@@ -2,25 +2,30 @@ import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-const Text = styled(TextField)`
-  background-color: white;
-  font-size: 16px;
-  margin-top: 6px;
-  width: 100%;
+const Wrapper = styled("div")`
+  background-color: transparent;
+  color: #84bcb4;
+  margin: 20px;
+  font-weight: bold;
 `;
 
 const Label = styled("label")`
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 4px;
+  width: 20%;
+  margin: auto 0;
+  font-size: 16px;
 `;
 
-export interface InputTextProps {
+const CustomTextField = styled(TextField)`
+  width: 100%;
+  margin: 20px auto;
+`;
+
+export interface InputTextareaProps {
   // NOTE:アクション
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   // NOTE:エラーハンドリング
   register?: UseFormRegisterReturn;
   error?: boolean;
@@ -33,58 +38,58 @@ export interface InputTextProps {
   type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search";
   //NOTE:追加項目
   autoFocus?: boolean;
-  name?: string;
-  pattern?: string;
   maxLength?: number;
-  inputRef?: React.RefObject<HTMLInputElement>;
-  size?: "small";
+  maxRows?: number;
+  readOnly?: boolean;
 }
 
-export const InputText: React.VFC<InputTextProps> = ({
+export const InputTextareaCustom: React.VFC<InputTextareaProps> = ({
   onChange,
   onKeyDown,
   onBlur,
   onFocus,
   register,
   error = false,
-  helperText = "",
+  helperText,
   label,
   value,
   disabled = false,
   placeholder,
   type = "text",
   autoFocus = false,
-  name,
-  pattern,
-  maxLength = 255,
-  inputRef = null,
-  size,
+  maxLength = 1000,
+  maxRows = 50,
+  readOnly,
 }) => {
   return (
-    <div>
+    <Wrapper>
       {label && <Label htmlFor={label}>{label}</Label>}
-      <Text
+      <CustomTextField
         onChange={onChange}
-        onKeyDown={onKeyDown}
+        onKeyDown={() => onKeyDown}
         onBlur={onBlur}
         onFocus={onFocus}
-        type={type}
-        name={name}
+        error={error}
+        helperText={helperText}
+        multiline
+        rows={4}
+        tabIndex={0}
         id={label}
+        type={type}
         disabled={disabled}
         autoFocus={autoFocus}
         placeholder={placeholder}
         value={value}
-        error={error}
-        helperText={helperText}
-        inputRef={inputRef}
-        size={size}
+        maxRows={maxRows}
         inputProps={{
           maxLength,
-          pattern,
+          style: {
+            // height: "127px",
+          },
+          readOnly,
         }}
         {...register}
       />
-    </div>
+    </Wrapper>
   );
 };

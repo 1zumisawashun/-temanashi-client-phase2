@@ -18,6 +18,7 @@ const { Login } = lazyImport(() => import("../pages/Login"), "Login");
 const { Product } = lazyImport(() => import("../pages/Product"), "Product");
 const { Signup } = lazyImport(() => import("../pages/Signup"), "Signup");
 const { User } = lazyImport(() => import("../pages/User"), "User");
+const { Component } = lazyImport(() => import("../Component"), "Component");
 
 const AppContainer = styled("div")`
   display: flex;
@@ -38,6 +39,7 @@ export const AppRoute: React.VFC = () => {
         <Route path="/signup" component={Signup} />
         <Route path="/users/:id" component={User} />
         <Route path="/cart" component={Cart} />
+        <Route path="/component" component={Component} />
         <Route path="*">
           <Redirect to="/" />
         </Route>

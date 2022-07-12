@@ -14,7 +14,6 @@ type Params = {
 /**
  * useCookieの責務をこのファイルに閉じ込める
  */
-
 export const useToken = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
 

@@ -16,6 +16,12 @@ import { MultiValue } from "react-select";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import styled from "@emotion/styled";
+
+const FormContainer = styled("div")`
+  display: grid;
+  gap: 20px;
+`;
 
 interface FormData {
   name: string;
@@ -62,12 +68,12 @@ const CreateProject: React.VFC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
     name: "",
-    description: text,
-    price: String(Math.floor(Math.random() * 3000)),
-    width: String(Math.floor(Math.random() * 100)),
-    length: String(Math.floor(Math.random() * 200)),
-    height: String(Math.floor(Math.random() * 300)),
-    stock: String(Math.floor(Math.random() * 10)),
+    description: "",
+    price: "",
+    width: "",
+    length: "",
+    height: "",
+    stock: "",
   });
   const [photos, setPhotos] = useState<File[]>([]);
   const [categories, setCategories] = useState<MultiValue<string>>([]);
@@ -107,10 +113,10 @@ const CreateProject: React.VFC = () => {
       return;
     }
 
+    // NOTE:複数選択できるが全体の型は修正していないので一旦一個のみポストする
     const furniture = {
       ...formData,
       photos: result,
-      // NOTE:複数選択できるが全体の型は修正していないので一旦一個のみポストする
       category: categories[0],
     };
 
@@ -119,8 +125,8 @@ const CreateProject: React.VFC = () => {
         Authorization: `Bearer ${cookies.jwt}`,
       };
       const res = await axios.post(
-        // `${process.env.REACT_APP_BASE_URL}/api/stripe-post`,
         "https://us-central1-temanashi-phase2.cloudfunctions.net/api/stripe-post",
+        // `${process.env.REACT_APP_BASE_URL}/api/stripe-post`,
         // "http://localhost:5001/temanashi-phase2/us-central1/api/stripe-post",
         furniture,
         { headers }
@@ -134,26 +140,36 @@ const CreateProject: React.VFC = () => {
     }
   };
 
+  const checkOnPreSubmit = () => {
+    if (photos.length === 0) scrollToPhotos.scrollHook();
+    if (formData.name === "") scrollToName.scrollHook();
+    if (formData.description === "") scrollToDescription.scrollHook();
+    if (formData.price === "") scrollToPrice.scrollHook();
+  };
+
   const onPreSubmit: SubmitHandler<FormData> = (data) => {
     onSubmit();
   };
 
+  /**
+   * RHFはvalueを使わずライブラリ内で処理するので無駄なレンダリングをしなくて済む
+   * ここら辺は調査不足なので後で時間をとる
+   */
   return (
     <div className="common-container">
       {isLoading && <Loading />}
-      <form>
-        {scrollToPhotos.renderScrollElement()}
-        <InputFileMulti
-          photos={photos}
-          onInputFileChange={(value) => onInputFileChange(value)}
-        />
+      {scrollToPhotos.renderScrollElement()}
+      <InputFileMulti
+        photos={photos}
+        onInputFileChange={(value) => onInputFileChange(value)}
+      />
+      <FormContainer>
         {scrollToName.renderScrollElement()}
         <InputText
           label="name"
           register={register("name", {
             onChange: (e) => onInputChange(e),
           })}
-          value={formData.name}
           error={"name" in errors}
           helperText={errors.name?.message}
         />
@@ -163,7 +179,6 @@ const CreateProject: React.VFC = () => {
           register={register("description", {
             onChange: (e) => onInputChange(e),
           })}
-          value={formData.description}
           error={"description" in errors}
           helperText={errors.description?.message}
         />
@@ -173,7 +188,6 @@ const CreateProject: React.VFC = () => {
           register={register("price", {
             onChange: (e) => onInputChange(e),
           })}
-          value={formData.price}
           error={"price" in errors}
           helperText={errors.price?.message}
         />
@@ -182,7 +196,6 @@ const CreateProject: React.VFC = () => {
           register={register("stock", {
             onChange: (e) => onInputChange(e),
           })}
-          value={formData.stock}
           error={"stock" in errors}
           helperText={errors.stock?.message}
         />
@@ -191,7 +204,6 @@ const CreateProject: React.VFC = () => {
           register={register("width", {
             onChange: (e) => onInputChange(e),
           })}
-          value={formData.width}
           error={"width" in errors}
           helperText={errors.width?.message}
         />
@@ -200,7 +212,6 @@ const CreateProject: React.VFC = () => {
           register={register("length", {
             onChange: (e) => onInputChange(e),
           })}
-          value={formData.length}
           error={"length" in errors}
           helperText={errors.length?.message}
         />
@@ -209,7 +220,6 @@ const CreateProject: React.VFC = () => {
           register={register("height", {
             onChange: (e) => onInputChange(e),
           })}
-          value={formData.height}
           error={"height" in errors}
           helperText={errors.height?.message}
         />
@@ -222,16 +232,13 @@ const CreateProject: React.VFC = () => {
         />
         <BasicButton
           onClick={() => {
-            if (photos.length === 0) scrollToPhotos.scrollHook();
-            if (formData.name === "") scrollToName.scrollHook();
-            if (formData.description === "") scrollToDescription.scrollHook();
-            if (formData.price === "") scrollToPrice.scrollHook();
+            checkOnPreSubmit();
             handleSubmit(onPreSubmit)();
           }}
         >
           完了
         </BasicButton>
-      </form>
+      </FormContainer>
     </div>
   );
 };

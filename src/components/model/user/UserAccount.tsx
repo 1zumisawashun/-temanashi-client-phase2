@@ -3,10 +3,10 @@ import { projectFunctions, isEmulating } from "../../../firebase/config";
 import { useAuthContext, useToken, useAuth } from "../../../hooks";
 import { useHistory } from "react-router-dom";
 import axios from "../../../utilities/axiosClient";
-import { SwitchForm, BasicButton } from "../../ui";
+import { BasicButton } from "../../ui";
 import styled from "@emotion/styled";
 
-const UserContaienr = styled("div")`
+const UserContainer = styled("div")`
   width: 100%;
   min-height: 300px;
   background: #f4f4f4;
@@ -53,8 +53,6 @@ const UserAccount: React.VFC = () => {
     setJWT(result.data.jwt);
     console.log(result, "result");
   };
-
-  // NOTE:検証済み_20220515
   const verifyJWT = async () => {
     const path = `/api/jwt/check`;
     const result = await axios.get(path).catch((err) => {
@@ -65,8 +63,6 @@ const UserAccount: React.VFC = () => {
     }
     console.log(result, "check JWT");
   };
-
-  // NOTE:検証済み_20220515
   const Emulating = async () => {
     const path = `/api/hello`;
     const result = await axios.get(path).catch((err) => {
@@ -77,11 +73,9 @@ const UserAccount: React.VFC = () => {
     }
     console.log(result, "check Emulator");
   };
-  const handleSwitchForm = () => {
-    console.log("動いている");
-  };
+
   return (
-    <UserContaienr>
+    <UserContainer>
       <BasicButton onClick={onCallTest}>OnCallTest</BasicButton>
       <BasicButton onClick={onRequestTest}>OnRequestTest</BasicButton>
       <BasicButton onClick={getAxiosTest}>GetAxiosTest</BasicButton>
@@ -93,8 +87,7 @@ const UserAccount: React.VFC = () => {
       <BasicButton onClick={handleSubmit} isDisabled={isPending}>
         Logout
       </BasicButton>
-      <SwitchForm onChange={handleSwitchForm} />
-    </UserContaienr>
+    </UserContainer>
   );
 };
 export default UserAccount;
