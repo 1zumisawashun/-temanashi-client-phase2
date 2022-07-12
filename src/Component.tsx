@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import {
   SwitchForm,
   BasicButton,
@@ -6,8 +6,16 @@ import {
   InputTextCustom,
   InputTextareaCustom,
   Divider,
+  CheckboxGroup,
+  BasicModal,
 } from "./components/ui";
 import styled from "@emotion/styled";
+import {
+  SquareIcon,
+  SquareIconBlank,
+  CircleIcon,
+  CircleIconBlank,
+} from "./components/ui/ninjaspase/CheckboxGroup";
 
 const Container = styled("div")`
   width: 100%;
@@ -27,14 +35,12 @@ const ButtonWrapper = styled("div")`
   margin: 0 20px 20px;
 `;
 const CoutionText = styled("div")`
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 14px;
   color: red;
   margin: 0 20px 20px;
 `;
 const ExampleText = styled("div")`
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 14px;
   margin: 0 20px 20px;
 `;
 
@@ -57,6 +63,24 @@ const ComponentTitle = styled("p")`
   background-color: #f4f4f4;
 `;
 
+const CheckboxGroupWrapper = styled("div")`
+  background-color: transparent;
+  display: flex;
+  color: #84bcb4;
+  margin: 20px;
+  font-weight: bold;
+`;
+const CheckboxGroupInner = styled("div")`
+  width: 80%;
+  text-align: end;
+`;
+
+const Label = styled("label")`
+  width: 20%;
+  margin: auto 0;
+  font-size: 16px;
+`;
+
 export type OptionProps = {
   value: string;
   label: string;
@@ -76,6 +100,7 @@ const selectOptions: OptionProps[] = [
     label: "埼玉県",
   },
 ];
+const weekdays = ["月", "火", "水", "木", "金", "土", "日"];
 
 export const Component: React.VFC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -85,6 +110,7 @@ export const Component: React.VFC = () => {
   const [textValue, setTextValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
   const [textWithButtonValue, setTextWithButtonValue] = useState("");
+  const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([]);
 
   const handleSwitchForm = (e: any) => {
     setChecked((prev) => !prev);
@@ -109,6 +135,20 @@ export const Component: React.VFC = () => {
   };
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleCheckboxGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // checkされた場合
+    if (e.target.checked) {
+      const newSelectedCheckLists = [...selectedCheckbox, e.target.value];
+      setSelectedCheckbox(newSelectedCheckLists);
+      return;
+    }
+    // checkが解除された場合
+    const newSelectedCheckLists = selectedCheckbox.filter(
+      (value) => value !== e.target.value
+    );
+    setSelectedCheckbox(newSelectedCheckLists);
   };
 
   return (
@@ -176,7 +216,7 @@ export const Component: React.VFC = () => {
               <BasicButton onClick={handleClick}>地図から反映</BasicButton>
             </ButtonWrapper>
             <CoutionText>
-              初期設定では「東京駅前」に設定されてしまいます。必ず店舗の位置を変更してください。
+              ※初期設定では「東京駅前」に設定されてしまいます。必ず店舗の位置を変更してください。
             </CoutionText>
           </ComponentContainer>
 
@@ -184,7 +224,7 @@ export const Component: React.VFC = () => {
             <ComponentTitle>SwitchForm + InputTextarea</ComponentTitle>
             <SwitchForm onChange={handleSwitchForm2} value={checkedWithText} />
             <CoutionText>
-              アクセスの際の注意点があればご記入ください。利用者側にのみ通知されます。
+              ※アクセスの際の注意点があればご記入ください。利用者側にのみ通知されます。
             </CoutionText>
             {checkedWithText && (
               <>
@@ -197,6 +237,73 @@ export const Component: React.VFC = () => {
                 />
               </>
             )}
+          </ComponentContainer>
+
+          <ComponentContainer>
+            <ComponentTitle>BasicButton & BasicModal</ComponentTitle>
+            <BasicButton onClick={handleOpen}>primary</BasicButton>
+            <Divider />
+            <BasicButton onClick={handleOpen} variant="secondary">
+              secondary
+            </BasicButton>
+            <Divider />
+            <BasicButton onClick={handleOpen} isDisabled>
+              disable
+            </BasicButton>
+            <BasicModal
+              title="basicmodal"
+              open={isOpen}
+              handleOpen={handleOpen}
+              contents={<InputTextareaCustom />}
+              footer={
+                <>
+                  <BasicButton onClick={handleOpen}>はい</BasicButton>
+                  <BasicButton onClick={handleOpen}>いいえ</BasicButton>
+                </>
+              }
+            />
+          </ComponentContainer>
+
+          <ComponentContainer>
+            <ComponentTitle>CheckboxGroup</ComponentTitle>
+            <CheckboxGroupWrapper>
+              <Label>オープン</Label>
+              <CheckboxGroupInner>
+                <CheckboxGroup
+                  value={""}
+                  label="マッチング"
+                  checked={checked}
+                  onChange={handleSwitchForm}
+                  icon={<SquareIcon content="ON" />}
+                  checkedIcon={<SquareIconBlank content="OFF" />}
+                />
+                <CheckboxGroup
+                  value={""}
+                  label="オート"
+                  checked={checked}
+                  onChange={handleSwitchForm}
+                  icon={<SquareIcon content="ON" />}
+                  checkedIcon={<SquareIconBlank content="OFF" />}
+                />
+              </CheckboxGroupInner>
+            </CheckboxGroupWrapper>
+            <Divider />
+            <CheckboxGroupWrapper>
+              <Label>定休日</Label>
+              <CheckboxGroupInner>
+                {weekdays.map((weekday) => (
+                  <CheckboxGroup
+                    value={weekday}
+                    checked={selectedCheckbox.includes(weekday)}
+                    onChange={handleCheckboxGroup}
+                    icon={<CircleIcon content={weekday} size="small" />}
+                    checkedIcon={
+                      <CircleIconBlank content={weekday} size="small" />
+                    }
+                  />
+                ))}
+              </CheckboxGroupInner>
+            </CheckboxGroupWrapper>
           </ComponentContainer>
         </FormContainer>
       </Inner>

@@ -26,6 +26,7 @@ export { LinkButton, NavlinkButton } from "./TextButton";
 export { default as InputTextarea } from "./InputTextarea";
 export { TextError } from "./TextError";
 // component.tsx
+export { CheckboxGroup } from "./ninjaspase/CheckboxGroup";
 export { SwitchForm } from "./ninjaspase/SwitchForm";
 export { SelectForm } from "./ninjaspase/SelectForm";
 export { InputTextCustom } from "./ninjaspase/InputText";
