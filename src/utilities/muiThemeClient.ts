@@ -25,6 +25,15 @@ export const theme = createTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          // fieldset: {
+          //   borderColor: "blue",
+          // },
+        },
+      },
+    },
     MuiInput: {
       styleOverrides: {
         input: {

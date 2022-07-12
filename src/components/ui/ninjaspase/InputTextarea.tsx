@@ -1,25 +1,23 @@
-import { TextField, FormControlLabel } from "@mui/material";
+import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-const StyledFormControl = styled(FormControlLabel)`
+const Wrapper = styled("div")`
   background-color: transparent;
-  justify-content: space-between;
-  display: flex;
-  align-items: start;
   color: #84bcb4;
   margin: 20px;
-  .MuiTypography-root {
-    font-weight: bold;
-  }
+  font-weight: bold;
 `;
 
-// MuiInputBase-root
-const Text = styled(TextField)`
-  width: -webkit-fill-available;
+const Label = styled("label")`
+  width: 20%;
+  margin: auto 0;
+  font-size: 16px;
+`;
+
+const CustomTextField = styled(TextField)`
+  width: 100%;
   margin: 20px auto;
-  border: 1px solid #84bcb4;
-  border-radius: 10px;
 `;
 
 export interface InputTextareaProps {
@@ -53,7 +51,7 @@ export const InputTextareaCustom: React.VFC<InputTextareaProps> = ({
   register,
   error = false,
   helperText,
-  label = "",
+  label,
   value,
   disabled = false,
   placeholder,
@@ -64,39 +62,34 @@ export const InputTextareaCustom: React.VFC<InputTextareaProps> = ({
   readOnly,
 }) => {
   return (
-    <StyledFormControl
-      control={
-        <Text
-          onChange={onChange}
-          onKeyDown={() => onKeyDown}
-          onBlur={onBlur}
-          onFocus={onFocus}
-          error={error}
-          helperText={helperText}
-          multiline
-          rows={4}
-          tabIndex={0}
-          id={label}
-          type={type}
-          disabled={disabled}
-          autoFocus={autoFocus}
-          placeholder={placeholder}
-          value={value}
-          maxRows={maxRows}
-          variant="standard"
-          sx={{ p: 2 }}
-          inputProps={{
-            maxLength,
-            style: {
-              // height: "127px",
-            },
-            readOnly,
-          }}
-          {...register}
-        />
-      }
-      label={label}
-      labelPlacement="top"
-    />
+    <Wrapper>
+      {label && <Label htmlFor={label}>{label}</Label>}
+      <CustomTextField
+        onChange={onChange}
+        onKeyDown={() => onKeyDown}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        error={error}
+        helperText={helperText}
+        multiline
+        rows={4}
+        tabIndex={0}
+        id={label}
+        type={type}
+        disabled={disabled}
+        autoFocus={autoFocus}
+        placeholder={placeholder}
+        value={value}
+        maxRows={maxRows}
+        inputProps={{
+          maxLength,
+          style: {
+            // height: "127px",
+          },
+          readOnly,
+        }}
+        {...register}
+      />
+    </Wrapper>
   );
 };

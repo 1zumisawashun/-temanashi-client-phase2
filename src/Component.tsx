@@ -5,8 +5,8 @@ import {
   SelectForm,
   InputTextCustom,
   InputTextareaCustom,
+  Divider,
 } from "./components/ui";
-import MuiDivider from "@mui/material/Divider";
 import styled from "@emotion/styled";
 
 const Container = styled("div")`
@@ -15,11 +15,12 @@ const Container = styled("div")`
   background: #f4f4f4;
 `;
 const Inner = styled("div")`
-  width: 50%;
+  width: 60%;
   margin: auto;
 `;
 const FormContainer = styled("div")`
   border: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: 40px;
 `;
 const ButtonWrapper = styled("div")`
   text-align: end;
@@ -35,6 +36,25 @@ const ExampleText = styled("div")`
   font-size: 12px;
   font-weight: bold;
   margin: 0 20px 20px;
+`;
+
+const ComponentContainer = styled("div")`
+  position: relative;
+  margin-top: 40px;
+  padding: 16px;
+  padding-bottom: 8px;
+  border: 1px solid black;
+  border-radius: 4px;
+`;
+
+const ComponentTitle = styled("p")`
+  position: absolute;
+  top: -16px;
+  left: 16px;
+  padding: 0 8px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #f4f4f4;
 `;
 
 export type OptionProps = {
@@ -95,53 +115,89 @@ export const Component: React.VFC = () => {
     <Container>
       <Inner>
         <FormContainer>
-          <SwitchForm onChange={handleSwitchForm} value={checked} />
-          <MuiDivider />
+          <ComponentContainer>
+            <ComponentTitle>SwitchForm</ComponentTitle>
+            <SwitchForm onChange={handleSwitchForm} value={checked} />
+          </ComponentContainer>
 
-          <SelectForm
-            options={selectOptions}
-            value={selectValue}
-            onChange={handleSelectForm}
-          />
-          <MuiDivider />
+          <ComponentContainer>
+            <ComponentTitle>SelectForm</ComponentTitle>
+            <SelectForm
+              options={selectOptions}
+              value={selectValue}
+              onChange={handleSelectForm}
+            />
+            <Divider />
+            <SelectForm
+              options={selectOptions}
+              value={selectValue}
+              onChange={handleSelectForm}
+              error={!checked}
+              helperText="errorerrorerrorerrorerror"
+            />
+          </ComponentContainer>
 
-          <InputTextCustom value={textValue} onChange={onInputChange} />
-          <MuiDivider />
+          <ComponentContainer>
+            <ComponentTitle>InputText</ComponentTitle>
+            <InputTextCustom value={textValue} onChange={onInputChange} />
+            <Divider />
+            <InputTextCustom
+              value={textValue}
+              onChange={onInputChange}
+              error={!checked}
+              helperText="errorerrorerrorerrorerror"
+            />
+          </ComponentContainer>
 
-          <InputTextareaCustom
-            label="備考欄(200文字)"
-            value={textareaValue}
-            onChange={onInputChange2}
-          />
-          <MuiDivider />
+          <ComponentContainer>
+            <ComponentTitle>InputTextarea</ComponentTitle>
+            <InputTextareaCustom
+              label="備考欄（200文字）"
+              value={textareaValue}
+              onChange={onInputChange2}
+            />
+            <Divider />
+            <InputTextareaCustom
+              label="備考欄（200文字）"
+              value={textareaValue}
+              onChange={onInputChange2}
+              error={!checked}
+              helperText="errorerrorerrorerrorerror"
+            />
+          </ComponentContainer>
 
-          <InputTextCustom
-            value={textWithButtonValue}
-            onChange={onInputChange3}
-          />
-          <ButtonWrapper>
-            <BasicButton onClick={handleClick}>地図から反映</BasicButton>
-          </ButtonWrapper>
-          <CoutionText>
-            初期設定では「東京駅前」に設定されてしまいます。必ず店舗の位置を変更してください。
-          </CoutionText>
+          <ComponentContainer>
+            <ComponentTitle>InputText + BasicButton</ComponentTitle>
+            <InputTextCustom
+              value={textWithButtonValue}
+              onChange={onInputChange3}
+            />
+            <ButtonWrapper>
+              <BasicButton onClick={handleClick}>地図から反映</BasicButton>
+            </ButtonWrapper>
+            <CoutionText>
+              初期設定では「東京駅前」に設定されてしまいます。必ず店舗の位置を変更してください。
+            </CoutionText>
+          </ComponentContainer>
 
-          <MuiDivider />
-          <SwitchForm onChange={handleSwitchForm2} value={checkedWithText} />
-          <CoutionText>
-            アクセスの際の注意点があればご記入ください。利用者側にのみ通知されます。
-          </CoutionText>
-          {checkedWithText && (
-            <>
-              <ExampleText>
-                例：店舗は １階ですが、地下１階が受付になります。
-              </ExampleText>
-              <InputTextareaCustom
-                value={textareaValue}
-                onChange={onInputChange2}
-              />
-            </>
-          )}
+          <ComponentContainer>
+            <ComponentTitle>SwitchForm + InputTextarea</ComponentTitle>
+            <SwitchForm onChange={handleSwitchForm2} value={checkedWithText} />
+            <CoutionText>
+              アクセスの際の注意点があればご記入ください。利用者側にのみ通知されます。
+            </CoutionText>
+            {checkedWithText && (
+              <>
+                <ExampleText>
+                  例：店舗は １階ですが、地下１階が受付になります。
+                </ExampleText>
+                <InputTextareaCustom
+                  value={textareaValue}
+                  onChange={onInputChange2}
+                />
+              </>
+            )}
+          </ComponentContainer>
         </FormContainer>
       </Inner>
     </Container>
