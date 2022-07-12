@@ -1,29 +1,49 @@
-import MenuItem from "@mui/material/MenuItem";
-import { FormControlLabel, TextField, InputAdornment } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import CircularProgress from "@mui/material/CircularProgress";
+import {
+  MenuItem,
+  TextField,
+  InputAdornment,
+  IconButton,
+  CircularProgress,
+} from "@mui/material";
 import styled from "@emotion/styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import IconButton from "@mui/material/IconButton";
+import { UseFormRegisterReturn } from "react-hook-form";
 
-const StyledFormControl = styled("div")`
+const Wrapper = styled("div")`
   background-color: transparent;
-  justify-content: space-between;
   display: flex;
   color: #84bcb4;
-  margin: 0 0 0 20px;
+  margin: 20px;
   font-weight: bold;
-  .MuiInput-input {
-    text-align: end;
+`;
+
+const Label = styled("label")`
+  width: 20%;
+  margin: auto 0;
+  font-size: 16px;
+`;
+
+const CustomTextField = styled(TextField)`
+  width: 80%;
+  .MuiOutlinedInput-root {
+    padding: 0;
+    /* fieldset {
+      border: none;
+    }
+    &:hover fieldset {
+      border: none;
+    }
+    &.Mui-focused fieldset {
+      border: none;
+    } */
   }
 `;
 
-const Text = styled(TextField)`
-  width: 70%;
-`;
-const Label = styled("label")`
-  margin: auto auto auto 0;
-  font-size: 16px;
+const CustomInputAdornment = styled(InputAdornment)`
+  position: absolute;
+  padding: 0;
+  right: 10px;
+  top: 50%;
 `;
 
 const Placehoplder = styled("p")`
@@ -31,18 +51,24 @@ const Placehoplder = styled("p")`
 `;
 
 export type SelectFormProps = {
-  className?: string;
+  // NOTE:アクション
+  onChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  // NOTE:エラーハンドリング
+  register?: UseFormRegisterReturn;
+  error?: boolean;
+  helperText?: string;
+  // NOTE:必須項目
   id?: string;
   labelId?: string;
   label?: string;
   value: string;
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
   options: OptionProps[];
   placeholder?: string;
   disabled?: boolean;
   isLoading?: boolean;
+  //NOTE:追加項目
   defaultValue?: string;
 };
 
@@ -52,11 +78,14 @@ export type OptionProps = {
 };
 
 export const SelectForm: React.VFC<SelectFormProps> = ({
+  onChange,
+  register,
+  error = false,
+  helperText = "",
   id,
   labelId = "select",
   label = "営業開始時間",
   value,
-  onChange,
   options,
   placeholder,
   disabled = false,
@@ -64,20 +93,20 @@ export const SelectForm: React.VFC<SelectFormProps> = ({
   defaultValue = "",
 }) => {
   return (
-    <StyledFormControl>
+    <Wrapper>
       <Label id={labelId}>{label}</Label>
-      <Text
+      <CustomTextField
         id={id}
         select
-        variant="standard"
-        sx={{ m: 2 }}
         value={value}
         disabled={disabled || options.length === 0 || isLoading}
         onChange={onChange}
+        helperText={helperText}
+        error={error}
         SelectProps={{
           labelId,
           MenuProps: {
-            disableScrollLock: true,
+            // disableScrollLock: true,
           },
           defaultValue,
           IconComponent: () => null,
@@ -87,22 +116,23 @@ export const SelectForm: React.VFC<SelectFormProps> = ({
             return options.find((option) => option.value === value)?.label;
           },
         }}
-        inputProps={{
+        InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
+            <CustomInputAdornment position="end">
               <IconButton>
                 <ArrowForwardIosIcon />
               </IconButton>
-            </InputAdornment>
+            </CustomInputAdornment>
           ),
         }}
+        {...register}
       >
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>
         ))}
-      </Text>
-    </StyledFormControl>
+      </CustomTextField>
+    </Wrapper>
   );
 };

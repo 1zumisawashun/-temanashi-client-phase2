@@ -1,32 +1,46 @@
-import { TextField, FormControlLabel } from "@mui/material";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
 import styled from "@emotion/styled";
-import { UseFormRegisterReturn } from "react-hook-form";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
+import { UseFormRegisterReturn } from "react-hook-form";
 
-const StyledFormControl = styled("div")`
+const Wrapper = styled("div")`
   background-color: transparent;
-  justify-content: space-between;
   display: flex;
   color: #84bcb4;
-  margin: 0 0 0 20px;
+  margin: 20px;
   font-weight: bold;
-  .MuiInput-input {
-    text-align: end;
-  }
-`;
-
-const Text = styled(TextField)`
-  width: 70%;
 `;
 
 const Label = styled("label")`
-  margin: auto auto auto 0;
+  width: 20%;
+  margin: auto 0;
   font-size: 16px;
 `;
 
-export interface InputTextProps {
+const CustomTextField = styled(TextField)`
+  width: 80%;
+  .MuiOutlinedInput-root {
+    padding: 0;
+    /* fieldset {
+      border: none;
+    }
+    &:hover fieldset {
+      border: none;
+    }
+    &.Mui-focused fieldset {
+      border: none;
+    } */
+  }
+`;
+
+const CustomInputAdornment = styled(InputAdornment)`
+  position: absolute;
+  padding: 0;
+  right: 10px;
+  top: 50%;
+`;
+
+export type InputTextProps = {
   // NOTE:アクション
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -49,7 +63,7 @@ export interface InputTextProps {
   maxLength?: number;
   inputRef?: React.RefObject<HTMLInputElement>;
   size?: "small";
-}
+};
 
 export const InputTextCustom: React.VFC<InputTextProps> = ({
   onChange,
@@ -66,15 +80,15 @@ export const InputTextCustom: React.VFC<InputTextProps> = ({
   type = "text",
   autoFocus = false,
   name,
-  pattern,
-  maxLength = 255,
+  // pattern,
+  // maxLength = 255,
   inputRef = null,
   size,
 }) => {
   return (
-    <StyledFormControl>
+    <Wrapper>
       <Label htmlFor={label}>{label}</Label>
-      <Text
+      <CustomTextField
         onChange={onChange}
         onKeyDown={onKeyDown}
         onBlur={onBlur}
@@ -90,21 +104,19 @@ export const InputTextCustom: React.VFC<InputTextProps> = ({
         helperText={helperText}
         inputRef={inputRef}
         size={size}
-        variant="standard"
-        sx={{ m: 2 }}
-        inputProps={{
-          maxLength,
-          pattern,
+        // maxLength,
+        // pattern,
+        InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
+            <CustomInputAdornment position="end">
               <IconButton>
                 <ArrowForwardIosIcon />
               </IconButton>
-            </InputAdornment>
+            </CustomInputAdornment>
           ),
         }}
         {...register}
       />
-    </StyledFormControl>
+    </Wrapper>
   );
 };
