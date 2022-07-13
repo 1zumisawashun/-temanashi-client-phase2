@@ -1,9 +1,25 @@
 import { useState } from "react";
-
 import { CloseButton, BasicButton, BasicModal, TextError } from ".";
 import { useDisclosure, useDragAndDrop } from "../../hooks";
 import styled from "@emotion/styled";
 
+const UploadContainer = styled("div")`
+  display: flex;
+  justify-content: space-between;
+  overflow-x: scroll;
+`;
+const UploadWrapper = styled("label")`
+  width: 240px;
+  height: 370px;
+  margin: 0 auto 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #84bcb4;
+`;
 const CloseButtonContainer = styled("div")`
   background: none;
   border: none;
@@ -102,14 +118,14 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
   };
   return (
     <>
-      <div className="photos-container" ref={dragRef}>
+      <UploadContainer ref={dragRef}>
         {[...Array(3)].map((_: number, index: number) =>
           files !== null && index < files.length ? (
             <div key={`select-file-${index}`}>
               <CloseButtonContainer>
                 <CloseButton onClick={() => executeModal.open()} />
               </CloseButtonContainer>
-              <div className="wrapper">
+              <UploadWrapper>
                 <BasicModal
                   title="本当に削除しますか？"
                   open={executeModal.isOpen}
@@ -131,24 +147,24 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
                   width="200"
                   className="image"
                 />
-              </div>
+              </UploadWrapper>
             </div>
           ) : (
             <div key={`no-file-${index}`}>
               <CloseButtonContainerHidden>
                 <CloseButton onClick={() => executeModal.open()} />
               </CloseButtonContainerHidden>
-              <label className="wrapper" htmlFor={name}>
+              <UploadWrapper htmlFor={name}>
                 <img
                   src="https://placehold.jp/200x200.png"
                   alt=""
                   className="image"
                 />
-              </label>
+              </UploadWrapper>
             </div>
           )
         )}
-      </div>
+      </UploadContainer>
 
       <TextError error={isError} helperText={isError} />
 

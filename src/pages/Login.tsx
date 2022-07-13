@@ -7,9 +7,6 @@ import { Head } from "../components/layout";
 const Container = styled("div")`
   flex-grow: 1;
   width: calc(100% - 650px);
-  @media (min-width: 576px) {
-    display: block;
-  }
 `;
 
 export const Login: React.VFC = () => {
