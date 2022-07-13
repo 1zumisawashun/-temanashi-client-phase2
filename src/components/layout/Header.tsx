@@ -1,9 +1,9 @@
 import { useState } from "react";
-import HamburgerMenu from "./HambergerMenu";
-import { StoreButton } from "../ui";
+import { HambergerMenu } from "./HambergerMenu";
+import { ButtonIconStore } from "../ui";
 import { useHistory } from "react-router-dom";
 
-const Header: React.VFC = () => {
+export const Header: React.VFC = () => {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -12,16 +12,14 @@ const Header: React.VFC = () => {
       <ul className="wrapper">
         {!isOpen && (
           <li className="logo">
-            <StoreButton onClick={() => history.push("/")} />
+            <ButtonIconStore onClick={() => history.push("/")} />
             <span>temanashi client</span>
           </li>
         )}
       </ul>
       <div className="responsive-wrapper">
-        <HamburgerMenu state={isOpen} setState={setIsOpen} />
+        <HambergerMenu state={isOpen} setState={setIsOpen} />
       </div>
     </div>
   );
 };
-
-export default Header;

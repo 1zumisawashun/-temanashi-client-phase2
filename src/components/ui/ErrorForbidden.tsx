@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
-import { BasicButton } from "./index";
+import { Button } from "./index";
 
 const ContentWrapper = styled("div")`
   background: #84bcb4;
@@ -58,9 +58,9 @@ export const ErrorForbidden: React.VFC = () => {
           <p>トップ画面へ戻り本サービスをご利用ください。</p>
         </FirstParagraph>
         <FooterContent>
-          <BasicButton onClick={() => history.push("/")} size="large">
+          <Button onClick={() => history.push("/")} size="large">
             トップ画面に戻る
-          </BasicButton>
+          </Button>
         </FooterContent>
       </Content>
     </ContentWrapper>

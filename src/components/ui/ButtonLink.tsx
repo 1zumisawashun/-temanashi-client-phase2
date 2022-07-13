@@ -1,9 +1,9 @@
 import { ReactNode, CSSProperties } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Button from "@mui/material/Button";
+import MuiButton from "@mui/material/Button";
 import { SvgIconProps } from "@mui/material";
 
-type LinkButtonProps = {
+type ButtonLinkProps = {
   path?: string;
   children: ReactNode;
   icon?: SvgIconProps;
@@ -23,7 +23,7 @@ type LinkButtonProps = {
  * MUIのLinkコンポーネントの場合iconの追加ができないためButtonを採用
  * 初期カラーを白にするためにvariant = secondaryを当てている
  */
-const LinkButton: React.VFC<LinkButtonProps> = ({
+export const ButtonLink: React.VFC<ButtonLinkProps> = ({
   path,
   children,
   icon,
@@ -31,7 +31,7 @@ const LinkButton: React.VFC<LinkButtonProps> = ({
   onClick,
 }) => {
   return (
-    <Button
+    <MuiButton
       component={Link}
       to={`${path}`}
       startIcon={icon}
@@ -40,7 +40,7 @@ const LinkButton: React.VFC<LinkButtonProps> = ({
       onClick={onClick}
     >
       {children}
-    </Button>
+    </MuiButton>
   );
 };
 
@@ -48,14 +48,14 @@ const LinkButton: React.VFC<LinkButtonProps> = ({
  * NavLinkの場合「active」というクラスの付与が可能になる
  * styledNameにお使い方に関してはProgressbarコンポーネントを見た方が良いかもしれない
  */
-const NavlinkButton: React.VFC<LinkButtonProps> = ({
+export const ButtonNavlink: React.VFC<ButtonLinkProps> = ({
   path,
   children,
   icon,
   styledName,
 }) => {
   return (
-    <Button
+    <MuiButton
       component={NavLink}
       exact
       to={`${path}`}
@@ -65,8 +65,6 @@ const NavlinkButton: React.VFC<LinkButtonProps> = ({
       style={styledName}
     >
       {children}
-    </Button>
+    </MuiButton>
   );
 };
-
-export { LinkButton, NavlinkButton };

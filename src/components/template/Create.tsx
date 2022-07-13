@@ -7,8 +7,8 @@ import {
   InputSelect,
   InputText,
   InputTextarea,
-  InputFileMulti,
-  BasicButton,
+  InputFileMultiple,
+  Button,
 } from "../ui";
 import { OptionProps } from "../ui/InputSelect";
 import { MultiValue } from "react-select";
@@ -172,7 +172,7 @@ const CreateProject: React.VFC = () => {
   return (
     <div className="common-container">
       {scrollToPhotos.renderScrollElement()}
-      <InputFileMulti
+      <InputFileMultiple
         files={files}
         onInputFileChange={(value) => onInputFileChange(value)}
       />
@@ -244,7 +244,7 @@ const CreateProject: React.VFC = () => {
           error={formError.length !== 0}
           helperText={formError}
         />
-        <BasicButton
+        <Button
           isLoading={isLoading}
           onClick={() => {
             checkOnPreSubmit();
@@ -252,7 +252,7 @@ const CreateProject: React.VFC = () => {
           }}
         >
           完了
-        </BasicButton>
+        </Button>
       </FormContainer>
     </div>
   );

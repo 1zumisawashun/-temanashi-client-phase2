@@ -2,7 +2,7 @@ import FormControl from "@mui/material/FormControl";
 import styled from "@emotion/styled";
 import Select, { MultiValue } from "react-select";
 import { CSSProperties } from "react";
-import { ErrorText } from "./ErrorText";
+import { ErrorText } from "./index";
 
 const StyledFormControl = styled(FormControl)`
   font-size: 16px;
@@ -45,7 +45,7 @@ export type SelectFormProps = {
   helperText?: string;
 };
 
-const InputSelect: React.VFC<SelectFormProps> = ({
+export const InputSelect: React.VFC<SelectFormProps> = ({
   label,
   onChange,
   options,
@@ -72,5 +72,3 @@ const InputSelect: React.VFC<SelectFormProps> = ({
     </StyledFormControl>
   );
 };
-
-export default InputSelect;

@@ -1,5 +1,5 @@
 import Hamburger from "hamburger-react";
-import { LinkButton, StoreButton } from "../ui";
+import { ButtonLink, ButtonIconStore } from "../ui";
 import { useAuthContext } from "../../hooks/useContextClient";
 import { useHistory } from "react-router-dom";
 
@@ -8,7 +8,10 @@ interface HamburgerMenuProp {
   setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
+export const HambergerMenu: React.VFC<HamburgerMenuProp> = ({
+  state,
+  setState,
+}) => {
   const history = useHistory();
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
@@ -23,7 +26,7 @@ const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
     <div className="responsive-header">
       <ul className="head">
         <li className="logo">
-          <StoreButton onClick={() => history.push("/")} />
+          <ButtonIconStore onClick={() => history.push("/")} />
           <span>Temanashi</span>
         </li>
         <li className="hamburger-box">
@@ -34,33 +37,33 @@ const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
         <div className="responsive-overlay">
           <ul className="menu">
             <li className="hamburger-link">
-              <LinkButton onClick={() => closeHamburger("/")}>
+              <ButtonLink onClick={() => closeHamburger("/")}>
                 Dashboard
-              </LinkButton>
+              </ButtonLink>
             </li>
             <li className="hamburger-link">
-              <LinkButton onClick={() => closeHamburger("/create/furniture")}>
+              <ButtonLink onClick={() => closeHamburger("/create/furniture")}>
                 New Furniture
-              </LinkButton>
+              </ButtonLink>
             </li>
             <li className="hamburger-link">
-              <LinkButton onClick={() => closeHamburger("/diagnose")}>
+              <ButtonLink onClick={() => closeHamburger("/diagnose")}>
                 Diagnose
-              </LinkButton>
+              </ButtonLink>
             </li>
             <li className="hamburger-link">
-              <LinkButton
+              <ButtonLink
                 onClick={() => closeHamburger(`/users/${user.uid}/cart`)}
               >
                 Shopping Cart
-              </LinkButton>
+              </ButtonLink>
             </li>
             <li className="hamburger-link">
-              <LinkButton
+              <ButtonLink
                 onClick={() => closeHamburger(`/users/${user.uid}/favorite`)}
               >
                 My Page
-              </LinkButton>
+              </ButtonLink>
             </li>
           </ul>
         </div>
@@ -68,5 +71,3 @@ const HamburgerMenu: React.VFC<HamburgerMenuProp> = ({ state, setState }) => {
     </div>
   );
 };
-
-export default HamburgerMenu;

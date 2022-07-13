@@ -8,7 +8,7 @@ type DividerProps = {
  * https://mui.com/material-ui/react-divider/
  * https://mui.com/material-ui/api/divider/
  */
-const Divider: React.VFC<DividerProps> = ({ variant = "middle" }) => {
+export const Divider: React.VFC<DividerProps> = ({ variant = "middle" }) => {
   return (
     <MuiDivider
       variant={variant}
@@ -19,4 +19,3 @@ const Divider: React.VFC<DividerProps> = ({ variant = "middle" }) => {
     />
   );
 };
-export default Divider;

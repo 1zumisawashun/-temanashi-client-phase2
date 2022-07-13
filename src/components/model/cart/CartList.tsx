@@ -5,7 +5,7 @@ import {
 } from "../../../hooks/useContextClient";
 import { formatTaxIncludedPrice } from "../../../utilities";
 import CartCounter from "./CartCounter";
-import { Divider, Image, DeleteButton } from "../../ui";
+import { Divider, Image, ButtonIconDelete } from "../../ui";
 interface Product {
   id: string;
   title: string;
@@ -63,7 +63,7 @@ const CartList: React.VFC<CartListProps> = ({ productItems }) => {
                   </div>
                 </div>
                 <div>
-                  <DeleteButton
+                  <ButtonIconDelete
                     styleName="delete-icon"
                     size="large"
                     onClick={() => HandleRemove(item.id)}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputCheckbox, BasicButton } from "../../ui";
+import { InputCheckbox, Button } from "../../ui";
 import styled from "@emotion/styled";
 
 const CartAgreementContainer = styled("div")`
@@ -32,9 +32,9 @@ const CartAgreement: React.VFC<CartAgreementProps> = ({ onClick }) => {
         size="medium"
         onChange={(e) => onInputChange(e)}
       />
-      <BasicButton isDisabled={!isAccepted} onClick={onClick}>
+      <Button isDisabled={!isAccepted} onClick={onClick}>
         購入する
-      </BasicButton>
+      </Button>
     </CartAgreementContainer>
   );
 };

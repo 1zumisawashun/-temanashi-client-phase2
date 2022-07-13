@@ -5,8 +5,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   InputText,
-  BasicButton,
-  LinkButton,
+  Button,
+  ButtonLink,
   InputFileSingle,
   ErrorText,
 } from "../ui";
@@ -125,7 +125,7 @@ const Signup: React.VFC = () => {
             thumbnail={thumbnail}
             onInputFileChange={onInputFileChange}
           />
-          <BasicButton
+          <Button
             isLoading={isPending}
             size="large"
             fullWidth
@@ -134,9 +134,9 @@ const Signup: React.VFC = () => {
             }}
           >
             Sign Up
-          </BasicButton>
+          </Button>
           <ErrorText error={error} helperText={error} />
-          <LinkButton path="/login">Move To Login</LinkButton>
+          <ButtonLink path="/login">Move To Login</ButtonLink>
         </FormContainer>
       </Inner>
     </Container>

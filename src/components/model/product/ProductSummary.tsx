@@ -4,8 +4,8 @@ import {
   useFirestore,
   useDisclosure,
 } from "../../../hooks";
-import { useHistory , useParams } from "react-router-dom";
-import { BasicButton, LikeButton, BasicModal } from "../../ui";
+import { useHistory, useParams } from "react-router-dom";
+import { Button, ButtonLike, Modal } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { formatTaxIncludedPrice } from "../../../utilities";
 import { Carousel } from "react-responsive-carousel";
@@ -64,7 +64,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
         ) : (
           <img src="https://placehold.jp/200x160.png" alt="" />
         )}
-        <BasicModal
+        <Modal
           title="プレビュー画面"
           open={previewModal.isOpen}
           handleOpen={() => previewModal.close()}
@@ -77,11 +77,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
               ))}
             </Carousel>
           }
-          footer={
-            <BasicButton onClick={() => previewModal.close()}>
-              閉じる
-            </BasicButton>
-          }
+          footer={<Button onClick={() => previewModal.close()}>閉じる</Button>}
         />
       </div>
 
@@ -93,21 +89,19 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
           </div>
           <p className="details">{furniture.product.description}</p>
           <ButtonWrapper>
-            <BasicButton onClick={() => executeModal.open()}>削除</BasicButton>
-            <BasicModal
+            <Button onClick={() => executeModal.open()}>削除</Button>
+            <Modal
               title="本当に削除しますか？"
               open={executeModal.isOpen}
               handleOpen={() => executeModal.close()}
               footer={
                 <>
-                  <BasicButton onClick={handleDelete}>はい</BasicButton>
-                  <BasicButton onClick={() => executeModal.close()}>
-                    いいえ
-                  </BasicButton>
+                  <Button onClick={handleDelete}>はい</Button>
+                  <Button onClick={() => executeModal.close()}>いいえ</Button>
                 </>
               }
             />
-            <BasicButton
+            <Button
               onClick={() =>
                 addCart({
                   id: furniture.product.id,
@@ -119,8 +113,8 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
               }
             >
               購入
-            </BasicButton>
-            <LikeButton furniture={furniture} />
+            </Button>
+            <ButtonLike furniture={furniture} />
           </ButtonWrapper>
         </div>
       ))}

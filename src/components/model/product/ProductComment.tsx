@@ -8,11 +8,11 @@ import { ja } from "date-fns/locale";
 import { timestamp } from "../../../firebase/config";
 import { useAuthContext } from "../../../hooks/useContextClient";
 import {
-  BasicButton,
-  BasicModal,
+  Button,
+  Modal,
   InputTextarea,
   Avatar,
-  PersonButton,
+  ButtonIconPerson,
 } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
 
@@ -62,7 +62,7 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
       <ul className="comment-list">
         <li>
           <div className="auther">
-            <PersonButton />
+            <ButtonIconPerson />
             <p>temanashi-tester</p>
           </div>
           <div className="date">
@@ -93,8 +93,8 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
             </li>
           ))}
       </ul>
-      <BasicButton onClick={() => commentModal.open()}>コメント</BasicButton>
-      <BasicModal
+      <Button onClick={() => commentModal.open()}>コメント</Button>
+      <Modal
         title="コメント入力フォーム"
         open={commentModal.isOpen}
         handleOpen={() => commentModal.close()}
@@ -106,10 +106,8 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
         }
         footer={
           <>
-            <BasicButton onClick={handleSubmit}>コメントする</BasicButton>
-            <BasicButton onClick={() => commentModal.close()}>
-              閉じる
-            </BasicButton>
+            <Button onClick={handleSubmit}>コメントする</Button>
+            <Button onClick={() => commentModal.close()}>閉じる</Button>
           </>
         }
       />

@@ -38,7 +38,7 @@ export interface InputTextareaProps {
   readOnly?: boolean;
 }
 
-const InputTextarea: React.VFC<InputTextareaProps> = ({
+export const InputTextarea: React.VFC<InputTextareaProps> = ({
   onChange,
   onKeyDown,
   onBlur,
@@ -88,5 +88,3 @@ const InputTextarea: React.VFC<InputTextareaProps> = ({
     </div>
   );
 };
-
-export default InputTextarea;

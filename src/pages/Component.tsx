@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BasicButton, Divider, BasicModal } from "../components/ui";
+import { Button, Divider, Modal } from "../components/ui";
 import styled from "@emotion/styled";
 import {
   SquareIcon,
@@ -219,10 +219,10 @@ export const Component: React.VFC = () => {
           </ComponentContainer>
 
           <ComponentContainer>
-            <ComponentTitle>InputText + BasicButton</ComponentTitle>
+            <ComponentTitle>InputText + Button</ComponentTitle>
             <InputText value={textWithButtonValue} onChange={onInputText2} />
             <ButtonWrapper>
-              <BasicButton onClick={handleClick}>地図から反映</BasicButton>
+              <Button onClick={handleClick}>地図から反映</Button>
             </ButtonWrapper>
             <CoutionText>
               ※初期設定では「東京駅前」に設定されてしまいます。必ず店舗の位置を変更してください。
@@ -249,29 +249,29 @@ export const Component: React.VFC = () => {
           </ComponentContainer>
 
           <ComponentContainer>
-            <ComponentTitle>BasicButton & BasicModal</ComponentTitle>
-            <BasicButton onClick={handleOpen}>primary</BasicButton>
+            <ComponentTitle>Button & BasicModal</ComponentTitle>
+            <Button onClick={handleOpen}>primary</Button>
             <Divider />
-            <BasicButton onClick={handleOpen} isLoading>
+            <Button onClick={handleOpen} isLoading>
               primary
-            </BasicButton>
+            </Button>
             <Divider />
-            <BasicButton onClick={handleOpen} variant="secondary">
+            <Button onClick={handleOpen} variant="secondary">
               secondary
-            </BasicButton>
+            </Button>
             <Divider />
-            <BasicButton onClick={handleOpen} isDisabled>
+            <Button onClick={handleOpen} isDisabled>
               disable
-            </BasicButton>
-            <BasicModal
-              title="basicmodal"
+            </Button>
+            <Modal
+              title="modal"
               open={isOpen}
               handleOpen={handleOpen}
               contents={<InputTextarea />}
               footer={
                 <>
-                  <BasicButton onClick={handleOpen}>はい</BasicButton>
-                  <BasicButton onClick={handleOpen}>いいえ</BasicButton>
+                  <Button onClick={handleOpen}>はい</Button>
+                  <Button onClick={handleOpen}>いいえ</Button>
                 </>
               }
             />

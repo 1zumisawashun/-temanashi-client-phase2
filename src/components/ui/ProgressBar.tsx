@@ -23,7 +23,10 @@ type ProgressBarProps = {
   percent: number;
 };
 
-const ProgressBar: React.VFC<ProgressBarProps> = ({ width, percent }) => {
+export const ProgressBar: React.VFC<ProgressBarProps> = ({
+  width,
+  percent,
+}) => {
   const [value, setValue] = useState<number>(0);
 
   useEffect(() => {
@@ -36,5 +39,3 @@ const ProgressBar: React.VFC<ProgressBarProps> = ({ width, percent }) => {
     </ProgressWrapper>
   );
 };
-
-export default ProgressBar;

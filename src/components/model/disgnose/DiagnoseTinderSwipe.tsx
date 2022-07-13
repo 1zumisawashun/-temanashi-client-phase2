@@ -3,9 +3,9 @@ import TinderCard from "react-tinder-card";
 import {
   ProgressBar,
   Loading,
-  ThumbDownButton,
-  ThumbUpButton,
-  UndoButton,
+  ButtonIconThumbDown,
+  ButtonIconThumbUp,
+  ButtonIconUndo,
 } from "../../ui";
 // import TinderCard from '../react-tinder-card/index'
 import styled from "@emotion/styled";
@@ -152,9 +152,9 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
           ))}
         </div>
         <ButtonWrapper>
-          <ThumbDownButton size="large" onClick={() => swipe("left")} />
-          <UndoButton size="large" onClick={() => goBack()} />
-          <ThumbUpButton size="large" onClick={() => swipe("right")} />
+          <ButtonIconThumbDown size="large" onClick={() => swipe("left")} />
+          <ButtonIconUndo size="large" onClick={() => goBack()} />
+          <ButtonIconThumbUp size="large" onClick={() => swipe("right")} />
         </ButtonWrapper>
       </div>
     </CommonWrapper>

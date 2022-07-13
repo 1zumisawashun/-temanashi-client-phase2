@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { InputText, BasicButton, LinkButton, ErrorText } from "../ui";
+import { InputText, Button, ButtonLink, ErrorText } from "../ui";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -96,7 +96,7 @@ const Login: React.VFC = () => {
             placeholder="Must have atleast 6 characters"
             data-cy="password"
           />
-          <BasicButton
+          <Button
             isLoading={isPending}
             data-cy="login"
             size="large"
@@ -106,9 +106,9 @@ const Login: React.VFC = () => {
             }}
           >
             Login
-          </BasicButton>
+          </Button>
           <ErrorText error={error} helperText={error} />
-          <LinkButton path="/signup">Move To Sign Up</LinkButton>
+          <ButtonLink path="/signup">Move To Sign Up</ButtonLink>
         </FormContainer>
       </Inner>
     </Container>
