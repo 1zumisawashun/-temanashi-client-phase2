@@ -3,7 +3,6 @@ import { useState } from "react";
 import { CloseButton, BasicButton, BasicModal, TextError } from ".";
 import { useDisclosure, useDragAndDrop } from "../../hooks";
 import styled from "@emotion/styled";
-import { v4 as uuidv4 } from "uuid";
 
 const CloseButtonContainer = styled("div")`
   background: none;
@@ -28,7 +27,7 @@ const CloseButtonContainerHidden = styled("div")`
 
 interface PhotosUploadProps {
   name?: string; // NOTE:input["file"]とlabelをリンクさせるためのフラグ
-  photos: File[];
+  files: File[];
   onInputFileChange: (files: File[]) => void;
 }
 
@@ -42,7 +41,7 @@ const mineType = [
 
 export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
   name = "photos",
-  photos,
+  files,
   onInputFileChange,
 }): React.ReactElement => {
   const executeModal = useDisclosure();
@@ -51,32 +50,35 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
 
   const handleCancel = (photoIndex: number) => {
     setIsError("");
-    if (!photos) return;
-    const modifyPhotos = photos.filter((photo, index) => photoIndex !== index);
+    if (!files) return;
+    const modifyPhotos = files.filter((file, index) => photoIndex !== index);
     onInputFileChange(modifyPhotos);
     executeModal.close();
   };
 
   const handleFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    let addedPhotos: File[] = [];
+    let newFiles: File[] = [];
 
     if (event.target.files === null || event.target.files.length === 0) {
       return;
     }
 
-    const files = Object.values(event.target.files).concat();
-    // event.target.value = "";
+    const copiedFiles = Object.values(event.target.files).concat();
+    // eslint-disable-next-line
+    event.target.value = "";
     setIsError("");
 
-    const pickedPhotos = files.filter((file) => {
-      if (!mineType.includes(file.type)) {
+    const checkedFiles = copiedFiles.filter((copiedFile) => {
+      if (!mineType.includes(copiedFile.type)) {
         setIsError(
           "※jpeg, png, bmp, gif, svg以外のファイル形式は表示されません"
         );
         return false;
       }
-      if (photos.length !== 0) {
-        const existsSameSize = photos.some((photo) => photo.size === file.size);
+      if (files.length !== 0) {
+        const existsSameSize = files.some(
+          (file) => file.size === copiedFile.size
+        );
         if (existsSameSize) {
           setIsError("※既に選択された画像と同じものは表示されません");
           return false;
@@ -85,25 +87,25 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
       return true;
     });
 
-    if (pickedPhotos.length === 0) {
+    if (checkedFiles.length === 0) {
       return;
     }
 
-    addedPhotos = [...photos, ...pickedPhotos];
+    newFiles = [...files, ...checkedFiles];
 
-    if (addedPhotos.length >= 4) {
+    if (newFiles.length >= 4) {
       setIsError("※3枚を超えて選択された画像は表示されません");
       return;
     }
 
-    onInputFileChange(addedPhotos.slice(0, 3));
+    onInputFileChange(newFiles.slice(0, 3));
   };
   return (
     <>
       <div className="photos-container" ref={dragRef}>
         {[...Array(3)].map((_: number, index: number) =>
-          photos !== null && index < photos.length ? (
-            <div key={uuidv4()}>
+          files !== null && index < files.length ? (
+            <div key={`select-file-${index}`}>
               <CloseButtonContainer>
                 <CloseButton onClick={() => executeModal.open()} />
               </CloseButtonContainer>
@@ -124,7 +126,7 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
                   }
                 />
                 <img
-                  src={URL.createObjectURL(photos[index])}
+                  src={URL.createObjectURL(files[index])}
                   alt={`あなたの写真 ${index + 1}`}
                   width="200"
                   className="image"
@@ -132,7 +134,7 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
               </div>
             </div>
           ) : (
-            <div key={uuidv4()}>
+            <div key={`no-file-${index}`}>
               <CloseButtonContainerHidden>
                 <CloseButton onClick={() => executeModal.open()} />
               </CloseButtonContainerHidden>
