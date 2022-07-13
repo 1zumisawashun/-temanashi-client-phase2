@@ -18,7 +18,7 @@ const { Login } = lazyImport(() => import("../pages/Login"), "Login");
 const { Product } = lazyImport(() => import("../pages/Product"), "Product");
 const { Signup } = lazyImport(() => import("../pages/Signup"), "Signup");
 const { User } = lazyImport(() => import("../pages/User"), "User");
-const { Component } = lazyImport(() => import("../Component"), "Component");
+const { Component } = lazyImport(() => import("../pages/Component"), "Component");
 
 const AppContainer = styled("div")`
   display: flex;

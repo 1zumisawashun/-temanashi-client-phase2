@@ -1,21 +1,19 @@
 import { useState } from "react";
-import {
-  SwitchForm,
-  BasicButton,
-  SelectForm,
-  InputTextCustom,
-  InputTextareaCustom,
-  Divider,
-  CheckboxGroup,
-  BasicModal,
-} from "./components/ui";
+import { BasicButton, Divider, BasicModal } from "../components/ui";
 import styled from "@emotion/styled";
 import {
   SquareIcon,
   SquareIconBlank,
   CircleIcon,
   CircleIconBlank,
-} from "./components/ui/ninjaspase/CheckboxGroup";
+} from "../components/ui/phase3/CheckboxGroup";
+import {
+  SwitchForm,
+  SelectForm,
+  InputText,
+  InputTextarea,
+  CheckboxGroup,
+} from "../components/ui/phase3";
 
 const Container = styled("div")`
   width: 100%;
@@ -179,9 +177,9 @@ export const Component: React.VFC = () => {
 
           <ComponentContainer>
             <ComponentTitle>InputText</ComponentTitle>
-            <InputTextCustom value={textValue} onChange={onInputChange} />
+            <InputText value={textValue} onChange={onInputChange} />
             <Divider />
-            <InputTextCustom
+            <InputText
               value={textValue}
               onChange={onInputChange}
               error={!checked}
@@ -191,13 +189,13 @@ export const Component: React.VFC = () => {
 
           <ComponentContainer>
             <ComponentTitle>InputTextarea</ComponentTitle>
-            <InputTextareaCustom
+            <InputTextarea
               label="備考欄（200文字）"
               value={textareaValue}
               onChange={onInputChange2}
             />
             <Divider />
-            <InputTextareaCustom
+            <InputTextarea
               label="備考欄（200文字）"
               value={textareaValue}
               onChange={onInputChange2}
@@ -208,10 +206,7 @@ export const Component: React.VFC = () => {
 
           <ComponentContainer>
             <ComponentTitle>InputText + BasicButton</ComponentTitle>
-            <InputTextCustom
-              value={textWithButtonValue}
-              onChange={onInputChange3}
-            />
+            <InputText value={textWithButtonValue} onChange={onInputChange3} />
             <ButtonWrapper>
               <BasicButton onClick={handleClick}>地図から反映</BasicButton>
             </ButtonWrapper>
@@ -231,7 +226,7 @@ export const Component: React.VFC = () => {
                 <ExampleText>
                   例：店舗は １階ですが、地下１階が受付になります。
                 </ExampleText>
-                <InputTextareaCustom
+                <InputTextarea
                   value={textareaValue}
                   onChange={onInputChange2}
                 />
@@ -254,7 +249,7 @@ export const Component: React.VFC = () => {
               title="basicmodal"
               open={isOpen}
               handleOpen={handleOpen}
-              contents={<InputTextareaCustom />}
+              contents={<InputTextarea />}
               footer={
                 <>
                   <BasicButton onClick={handleOpen}>はい</BasicButton>
