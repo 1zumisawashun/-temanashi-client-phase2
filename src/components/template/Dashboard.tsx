@@ -16,7 +16,7 @@ const Dashboard: React.VFC = () => {
   );
 
   const changeFilter = (newFilter: string) => {
-    if (!newFilter) handleError("we cant find new filter");
+    if (!newFilter) handleError("changeFilter Error");
     setCurrentFilter(newFilter);
   };
 

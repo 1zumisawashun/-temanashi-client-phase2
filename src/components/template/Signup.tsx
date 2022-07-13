@@ -99,7 +99,6 @@ const Signup: React.VFC = () => {
             register={register("email", {
               onChange: (e) => setEmail(e.target.value),
             })}
-            value={email}
             error={"email" in errors}
             helperText={errors.email?.message}
             placeholder="xyz@gmail.com"
@@ -109,7 +108,6 @@ const Signup: React.VFC = () => {
             register={register("password", {
               onChange: (e) => setPassword(e.target.value),
             })}
-            value={password}
             error={"password" in errors}
             helperText={errors.password?.message}
             placeholder="Must have atleast 6 characters"
@@ -119,7 +117,6 @@ const Signup: React.VFC = () => {
             register={register("displayName", {
               onChange: (e) => setDisplayName(e.target.value),
             })}
-            value={displayName}
             error={"displayName" in errors}
             helperText={errors.displayName?.message}
             placeholder="your name or nick name"
@@ -129,8 +126,7 @@ const Signup: React.VFC = () => {
             onInputFileChange={onInputFileChange}
           />
           <BasicButton
-            isDisabled={isPending}
-            variant="secondary"
+            isLoading={isPending}
             size="large"
             fullWidth
             onClick={() => {

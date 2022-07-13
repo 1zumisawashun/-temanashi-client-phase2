@@ -50,19 +50,16 @@ export const ForbiddenError: React.VFC = () => {
       <Content>
         <Title>アクセスしようとしたページが見つかりません</Title>
         <FirstParagraph>
-          以下の原因が考えられます。
-          <br /> 1.URLが間違っているか、古い
+          <p>以下の原因が考えられます。</p>
+          <p> 1.URLが間違っているか、古い</p>
+          <p>2.権限が与えられていない操作</p>
           <br />
-          2.権限が与えられていない操作
-          <br />
-          <br />
-          ご不便をおかけしますが、アドレスをご確認いただくか、
-          <br />
-          引き続き1つ前のページから本サービスをご利用ください。
+          <p>ご不便をおかけしますが、アドレスをご確認いただくか、</p>
+          <p>トップ画面へ戻り本サービスをご利用ください。</p>
         </FirstParagraph>
         <FooterContent>
-          <BasicButton onClick={() => history.push("/")}>
-            前の画面に戻る
+          <BasicButton onClick={() => history.push("/")} size="large">
+            トップ画面に戻る
           </BasicButton>
         </FooterContent>
       </Content>

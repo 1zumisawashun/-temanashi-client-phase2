@@ -19,7 +19,7 @@ export { default as Image } from "./Image";
 export { default as InputCheckbox } from "./InputCheckbox";
 export { default as InputSelect } from "./InputSelect";
 export { InputText } from "./InputText";
-export { Loading, LoadingMui } from "./Loading";
+export { Loading } from "./Loading";
 export { default as NotFoundItem } from "./NotFoundItem";
 export { default as ProgressBar } from "./ProgressBar";
 export { LinkButton, NavlinkButton } from "./TextButton";

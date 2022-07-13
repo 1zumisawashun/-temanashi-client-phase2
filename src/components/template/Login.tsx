@@ -64,7 +64,6 @@ const Login: React.VFC = () => {
   });
 
   const onSubmit = () => {
-    console.log("onsubmit");
     login(email, password);
   };
 
@@ -82,7 +81,6 @@ const Login: React.VFC = () => {
             register={register("email", {
               onChange: (e) => setEmail(e.target.value),
             })}
-            value={email}
             error={"email" in errors}
             helperText={errors.email?.message}
             placeholder="xyz@gmail.com"
@@ -93,17 +91,15 @@ const Login: React.VFC = () => {
             register={register("password", {
               onChange: (e) => setPassword(e.target.value),
             })}
-            value={password}
             error={"password" in errors}
             helperText={errors.password?.message}
             placeholder="Must have atleast 6 characters"
             data-cy="password"
           />
           <BasicButton
-            isDisabled={isPending}
+            isLoading={isPending}
             data-cy="login"
             size="large"
-            variant="secondary"
             fullWidth
             onClick={() => {
               handleSubmit(onPreSubmit)();

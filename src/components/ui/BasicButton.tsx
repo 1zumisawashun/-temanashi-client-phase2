@@ -31,7 +31,7 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
   variant = "primary",
   size = "medium",
   isDisabled,
-  isLoading,
+  isLoading = false,
   onClick,
   fullWidth = false,
 }) => {
@@ -51,8 +51,8 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
         marginBottom: () => (size === "medium" || fullWidth ? "10px" : "0px"),
       }}
     >
-      {isLoading && <CircularProgress color="primary" />}
-      {children}
+      {!isLoading && <p>{children}</p>}
+      {isLoading && <CircularProgress color="secondary" size={25} />}
     </Button>
   );
 };
