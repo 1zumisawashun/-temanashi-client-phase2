@@ -58,7 +58,7 @@ export const ErrorForbidden: React.VFC = () => {
           <p>トップ画面へ戻り本サービスをご利用ください。</p>
         </FirstParagraph>
         <FooterContent>
-          <Button onClick={() => history.push("/")} size="large">
+          <Button onClick={() => history.push("/dammy")} size="large">
             トップ画面に戻る
           </Button>
         </FooterContent>

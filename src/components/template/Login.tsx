@@ -42,7 +42,7 @@ interface FormData {
   password: string;
 }
 
-const Login: React.VFC = () => {
+export const LoginTemplate: React.VFC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login, error, isPending } = useAuth();
@@ -114,5 +114,3 @@ const Login: React.VFC = () => {
     </Container>
   );
 };
-
-export default Login;

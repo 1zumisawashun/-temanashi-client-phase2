@@ -33,7 +33,7 @@ interface FormData {
   stock: string;
 }
 
-const CreateProject: React.VFC = () => {
+export const CreateTemplate: React.VFC = () => {
   const history = useHistory();
   const { getStorageUrl } = useStorage();
   const { cookies } = useToken();
@@ -170,7 +170,7 @@ const CreateProject: React.VFC = () => {
    * ここら辺は調査不足なので後で時間をとる
    */
   return (
-    <div className="common-container">
+    <>
       {scrollToPhotos.renderScrollElement()}
       <InputFileMultiple
         files={files}
@@ -254,8 +254,6 @@ const CreateProject: React.VFC = () => {
           完了
         </Button>
       </FormContainer>
-    </div>
+    </>
   );
 };
-
-export default CreateProject;

@@ -17,7 +17,7 @@ type Response = {
   jwt: string;
 };
 
-const UserAccount: React.VFC = () => {
+export const UserAccount: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
   const { logout, isPending } = useAuth();
@@ -90,4 +90,3 @@ const UserAccount: React.VFC = () => {
     </UserContainer>
   );
 };
-export default UserAccount;

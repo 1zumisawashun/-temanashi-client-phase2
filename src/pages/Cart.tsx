@@ -1,4 +1,4 @@
-import CartTemplate from "../components/template/Cart";
+import { CartTemplate } from "../components/template/Cart";
 import { useAuthContext } from "../hooks";
 import {
   Sidebar,

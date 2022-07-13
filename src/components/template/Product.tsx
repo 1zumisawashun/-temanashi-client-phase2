@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
-import ProductComment from "../model/product/ProductComment";
-import ProductSummary from "../model/product/ProductSummary";
+import { ProductComment, ProductSummary } from "../model/product";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
 import { useData } from "../../hooks";
 import styled from "@emotion/styled";
@@ -15,7 +14,7 @@ const ProductContainer = styled("div")`
   }
 `;
 
-const ProductTemplate: React.VFC = () => {
+export const ProductTemplate: React.VFC = () => {
   const { id } = useParams<{ id: string }>();
 
   const productItem = useData<ProductItem>(id, () =>
@@ -23,16 +22,13 @@ const ProductTemplate: React.VFC = () => {
   );
 
   return (
-    <div className="common-container">
-      <ProductContainer>
-        {productItem && (
-          <>
-            <ProductSummary furniture={productItem} />
-            <ProductComment furniture={productItem} />
-          </>
-        )}
-      </ProductContainer>
-    </div>
+    <ProductContainer>
+      {productItem && (
+        <>
+          <ProductSummary furniture={productItem} />
+          <ProductComment furniture={productItem} />
+        </>
+      )}
+    </ProductContainer>
   );
 };
-export default ProductTemplate;

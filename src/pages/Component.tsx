@@ -41,7 +41,6 @@ const ExampleText = styled("div")`
   font-size: 14px;
   margin: 0 20px 20px;
 `;
-
 const ComponentContainer = styled("div")`
   position: relative;
   margin-top: 40px;
@@ -50,7 +49,6 @@ const ComponentContainer = styled("div")`
   border: 1px solid black;
   border-radius: 4px;
 `;
-
 const ComponentTitle = styled("p")`
   position: absolute;
   top: -16px;
@@ -60,7 +58,6 @@ const ComponentTitle = styled("p")`
   font-weight: bold;
   background-color: #f4f4f4;
 `;
-
 const CheckboxGroupWrapper = styled("div")`
   background-color: transparent;
   display: flex;
@@ -72,7 +69,6 @@ const CheckboxGroupInner = styled("div")`
   width: 80%;
   text-align: end;
 `;
-
 const Label = styled("label")`
   width: 20%;
   margin: auto 0;

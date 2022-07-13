@@ -1,12 +1,11 @@
 import { useState } from "react";
-import DashboardFilter from "../model/dashboard/DashboardFilter";
+import { DashboardFilter, DashboardList } from "../model/dashboard";
 import { useAuthContext } from "../../hooks/useContextClient";
 import { productUseCase, ProductItem } from "../../utilities/stripeClient";
-import DashboardList from "../model/dashboard/DashboardList";
 import { useErrorHandler } from "react-error-boundary";
 import { useData } from "../../hooks/useData";
 
-const Dashboard: React.VFC = () => {
+export const DashboardTemplate: React.VFC = () => {
   const { user } = useAuthContext();
   const handleError = useErrorHandler();
   const [currentFilter, setCurrentFilter] = useState<string>("all");
@@ -16,7 +15,7 @@ const Dashboard: React.VFC = () => {
   );
 
   const changeFilter = (newFilter: string) => {
-    if (!newFilter) handleError("changeFilter Error");
+    if (newFilter) handleError("changeFilter Error");
     setCurrentFilter(newFilter);
   };
 
@@ -48,7 +47,7 @@ const Dashboard: React.VFC = () => {
     : null;
 
   return (
-    <div className="common-container">
+    <>
       {filteredProductItems && (
         <DashboardFilter
           currentFilter={currentFilter}
@@ -58,8 +57,6 @@ const Dashboard: React.VFC = () => {
       {filteredProductItems && (
         <DashboardList productItems={filteredProductItems} />
       )}
-    </div>
+    </>
   );
 };
-
-export default Dashboard;

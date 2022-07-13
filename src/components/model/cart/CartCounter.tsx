@@ -16,7 +16,10 @@ interface CartCounterProps {
   quantity: number;
 }
 
-const CartCounter: React.VFC<CartCounterProps> = ({ quantity, productId }) => {
+export const CartCounter: React.VFC<CartCounterProps> = ({
+  quantity,
+  productId,
+}) => {
   const { countDownProduct, countUpProduct } = useCartContext();
 
   const handleCountUp = () => {
@@ -34,5 +37,3 @@ const CartCounter: React.VFC<CartCounterProps> = ({ quantity, productId }) => {
     </CounterWrapper>
   );
 };
-
-export default CartCounter;

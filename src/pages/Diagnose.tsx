@@ -1,4 +1,4 @@
-import DiagnoseTemplate from "../components/template/Diagnose";
+import { DiagnoseTemplate } from "../components/template/Diagnose";
 import { useAuthContext } from "../hooks";
 import {
   Sidebar,

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import DiagnoseTinderSwipe from "../model/disgnose/DiagnoseTinderSwipe";
+import { DiagnoseResult, DiagnoseTinderSwipe } from "../model/disgnose";
 import { Loading } from "../ui";
-import DiagnoseResult from "../model/disgnose/DiagnoseResult";
 import { useRandomContext } from "../../hooks/useContextClient";
 import { useData } from "../../hooks/useData";
 import { productUseCase, StoreProductItem } from "../../utilities/stripeClient";
@@ -12,7 +11,7 @@ interface Product {
   image: string;
 }
 
-const Diagnose: React.VFC = () => {
+export const DiagnoseTemplate: React.VFC = () => {
   const { products, addProductWithRandom } = useRandomContext();
   const [isPendingDiagnose, setIsPendingDiagnose] = useState<boolean>(false);
   const [documents, setDocuments] = useState<Array<Product>>([]);
@@ -59,4 +58,3 @@ const Diagnose: React.VFC = () => {
     </>
   );
 };
-export default Diagnose;

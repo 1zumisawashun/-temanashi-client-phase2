@@ -3,9 +3,9 @@ import { db, recommendation } from "../../../utilities/constant";
 import { formatTaxIncludedPrice } from "../../../utilities";
 import { Loading, Image } from "../../ui";
 
-const DiagnoseResult: React.VFC = () => {
+export const DiagnoseResult: React.VFC = () => {
   return (
-    <div className="common-container">
+    <>
       {db.length === 0 && recommendation && <Loading />}
       <div className="diagnose-result">
         <div className="thumbnail">
@@ -56,7 +56,6 @@ const DiagnoseResult: React.VFC = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </>
   );
 };
-export default DiagnoseResult;

@@ -50,7 +50,7 @@ interface UserFilterProps {
   changeFilter: (newFilter: string) => void;
 }
 
-const UserFilter: React.VFC<UserFilterProps> = ({
+export const UserFilter: React.VFC<UserFilterProps> = ({
   currentFilter,
   changeFilter,
 }) => {
@@ -74,5 +74,3 @@ const UserFilter: React.VFC<UserFilterProps> = ({
     </FilterContainer>
   );
 };
-
-export default UserFilter;

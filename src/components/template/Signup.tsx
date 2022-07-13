@@ -51,7 +51,7 @@ interface FormData {
   thumbnail: File | null;
 }
 
-const Signup: React.VFC = () => {
+export const SignupTemplate: React.VFC = () => {
   const { signup, isPending, error } = useAuth();
 
   const [email, setEmail] = useState<string>("");
@@ -142,5 +142,3 @@ const Signup: React.VFC = () => {
     </Container>
   );
 };
-
-export default Signup;

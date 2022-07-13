@@ -32,7 +32,7 @@ type TinderSwipeProps = {
   setIsPendingDiagnose: any;
 };
 
-const TinderSwipe: React.VFC<TinderSwipeProps> = ({
+export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
   db,
   setIsPendingDiagnose,
 }) => {
@@ -160,5 +160,3 @@ const TinderSwipe: React.VFC<TinderSwipeProps> = ({
     </CommonWrapper>
   );
 };
-
-export default TinderSwipe;

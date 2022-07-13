@@ -50,7 +50,7 @@ type DashboardFilterProps = {
   changeFilter: (newFilter: string) => void;
 };
 
-const DashboardFilter: React.VFC<DashboardFilterProps> = ({
+export const DashboardFilter: React.VFC<DashboardFilterProps> = ({
   currentFilter,
   changeFilter,
 }) => {
@@ -74,5 +74,3 @@ const DashboardFilter: React.VFC<DashboardFilterProps> = ({
     </FilterContainer>
   );
 };
-
-export default DashboardFilter;

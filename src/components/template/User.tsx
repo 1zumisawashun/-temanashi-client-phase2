@@ -10,7 +10,7 @@ import { User, likedFurnitures } from "../../@types/dashboard";
 import { useSubCollection, useAuthContext, useData } from "../../hooks";
 import { formatFirebasePath } from "../../utilities";
 
-const UserTemplate: React.VFC = () => {
+export const UserTemplate: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
 
@@ -40,15 +40,13 @@ const UserTemplate: React.VFC = () => {
   const likedProductsList = getLikedFurnitures(documents);
 
   return (
-    <div className="common-container">
+    <>
       <UserFilter currentFilter={currentFilter} changeFilter={changeFilter} />
       {currentFilter === "favorite" && (
         <UserFavorite productItems={likedProductsList} />
       )}
       {currentFilter === "history" && <UserHistory payments={paymentsList} />}
       {currentFilter === "account" && <UserAccount />}
-    </div>
+    </>
   );
 };
-
-export default UserTemplate;

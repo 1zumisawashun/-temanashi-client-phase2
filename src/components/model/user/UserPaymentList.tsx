@@ -5,7 +5,9 @@ interface PaymentListProp {
   paymentItems: Array<any>;
 }
 
-const PaymentList: React.VFC<PaymentListProp> = ({ paymentItems }) => {
+export const UserPaymentList: React.VFC<PaymentListProp> = ({
+  paymentItems,
+}) => {
   return (
     <div className="payment-list">
       {paymentItems &&
@@ -35,4 +37,3 @@ const PaymentList: React.VFC<PaymentListProp> = ({ paymentItems }) => {
     </div>
   );
 };
-export default PaymentList;

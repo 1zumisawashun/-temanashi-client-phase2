@@ -66,5 +66,3 @@ export const RandomContextProvider: React.VFC<
     </RandomContext.Provider>
   );
 };
-
-export default RandomContextProvider;
