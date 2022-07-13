@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
-import Button from "@mui/material/Button";
+import MuiButton from "@mui/material/Button";
 import { SvgIconProps } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
-interface BasicButtonProps {
+interface ButtonProps {
   children: ReactNode;
   icon?: SvgIconProps;
   variant?:
@@ -23,7 +23,7 @@ interface BasicButtonProps {
   fullWidth?: boolean;
 }
 
-const BasicButton: React.VFC<BasicButtonProps> = ({
+export const Button: React.VFC<ButtonProps> = ({
   styledName,
   children,
   icon,
@@ -31,12 +31,12 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
   variant = "primary",
   size = "medium",
   isDisabled,
-  isLoading,
+  isLoading = false,
   onClick,
   fullWidth = false,
 }) => {
   return (
-    <Button
+    <MuiButton
       variant="contained"
       color={variant}
       size={size}
@@ -51,10 +51,8 @@ const BasicButton: React.VFC<BasicButtonProps> = ({
         marginBottom: () => (size === "medium" || fullWidth ? "10px" : "0px"),
       }}
     >
-      {isLoading && <CircularProgress color="primary" />}
-      {children}
-    </Button>
+      {!isLoading && <p>{children}</p>}
+      {isLoading && <CircularProgress color="secondary" size={25} />}
+    </MuiButton>
   );
 };
-
-export default BasicButton;

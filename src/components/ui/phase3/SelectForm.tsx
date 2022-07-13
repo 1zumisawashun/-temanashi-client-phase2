@@ -52,9 +52,7 @@ const Placehoplder = styled("p")`
 
 export type SelectFormProps = {
   // NOTE:アクション
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   // NOTE:エラーハンドリング
   register?: UseFormRegisterReturn;
   error?: boolean;
@@ -111,7 +109,8 @@ export const SelectForm: React.VFC<SelectFormProps> = ({
           defaultValue,
           IconComponent: () => null,
           renderValue: () => {
-            if (isLoading) return <CircularProgress size={20} />;
+            if (isLoading)
+              return <CircularProgress size={25} color="primary" />;
             if (value === "") return <Placehoplder>{placeholder}</Placehoplder>;
             return options.find((option) => option.value === value)?.label;
           },

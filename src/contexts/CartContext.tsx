@@ -147,5 +147,3 @@ export const CartContextProvider: React.VFC<
     </CartContext.Provider>
   );
 };
-
-export default CartContextProvider;

@@ -2,14 +2,13 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStorage, useReactScroll, useToken } from "../../hooks";
-import { categoryOptions, text } from "../../utilities/constant";
+import { categoryOptions } from "../../utilities/constant";
 import {
   InputSelect,
   InputText,
   InputTextarea,
-  InputFileMulti,
-  Loading,
-  BasicButton,
+  InputFileMultiple,
+  Button,
 } from "../ui";
 import { OptionProps } from "../ui/InputSelect";
 import { MultiValue } from "react-select";
@@ -17,10 +16,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "@emotion/styled";
+import { useErrorHandler } from "react-error-boundary";
 
 const FormContainer = styled("div")`
   display: grid;
-  gap: 20px;
+  gap: 10px;
 `;
 
 interface FormData {
@@ -33,15 +33,17 @@ interface FormData {
   stock: string;
 }
 
-const CreateProject: React.VFC = () => {
+export const CreateTemplate: React.VFC = () => {
   const history = useHistory();
   const { getStorageUrl } = useStorage();
   const { cookies } = useToken();
+  const handleError = useErrorHandler();
 
   const scrollToPhotos = useReactScroll("photos");
   const scrollToName = useReactScroll("name");
   const scrollToDescription = useReactScroll("description");
   const scrollToPrice = useReactScroll("price");
+  const scrollToStock = useReactScroll("stock");
 
   const getSchema = () => {
     return yup.object({
@@ -99,16 +101,16 @@ const CreateProject: React.VFC = () => {
     setIsLoading(true);
     setFromError("");
 
-    if (categories.length === 0) {
-      setFromError("カテゴリーを選択してください。");
-      setIsLoading(false);
-      return;
-    }
-
     const result = await getStorageUrl(files);
 
     if (!result) {
       setFromError("画像を処理できませんでした。");
+      setIsLoading(false);
+      return;
+    }
+
+    if (categories.length === 0) {
+      setFromError("カテゴリーを選択してください。");
       setIsLoading(false);
       return;
     }
@@ -124,31 +126,43 @@ const CreateProject: React.VFC = () => {
       const headers = {
         Authorization: `Bearer ${cookies.jwt}`,
       };
-      const res = await axios.post(
+      await axios.post(
         "https://us-central1-temanashi-phase2.cloudfunctions.net/api/stripe-post",
-        // `${process.env.REACT_APP_BASE_URL}/api/stripe-post`,
-        // "http://localhost:5001/temanashi-phase2/us-central1/api/stripe-post",
         furniture,
         { headers }
       );
-      console.log(res);
       setIsLoading(false);
       history.push("/");
     } catch (error) {
-      setFromError("Axios Error");
+      handleError("onSubmit Error");
       setIsLoading(false);
     }
   };
 
-  const checkOnPreSubmit = () => {
-    if (files.length === 0) scrollToPhotos.scrollHook();
-    if (formData.name === "") scrollToName.scrollHook();
-    if (formData.description === "") scrollToDescription.scrollHook();
-    if (formData.price === "") scrollToPrice.scrollHook();
+  const onPreSubmit: SubmitHandler<FormData> = () => {
+    onSubmit();
   };
 
-  const onPreSubmit: SubmitHandler<FormData> = (data) => {
-    onSubmit();
+  const checkOnPreSubmit = () => {
+    if (files.length === 0) {
+      scrollToPhotos.scrollHook();
+      return;
+    }
+    if (formData.name === "") {
+      scrollToName.scrollHook();
+      return;
+    }
+    if (formData.description === "") {
+      scrollToDescription.scrollHook();
+      return;
+    }
+    if (formData.price === "") {
+      scrollToPrice.scrollHook();
+      return;
+    }
+    if (formData.stock === "") {
+      scrollToStock.scrollHook();
+    }
   };
 
   /**
@@ -156,10 +170,9 @@ const CreateProject: React.VFC = () => {
    * ここら辺は調査不足なので後で時間をとる
    */
   return (
-    <div className="common-container">
-      {isLoading && <Loading />}
+    <>
       {scrollToPhotos.renderScrollElement()}
-      <InputFileMulti
+      <InputFileMultiple
         files={files}
         onInputFileChange={(value) => onInputFileChange(value)}
       />
@@ -191,6 +204,7 @@ const CreateProject: React.VFC = () => {
           error={"price" in errors}
           helperText={errors.price?.message}
         />
+        {scrollToStock.renderScrollElement()}
         <InputText
           label="stock"
           register={register("stock", {
@@ -224,23 +238,22 @@ const CreateProject: React.VFC = () => {
           helperText={errors.height?.message}
         />
         <InputSelect
-          label="Category"
+          label="category"
           onChange={(e) => onInputChangeSelect(e)}
           options={categoryOptions}
           error={formError.length !== 0}
           helperText={formError}
         />
-        <BasicButton
+        <Button
+          isLoading={isLoading}
           onClick={() => {
             checkOnPreSubmit();
             handleSubmit(onPreSubmit)();
           }}
         >
           完了
-        </BasicButton>
+        </Button>
       </FormContainer>
-    </div>
+    </>
   );
 };
-
-export default CreateProject;

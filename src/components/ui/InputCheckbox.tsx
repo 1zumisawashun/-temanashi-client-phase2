@@ -26,7 +26,7 @@ const StyledCheckBox = styled(Checkbox)`
   padding: 6px;
 `;
 
-const InputCheckbox: React.VFC<CheckBoxProps> = ({
+export const InputCheckbox: React.VFC<CheckBoxProps> = ({
   label = "",
   checked = false,
   disabled = false,
@@ -51,5 +51,3 @@ const InputCheckbox: React.VFC<CheckBoxProps> = ({
     />
   );
 };
-
-export default InputCheckbox;

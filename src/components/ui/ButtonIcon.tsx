@@ -11,7 +11,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import UndoIcon from "@mui/icons-material/Undo";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 
-interface IconButtonProps {
+interface ButtonIconProps {
   styleName?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   color?:
@@ -26,7 +26,7 @@ interface IconButtonProps {
   size?: "small" | "medium" | "large";
 }
 
-const CloseButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconClose: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -46,7 +46,7 @@ const CloseButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const DeleteButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconDelete: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -66,7 +66,7 @@ const DeleteButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const CountUpButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconCountUp: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -86,7 +86,7 @@ const CountUpButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const CountDownButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconCountDown: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -106,7 +106,7 @@ const CountDownButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const FavoriteButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconFavorite: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -126,7 +126,7 @@ const FavoriteButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const NoFaviruteButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconNoFavirute: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -146,7 +146,7 @@ const NoFaviruteButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const PersonButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconPerson: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -166,7 +166,7 @@ const PersonButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const ThumbDownButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconThumbDown: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -186,7 +186,7 @@ const ThumbDownButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const ThumbUpButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconThumbUp: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -206,7 +206,7 @@ const ThumbUpButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const UndoButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconUndo: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -226,7 +226,7 @@ const UndoButton: React.VFC<IconButtonProps> = ({
   );
 };
 
-const StoreButton: React.VFC<IconButtonProps> = ({
+export const ButtonIconStore: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
@@ -239,18 +239,4 @@ const StoreButton: React.VFC<IconButtonProps> = ({
       </IconButton>
     </div>
   );
-};
-
-export {
-  CloseButton,
-  DeleteButton,
-  CountUpButton,
-  CountDownButton,
-  FavoriteButton,
-  NoFaviruteButton,
-  PersonButton,
-  ThumbDownButton,
-  ThumbUpButton,
-  UndoButton,
-  StoreButton,
 };

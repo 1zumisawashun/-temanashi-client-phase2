@@ -1,6 +1,6 @@
-import ProductList from "../dashboard/DashboardList";
+import { DashboardList } from "../dashboard";
 import { ProductItem } from "../../../utilities/stripeClient";
-import { NotFoundItem } from "../../ui";
+import { ErrorNotFound } from "../../ui";
 import styled from "@emotion/styled";
 
 const UserContaienr = styled("div")`
@@ -12,15 +12,16 @@ interface UserFavoriteProps {
   productItems: Array<ProductItem>;
 }
 
-const UserFavorite: React.VFC<UserFavoriteProps> = ({ productItems }) => {
+export const UserFavorite: React.VFC<UserFavoriteProps> = ({
+  productItems,
+}) => {
   return (
     <UserContaienr>
       {productItems.length !== 0 ? (
-        <ProductList productItems={productItems} />
+        <DashboardList productItems={productItems} />
       ) : (
-        <NotFoundItem />
+        <ErrorNotFound />
       )}
     </UserContaienr>
   );
 };
-export default UserFavorite;

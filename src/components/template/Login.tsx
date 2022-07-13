@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { InputText, BasicButton, LinkButton, TextError } from "../ui";
+import { InputText, Button, ButtonLink, ErrorText } from "../ui";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -42,7 +42,7 @@ interface FormData {
   password: string;
 }
 
-const Login: React.VFC = () => {
+export const LoginTemplate: React.VFC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login, error, isPending } = useAuth();
@@ -64,7 +64,6 @@ const Login: React.VFC = () => {
   });
 
   const onSubmit = () => {
-    console.log("onsubmit");
     login(email, password);
   };
 
@@ -82,7 +81,6 @@ const Login: React.VFC = () => {
             register={register("email", {
               onChange: (e) => setEmail(e.target.value),
             })}
-            value={email}
             error={"email" in errors}
             helperText={errors.email?.message}
             placeholder="xyz@gmail.com"
@@ -93,30 +91,26 @@ const Login: React.VFC = () => {
             register={register("password", {
               onChange: (e) => setPassword(e.target.value),
             })}
-            value={password}
             error={"password" in errors}
             helperText={errors.password?.message}
             placeholder="Must have atleast 6 characters"
             data-cy="password"
           />
-          <BasicButton
-            isDisabled={isPending}
+          <Button
+            isLoading={isPending}
             data-cy="login"
             size="large"
-            variant="secondary"
             fullWidth
             onClick={() => {
               handleSubmit(onPreSubmit)();
             }}
           >
             Login
-          </BasicButton>
-          <TextError error={error} helperText={error} />
-          <LinkButton path="/signup">Move To Sign Up</LinkButton>
+          </Button>
+          <ErrorText error={error} helperText={error} />
+          <ButtonLink path="/signup">Move To Sign Up</ButtonLink>
         </FormContainer>
       </Inner>
     </Container>
   );
 };
-
-export default Login;

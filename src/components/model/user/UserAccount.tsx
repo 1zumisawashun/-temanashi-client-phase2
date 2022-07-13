@@ -3,7 +3,7 @@ import { projectFunctions, isEmulating } from "../../../firebase/config";
 import { useAuthContext, useToken, useAuth } from "../../../hooks";
 import { useHistory } from "react-router-dom";
 import axios from "../../../utilities/axiosClient";
-import { BasicButton } from "../../ui";
+import { Button } from "../../ui";
 import styled from "@emotion/styled";
 
 const UserContainer = styled("div")`
@@ -17,7 +17,7 @@ type Response = {
   jwt: string;
 };
 
-const UserAccount: React.VFC = () => {
+export const UserAccount: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
   const { logout, isPending } = useAuth();
@@ -76,18 +76,17 @@ const UserAccount: React.VFC = () => {
 
   return (
     <UserContainer>
-      <BasicButton onClick={onCallTest}>OnCallTest</BasicButton>
-      <BasicButton onClick={onRequestTest}>OnRequestTest</BasicButton>
-      <BasicButton onClick={getAxiosTest}>GetAxiosTest</BasicButton>
-      <BasicButton onClick={createJWT}>CreateJWT</BasicButton>
-      <BasicButton onClick={verifyJWT}>verifyJWT</BasicButton>
-      <BasicButton onClick={Emulating} isDisabled={isEmulating}>
+      <Button onClick={onCallTest}>OnCallTest</Button>
+      <Button onClick={onRequestTest}>OnRequestTest</Button>
+      <Button onClick={getAxiosTest}>GetAxiosTest</Button>
+      <Button onClick={createJWT}>CreateJWT</Button>
+      <Button onClick={verifyJWT}>verifyJWT</Button>
+      <Button onClick={Emulating} isDisabled={isEmulating}>
         emulatingTest
-      </BasicButton>
-      <BasicButton onClick={handleSubmit} isDisabled={isPending}>
+      </Button>
+      <Button onClick={handleSubmit} isDisabled={isPending}>
         Logout
-      </BasicButton>
+      </Button>
     </UserContainer>
   );
 };
-export default UserAccount;

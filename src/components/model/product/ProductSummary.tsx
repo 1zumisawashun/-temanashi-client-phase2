@@ -4,15 +4,41 @@ import {
   useFirestore,
   useDisclosure,
 } from "../../../hooks";
-import { useHistory , useParams } from "react-router-dom";
-import { BasicButton, LikeButton, BasicModal } from "../../ui";
+import { useHistory, useParams } from "react-router-dom";
+import { Button, ButtonLike, Modal } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
 import { formatTaxIncludedPrice } from "../../../utilities";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from "@emotion/styled";
 
-const ButtonWrapper = styled("div")`
+const ProductSummaryContainer = styled("div")`
+  background-color: white;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+`;
+const ThumbnailWrapper = styled("div")``;
+const Thumbnail = styled("img")`
+  width: 100%;
+`;
+const Title = styled("h2")`
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #444;
+`;
+const ContentWrapper = styled("div")``;
+const ContentPrice = styled("div")`
+  font-size: 1.2em;
+  color: #999;
+`;
+const ContentDetail = styled("p")`
+  margin: 20px 0;
+  color: #999;
+  line-height: 1.8em;
+  font-size: 0.9em;
+`;
+const ContentButtonWrapper = styled("div")`
   display: flex;
   gap: 20px;
 `;
@@ -29,7 +55,9 @@ interface Product {
   image: string;
 }
 
-const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
+export const ProductSummary: React.VFC<ProductSummaryProps> = ({
+  furniture,
+}) => {
   const history = useHistory();
   const { addProductToCart } = useCartContext();
   const { deleteDocument } = useFirestore();
@@ -51,10 +79,10 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
   };
 
   return (
-    <div className="project-summary-container">
-      <div className="thumbnail">
+    <ProductSummaryContainer>
+      <ThumbnailWrapper>
         {furniture.product.images.length > 0 ? (
-          <img
+          <Thumbnail
             src={furniture.product.images[0]}
             alt=""
             onClick={() => previewModal.open()}
@@ -64,7 +92,7 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
         ) : (
           <img src="https://placehold.jp/200x160.png" alt="" />
         )}
-        <BasicModal
+        <Modal
           title="プレビュー画面"
           open={previewModal.isOpen}
           handleOpen={() => previewModal.close()}
@@ -77,37 +105,31 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
               ))}
             </Carousel>
           }
-          footer={
-            <BasicButton onClick={() => previewModal.close()}>
-              閉じる
-            </BasicButton>
-          }
+          footer={<Button onClick={() => previewModal.close()}>閉じる</Button>}
         />
-      </div>
+      </ThumbnailWrapper>
 
-      <h2 className="title">{furniture.product.name}</h2>
+      <Title>{furniture.product.name}</Title>
       {Object.keys(furniture.prices).map((priceIndex) => (
-        <div key={priceIndex} className="content">
-          <div className="price">
+        <ContentWrapper key={priceIndex}>
+          <ContentPrice>
             {formatTaxIncludedPrice(furniture.prices[priceIndex].unit_amount)}
-          </div>
-          <p className="details">{furniture.product.description}</p>
-          <ButtonWrapper>
-            <BasicButton onClick={() => executeModal.open()}>削除</BasicButton>
-            <BasicModal
+          </ContentPrice>
+          <ContentDetail>{furniture.product.description}</ContentDetail>
+          <ContentButtonWrapper>
+            <Button onClick={() => executeModal.open()}>削除</Button>
+            <Modal
               title="本当に削除しますか？"
               open={executeModal.isOpen}
               handleOpen={() => executeModal.close()}
               footer={
                 <>
-                  <BasicButton onClick={handleDelete}>はい</BasicButton>
-                  <BasicButton onClick={() => executeModal.close()}>
-                    いいえ
-                  </BasicButton>
+                  <Button onClick={handleDelete}>はい</Button>
+                  <Button onClick={() => executeModal.close()}>いいえ</Button>
                 </>
               }
             />
-            <BasicButton
+            <Button
               onClick={() =>
                 addCart({
                   id: furniture.product.id,
@@ -119,12 +141,11 @@ const ProductSummary: React.VFC<ProductSummaryProps> = ({ furniture }) => {
               }
             >
               購入
-            </BasicButton>
-            <LikeButton furniture={furniture} />
-          </ButtonWrapper>
-        </div>
+            </Button>
+            <ButtonLike furniture={furniture} />
+          </ContentButtonWrapper>
+        </ContentWrapper>
       ))}
-    </div>
+    </ProductSummaryContainer>
   );
 };
-export default ProductSummary;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BasicButton, Divider, BasicModal } from "../components/ui";
+import { Button, Divider, Modal } from "../components/ui";
 import styled from "@emotion/styled";
 import {
   SquareIcon,
@@ -41,7 +41,6 @@ const ExampleText = styled("div")`
   font-size: 14px;
   margin: 0 20px 20px;
 `;
-
 const ComponentContainer = styled("div")`
   position: relative;
   margin-top: 40px;
@@ -50,7 +49,6 @@ const ComponentContainer = styled("div")`
   border: 1px solid black;
   border-radius: 4px;
 `;
-
 const ComponentTitle = styled("p")`
   position: absolute;
   top: -16px;
@@ -60,7 +58,6 @@ const ComponentTitle = styled("p")`
   font-weight: bold;
   background-color: #f4f4f4;
 `;
-
 const CheckboxGroupWrapper = styled("div")`
   background-color: transparent;
   display: flex;
@@ -72,7 +69,6 @@ const CheckboxGroupInner = styled("div")`
   width: 80%;
   text-align: end;
 `;
-
 const Label = styled("label")`
   width: 20%;
   margin: auto 0;
@@ -102,34 +98,38 @@ const weekdays = ["月", "火", "水", "木", "金", "土", "日"];
 
 export const Component: React.VFC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [checked, setChecked] = useState<boolean>(false);
   const [checkedWithText, setCheckedWithText] = useState<boolean>(false);
   const [selectValue, setSelectValue] = useState("");
   const [textValue, setTextValue] = useState("");
   const [textareaValue, setTextareaValue] = useState("");
   const [textWithButtonValue, setTextWithButtonValue] = useState("");
   const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([]);
+  const [isSwitch, setIsSwitch] = useState<boolean>(false);
+  const [isMatching, setIsMatching] = useState<boolean>(false);
+  const [isAuto, setIsAuto] = useState<boolean>(false);
 
-  const handleSwitchForm = (e: any) => {
-    setChecked((prev) => !prev);
+  const handleSwitchForm = (state: string) => {
+    if (state === "isSwitch") setIsSwitch((prev) => !prev);
+    if (state === "isMatching") setIsMatching((prev) => !prev);
+    if (state === "isAuto") setIsAuto((prev) => !prev);
   };
-  const handleSwitchForm2 = (e: any) => {
+  const handleSwitchForm2 = () => {
     setCheckedWithText((prev) => !prev);
   };
-  const handleSelectForm = (e: any) => {
+  const handleSelectForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectValue(e.target.value);
   };
-  const onInputChange = (e: any) => {
+  const onInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextValue(e.target.value);
   };
-  const onInputChange2 = (e: any) => {
-    setTextareaValue(e.target.value);
-  };
-  const onInputChange3 = (e: any) => {
+  const onInputText2 = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextWithButtonValue(e.target.value);
   };
-  const handleClick = (e: any) => {
-    console.log("handleClick");
+  const onInputTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextareaValue(e.target.value);
+  };
+  const handleClick = () => {
+    alert("handleClick");
   };
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
@@ -155,7 +155,10 @@ export const Component: React.VFC = () => {
         <FormContainer>
           <ComponentContainer>
             <ComponentTitle>SwitchForm</ComponentTitle>
-            <SwitchForm onChange={handleSwitchForm} value={checked} />
+            <SwitchForm
+              value={isSwitch}
+              onChange={() => handleSwitchForm("isSwitch")}
+            />
           </ComponentContainer>
 
           <ComponentContainer>
@@ -170,19 +173,26 @@ export const Component: React.VFC = () => {
               options={selectOptions}
               value={selectValue}
               onChange={handleSelectForm}
-              error={!checked}
+              error
               helperText="errorerrorerrorerrorerror"
+            />
+            <Divider />
+            <SelectForm
+              options={selectOptions}
+              value={selectValue}
+              onChange={handleSelectForm}
+              isLoading
             />
           </ComponentContainer>
 
           <ComponentContainer>
             <ComponentTitle>InputText</ComponentTitle>
-            <InputText value={textValue} onChange={onInputChange} />
+            <InputText value={textValue} onChange={onInputText} />
             <Divider />
             <InputText
               value={textValue}
-              onChange={onInputChange}
-              error={!checked}
+              onChange={onInputText}
+              error
               helperText="errorerrorerrorerrorerror"
             />
           </ComponentContainer>
@@ -192,23 +202,23 @@ export const Component: React.VFC = () => {
             <InputTextarea
               label="備考欄（200文字）"
               value={textareaValue}
-              onChange={onInputChange2}
+              onChange={onInputTextarea}
             />
             <Divider />
             <InputTextarea
               label="備考欄（200文字）"
               value={textareaValue}
-              onChange={onInputChange2}
-              error={!checked}
+              onChange={onInputTextarea}
+              error
               helperText="errorerrorerrorerrorerror"
             />
           </ComponentContainer>
 
           <ComponentContainer>
-            <ComponentTitle>InputText + BasicButton</ComponentTitle>
-            <InputText value={textWithButtonValue} onChange={onInputChange3} />
+            <ComponentTitle>InputText + Button</ComponentTitle>
+            <InputText value={textWithButtonValue} onChange={onInputText2} />
             <ButtonWrapper>
-              <BasicButton onClick={handleClick}>地図から反映</BasicButton>
+              <Button onClick={handleClick}>地図から反映</Button>
             </ButtonWrapper>
             <CoutionText>
               ※初期設定では「東京駅前」に設定されてしまいます。必ず店舗の位置を変更してください。
@@ -228,32 +238,36 @@ export const Component: React.VFC = () => {
                 </ExampleText>
                 <InputTextarea
                   value={textareaValue}
-                  onChange={onInputChange2}
+                  onChange={onInputTextarea}
                 />
               </>
             )}
           </ComponentContainer>
 
           <ComponentContainer>
-            <ComponentTitle>BasicButton & BasicModal</ComponentTitle>
-            <BasicButton onClick={handleOpen}>primary</BasicButton>
+            <ComponentTitle>Button & BasicModal</ComponentTitle>
+            <Button onClick={handleOpen}>primary</Button>
             <Divider />
-            <BasicButton onClick={handleOpen} variant="secondary">
+            <Button onClick={handleOpen} isLoading>
+              primary
+            </Button>
+            <Divider />
+            <Button onClick={handleOpen} variant="secondary">
               secondary
-            </BasicButton>
+            </Button>
             <Divider />
-            <BasicButton onClick={handleOpen} isDisabled>
+            <Button onClick={handleOpen} isDisabled>
               disable
-            </BasicButton>
-            <BasicModal
-              title="basicmodal"
+            </Button>
+            <Modal
+              title="modal"
               open={isOpen}
               handleOpen={handleOpen}
               contents={<InputTextarea />}
               footer={
                 <>
-                  <BasicButton onClick={handleOpen}>はい</BasicButton>
-                  <BasicButton onClick={handleOpen}>いいえ</BasicButton>
+                  <Button onClick={handleOpen}>はい</Button>
+                  <Button onClick={handleOpen}>いいえ</Button>
                 </>
               }
             />
@@ -267,16 +281,16 @@ export const Component: React.VFC = () => {
                 <CheckboxGroup
                   value={""}
                   label="マッチング"
-                  checked={checked}
-                  onChange={handleSwitchForm}
+                  checked={isMatching}
+                  onChange={() => handleSwitchForm("isMatching")}
                   icon={<SquareIcon content="ON" />}
                   checkedIcon={<SquareIconBlank content="OFF" />}
                 />
                 <CheckboxGroup
                   value={""}
                   label="オート"
-                  checked={checked}
-                  onChange={handleSwitchForm}
+                  checked={isAuto}
+                  onChange={() => handleSwitchForm("isAuto")}
                   icon={<SquareIcon content="ON" />}
                   checkedIcon={<SquareIconBlank content="OFF" />}
                 />

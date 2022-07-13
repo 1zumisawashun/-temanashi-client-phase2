@@ -15,7 +15,7 @@ const Message = styled("p")`
   margin: 30px 0;
 `;
 
-const NotFoundItem: React.VFC = () => {
+export const ErrorNotFound: React.VFC = () => {
   return (
     <NotFoundItemContainer>
       <Image src={NotFoundIcon} alt="" />
@@ -23,4 +23,3 @@ const NotFoundItem: React.VFC = () => {
     </NotFoundItemContainer>
   );
 };
-export default NotFoundItem;

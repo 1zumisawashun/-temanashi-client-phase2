@@ -1,6 +1,5 @@
-import Avatar from "../ui/Avatar";
 import { useAuthContext, useCartContext } from "../../hooks/useContextClient";
-import { NavlinkButton, Divider } from "../ui";
+import { ButtonNavlink, Divider, Avatar } from "../ui";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SendIcon from "@mui/icons-material/Send";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -46,7 +45,7 @@ const SidebarLinkItem = styled("li")`
   }
 `;
 
-const Sidebar: React.VFC = () => {
+export const Sidebar: React.VFC = () => {
   const { user } = useAuthContext();
   if (!user) throw new Error("we cant find your account");
   const { cart } = useCartContext();
@@ -55,33 +54,33 @@ const Sidebar: React.VFC = () => {
     <SidebarContainer>
       <SidebarInner>
         <SidebarUser>
-          <NavlinkButton path={`/users/${user.uid}`}>
+          <ButtonNavlink path={`/users/${user.uid}`}>
             <SidebarUserInner>
               {user.photoURL && <Avatar src={user.photoURL} size="medium" />}
               <p>hey {user.displayName}</p>
             </SidebarUserInner>
-          </NavlinkButton>
+          </ButtonNavlink>
           <Divider />
         </SidebarUser>
         <SidebarLinks>
           <ul>
             <SidebarLinkItem>
-              <NavlinkButton path="/" icon={<DashboardIcon />}>
+              <ButtonNavlink path="/" icon={<DashboardIcon />}>
                 Dashboard
-              </NavlinkButton>
+              </ButtonNavlink>
             </SidebarLinkItem>
             <SidebarLinkItem>
-              <NavlinkButton path="/create/product" icon={<SendIcon />}>
+              <ButtonNavlink path="/create/product" icon={<SendIcon />}>
                 New Product
-              </NavlinkButton>
+              </ButtonNavlink>
             </SidebarLinkItem>
             <SidebarLinkItem>
-              <NavlinkButton path="/diagnose" icon={<ContentPasteSearchIcon />}>
+              <ButtonNavlink path="/diagnose" icon={<ContentPasteSearchIcon />}>
                 Diagnose
-              </NavlinkButton>
+              </ButtonNavlink>
             </SidebarLinkItem>
             <SidebarLinkItem>
-              <NavlinkButton
+              <ButtonNavlink
                 path="/cart"
                 icon={
                   <Badge badgeContent={cart.length} color="error">
@@ -90,7 +89,7 @@ const Sidebar: React.VFC = () => {
                 }
               >
                 Shopping Cart
-              </NavlinkButton>
+              </ButtonNavlink>
             </SidebarLinkItem>
           </ul>
         </SidebarLinks>
@@ -98,5 +97,3 @@ const Sidebar: React.VFC = () => {
     </SidebarContainer>
   );
 };
-
-export default Sidebar;

@@ -8,19 +8,52 @@ import { ja } from "date-fns/locale";
 import { timestamp } from "../../../firebase/config";
 import { useAuthContext } from "../../../hooks/useContextClient";
 import {
-  BasicButton,
-  BasicModal,
+  Button,
+  Modal,
   InputTextarea,
   Avatar,
-  PersonButton,
+  ButtonIconPerson,
 } from "../../ui";
 import { ProductItem } from "../../../utilities/stripeClient";
+import styled from "@emotion/styled";
+
+const ProductCommentContainer = styled("div")`
+  width: 100%;
+`;
+const ProductCommentWrapper = styled("ul")`
+  max-height: 590px;
+  overflow: auto;
+`;
+const ProductCommentInner = styled("li")`
+  padding: 15px;
+  border-radius: 4px;
+  margin: 10px 0 0 0;
+  border: 1px solid #f2f2f2;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  background: white;
+`;
+const ProductCommentAuther = styled("div")`
+  display: flex;
+  align-items: center;
+  color: #444;
+`;
+const ProductCommentDate = styled("div")`
+  color: #999;
+  font-size: 0.9em;
+  margin: 4px 0 10px;
+`;
+const ProductCommentContent = styled("div")`
+  color: #999;
+  font-size: 0.9em;
+`;
 
 type ProductCommentProps = {
   furniture: ProductItem;
 };
 
-const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
+export const ProductComment: React.VFC<ProductCommentProps> = ({
+  furniture,
+}) => {
   const { user } = useAuthContext();
   const commentModal = useDisclosure();
   const { id } = useParams<{ id: string }>();
@@ -58,43 +91,43 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
   };
 
   return (
-    <div className="product-comments">
-      <ul className="comment-list">
-        <li>
-          <div className="auther">
-            <PersonButton />
+    <ProductCommentContainer>
+      <ProductCommentWrapper>
+        <ProductCommentInner>
+          <ProductCommentAuther>
+            <ButtonIconPerson />
             <p>temanashi-tester</p>
-          </div>
-          <div className="date">
+          </ProductCommentAuther>
+          <ProductCommentDate>
             <p>約5分前</p>
-          </div>
-          <div className="content">
+          </ProductCommentDate>
+          <ProductCommentContent>
             <p>free comment area !</p>
-          </div>
-        </li>
+          </ProductCommentContent>
+        </ProductCommentInner>
         {furniture.comments?.length > 0 &&
           furniture.comments?.map((comment: Comment) => (
-            <li key={comment.id}>
-              <div className="auther">
-                <Avatar src={comment.photoURL} />
+            <ProductCommentInner key={comment.id}>
+              <ProductCommentAuther>
+                <Avatar src={comment.photoURL} size="small" />
                 <p>{comment.displayName}</p>
-              </div>
-              <div className="date">
+              </ProductCommentAuther>
+              <ProductCommentDate>
                 <p>
                   {formatDistanceToNow(comment.createdAt?.toDate(), {
                     addSuffix: true,
                     locale: ja,
                   })}
                 </p>
-              </div>
-              <div className="content">
+              </ProductCommentDate>
+              <ProductCommentContent>
                 <p>{comment.content}</p>
-              </div>
-            </li>
+              </ProductCommentContent>
+            </ProductCommentInner>
           ))}
-      </ul>
-      <BasicButton onClick={() => commentModal.open()}>コメント</BasicButton>
-      <BasicModal
+      </ProductCommentWrapper>
+      <Button onClick={() => commentModal.open()}>コメント</Button>
+      <Modal
         title="コメント入力フォーム"
         open={commentModal.isOpen}
         handleOpen={() => commentModal.close()}
@@ -106,15 +139,11 @@ const ProductComment: React.VFC<ProductCommentProps> = ({ furniture }) => {
         }
         footer={
           <>
-            <BasicButton onClick={handleSubmit}>コメントする</BasicButton>
-            <BasicButton onClick={() => commentModal.close()}>
-              閉じる
-            </BasicButton>
+            <Button onClick={handleSubmit}>コメントする</Button>
+            <Button onClick={() => commentModal.close()}>閉じる</Button>
           </>
         }
       />
-    </div>
+    </ProductCommentContainer>
   );
 };
-
-export default ProductComment;

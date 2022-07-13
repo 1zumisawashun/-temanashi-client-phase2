@@ -26,7 +26,7 @@ interface AvatarProps {
   size?: "small" | "medium" | "large";
 }
 
-const Avatar: React.VFC<AvatarProps> = ({ src, size = "small" }) => {
+export const Avatar: React.VFC<AvatarProps> = ({ src, size = "small" }) => {
   return src ? (
     <AvatarWrapper size={size}>
       <AvatarImage src={src} />
@@ -35,4 +35,3 @@ const Avatar: React.VFC<AvatarProps> = ({ src, size = "small" }) => {
     <AvatarWrapper size={size} />
   );
 };
-export default Avatar;

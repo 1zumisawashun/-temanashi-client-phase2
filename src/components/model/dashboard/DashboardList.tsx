@@ -11,7 +11,9 @@ type DashboardListProps = {
   productItems: Array<ProductItem | ProductItemWithoutComment>;
 };
 
-const DashboardList: React.VFC<DashboardListProps> = ({ productItems }) => {
+export const DashboardList: React.VFC<DashboardListProps> = ({
+  productItems,
+}) => {
   const { user } = useAuthContext();
   // nullチェック・通常のreturnだとエラーになる
   if (!user) throw new Error("we cant find your account");
@@ -52,4 +54,3 @@ const DashboardList: React.VFC<DashboardListProps> = ({ productItems }) => {
     </div>
   );
 };
-export default DashboardList;

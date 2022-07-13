@@ -1,5 +1,5 @@
-import PaymentList from "./UserPaymentList";
-import { NotFoundItem } from "../../ui";
+import { UserPaymentList } from "./UserPaymentList";
+import { ErrorNotFound } from "../../ui";
 import styled from "@emotion/styled";
 
 const UserContaienr = styled("div")`
@@ -11,15 +11,14 @@ interface UserHistoryProps {
   payments: Array<any>;
 }
 
-const UserHistory: React.VFC<UserHistoryProps> = ({ payments }) => {
+export const UserHistory: React.VFC<UserHistoryProps> = ({ payments }) => {
   return (
     <UserContaienr>
       {payments.length !== 0 ? (
-        <PaymentList paymentItems={payments} />
+        <UserPaymentList paymentItems={payments} />
       ) : (
-        <NotFoundItem />
+        <ErrorNotFound />
       )}
     </UserContaienr>
   );
 };
-export default UserHistory;

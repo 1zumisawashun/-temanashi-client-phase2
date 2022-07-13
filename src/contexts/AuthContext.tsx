@@ -63,5 +63,3 @@ export const AuthContextProvider: React.VFC<
     <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>
   );
 };
-
-export default AuthContextProvider;

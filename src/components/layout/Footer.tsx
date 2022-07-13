@@ -12,7 +12,7 @@ const Copyright = styled("div")`
   padding: 20px;
 `;
 
-const Footer: React.VFC = () => {
+export const Footer: React.VFC = () => {
   return (
     <FooterContainer>
       <Divider />
@@ -20,4 +20,3 @@ const Footer: React.VFC = () => {
     </FooterContainer>
   );
 };
-export default Footer;

@@ -37,7 +37,7 @@ const OnlineUserItem = styled("div")`
   margin: 20px auto;
 `;
 
-const OnlineUsers: React.VFC = () => {
+export const OnlineUsers: React.VFC = () => {
   const { documents } = useCollection<User>(formatFirebasePath("/users"));
 
   return (
@@ -55,4 +55,3 @@ const OnlineUsers: React.VFC = () => {
     </OnlineUserContainer>
   );
 };
-export default OnlineUsers;

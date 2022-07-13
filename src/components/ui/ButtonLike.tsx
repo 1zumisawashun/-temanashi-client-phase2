@@ -10,7 +10,7 @@ import { useAuthContext } from "../../hooks/useContextClient";
 import { formatFirebasePath } from "../../utilities";
 import { useSubDocument } from "../../hooks/useSubDocument";
 import { ProductItem } from "../../utilities/stripeClient";
-import { FavoriteButton, NoFaviruteButton } from ".";
+import { ButtonIconFavorite, ButtonIconNoFavirute } from ".";
 
 type LikeButtonProp = {
   furniture: ProductItem;
@@ -29,7 +29,7 @@ type LikedFuritures = {
   referense: firebase.firestore.DocumentReference<likedFurnitures> | null;
 };
 
-const LikeButton: React.VFC<LikeButtonProp> = ({ furniture }) => {
+export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   const [like, setLike] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuthContext();
@@ -110,12 +110,19 @@ const LikeButton: React.VFC<LikeButtonProp> = ({ furniture }) => {
   return (
     <>
       {like ? (
-        <FavoriteButton color="primary" size="large" onClick={handleClick} />
+        <ButtonIconFavorite
+          color="primary"
+          size="large"
+          onClick={handleClick}
+        />
       ) : (
-        <NoFaviruteButton color="primary" size="large" onClick={handleClick} />
+        <ButtonIconNoFavirute
+          color="primary"
+          size="large"
+          onClick={handleClick}
+        />
       )}
       {error && <div className="error">{error}</div>}
     </>
   );
 };
-export default LikeButton;

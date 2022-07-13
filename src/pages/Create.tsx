@@ -1,4 +1,4 @@
-import CreateTemplate from "../components/template/Create";
+import { CreateTemplate } from "../components/template/Create";
 import { useAuthContext } from "../hooks";
 import {
   Sidebar,

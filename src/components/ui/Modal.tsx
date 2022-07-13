@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
-import { ElementType } from "react";
 // 参考記事:https://mui.com/base/react-modal/
 
 const StyledModal = styled(ModalUnstyled)`
@@ -61,7 +60,7 @@ const FooterWrapper = styled("div")`
   padding-top: 30px;
 `;
 
-export interface BasicModalProps {
+export interface ModalProps {
   className?: string;
   title: string;
   subtitle?: string;
@@ -72,7 +71,7 @@ export interface BasicModalProps {
   handleOpen: () => void;
 }
 
-const BasicModal: React.VFC<BasicModalProps> = ({
+export const Modal: React.VFC<ModalProps> = ({
   open = false,
   title,
   subtitle,
@@ -101,5 +100,3 @@ const BasicModal: React.VFC<BasicModalProps> = ({
     </StyledModal>
   );
 };
-
-export default BasicModal;

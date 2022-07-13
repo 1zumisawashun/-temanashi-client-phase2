@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputCheckbox, BasicButton } from "../../ui";
+import { InputCheckbox, Button } from "../../ui";
 import styled from "@emotion/styled";
 
 const CartAgreementContainer = styled("div")`
@@ -14,9 +14,13 @@ const CartAgreementContainer = styled("div")`
 
 interface CartAgreementProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isLoading: boolean;
 }
 
-const CartAgreement: React.VFC<CartAgreementProps> = ({ onClick }) => {
+export const CartAgreement: React.VFC<CartAgreementProps> = ({
+  onClick,
+  isLoading,
+}) => {
   const [isAccepted, setIsAccepted] = useState<boolean>(false);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,10 +36,9 @@ const CartAgreement: React.VFC<CartAgreementProps> = ({ onClick }) => {
         size="medium"
         onChange={(e) => onInputChange(e)}
       />
-      <BasicButton isDisabled={!isAccepted} onClick={onClick}>
+      <Button isDisabled={!isAccepted} onClick={onClick} isLoading={isLoading}>
         購入する
-      </BasicButton>
+      </Button>
     </CartAgreementContainer>
   );
 };
-export default CartAgreement;

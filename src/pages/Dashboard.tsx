@@ -1,4 +1,4 @@
-import DashboardTemplate from "../components/template/Dashboard";
+import { DashboardTemplate } from "../components/template/Dashboard";
 import { useAuthContext } from "../hooks";
 import {
   Sidebar,

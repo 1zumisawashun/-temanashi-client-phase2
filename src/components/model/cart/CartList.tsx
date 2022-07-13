@@ -4,8 +4,8 @@ import {
   useCartContext,
 } from "../../../hooks/useContextClient";
 import { formatTaxIncludedPrice } from "../../../utilities";
-import CartCounter from "./CartCounter";
-import { Divider, Image, DeleteButton } from "../../ui";
+import { CartCounter } from "./CartCounter";
+import { Divider, Image, ButtonIconDelete } from "../../ui";
 interface Product {
   id: string;
   title: string;
@@ -18,7 +18,7 @@ interface CartListProps {
   productItems: Array<Product>;
 }
 
-const CartList: React.VFC<CartListProps> = ({ productItems }) => {
+export const CartList: React.VFC<CartListProps> = ({ productItems }) => {
   const { user } = useAuthContext();
   const { removeProductFromCart } = useCartContext();
 
@@ -63,7 +63,7 @@ const CartList: React.VFC<CartListProps> = ({ productItems }) => {
                   </div>
                 </div>
                 <div>
-                  <DeleteButton
+                  <ButtonIconDelete
                     styleName="delete-icon"
                     size="large"
                     onClick={() => HandleRemove(item.id)}
@@ -77,4 +77,3 @@ const CartList: React.VFC<CartListProps> = ({ productItems }) => {
     </div>
   );
 };
-export default CartList;

@@ -1,4 +1,4 @@
-import ProductTemplate from "../components/template/Product";
+import { ProductTemplate } from "../components/template/Product";
 import { useAuthContext } from "../hooks";
 import {
   Sidebar,

@@ -8,5 +8,3 @@ export { Login } from "./Login";
 export { Product } from "./Product";
 export { Signup } from "./Signup";
 export { User } from "./User";
-
-// contexts（グローバル変数）に関してはpagesで役割を閉じ込める

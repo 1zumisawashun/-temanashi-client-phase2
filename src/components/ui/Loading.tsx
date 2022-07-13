@@ -1,8 +1,6 @@
 import Loader from "react-loader-spinner";
 import styled from "@emotion/styled";
 import * as React from "react";
-import MuiBackdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const LoadingContainer = styled("div")`
   align-items: center;
@@ -39,6 +37,10 @@ type LoadingProps = {
   color?: string;
 };
 
+/**
+ * 読み込み系のローディングはライブラリのローディング（バックドロップあり）を使う
+ * 追加・更新・削除時のローディングはMUIのローティング（バックドロップなし）を使う
+ */
 export const Loading: React.VFC<LoadingProps> = ({ color = "#84bcb4" }) => {
   return (
     <LoadingContainer>
@@ -48,16 +50,5 @@ export const Loading: React.VFC<LoadingProps> = ({ color = "#84bcb4" }) => {
         </Inner>
       </Backdrop>
     </LoadingContainer>
-  );
-};
-
-export const LoadingMui: React.VFC = () => {
-  return (
-    <MuiBackdrop
-      sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open
-    >
-      <CircularProgress color="primary" />
-    </MuiBackdrop>
   );
 };

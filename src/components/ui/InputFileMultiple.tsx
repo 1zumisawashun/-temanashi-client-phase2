@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CloseButton, BasicButton, BasicModal, TextError } from ".";
+import { ButtonIconClose, Button, Modal, ErrorText } from ".";
 import { useDisclosure, useDragAndDrop } from "../../hooks";
 import styled from "@emotion/styled";
 
@@ -55,7 +55,7 @@ const mineType = [
   "image/svg+xml",
 ];
 
-export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
+export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
   name = "photos",
   files,
   onInputFileChange,
@@ -123,21 +123,19 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
           files !== null && index < files.length ? (
             <div key={`select-file-${index}`}>
               <CloseButtonContainer>
-                <CloseButton onClick={() => executeModal.open()} />
+                <ButtonIconClose onClick={() => executeModal.open()} />
               </CloseButtonContainer>
               <UploadWrapper>
-                <BasicModal
+                <Modal
                   title="本当に削除しますか？"
                   open={executeModal.isOpen}
                   handleOpen={() => executeModal.close()}
                   footer={
                     <>
-                      <BasicButton onClick={() => handleCancel(index)}>
-                        はい
-                      </BasicButton>
-                      <BasicButton onClick={() => executeModal.close()}>
+                      <Button onClick={() => handleCancel(index)}>はい</Button>
+                      <Button onClick={() => executeModal.close()}>
                         いいえ
-                      </BasicButton>
+                      </Button>
                     </>
                   }
                 />
@@ -152,7 +150,7 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
           ) : (
             <div key={`no-file-${index}`}>
               <CloseButtonContainerHidden>
-                <CloseButton onClick={() => executeModal.open()} />
+                <ButtonIconClose onClick={() => executeModal.open()} />
               </CloseButtonContainerHidden>
               <UploadWrapper htmlFor={name}>
                 <img
@@ -166,7 +164,7 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
         )}
       </UploadContainer>
 
-      <TextError error={isError} helperText={isError} />
+      <ErrorText error={isError} helperText={isError} />
 
       <input
         data-cy="file_upload"
