@@ -47,7 +47,7 @@ const Diagnose: React.VFC = () => {
   }, [products]);
 
   return (
-    <main className="root">
+    <>
       {documents.length === 0 && <Loading />}
       {!isPendingDiagnose && documents.length > 0 && (
         <DiagnoseTinderSwipe
@@ -56,7 +56,7 @@ const Diagnose: React.VFC = () => {
         />
       )}
       {isPendingDiagnose && <DiagnoseResult />}
-    </main>
+    </>
   );
 };
 export default Diagnose;

@@ -75,7 +75,7 @@ const CreateProject: React.VFC = () => {
     height: "",
     stock: "",
   });
-  const [photos, setPhotos] = useState<File[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [categories, setCategories] = useState<MultiValue<string>>([]);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +92,7 @@ const CreateProject: React.VFC = () => {
   };
 
   const onInputFileChange = (value: File[]) => {
-    setPhotos(value);
+    setFiles(value);
   };
 
   const onSubmit = async () => {
@@ -105,7 +105,7 @@ const CreateProject: React.VFC = () => {
       return;
     }
 
-    const result = await getStorageUrl(photos);
+    const result = await getStorageUrl(files);
 
     if (!result) {
       setFromError("画像を処理できませんでした。");
@@ -141,7 +141,7 @@ const CreateProject: React.VFC = () => {
   };
 
   const checkOnPreSubmit = () => {
-    if (photos.length === 0) scrollToPhotos.scrollHook();
+    if (files.length === 0) scrollToPhotos.scrollHook();
     if (formData.name === "") scrollToName.scrollHook();
     if (formData.description === "") scrollToDescription.scrollHook();
     if (formData.price === "") scrollToPrice.scrollHook();
@@ -160,7 +160,7 @@ const CreateProject: React.VFC = () => {
       {isLoading && <Loading />}
       {scrollToPhotos.renderScrollElement()}
       <InputFileMulti
-        photos={photos}
+        files={files}
         onInputFileChange={(value) => onInputFileChange(value)}
       />
       <FormContainer>

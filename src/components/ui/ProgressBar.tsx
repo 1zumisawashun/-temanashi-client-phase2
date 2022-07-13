@@ -30,12 +30,6 @@ const ProgressBar: React.VFC<ProgressBarProps> = ({ width, percent }) => {
     setValue(percent * width);
   }, [width, percent]);
 
-  // return (
-  //   <ProgressWrapper style={{ width: `${width}%` }}>
-  //     <Progress style={{ width: `${value}%` }} />
-  //   </ProgressWrapper>
-  // );
-
   return (
     <ProgressWrapper width={width}>
       <Progress width={value} />

@@ -14,9 +14,6 @@ import { Loading } from "../components/ui";
 const Container = styled("div")`
   flex-grow: 1;
   width: calc(100% - 650px);
-  @media (min-width: 576px) {
-    display: block;
-  }
 `;
 const Inner = styled("div")`
   padding: 0 50px 50px;
