@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const ErrorText = styled("p")`
+const ErrorTextBlock = styled("p")`
   color: #d32f2f;
   font-size: 0.75rem;
   font-weight: 400;
@@ -13,7 +13,7 @@ const ErrorText = styled("p")`
   text-align: left;
 `;
 
-export type TextErrorProps = {
+export type ErrorTextProps = {
   error?: boolean | null | string;
   helperText?: string | null;
 };
@@ -22,9 +22,9 @@ export type TextErrorProps = {
  * MUIと同じレイアウトのエラーメッセージ
  * react-hook-formとyupでのバリデーションに組み込めないローカルバリデーションに当てる
  */
-export const TextError: React.VFC<TextErrorProps> = ({
+export const ErrorText: React.VFC<ErrorTextProps> = ({
   error = false,
   helperText = "エラーが発生しました",
 }) => {
-  return error ? <ErrorText>{helperText}</ErrorText> : <ErrorText />;
+  return error ? <ErrorTextBlock>{helperText}</ErrorTextBlock> : <ErrorText />;
 };

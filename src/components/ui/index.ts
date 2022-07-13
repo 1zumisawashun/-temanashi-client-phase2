@@ -20,13 +20,13 @@ export { default as InputCheckbox } from "./InputCheckbox";
 export { default as InputSelect } from "./InputSelect";
 export { InputText } from "./InputText";
 export { Loading } from "./Loading";
-export { default as NotFoundItem } from "./NotFoundItem";
+export { ErrorNotFound } from "./ErrorNotFound";
 export { default as ProgressBar } from "./ProgressBar";
 export { LinkButton, NavlinkButton } from "./TextButton";
 export { default as InputTextarea } from "./InputTextarea";
-export { TextError } from "./TextError";
+export { ErrorText } from "./ErrorText";
 /* eslint-disable import/no-cycle*/
-export { ForbiddenError } from "./ForbiddenError";
+export { ErrorForbidden } from "./ErrorForbidden";
 export { default as LikeButton } from "./LikeButton";
 export { InputFileMulti } from "./InputFileMultiple";
 export { default as InputFileSingle } from "./InputFileSingle";

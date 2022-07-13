@@ -8,7 +8,7 @@ import {
   BasicButton,
   LinkButton,
   InputFileSingle,
-  TextError,
+  ErrorText,
 } from "../ui";
 import styled from "@emotion/styled";
 
@@ -135,7 +135,7 @@ const Signup: React.VFC = () => {
           >
             Sign Up
           </BasicButton>
-          <TextError error={error} helperText={error} />
+          <ErrorText error={error} helperText={error} />
           <LinkButton path="/login">Move To Login</LinkButton>
         </FormContainer>
       </Inner>

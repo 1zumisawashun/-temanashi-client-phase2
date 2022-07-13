@@ -1,6 +1,6 @@
 import ProductList from "../dashboard/DashboardList";
 import { ProductItem } from "../../../utilities/stripeClient";
-import { NotFoundItem } from "../../ui";
+import { ErrorNotFound } from "../../ui";
 import styled from "@emotion/styled";
 
 const UserContaienr = styled("div")`
@@ -18,7 +18,7 @@ const UserFavorite: React.VFC<UserFavoriteProps> = ({ productItems }) => {
       {productItems.length !== 0 ? (
         <ProductList productItems={productItems} />
       ) : (
-        <NotFoundItem />
+        <ErrorNotFound />
       )}
     </UserContaienr>
   );

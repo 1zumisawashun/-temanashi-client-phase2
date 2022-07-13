@@ -2,7 +2,7 @@ import FormControl from "@mui/material/FormControl";
 import styled from "@emotion/styled";
 import Select, { MultiValue } from "react-select";
 import { CSSProperties } from "react";
-import { TextError } from "./TextError";
+import { ErrorText } from "./ErrorText";
 
 const StyledFormControl = styled(FormControl)`
   font-size: 16px;
@@ -68,7 +68,7 @@ const InputSelect: React.VFC<SelectFormProps> = ({
         isLoading={isLoading}
         styles={customStyles(error)}
       />
-      <TextError error={error} helperText={helperText} />
+      <ErrorText error={error} helperText={helperText} />
     </StyledFormControl>
   );
 };

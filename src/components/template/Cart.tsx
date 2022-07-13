@@ -3,7 +3,7 @@ import { productUseCase } from "../../utilities/stripeClient";
 import { useAuthContext, useCartContext } from "../../hooks/useContextClient";
 import { useToken } from "../../hooks/useToken";
 import CartList from "../model/cart/CartList";
-import { NotFoundItem, Loading } from "../ui";
+import { ErrorNotFound, Loading } from "../ui";
 import CartPaymentArea from "../model/cart/CartAgreement";
 
 const Cart: React.VFC = () => {
@@ -55,7 +55,7 @@ const Cart: React.VFC = () => {
           <CartPaymentArea onClick={onClickBuy} />
         </>
       ) : (
-        <NotFoundItem />
+        <ErrorNotFound />
       )}
       {isError.length !== 0 && <p>{isError}</p>}
     </div>

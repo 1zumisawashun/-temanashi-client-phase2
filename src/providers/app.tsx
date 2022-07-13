@@ -2,7 +2,7 @@ import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
-import { ForbiddenError, Loading } from "../components/ui";
+import { ErrorForbidden, Loading } from "../components/ui";
 import {
   AuthContextProvider,
   CartContextProvider,
@@ -13,7 +13,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../utilities/muiThemeClient";
 
 export const ErrorFallback: React.VFC = () => {
-  return <ForbiddenError />;
+  return <ErrorForbidden />;
 };
 
 type AppProviderProps = {

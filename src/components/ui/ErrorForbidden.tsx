@@ -43,7 +43,7 @@ const FooterContent = styled("div")`
   text-align: center;
 `;
 
-export const ForbiddenError: React.VFC = () => {
+export const ErrorForbidden: React.VFC = () => {
   const history = useHistory();
   return (
     <ContentWrapper>

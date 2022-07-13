@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CloseButton, BasicButton, BasicModal, TextError } from ".";
+import { CloseButton, BasicButton, BasicModal, ErrorText } from ".";
 import { useDisclosure, useDragAndDrop } from "../../hooks";
 import styled from "@emotion/styled";
 
@@ -166,7 +166,7 @@ export const InputFileMulti: React.VFC<PhotosUploadProps> = ({
         )}
       </UploadContainer>
 
-      <TextError error={isError} helperText={isError} />
+      <ErrorText error={isError} helperText={isError} />
 
       <input
         data-cy="file_upload"
