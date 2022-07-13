@@ -25,12 +25,6 @@ export { default as ProgressBar } from "./ProgressBar";
 export { LinkButton, NavlinkButton } from "./TextButton";
 export { default as InputTextarea } from "./InputTextarea";
 export { TextError } from "./TextError";
-// component.tsx
-export { CheckboxGroup } from "./ninjaspase/CheckboxGroup";
-export { SwitchForm } from "./ninjaspase/SwitchForm";
-export { SelectForm } from "./ninjaspase/SelectForm";
-export { InputTextCustom } from "./ninjaspase/InputText";
-export { InputTextareaCustom } from "./ninjaspase/InputTextarea";
 /* eslint-disable import/no-cycle*/
 export { ForbiddenError } from "./ForbiddenError";
 export { default as LikeButton } from "./LikeButton";

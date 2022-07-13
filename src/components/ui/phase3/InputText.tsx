@@ -65,7 +65,7 @@ export type InputTextProps = {
   size?: "small";
 };
 
-export const InputTextCustom: React.VFC<InputTextProps> = ({
+export const InputText: React.VFC<InputTextProps> = ({
   onChange,
   onKeyDown,
   onBlur,

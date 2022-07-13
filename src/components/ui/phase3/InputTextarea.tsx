@@ -43,7 +43,7 @@ export interface InputTextareaProps {
   readOnly?: boolean;
 }
 
-export const InputTextareaCustom: React.VFC<InputTextareaProps> = ({
+export const InputTextarea: React.VFC<InputTextareaProps> = ({
   onChange,
   onKeyDown,
   onBlur,
