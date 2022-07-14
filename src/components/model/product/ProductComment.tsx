@@ -23,14 +23,15 @@ const ProductCommentContainer = styled("div")`
 const ProductCommentWrapper = styled("ul")`
   max-height: 590px;
   overflow: auto;
+  padding-bottom: 5px;
 `;
 const ProductCommentInner = styled("li")`
   padding: 15px;
-  border-radius: 4px;
   margin: 10px 0 0 0;
   border: 1px solid #f2f2f2;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   background: white;
+  border-radius: 9px;
 `;
 const ProductCommentAuther = styled("div")`
   display: flex;

@@ -23,7 +23,7 @@ const DisgnoseThumbnail = styled("div")`
   background: white;
   padding: 40px 0;
   text-align: center;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
 `;
 /*

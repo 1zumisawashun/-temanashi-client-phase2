@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from "react";
+import { ReactNode } from "react";
 import { Link, NavLink } from "react-router-dom";
 import MuiButton from "@mui/material/Button";
 import { SvgIconProps } from "@mui/material";
@@ -16,7 +16,7 @@ type ButtonLinkProps = {
     | "info"
     | "warning";
   onClick?: () => void;
-  styledName?: CSSProperties;
+  className?: string;
 };
 
 /**
@@ -52,7 +52,7 @@ export const ButtonNavlink: React.VFC<ButtonLinkProps> = ({
   path,
   children,
   icon,
-  styledName,
+  className,
 }) => {
   return (
     <MuiButton
@@ -62,7 +62,7 @@ export const ButtonNavlink: React.VFC<ButtonLinkProps> = ({
       startIcon={icon}
       size="large"
       fullWidth
-      style={styledName}
+      className={className}
     >
       {children}
     </MuiButton>

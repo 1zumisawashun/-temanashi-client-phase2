@@ -6,6 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 import styled from "@emotion/styled";
 import Badge from "@mui/material/Badge";
+import { css } from "@emotion/css";
 
 const SidebarContainer = styled("div")`
   background: #84bcb4;
@@ -44,6 +45,15 @@ const SidebarLinkItem = styled("li")`
     color: #555;
   }
 `;
+/**
+ * 小コンポーネントに送るために作成
+ * styleをコンポーネントに当てるとCSSPropertiesが型になってしまう
+ * classNameをコンポーネントに当てるとstringになる＞こっちを採用したい
+ */
+export const CustomStyle = css`
+  justify-content: flex-start;
+  padding-left: 40px;
+`;
 
 export const Sidebar: React.VFC = () => {
   const { user } = useAuthContext();
@@ -65,17 +75,29 @@ export const Sidebar: React.VFC = () => {
         <SidebarLinks>
           <ul>
             <SidebarLinkItem>
-              <ButtonNavlink path="/" icon={<DashboardIcon />}>
+              <ButtonNavlink
+                path="/"
+                icon={<DashboardIcon />}
+                className={CustomStyle}
+              >
                 Dashboard
               </ButtonNavlink>
             </SidebarLinkItem>
             <SidebarLinkItem>
-              <ButtonNavlink path="/create/product" icon={<SendIcon />}>
+              <ButtonNavlink
+                path="/create/product"
+                icon={<SendIcon />}
+                className={CustomStyle}
+              >
                 New Product
               </ButtonNavlink>
             </SidebarLinkItem>
             <SidebarLinkItem>
-              <ButtonNavlink path="/diagnose" icon={<ContentPasteSearchIcon />}>
+              <ButtonNavlink
+                path="/diagnose"
+                icon={<ContentPasteSearchIcon />}
+                className={CustomStyle}
+              >
                 Diagnose
               </ButtonNavlink>
             </SidebarLinkItem>
@@ -87,6 +109,7 @@ export const Sidebar: React.VFC = () => {
                     <ShoppingCartIcon />
                   </Badge>
                 }
+                className={CustomStyle}
               >
                 Shopping Cart
               </ButtonNavlink>

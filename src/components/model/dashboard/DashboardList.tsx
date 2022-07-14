@@ -20,8 +20,8 @@ export const DashboardListWrapper = styled(Link)`
   justify-content: space-between;
   background-color: white;
   padding: 16px;
-  border-radius: 6px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 9px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   text-decoration: none;
   color: inherit;
 `;
@@ -34,9 +34,10 @@ export const Thumbnail = styled("div")`
  * 小コンポーネントに送るために作成
  */
 export const styledImage = css`
-  width: 230px;
+  width: 220px;
   height: 160px;
   object-fit: cover;
+  border-radius: 6px;
 `;
 export const Content = styled("div")`
   width: 30%;
@@ -100,7 +101,7 @@ export const DashboardList: React.VFC<DashboardListProps> = ({
             <Content>
               <Name>{item.product.name}</Name>
               {Object.keys(item.prices).map((priceIndex) => (
-                <Price>
+                <Price key={priceIndex}>
                   {formatTaxIncludedPrice(item.prices[priceIndex].unit_amount)}
                 </Price>
               ))}

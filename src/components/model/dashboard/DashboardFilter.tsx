@@ -2,9 +2,12 @@ import { filterList } from "../../../utilities/constant";
 import styled from "@emotion/styled";
 
 const FilterContainer = styled("div")`
+  width: 100%;
+  display: inline-block;
   margin: 30px auto 0;
   overflow-x: auto;
   white-space: nowrap;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   &::-webkit-scrollbar {
     height: 5px;
   }

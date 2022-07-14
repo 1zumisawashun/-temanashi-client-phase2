@@ -15,7 +15,7 @@ export const DashboardTemplate: React.VFC = () => {
   );
 
   const changeFilter = (newFilter: string) => {
-    if (newFilter) handleError("changeFilter Error");
+    if (!newFilter) handleError("changeFilter Error");
     setCurrentFilter(newFilter);
   };
 

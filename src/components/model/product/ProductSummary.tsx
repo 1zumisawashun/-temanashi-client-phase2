@@ -15,12 +15,14 @@ import styled from "@emotion/styled";
 const ProductSummaryContainer = styled("div")`
   background-color: white;
   padding: 30px;
-  border-radius: 4px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 9px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 `;
 const ThumbnailWrapper = styled("div")``;
 const Thumbnail = styled("img")`
   width: 100%;
+  border-radius: 6px;
+
 `;
 const Title = styled("h2")`
   margin-top: 10px;
