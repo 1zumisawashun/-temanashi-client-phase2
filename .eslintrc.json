@@ -5,8 +5,9 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    // 以下4つのライブラリは次の記事で紹介されている https://zenn.dev/longbridge/articles/ae3aa36cf17d73
+    "plugin:react/recommended",
     "airbnb",
     "airbnb-typescript",
     "prettier"
@@ -26,20 +27,21 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-throw-literal": "off",
-    "react/require-default-props": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off", // 関数の返り値の型必須をoffにする https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md
+    "react/require-default-props": "off", // コンポーネントの引数が必須ではない時の警告をoff
     // temanashi-phase1で実装したESLint
     "spaced-comment": "off",
     "no-control-regex": "off",
     "no-console": "off",
     "no-alert": "off",
-    "arrow-body-style": "off", // returnを無くして強制的に () =>にするのをoff
+    "arrow-body-style": "off", // returnを無くして強制的に const num = () => 1 にするのをoff
     "import/prefer-default-export": "off", // named-exportを採用するためoff
     "import/order": "off",
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-unused-expressions": "off",
     "@typescript-eslint/no-unused-vars": "off",
-    "react/prop-types": "off",
+    "react/prop-types": "off", // https://zenn.dev/yuki_tu/scraps/3fff5f0a600388
     "react/jsx-props-no-spreading": "off", // uisのregisterの展開ができなくなるためoff
     "react/react-in-jsx-scope": "off", // Reactをimportしなくても使えるようにoff
     "react/function-component-definition": [

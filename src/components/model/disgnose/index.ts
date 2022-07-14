@@ -1,2 +1,2 @@
-export { DiagnoseResult } from "./DiagnoseResult";
-export { DiagnoseTinderSwipe } from "./DiagnoseTinderSwipe";
+export { DiagnoseResult } from './DiagnoseResult'
+export { DiagnoseTinderSwipe } from './DiagnoseTinderSwipe'

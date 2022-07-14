@@ -1,13 +1,13 @@
-import { Helmet } from "react-helmet-async";
+import { Helmet } from 'react-helmet-async'
 
 type HeadProps = {
-  title?: string;
-  description?: string;
-};
+  title?: string
+  description?: string
+}
 
 export const Head: React.VFC<HeadProps> = ({
-  title = "",
-  description = "",
+  title = '',
+  description = ''
 }) => {
   return (
     <Helmet
@@ -16,5 +16,5 @@ export const Head: React.VFC<HeadProps> = ({
     >
       <meta name="description" content={description} />
     </Helmet>
-  );
-};
+  )
+}

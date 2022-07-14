@@ -1,16 +1,16 @@
-import { LoginTemplate } from "../components/template/Login";
-import { useAuthContext } from "../hooks";
-import { Redirect } from "react-router-dom";
-import styled from "@emotion/styled";
-import { Head } from "../components/layout";
+import { LoginTemplate } from '../components/template/Login'
+import { useAuthContext } from '../hooks'
+import { Redirect } from 'react-router-dom'
+import styled from '@emotion/styled'
+import { Head } from '../components/layout'
 
-const Container = styled("div")`
+const Container = styled('div')`
   flex-grow: 1;
   width: calc(100% - 650px);
-`;
+`
 
 export const Login: React.VFC = () => {
-  const { user } = useAuthContext();
+  const { user } = useAuthContext()
 
   return user ? (
     <Redirect to="/" />
@@ -21,5 +21,5 @@ export const Login: React.VFC = () => {
         <LoginTemplate />
       </Container>
     </>
-  );
-};
+  )
+}

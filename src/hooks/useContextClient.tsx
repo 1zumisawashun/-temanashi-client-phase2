@@ -1,34 +1,30 @@
-import { AuthContext } from "../contexts/AuthContext";
-import { CartContext } from "../contexts/CartContext";
-import { RandomContext } from "../contexts/RandomContext";
-import { useContext } from "react";
+import { AuthContext } from '../contexts/AuthContext'
+import { CartContext } from '../contexts/CartContext'
+import { RandomContext } from '../contexts/RandomContext'
+import { useContext } from 'react'
 
 export const useAuthContext = () => {
-  const context = useContext(AuthContext);
+  const context = useContext(AuthContext)
   if (!context) {
-    throw new Error(
-      "useAuthContext must be used inside an AuthContextProvider"
-    );
+    throw new Error('useAuthContext must be used inside an AuthContextProvider')
   }
-  return context;
-};
+  return context
+}
 
 export const useCartContext = () => {
-  const context = useContext(CartContext);
+  const context = useContext(CartContext)
   if (!context) {
-    throw new Error(
-      "useCartContext must be used inside an CartContextProvider"
-    );
+    throw new Error('useCartContext must be used inside an CartContextProvider')
   }
-  return context;
-};
+  return context
+}
 
 export const useRandomContext = () => {
-  const context = useContext(RandomContext);
+  const context = useContext(RandomContext)
   if (!context) {
     throw new Error(
-      "useRandomContext must be used inside an RandomContextProvider"
-    );
+      'useRandomContext must be used inside an RandomContextProvider'
+    )
   }
-  return context;
-};
+  return context
+}

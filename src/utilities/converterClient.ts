@@ -1,21 +1,21 @@
-import { firebase, projectFirestore } from "../firebase/config";
-import { User } from "../@types/dashboard";
+import { firebase, projectFirestore } from '../firebase/config'
+import { User } from '../@types/dashboard'
 
 const converter = <T>() => ({
   // NOTE:toFirestore: (data: Partial<T>) => data,で曖昧にすることもできる
   toFirestore: (data: T) => data,
   fromFirestore: (snap: firebase.firestore.QueryDocumentSnapshot) =>
-    snap.data() as T,
-});
+    snap.data() as T
+})
 
 const collectionPoint = <T>(collection: string) =>
-  projectFirestore.collection(collection).withConverter(converter<T>());
+  projectFirestore.collection(collection).withConverter(converter<T>())
 
 const documentPoint = <T>(collection: string, document: string) =>
   projectFirestore
     .collection(collection)
     .withConverter(converter<T>())
-    .doc(document);
+    .doc(document)
 
 const subCollectionPoint = <T, U>(
   collection: string,
@@ -27,7 +27,7 @@ const subCollectionPoint = <T, U>(
     .withConverter(converter<T>())
     .doc(document)
     .collection(subCollection)
-    .withConverter(converter<U>());
+    .withConverter(converter<U>())
 
 const subDocumentPoint = <T, U>(
   collection: string,
@@ -41,16 +41,16 @@ const subDocumentPoint = <T, U>(
     .doc(document)
     .collection(subCollection)
     .withConverter(converter<U>())
-    .doc(subDocument);
+    .doc(subDocument)
 
 const db = {
-  users: collectionPoint<User>("users"),
-};
+  users: collectionPoint<User>('users')
+}
 
 export {
   collectionPoint,
   documentPoint,
   subCollectionPoint,
   subDocumentPoint,
-  db,
-};
+  db
+}

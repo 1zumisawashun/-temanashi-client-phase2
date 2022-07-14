@@ -1,6 +1,6 @@
 // import { useCookies } from "react-cookie";
 // import Axios, { AxiosRequestConfig } from "axios";
-import Axios from "axios";
+import Axios from 'axios'
 
 // const headers = {
 //   Authorization: `Bearer ${cookies.jwt}`,
@@ -17,9 +17,9 @@ import Axios from "axios";
 // };
 
 const axios = Axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: process.env.REACT_APP_BASE_URL
   // baseURL: process.env.REACT_APP_BASE_URL_EMULATOR,
-});
+})
 
 // axios.interceptors.request.use(useAuthRequestInterceptor);
 // axios.interceptors.response.use(
@@ -39,4 +39,4 @@ const axios = Axios.create({
 //   }
 // );
 
-export default axios;
+export default axios

@@ -1,14 +1,14 @@
 import {
   ScrollPosition,
   LazyLoadImage,
-  trackWindowScroll,
-} from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+  trackWindowScroll
+} from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 
 interface ImageProp {
-  src: string;
-  scrollPosition: ScrollPosition;
-  className?: string;
+  src: string
+  scrollPosition: ScrollPosition
+  className?: string
 }
 
 /**
@@ -20,10 +20,10 @@ const Image: React.VFC<ImageProp> = ({ src, scrollPosition, className }) => {
   return (
     <LazyLoadImage
       src={src}
-      className={className || "image"}
+      className={className || 'image'}
       scrollPosition={scrollPosition}
     />
-  );
-};
+  )
+}
 
-export default trackWindowScroll(Image);
+export default trackWindowScroll(Image)

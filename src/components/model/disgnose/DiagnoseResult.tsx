@@ -1,8 +1,8 @@
-import { db, recommendation } from "../../../utilities/constant";
-import { formatTaxIncludedPrice } from "../../../utilities";
-import { Loading, Image } from "../../ui";
-import { css } from "@emotion/css";
-import styled from "@emotion/styled";
+import { db, recommendation } from '../../../utilities/constant'
+import { formatTaxIncludedPrice } from '../../../utilities'
+import { Loading, Image } from '../../ui'
+import { css } from '@emotion/css'
+import styled from '@emotion/styled'
 import {
   DashboardListContainer,
   DashboardListWrapper,
@@ -13,42 +13,42 @@ import {
   Price,
   DimentionContainer,
   DimentionInner,
-  DimentionItem,
-} from "../dashboard/DashboardList";
+  DimentionItem
+} from '../dashboard/DashboardList'
 
-const DisgnoseResultContainer = styled("div")`
+const DisgnoseResultContainer = styled('div')`
   font-size: 16px;
-`;
-const DisgnoseThumbnail = styled("div")`
+`
+const DisgnoseThumbnail = styled('div')`
   background: white;
   padding: 40px 0;
   text-align: center;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
-`;
+`
 /*
  * 小コンポーネントに送るために作成
  */
 const styledImageDisgnose = css`
   width: 700px;
   object-fit: cover;
-`;
-const DisgnoseContent = styled("div")`
+`
+const DisgnoseContent = styled('div')`
   margin: 20px 0;
-`;
-const DisgnoseName = styled("h2")`
+`
+const DisgnoseName = styled('h2')`
   font-size: 1.6rem;
-`;
-const DisgnoseColors = styled("div")`
+`
+const DisgnoseColors = styled('div')`
   width: 55%;
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
-`;
-const DisgnoseItem = styled("div")`
+`
+const DisgnoseItem = styled('div')`
   display: flex;
-`;
-const DisgnoseItemCercle = styled("span")`
+`
+const DisgnoseItemCercle = styled('span')`
   display: inline-block;
   width: 25px;
   height: 25px;
@@ -61,11 +61,11 @@ const DisgnoseItemCercle = styled("span")`
   &.-grey {
     background: grey;
   }
-`;
-const DisgnoseTotal = styled("span")`
+`
+const DisgnoseTotal = styled('span')`
   font-weight: bold;
   margin: 0 10px;
-`;
+`
 
 export const DiagnoseResult: React.VFC = () => {
   return (
@@ -124,5 +124,5 @@ export const DiagnoseResult: React.VFC = () => {
         ))}
       </DashboardListContainer>
     </>
-  );
-};
+  )
+}

@@ -2,83 +2,82 @@ import {
   useAuthContext,
   useCartContext,
   useFirestore,
-  useDisclosure,
-} from "../../../hooks";
-import { useHistory, useParams } from "react-router-dom";
-import { Button, ButtonLike, Modal } from "../../ui";
-import { ProductItem } from "../../../utilities/stripeClient";
-import { formatTaxIncludedPrice } from "../../../utilities";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import styled from "@emotion/styled";
+  useDisclosure
+} from '../../../hooks'
+import { useHistory, useParams } from 'react-router-dom'
+import { Button, ButtonLike, Modal } from '../../ui'
+import { ProductItem } from '../../../utilities/stripeClient'
+import { formatTaxIncludedPrice } from '../../../utilities'
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import styled from '@emotion/styled'
 
-const ProductSummaryContainer = styled("div")`
+const ProductSummaryContainer = styled('div')`
   background-color: white;
   padding: 30px;
   border-radius: 9px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-`;
-const ThumbnailWrapper = styled("div")``;
-const Thumbnail = styled("img")`
+`
+const ThumbnailWrapper = styled('div')``
+const Thumbnail = styled('img')`
   width: 100%;
   border-radius: 6px;
-
-`;
-const Title = styled("h2")`
+`
+const Title = styled('h2')`
   margin-top: 10px;
   font-size: 1.2em;
   color: #444;
-`;
-const ContentWrapper = styled("div")``;
-const ContentPrice = styled("div")`
+`
+const ContentWrapper = styled('div')``
+const ContentPrice = styled('div')`
   font-size: 1.2em;
   color: #999;
-`;
-const ContentDetail = styled("p")`
+`
+const ContentDetail = styled('p')`
   margin: 20px 0;
   color: #999;
   line-height: 1.8em;
   font-size: 0.9em;
-`;
-const ContentButtonWrapper = styled("div")`
+`
+const ContentButtonWrapper = styled('div')`
   display: flex;
   gap: 20px;
-`;
+`
 
 interface ProductSummaryProps {
-  furniture: ProductItem;
+  furniture: ProductItem
 }
 interface Product {
-  id: string;
-  title: string;
-  price: number;
-  priceIndex: string;
-  quantity?: number;
-  image: string;
+  id: string
+  title: string
+  price: number
+  priceIndex: string
+  quantity?: number
+  image: string
 }
 
 export const ProductSummary: React.VFC<ProductSummaryProps> = ({
-  furniture,
+  furniture
 }) => {
-  const history = useHistory();
-  const { addProductToCart } = useCartContext();
-  const { deleteDocument } = useFirestore();
-  const { id } = useParams<{ id: string }>();
-  const { user } = useAuthContext();
-  const executeModal = useDisclosure();
-  const previewModal = useDisclosure();
+  const history = useHistory()
+  const { addProductToCart } = useCartContext()
+  const { deleteDocument } = useFirestore()
+  const { id } = useParams<{ id: string }>()
+  const { user } = useAuthContext()
+  const executeModal = useDisclosure()
+  const previewModal = useDisclosure()
 
-  if (!user) throw new Error("we cant find your account");
+  if (!user) throw new Error('we cant find your account')
 
   const addCart = async (product: Product) => {
-    addProductToCart(product);
-  };
+    addProductToCart(product)
+  }
 
   const handleDelete = async () => {
-    executeModal.close();
-    if (furniture.product) await deleteDocument<ProductItem>("products", id);
-    history.push("/");
-  };
+    executeModal.close()
+    if (furniture.product) await deleteDocument<ProductItem>('products', id)
+    history.push('/')
+  }
 
   return (
     <ProductSummaryContainer>
@@ -138,7 +137,7 @@ export const ProductSummary: React.VFC<ProductSummaryProps> = ({
                   title: furniture.product.name,
                   price: furniture.prices[priceIndex].unit_amount,
                   priceIndex,
-                  image: furniture.product.images[0],
+                  image: furniture.product.images[0]
                 })
               }
             >
@@ -149,5 +148,5 @@ export const ProductSummary: React.VFC<ProductSummaryProps> = ({
         </ContentWrapper>
       ))}
     </ProductSummaryContainer>
-  );
-};
+  )
+}

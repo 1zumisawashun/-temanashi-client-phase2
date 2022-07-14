@@ -1,24 +1,22 @@
-import { useEffect, useState } from "react";
-import { subDocumentPoint } from "../utilities/converterClient";
-import { firebase } from "../firebase/config";
-import { firebasePath } from "../@types/dashboard";
+import { useEffect, useState } from 'react'
+import { subDocumentPoint } from '../utilities/converterClient'
+import { firebase } from '../firebase/config'
+import { firebasePath } from '../@types/dashboard'
 
 type Id = {
-  id: string; // 追加したい型
-};
+  id: string // 追加したい型
+}
 
 export const useSubDocument = <T, U>({
   collection,
   document,
   subCollection,
-  subDocument,
+  subDocument
 }: firebasePath) => {
-  const [documents, setDocuments] = useState<U & Id>();
-  const [error, setError] = useState<string | null>(null);
-  const [
-    referense,
-    setReferense,
-  ] = useState<firebase.firestore.DocumentReference<U> | null>(null);
+  const [documents, setDocuments] = useState<U & Id>()
+  const [error, setError] = useState<string | null>(null)
+  const [referense, setReferense] =
+    useState<firebase.firestore.DocumentReference<U> | null>(null)
 
   useEffect(() => {
     const ref = subDocumentPoint<T, U>(
@@ -26,27 +24,27 @@ export const useSubDocument = <T, U>({
       document,
       subCollection,
       subDocument
-    );
+    )
     const unsubscribe = ref.onSnapshot(
       (snapshot) => {
         if (snapshot) {
           setDocuments({
             ...(snapshot.data() as U),
-            id: snapshot.id,
-          });
-          setReferense(ref);
-          setError(null);
+            id: snapshot.id
+          })
+          setReferense(ref)
+          setError(null)
         } else {
-          setError("no such socument exist");
+          setError('no such socument exist')
         }
       },
       (err) => {
-        console.log(err);
-        setError("failed to get document");
+        console.log(err)
+        setError('failed to get document')
       }
-    );
-    return () => unsubscribe();
-  }, [collection, document, subCollection, subDocument]);
+    )
+    return () => unsubscribe()
+  }, [collection, document, subCollection, subDocument])
 
-  return { documents, error, referense };
-};
+  return { documents, error, referense }
+}

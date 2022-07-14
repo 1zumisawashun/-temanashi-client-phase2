@@ -1,14 +1,14 @@
-import { UserPaymentList } from "./UserPaymentList";
-import { ErrorNotFound } from "../../ui";
-import styled from "@emotion/styled";
+import { UserPaymentList } from './UserPaymentList'
+import { ErrorNotFound } from '../../ui'
+import styled from '@emotion/styled'
 
-const UserContaienr = styled("div")`
+const UserContaienr = styled('div')`
   width: 100%;
   min-height: 300px;
   background: #f4f4f4;
-`;
+`
 interface UserHistoryProps {
-  payments: Array<any>;
+  payments: Array<any>
 }
 
 export const UserHistory: React.VFC<UserHistoryProps> = ({ payments }) => {
@@ -20,5 +20,5 @@ export const UserHistory: React.VFC<UserHistoryProps> = ({ payments }) => {
         <ErrorNotFound />
       )}
     </UserContaienr>
-  );
-};
+  )
+}

@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { HambergerMenu } from "./HambergerMenu";
-import { ButtonIconStore } from "../ui";
-import { useHistory } from "react-router-dom";
+import { useState } from 'react'
+import { HambergerMenu } from './HambergerMenu'
+import { ButtonIconStore } from '../ui'
+import { useHistory } from 'react-router-dom'
 
 export const Header: React.VFC = () => {
-  const history = useHistory();
-  const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory()
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className={!isOpen ? "navbar" : "navbar -active"}>
+    <div className={!isOpen ? 'navbar' : 'navbar -active'}>
       <ul className="wrapper">
         {!isOpen && (
           <li className="logo">
-            <ButtonIconStore onClick={() => history.push("/")} />
+            <ButtonIconStore onClick={() => history.push('/')} />
             <span>temanashi client</span>
           </li>
         )}
@@ -21,5 +21,5 @@ export const Header: React.VFC = () => {
         <HambergerMenu state={isOpen} setState={setIsOpen} />
       </div>
     </div>
-  );
-};
+  )
+}

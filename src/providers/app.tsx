@@ -1,24 +1,24 @@
-import * as React from "react";
-import { ErrorBoundary } from "react-error-boundary";
-import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter } from "react-router-dom";
-import { ErrorForbidden, Loading } from "../components/ui";
+import * as React from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { HelmetProvider } from 'react-helmet-async'
+import { BrowserRouter } from 'react-router-dom'
+import { ErrorForbidden, Loading } from '../components/ui'
 import {
   AuthContextProvider,
   CartContextProvider,
-  RandomContextProvider,
-} from "../contexts";
-import { CookiesProvider } from "react-cookie";
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "../utilities/muiThemeClient";
+  RandomContextProvider
+} from '../contexts'
+import { CookiesProvider } from 'react-cookie'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from '../utilities/muiThemeClient'
 
 export const ErrorFallback: React.VFC = () => {
-  return <ErrorForbidden />;
-};
+  return <ErrorForbidden />
+}
 
 type AppProviderProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export const AppProvider: React.VFC<AppProviderProps> = ({ children }) => {
   return (
@@ -39,5 +39,5 @@ export const AppProvider: React.VFC<AppProviderProps> = ({ children }) => {
         </ErrorBoundary>
       </ThemeProvider>
     </React.Suspense>
-  );
-};
+  )
+}

@@ -1,13 +1,13 @@
 type WhereFilterOp =
-  | "<"
-  | "<="
-  | "=="
-  | "!="
-  | ">="
-  | ">"
-  | "array-contains"
-  | "in"
-  | "array-contains-any"
-  | "not-in";
+  | '<'
+  | '<='
+  | '=='
+  | '!='
+  | '>='
+  | '>'
+  | 'array-contains'
+  | 'in'
+  | 'array-contains-any'
+  | 'not-in'
 
-type OrderByDirection = "desc" | "asc";
+type OrderByDirection = 'desc' | 'asc'

@@ -1,23 +1,23 @@
-import { ReactNode } from "react";
-import { Link, NavLink } from "react-router-dom";
-import MuiButton from "@mui/material/Button";
-import { SvgIconProps } from "@mui/material";
+import { ReactNode } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import MuiButton from '@mui/material/Button'
+import { SvgIconProps } from '@mui/material'
 
 type ButtonLinkProps = {
-  path?: string;
-  children: ReactNode;
-  icon?: SvgIconProps;
+  path?: string
+  children: ReactNode
+  icon?: SvgIconProps
   variant?:
-    | "inherit"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "error"
-    | "info"
-    | "warning";
-  onClick?: () => void;
-  className?: string;
-};
+    | 'inherit'
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'error'
+    | 'info'
+    | 'warning'
+  onClick?: () => void
+  className?: string
+}
 
 /**
  * MUIのLinkコンポーネントの場合iconの追加ができないためButtonを採用
@@ -27,8 +27,8 @@ export const ButtonLink: React.VFC<ButtonLinkProps> = ({
   path,
   children,
   icon,
-  variant = "secondary",
-  onClick,
+  variant = 'secondary',
+  onClick
 }) => {
   return (
     <MuiButton
@@ -41,8 +41,8 @@ export const ButtonLink: React.VFC<ButtonLinkProps> = ({
     >
       {children}
     </MuiButton>
-  );
-};
+  )
+}
 
 /**
  * NavLinkの場合「active」というクラスの付与が可能になる
@@ -52,7 +52,7 @@ export const ButtonNavlink: React.VFC<ButtonLinkProps> = ({
   path,
   children,
   icon,
-  className,
+  className
 }) => {
   return (
     <MuiButton
@@ -66,5 +66,5 @@ export const ButtonNavlink: React.VFC<ButtonLinkProps> = ({
     >
       {children}
     </MuiButton>
-  );
-};
+  )
+}

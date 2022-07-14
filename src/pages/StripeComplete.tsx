@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { Head } from "../components/layout";
+import { Link } from 'react-router-dom'
+import { Head } from '../components/layout'
 
 export const Complete: React.VFC = () => {
   return (
@@ -23,5 +23,5 @@ export const Complete: React.VFC = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}

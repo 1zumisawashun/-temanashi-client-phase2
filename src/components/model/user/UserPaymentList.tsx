@@ -1,28 +1,28 @@
-import { Link } from "react-router-dom";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
-import { ja } from "date-fns/locale";
-import styled from "@emotion/styled";
-import { Divider } from "../../ui";
+import { Link } from 'react-router-dom'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { ja } from 'date-fns/locale'
+import styled from '@emotion/styled'
+import { Divider } from '../../ui'
 
-const PaymentContaienr = styled("div")`
+const PaymentContaienr = styled('div')`
   padding: 30px 15px;
-`;
-const PaymentWrapper = styled("div")``;
-const PaymentInner = styled("div")`
+`
+const PaymentWrapper = styled('div')``
+const PaymentInner = styled('div')`
   padding: 20px 0px;
   display: flex;
   justify-content: space-between;
-`;
-const PaymentName = styled("p")`
+`
+const PaymentName = styled('p')`
   font-weight: bold;
-`;
-const PaymentDate = styled("span")`
+`
+const PaymentDate = styled('span')`
   display: inline-block;
   font-size: 10px;
   font-weight: normal;
   vertical-align: middle;
   margin: 0 5px;
-`;
+`
 const PaymentLink = styled(Link)`
   font-size: 0.8rem;
   margin: auto 0;
@@ -30,13 +30,13 @@ const PaymentLink = styled(Link)`
   color: #84bcb4;
   text-decoration: none;
   cursor: pointer;
-`;
+`
 interface PaymentListProp {
-  paymentItems: Array<any>;
+  paymentItems: Array<any>
 }
 
 export const UserPaymentList: React.VFC<PaymentListProp> = ({
-  paymentItems,
+  paymentItems
 }) => {
   return (
     <PaymentContaienr>
@@ -51,7 +51,7 @@ export const UserPaymentList: React.VFC<PaymentListProp> = ({
                     (
                     {formatDistanceToNow(new Date(item.price.created), {
                       addSuffix: true,
-                      locale: ja,
+                      locale: ja
                     })}
                     )
                   </PaymentDate>
@@ -69,5 +69,5 @@ export const UserPaymentList: React.VFC<PaymentListProp> = ({
           </PaymentWrapper>
         ))}
     </PaymentContaienr>
-  );
-};
+  )
+}

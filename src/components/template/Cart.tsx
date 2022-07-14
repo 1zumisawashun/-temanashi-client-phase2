@@ -1,30 +1,30 @@
-import { useState } from "react";
-import { productUseCase } from "../../utilities/stripeClient";
-import { useAuthContext, useCartContext } from "../../hooks/useContextClient";
-import { useToken } from "../../hooks/useToken";
-import { CartList, CartAgreement } from "../model/cart";
-import { ErrorNotFound } from "../ui";
-import { useErrorHandler } from "react-error-boundary";
+import { useState } from 'react'
+import { productUseCase } from '../../utilities/stripeClient'
+import { useAuthContext, useCartContext } from '../../hooks/useContextClient'
+import { useToken } from '../../hooks/useToken'
+import { CartList, CartAgreement } from '../model/cart'
+import { ErrorNotFound } from '../ui'
+import { useErrorHandler } from 'react-error-boundary'
 
 export const CartTemplate: React.VFC = () => {
-  const { verifyJWT } = useToken();
-  const { cart } = useCartContext();
-  const { user } = useAuthContext();
-  const handleError = useErrorHandler();
+  const { verifyJWT } = useToken()
+  const { cart } = useCartContext()
+  const { user } = useAuthContext()
+  const handleError = useErrorHandler()
 
-  const [isPendingBuy, setIsPendingBuy] = useState<boolean>(false);
+  const [isPendingBuy, setIsPendingBuy] = useState<boolean>(false)
 
-  if (!user) throw new Error("we cant find your account");
+  if (!user) throw new Error('we cant find your account')
 
   const onClickBuy = async () => {
-    setIsPendingBuy(true);
+    setIsPendingBuy(true)
 
     const line_items = cart.map((item) => {
       return {
         price: item.priceIndex,
-        quantity: item.quantity ?? 0,
-      };
-    });
+        quantity: item.quantity ?? 0
+      }
+    })
 
     /**
      * 今はトークン認証バグっているのであとで修正が必要_20220713
@@ -32,24 +32,24 @@ export const CartTemplate: React.VFC = () => {
      * https://ja.reactjs.org/docs/error-boundaries.html
      * react-dom.development.jsでエラーが発生している模様
      */
-    const token = await verifyJWT();
+    const token = await verifyJWT()
     if (token) {
-      setIsPendingBuy(false);
-      handleError("onClickBuy Error");
-      return;
+      setIsPendingBuy(false)
+      handleError('onClickBuy Error')
+      return
     }
 
     try {
-      const { uid } = user;
-      const seccess_url = `${window.location.origin}/complete`;
-      const cancel_url = `${window.location.origin}/error`;
-      await productUseCase.buy(uid, line_items, seccess_url, cancel_url);
-      setIsPendingBuy(false);
+      const { uid } = user
+      const seccess_url = `${window.location.origin}/complete`
+      const cancel_url = `${window.location.origin}/error`
+      await productUseCase.buy(uid, line_items, seccess_url, cancel_url)
+      setIsPendingBuy(false)
     } catch (error) {
-      setIsPendingBuy(false);
-      handleError("onClickBuy Error");
+      setIsPendingBuy(false)
+      handleError('onClickBuy Error')
     }
-  };
+  }
 
   return (
     <div>
@@ -62,5 +62,5 @@ export const CartTemplate: React.VFC = () => {
         <ErrorNotFound />
       )}
     </div>
-  );
-};
+  )
+}

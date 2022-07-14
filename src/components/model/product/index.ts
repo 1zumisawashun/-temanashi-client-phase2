@@ -1,2 +1,2 @@
-export { ProductComment } from "./ProductComment";
-export { ProductSummary } from "./ProductSummary";
+export { ProductComment } from './ProductComment'
+export { ProductSummary } from './ProductSummary'

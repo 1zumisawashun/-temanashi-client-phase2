@@ -1,8 +1,8 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import "firebase/storage";
-import "firebase/functions";
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+import 'firebase/storage'
+import 'firebase/functions'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -11,24 +11,24 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
-  useFirebaseEmulator: window.location.hostname === "localhost",
-};
+  useFirebaseEmulator: window.location.hostname === 'localhost'
+}
 
-console.log(process.env.REACT_APP_PROJECT_ID);
+console.log(process.env.REACT_APP_PROJECT_ID)
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig)
 
-const projectFirestore = firebase.firestore();
-const projectAuth = firebase.auth();
-const projectStorage = firebase.storage();
-const projectFunctions = firebase.app().functions();
+const projectFirestore = firebase.firestore()
+const projectAuth = firebase.auth()
+const projectStorage = firebase.storage()
+const projectFunctions = firebase.app().functions()
 
-const timestamp = firebase.firestore.Timestamp;
+const timestamp = firebase.firestore.Timestamp
 
 // NOTE:functions側でfirebase emulator:startするなら意味がない？
-const isEmulating = firebaseConfig.useFirebaseEmulator;
+const isEmulating = firebaseConfig.useFirebaseEmulator
 if (isEmulating) {
-  firebase.functions().useEmulator("localhost", 5001);
+  firebase.functions().useEmulator('localhost', 5001)
 }
 
 export {
@@ -38,5 +38,5 @@ export {
   projectStorage,
   projectFunctions,
   timestamp,
-  isEmulating,
-};
+  isEmulating
+}

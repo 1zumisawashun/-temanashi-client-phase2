@@ -3,25 +3,25 @@ import {
   TextField,
   InputAdornment,
   IconButton,
-  CircularProgress,
-} from "@mui/material";
-import styled from "@emotion/styled";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { UseFormRegisterReturn } from "react-hook-form";
+  CircularProgress
+} from '@mui/material'
+import styled from '@emotion/styled'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { UseFormRegisterReturn } from 'react-hook-form'
 
-const Wrapper = styled("div")`
+const Wrapper = styled('div')`
   background-color: transparent;
   display: flex;
   color: #84bcb4;
   margin: 20px;
   font-weight: bold;
-`;
+`
 
-const Label = styled("label")`
+const Label = styled('label')`
   width: 20%;
   margin: auto 0;
   font-size: 16px;
-`;
+`
 
 const CustomTextField = styled(TextField)`
   width: 80%;
@@ -37,58 +37,58 @@ const CustomTextField = styled(TextField)`
       border: none;
     } */
   }
-`;
+`
 
 const CustomInputAdornment = styled(InputAdornment)`
   position: absolute;
   padding: 0;
   right: 10px;
   top: 50%;
-`;
+`
 
-const Placehoplder = styled("p")`
+const Placehoplder = styled('p')`
   color: gray;
-`;
+`
 
 export type SelectFormProps = {
   // NOTE:アクション
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   // NOTE:エラーハンドリング
-  register?: UseFormRegisterReturn;
-  error?: boolean;
-  helperText?: string;
+  register?: UseFormRegisterReturn
+  error?: boolean
+  helperText?: string
   // NOTE:必須項目
-  id?: string;
-  labelId?: string;
-  label?: string;
-  value: string;
-  options: OptionProps[];
-  placeholder?: string;
-  disabled?: boolean;
-  isLoading?: boolean;
+  id?: string
+  labelId?: string
+  label?: string
+  value: string
+  options: OptionProps[]
+  placeholder?: string
+  disabled?: boolean
+  isLoading?: boolean
   //NOTE:追加項目
-  defaultValue?: string;
-};
+  defaultValue?: string
+}
 
 export type OptionProps = {
-  value: string;
-  label: string;
-};
+  value: string
+  label: string
+}
 
 export const SelectForm: React.VFC<SelectFormProps> = ({
   onChange,
   register,
   error = false,
-  helperText = "",
+  helperText = '',
   id,
-  labelId = "select",
-  label = "営業開始時間",
+  labelId = 'select',
+  label = '営業開始時間',
   value,
   options,
   placeholder,
   disabled = false,
   isLoading = false,
-  defaultValue = "",
+  defaultValue = ''
 }) => {
   return (
     <Wrapper>
@@ -109,11 +109,10 @@ export const SelectForm: React.VFC<SelectFormProps> = ({
           defaultValue,
           IconComponent: () => null,
           renderValue: () => {
-            if (isLoading)
-              return <CircularProgress size={25} color="primary" />;
-            if (value === "") return <Placehoplder>{placeholder}</Placehoplder>;
-            return options.find((option) => option.value === value)?.label;
-          },
+            if (isLoading) return <CircularProgress size={25} color="primary" />
+            if (value === '') return <Placehoplder>{placeholder}</Placehoplder>
+            return options.find((option) => option.value === value)?.label
+          }
         }}
         InputProps={{
           endAdornment: (
@@ -122,7 +121,7 @@ export const SelectForm: React.VFC<SelectFormProps> = ({
                 <ArrowForwardIosIcon />
               </IconButton>
             </CustomInputAdornment>
-          ),
+          )
         }}
         {...register}
       >
@@ -133,5 +132,5 @@ export const SelectForm: React.VFC<SelectFormProps> = ({
         ))}
       </CustomTextField>
     </Wrapper>
-  );
-};
+  )
+}

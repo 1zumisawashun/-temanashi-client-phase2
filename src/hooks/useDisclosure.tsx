@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react'
 
 /**
  * 複数モーダルで使用する際は下記のように変数に格納する（具体例:productSummary.tsx）
@@ -7,11 +7,11 @@ import { useState, useCallback } from "react";
  */
 
 export const useDisclosure = (initial = false) => {
-  const [isOpen, setIsOpen] = useState(initial);
+  const [isOpen, setIsOpen] = useState(initial)
 
-  const open = useCallback(() => setIsOpen(true), []);
-  const close = useCallback(() => setIsOpen(false), []);
-  const toggle = useCallback(() => setIsOpen((state) => !state), []);
+  const open = useCallback(() => setIsOpen(true), [])
+  const close = useCallback(() => setIsOpen(false), [])
+  const toggle = useCallback(() => setIsOpen((state) => !state), [])
 
-  return { isOpen, open, close, toggle };
-};
+  return { isOpen, open, close, toggle }
+}

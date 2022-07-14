@@ -1,20 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import {
   ProductItem,
-  ProductItemWithoutComment,
-} from "../../../utilities/stripeClient";
-import { useAuthContext } from "../../../hooks/useContextClient";
-import { formatTaxIncludedPrice } from "../../../utilities";
-import { Image, Divider } from "../../ui";
-import { css } from "@emotion/css";
-import styled from "@emotion/styled";
+  ProductItemWithoutComment
+} from '../../../utilities/stripeClient'
+import { useAuthContext } from '../../../hooks/useContextClient'
+import { formatTaxIncludedPrice } from '../../../utilities'
+import { Image, Divider } from '../../ui'
+import { css } from '@emotion/css'
+import styled from '@emotion/styled'
 
-export const DashboardListContainer = styled("div")`
+export const DashboardListContainer = styled('div')`
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 20px;
-`;
+`
 export const DashboardListWrapper = styled(Link)`
   display: flex;
   justify-content: space-between;
@@ -24,12 +24,12 @@ export const DashboardListWrapper = styled(Link)`
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   text-decoration: none;
   color: inherit;
-`;
-export const Thumbnail = styled("div")`
+`
+export const Thumbnail = styled('div')`
   width: 70%;
   display: flex;
   margin: auto;
-`;
+`
 /*
  * 小コンポーネントに送るために作成
  */
@@ -38,12 +38,12 @@ export const styledImage = css`
   height: 160px;
   object-fit: cover;
   border-radius: 6px;
-`;
-export const Content = styled("div")`
+`
+export const Content = styled('div')`
   width: 30%;
   margin: auto;
-`;
-export const Name = styled("p")`
+`
+export const Name = styled('p')`
   font-size: 1.1rem;
   color: #444;
   font-weight: bold;
@@ -55,30 +55,30 @@ export const Name = styled("p")`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-`;
-export const Price = styled("span")`
+`
+export const Price = styled('span')`
   color: #444;
   font-size: 0.9rem;
-`;
-export const DimentionContainer = styled("div")``;
-export const DimentionInner = styled("ul")`
+`
+export const DimentionContainer = styled('div')``
+export const DimentionInner = styled('ul')`
   margin: 10px 0 0 0;
   font-size: 14px;
-`;
-export const DimentionItem = styled("li")`
+`
+export const DimentionItem = styled('li')`
   margin-right: 10px;
-`;
+`
 
 type DashboardListProps = {
-  productItems: Array<ProductItem | ProductItemWithoutComment>;
-};
+  productItems: Array<ProductItem | ProductItemWithoutComment>
+}
 
 export const DashboardList: React.VFC<DashboardListProps> = ({
-  productItems,
+  productItems
 }) => {
-  const { user } = useAuthContext();
+  const { user } = useAuthContext()
   // nullチェック・通常のreturnだとエラーになる
-  if (!user) throw new Error("we cant find your account");
+  if (!user) throw new Error('we cant find your account')
 
   return (
     <DashboardListContainer>
@@ -123,5 +123,5 @@ export const DashboardList: React.VFC<DashboardListProps> = ({
           </DashboardListWrapper>
         ))}
     </DashboardListContainer>
-  );
-};
+  )
+}

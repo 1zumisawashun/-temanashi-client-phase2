@@ -1,39 +1,38 @@
-import { loadStripe } from "@stripe/stripe-js";
+import type { Comment } from '../@types/dashboard'
+import { loadStripe } from '@stripe/stripe-js'
 import {
   CheckoutSessionDoc,
   PriceDoc,
   ProductDoc,
-  SubscriptionDoc,
-} from "../@types/stripe";
-import { projectFirestore } from "../firebase/config";
-/* eslint-disable import/no-cycle*/
-import { Comment } from "../@types/dashboard";
+  SubscriptionDoc
+} from '../@types/stripe'
+import { projectFirestore } from '../firebase/config'
 
 export type ProductItem = {
-  product: ProductDoc;
-  prices: { [key: string]: PriceDoc };
-  comments: Array<Comment>;
-};
+  product: ProductDoc
+  prices: { [key: string]: PriceDoc }
+  comments: Array<Comment>
+}
 
-export type ProductItemWithoutComment = Pick<ProductItem, "product" | "prices">;
+export type ProductItemWithoutComment = Pick<ProductItem, 'product' | 'prices'>
 
 export type SubscriptionItem = {
-  subscription: SubscriptionDoc;
-  product: ProductDoc;
-  price: PriceDoc;
-};
+  subscription: SubscriptionDoc
+  product: ProductDoc
+  price: PriceDoc
+}
 
 export type line_item = {
-  price: string;
-  quantity: number;
-};
+  price: string
+  quantity: number
+}
 
 export type StoreProductItem = {
-  name: string;
-  image: string;
-  id: string;
-  random: number;
-};
+  name: string
+  image: string
+  id: string
+  random: number
+}
 
 /* eslint-disable */
 class ProductUseCase {
@@ -42,62 +41,62 @@ class ProductUseCase {
    */
   async fetchAll(): Promise<ProductItem[]> {
     const productQuery = projectFirestore
-      .collection("products")
-      .orderBy("metadata.createdAt", "desc");
+      .collection('products')
+      .orderBy('metadata.createdAt', 'desc')
 
-    const productSnapshot = await productQuery.get();
+    const productSnapshot = await productQuery.get()
     return Promise.all(
       productSnapshot.docs.map(async (doc) => {
-        const priceRef = doc.ref.collection("prices");
-        const priceSnapshot = await priceRef.where("active", "==", true).get();
+        const priceRef = doc.ref.collection('prices')
+        const priceSnapshot = await priceRef.where('active', '==', true).get()
         const priceMap = priceSnapshot.docs.reduce((acc, v) => {
           // @ts-ignore
-          acc[v.id] = v.data() as PriceDoc;
-          return acc;
-        }, {});
+          acc[v.id] = v.data() as PriceDoc
+          return acc
+        }, {})
         const productItem: ProductItem = {
           product: {
             id: doc.id,
-            ...doc.data(),
+            ...doc.data()
           } as ProductDoc,
           prices: priceMap,
-          comments: [], // FIXME:PickでCommentを省く
-        };
+          comments: [] // FIXME:PickでCommentを省く
+        }
 
-        return productItem;
+        return productItem
       })
-    );
+    )
   }
 
   /**
    * 参照②
    */
   async fetchProductItem(id: string): Promise<ProductItem> {
-    const productItemRef = projectFirestore.collection("products").doc(id);
-    const productItemSnapshot = await productItemRef.get();
-    const priceRef = await productItemSnapshot.ref.collection("prices");
-    const priceSnapshot = await priceRef.where("active", "==", true).get();
+    const productItemRef = projectFirestore.collection('products').doc(id)
+    const productItemSnapshot = await productItemRef.get()
+    const priceRef = await productItemSnapshot.ref.collection('prices')
+    const priceSnapshot = await priceRef.where('active', '==', true).get()
     const priceMap = await priceSnapshot.docs.reduce((acc, v) => {
       // @ts-ignore
-      acc[v.id] = v.data() as PriceDoc;
-      return acc;
-    }, {});
+      acc[v.id] = v.data() as PriceDoc
+      return acc
+    }, {})
 
-    const commentRef = await productItemSnapshot.ref.collection("comments");
-    const commentSnapshot = await commentRef.get();
+    const commentRef = await productItemSnapshot.ref.collection('comments')
+    const commentSnapshot = await commentRef.get()
 
     const commentMap = await commentSnapshot.docs.map((snapshot) => {
-      return snapshot.data();
-    });
+      return snapshot.data()
+    })
     const productItem: ProductItem = {
       product: {
         id: productItemSnapshot.id,
-        ...productItemSnapshot.data(),
+        ...productItemSnapshot.data()
       } as ProductDoc,
       prices: priceMap,
-      comments: commentMap as Array<Comment>,
-    };
-    return productItem;
+      comments: commentMap as Array<Comment>
+    }
+    return productItem
   }
 
   /**
@@ -106,24 +105,24 @@ class ProductUseCase {
   async fetchProductItemWitoutComment(
     id: string
   ): Promise<ProductItemWithoutComment> {
-    const productItemRef = projectFirestore.collection("products").doc(id);
-    const productItemSnapshot = await productItemRef.get();
-    const priceRef = await productItemSnapshot.ref.collection("prices");
-    const priceSnapshot = await priceRef.get();
+    const productItemRef = projectFirestore.collection('products').doc(id)
+    const productItemSnapshot = await productItemRef.get()
+    const priceRef = await productItemSnapshot.ref.collection('prices')
+    const priceSnapshot = await priceRef.get()
     const priceMap = await priceSnapshot.docs.reduce((acc, v) => {
       // @ts-ignore
-      acc[v.id] = v.data() as PriceDoc;
-      return acc;
-    }, {});
+      acc[v.id] = v.data() as PriceDoc
+      return acc
+    }, {})
 
     const productItem: ProductItemWithoutComment = {
       product: {
         id: productItemSnapshot.id,
-        ...productItemSnapshot.data(),
+        ...productItemSnapshot.data()
       } as ProductDoc,
-      prices: priceMap,
-    };
-    return productItem;
+      prices: priceMap
+    }
+    return productItem
   }
 
   /**
@@ -131,31 +130,31 @@ class ProductUseCase {
    */
   async fetchPayments(uid: string): Promise<any> {
     const paymentsRef = await projectFirestore
-      .collection("customers")
+      .collection('customers')
       .doc(uid)
-      .collection("payments")
-      .where("status", "==", "succeeded");
-    const paymentSnapshot = await paymentsRef.get();
+      .collection('payments')
+      .where('status', '==', 'succeeded')
+    const paymentSnapshot = await paymentsRef.get()
     const payments = await paymentSnapshot.docs.map((doc) => {
       return {
         id: doc.id,
-        ...doc.data(),
-      };
-    });
-    return payments;
+        ...doc.data()
+      }
+    })
+    return payments
   }
 
   /**
    * 参照⑤
    */
   async fetchAllForStore(): Promise<Array<StoreProductItem>> {
-    const productsRef = projectFirestore.collection("products");
-    const querySnapshot = await productsRef.get();
+    const productsRef = projectFirestore.collection('products')
+    const querySnapshot = await productsRef.get()
     const results = querySnapshot.docs.map((doc, index) => {
-      const { name, images } = doc.data();
-      return { name, image: images[0], id: doc.id, random: index };
-    });
-    return results;
+      const { name, images } = doc.data()
+      return { name, image: images[0], id: doc.id, random: index }
+    })
+    return results
   }
 
   /**
@@ -171,29 +170,29 @@ class ProductUseCase {
   ) {
     return new Promise(async (resolve, reject) => {
       const docRef = await projectFirestore
-        .collection("customers")
+        .collection('customers')
         .doc(uid)
-        .collection("checkout_sessions")
+        .collection('checkout_sessions')
         .add({
-          mode: "payment",
+          mode: 'payment',
           line_items, // 複数購入に対応
           success_url,
-          cancel_url,
-        });
+          cancel_url
+        })
       docRef.onSnapshot(async (snap) => {
-        const { error, sessionId } = (await snap.data()) as CheckoutSessionDoc;
-        if (error) return reject(error);
+        const { error, sessionId } = (await snap.data()) as CheckoutSessionDoc
+        if (error) return reject(error)
         if (sessionId) {
           const stripe = await loadStripe(
-            process.env.REACT_APP_STRIPE_API_KEY || ""
-          );
-          if (!stripe) return reject();
-          stripe.redirectToCheckout({ sessionId });
-          return resolve(undefined);
+            process.env.REACT_APP_STRIPE_API_KEY || ''
+          )
+          if (!stripe) return reject()
+          stripe.redirectToCheckout({ sessionId })
+          return resolve(undefined)
         }
-      });
-    });
+      })
+    })
   }
 }
 
-export const productUseCase = new ProductUseCase();
+export const productUseCase = new ProductUseCase()

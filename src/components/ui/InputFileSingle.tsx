@@ -1,41 +1,41 @@
-import { useState } from "react";
-import { Button, ErrorText } from ".";
-import UploadFileIcon from "@mui/icons-material/UploadFile";
+import { useState } from 'react'
+import { Button, ErrorText } from '.'
+import UploadFileIcon from '@mui/icons-material/UploadFile'
 
 interface InputFileSingleProps {
-  thumbnail: File | null;
-  onInputFileChange: (e: File) => void;
+  thumbnail: File | null
+  onInputFileChange: (e: File) => void
 }
 
 export const InputFileSingle: React.VFC<InputFileSingleProps> = ({
   thumbnail,
-  onInputFileChange,
+  onInputFileChange
 }) => {
-  const [thumbnailError, setThumbnailError] = useState<string | null>(null);
+  const [thumbnailError, setThumbnailError] = useState<string | null>(null)
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let selected;
+    let selected
 
     if (e.target.files !== null) {
-      const copiedFile = e.target.files[0];
-      selected = copiedFile;
+      const copiedFile = e.target.files[0]
+      selected = copiedFile
     }
     if (!selected) {
-      setThumbnailError("please select a file");
-      return;
+      setThumbnailError('please select a file')
+      return
     }
-    if (!selected.type.includes("image")) {
-      setThumbnailError("selected file must be an image");
-      return;
+    if (!selected.type.includes('image')) {
+      setThumbnailError('selected file must be an image')
+      return
     }
     if (selected.size > 1000000) {
-      setThumbnailError("image file size must be less than 100kb");
-      return;
+      setThumbnailError('image file size must be less than 100kb')
+      return
     }
 
-    setThumbnailError(null);
-    onInputFileChange(selected);
-  };
+    setThumbnailError(null)
+    onInputFileChange(selected)
+  }
 
   return (
     <>
@@ -60,5 +60,5 @@ export const InputFileSingle: React.VFC<InputFileSingleProps> = ({
         id="singleFile"
       />
     </>
-  );
-};
+  )
+}
