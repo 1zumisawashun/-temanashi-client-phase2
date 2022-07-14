@@ -6,6 +6,61 @@ import {
 import { formatTaxIncludedPrice } from "../../../utilities";
 import { CartCounter } from "./CartCounter";
 import { Divider, Image, ButtonIconDelete } from "../../ui";
+import { css } from "@emotion/css";
+import styled from "@emotion/styled";
+
+const CartListContainer = styled("div")`
+  width: 80%;
+  margin: 0 auto;
+`;
+const CartListWrapper = styled("div")`
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: 6px;
+`;
+const Thumbnail = styled(Link)`
+  display: block;
+  width: 30%;
+  display: flex;
+  margin: auto;
+`;
+/*
+ * 小コンポーネントに送るために作成
+ */
+const styledImage = css`
+  width: 130px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+`;
+const Content = styled("div")`
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+`;
+const Detail = styled("div")`
+  margin: auto 0;
+`;
+const ButtonWrapper = styled("div")``;
+const Name = styled("p")`
+  font-size: 1.1rem;
+  color: #444;
+  font-weight: bold;
+  text-decoration: none;
+  /*
+   * 3点リーダー
+   */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+`;
+const Price = styled("span")`
+  color: #444;
+  font-size: 0.9rem;
+  margin: 0 10px;
+`;
 interface Product {
   id: string;
   title: string;
@@ -29,51 +84,52 @@ export const CartList: React.VFC<CartListProps> = ({ productItems }) => {
   };
 
   return (
-    <div className="cart-list">
+    <CartListContainer>
       {productItems &&
         productItems.map((item: Product) => (
           <>
-            <div className="wrapper">
-              <Link
+            <CartListWrapper>
+              <Thumbnail
                 to={`/products/${item.id}`}
                 key={item.id}
                 className="thumbnail"
               >
                 {item.image ? (
-                  <Image src={item.image} />
+                  <Image src={item.image} className={styledImage} />
                 ) : (
-                  <Image src="https://placehold.jp/230x160.png" />
+                  <Image
+                    src="https://placehold.jp/230x160.png"
+                    className={styledImage}
+                  />
                 )}
-              </Link>
-              <div className="content">
-                <div className="details">
-                  <p className="name">
+              </Thumbnail>
+              <Content>
+                <Detail>
+                  <Name>
                     {item.title}
-                    <span className="price">
-                      {formatTaxIncludedPrice(item.price)}
-                    </span>
-                  </p>
-                  <div className="btnarea">
+                    <Price>{formatTaxIncludedPrice(item.price)}</Price>
+                  </Name>
+                  <ButtonWrapper>
                     {item.quantity && (
                       <CartCounter
                         quantity={item.quantity}
                         productId={item.id}
                       />
                     )}
-                  </div>
-                </div>
-                <div>
+                  </ButtonWrapper>
+                </Detail>
+                <ButtonWrapper>
                   <ButtonIconDelete
                     styleName="delete-icon"
                     size="large"
                     onClick={() => HandleRemove(item.id)}
                   />
-                </div>
-              </div>
-            </div>
+                </ButtonWrapper>
+              </Content>
+            </CartListWrapper>
             <Divider />
           </>
         ))}
-    </div>
+    </CartListContainer>
   );
 };

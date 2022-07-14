@@ -1,6 +1,36 @@
 import { Link } from "react-router-dom";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { ja } from "date-fns/locale";
+import styled from "@emotion/styled";
+import { Divider } from "../../ui";
+
+const PaymentContaienr = styled("div")`
+  padding: 30px 15px;
+`;
+const PaymentWrapper = styled("div")``;
+const PaymentInner = styled("div")`
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+`;
+const PaymentName = styled("p")`
+  font-weight: bold;
+`;
+const PaymentDate = styled("span")`
+  display: inline-block;
+  font-size: 10px;
+  font-weight: normal;
+  vertical-align: middle;
+  margin: 0 5px;
+`;
+const PaymentLink = styled(Link)`
+  font-size: 0.8rem;
+  margin: auto 0;
+  display: block;
+  color: #84bcb4;
+  text-decoration: none;
+  cursor: pointer;
+`;
 interface PaymentListProp {
   paymentItems: Array<any>;
 }
@@ -9,31 +39,35 @@ export const UserPaymentList: React.VFC<PaymentListProp> = ({
   paymentItems,
 }) => {
   return (
-    <div className="payment-list">
+    <PaymentContaienr>
       {paymentItems &&
         paymentItems.map((payment: any) => (
-          <div key={payment.id}>
+          <PaymentWrapper key={payment.id}>
             {payment.items.map((item: any) => (
-              <div key={item.id} className="box">
-                <p className="name">
+              <PaymentInner key={item.id}>
+                <PaymentName>
                   {item.description}
-                  <span className="date">
+                  <PaymentDate>
                     (
                     {formatDistanceToNow(new Date(item.price.created), {
                       addSuffix: true,
                       locale: ja,
                     })}
                     )
-                  </span>
-                </p>
+                  </PaymentDate>
+                </PaymentName>
 
-                <Link to={`/products/${item.price.product}`} className="link">
+                <PaymentLink
+                  to={`/products/${item.price.product}`}
+                  className="link"
+                >
                   詳細を見る
-                </Link>
-              </div>
+                </PaymentLink>
+              </PaymentInner>
             ))}
-          </div>
+            <Divider variant="fullWidth" />
+          </PaymentWrapper>
         ))}
-    </div>
+    </PaymentContaienr>
   );
 };
