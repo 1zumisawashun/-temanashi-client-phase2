@@ -27,27 +27,25 @@ export const useSubDocument = <T, U>({
       subCollection,
       subDocument
     );
-    if (ref) {
-      const unsubscribe = ref.onSnapshot(
-        (snapshot) => {
-          if (snapshot) {
-            setDocuments({
-              ...(snapshot.data() as U),
-              id: snapshot.id,
-            });
-            setReferense(ref);
-            setError(null);
-          } else {
-            setError("no such socument exist");
-          }
-        },
-        (err) => {
-          console.log(err);
-          setError("failed to get document");
+    const unsubscribe = ref.onSnapshot(
+      (snapshot) => {
+        if (snapshot) {
+          setDocuments({
+            ...(snapshot.data() as U),
+            id: snapshot.id,
+          });
+          setReferense(ref);
+          setError(null);
+        } else {
+          setError("no such socument exist");
         }
-      );
-      return () => unsubscribe();
-    }
+      },
+      (err) => {
+        console.log(err);
+        setError("failed to get document");
+      }
+    );
+    return () => unsubscribe();
   }, [collection, document, subCollection, subDocument]);
 
   return { documents, error, referense };

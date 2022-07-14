@@ -91,7 +91,7 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   };
 
   useEffect(() => {
-    if (!likedFurniture.referense) return;
+    if (!likedFurniture.referense) throw new Error();
     const unsubscribe = likedFurniture.referense.onSnapshot(
       (snapshot) => {
         if (snapshot.exists) {

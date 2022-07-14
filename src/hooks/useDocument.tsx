@@ -12,26 +12,24 @@ export const useDocument = <T,>({ collection, document }: firebasePath) => {
 
   useEffect(() => {
     const ref = documentPoint<T>(collection, document);
-    if (ref !== undefined) {
-      const unsubscribe = ref.onSnapshot(
-        (snapshot) => {
-          if (snapshot) {
-            setDocuments({
-              ...(snapshot.data() as T),
-              id: snapshot.id,
-            });
-            setError(null);
-          } else {
-            setError("no such socument exist");
-          }
-        },
-        (err) => {
-          console.log(err);
-          setError("failed to get document");
+    const unsubscribe = ref.onSnapshot(
+      (snapshot) => {
+        if (snapshot) {
+          setDocuments({
+            ...(snapshot.data() as T),
+            id: snapshot.id,
+          });
+          setError(null);
+        } else {
+          setError("no such socument exist");
         }
-      );
-      return () => unsubscribe();
-    }
+      },
+      (err) => {
+        console.log(err);
+        setError("failed to get document");
+      }
+    );
+    return () => unsubscribe();
   }, [collection, document]);
 
   return { documents, error };

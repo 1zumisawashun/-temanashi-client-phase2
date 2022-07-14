@@ -33,6 +33,7 @@ const CustomSpan = styled("span")<{
     if (p.size === "small") return 40;
     if (p.size === "medium") return 50;
     if (p.size === "large") return 60;
+    return 0
   }}px;
   display: flex;
   justify-content: center;
@@ -46,16 +47,19 @@ const CustomP = styled("p")<{
   border-radius: ${(p) => {
     if (p.shape === "round") return 50;
     if (p.shape === "square") return 10;
+    return 0
   }}%;
   height: ${(p) => {
     if (p.size === "small") return 40;
     if (p.size === "medium") return 50;
     if (p.size === "large") return 60;
+    return 0
   }}px;
   width: ${(p) => {
     if (p.size === "small") return 40;
     if (p.size === "medium") return 50;
     if (p.size === "large") return 60;
+    return 0
   }}px;
   background-color: ;
   background-color: ${(p) => (p.isChecked ? "#84bcb4" : "gray")};
@@ -129,7 +133,7 @@ export const CheckboxGroup: React.VFC<CheckBoxProps> = ({
         />
       }
       label={label}
-      labelPlacement={"start"}
+      labelPlacement="start"
     />
   );
 };

@@ -17,24 +17,22 @@ export const useSubCollection = <T, U>({
 
   useEffect(() => {
     const ref = subCollectionPoint<T, U>(collection, document, subCollection);
-    if (ref !== undefined) {
-      const unsubscribe = ref.onSnapshot(
-        (snapshot) => {
-          const results: Array<U> = [];
-          snapshot.docs.forEach((doc) => {
-            results.push({ ...doc.data(), id: doc.id });
-          });
-          setReferense(ref);
-          setDocuments(results);
-          setError(null);
-        },
-        (error) => {
-          console.log(error);
-          setError("could not fetch the data");
-        }
-      );
-      return () => unsubscribe();
-    }
+    const unsubscribe = ref.onSnapshot(
+      (snapshot) => {
+        const results: Array<U> = [];
+        snapshot.docs.forEach((doc) => {
+          results.push({ ...doc.data(), id: doc.id });
+        });
+        setReferense(ref);
+        setDocuments(results);
+        setError(null);
+      },
+      (error) => {
+        console.log(error);
+        setError("could not fetch the data");
+      }
+    );
+    return () => unsubscribe();
   }, [collection, document, subCollection]);
 
   return { documents, error, referense };

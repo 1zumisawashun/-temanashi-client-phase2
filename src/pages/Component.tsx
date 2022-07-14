@@ -279,7 +279,7 @@ export const Component: React.VFC = () => {
               <Label>オープン</Label>
               <CheckboxGroupInner>
                 <CheckboxGroup
-                  value={""}
+                  value=""
                   label="マッチング"
                   checked={isMatching}
                   onChange={() => handleSwitchForm("isMatching")}
@@ -287,7 +287,7 @@ export const Component: React.VFC = () => {
                   checkedIcon={<SquareIconBlank content="OFF" />}
                 />
                 <CheckboxGroup
-                  value={""}
+                  value=""
                   label="オート"
                   checked={isAuto}
                   onChange={() => handleSwitchForm("isAuto")}

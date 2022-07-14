@@ -22,7 +22,7 @@ export const useStorage = () => {
 
     if (!state) {
       setError("state is null!");
-      return;
+      throw new Error();
     }
 
     const promises = state.map(
@@ -36,7 +36,7 @@ export const useStorage = () => {
             async (blob) => {
               if (!blob) {
                 setError("could not generate blob");
-                return reject("error");
+                throw new Error();
               }
               const uploadPath = `photos/${user.uid}/${file.name}`;
               try {
@@ -69,7 +69,7 @@ export const useStorage = () => {
 
     if (!state) {
       setError("state is null!");
-      return;
+      throw new Error();
     }
     const promises = state.map(
       async (file): Promise<string | ArrayBuffer | null> => {

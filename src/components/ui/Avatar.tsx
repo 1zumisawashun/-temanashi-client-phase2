@@ -8,12 +8,14 @@ const AvatarWrapper = styled("div")<{ size: string }>`
     if (p.size === "small") return 40;
     if (p.size === "medium") return 50;
     if (p.size === "large") return 60;
+    return 0;
   }}px;
   overflow: hidden;
   width: ${(p) => {
     if (p.size === "small") return 40;
     if (p.size === "medium") return 50;
     if (p.size === "large") return 60;
+    return 0;
   }}px;
 `;
 const AvatarImage = styled("img")`
