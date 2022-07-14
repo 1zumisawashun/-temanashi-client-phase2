@@ -33,9 +33,9 @@ const Inner = styled("div")`
   transform: translate(-50%, -50%);
 `;
 
-type LoadingProps = {
+export interface LoadingProps {
   color?: string;
-};
+}
 
 /**
  * 読み込み系のローディングはライブラリのローディング（バックドロップあり）を使う

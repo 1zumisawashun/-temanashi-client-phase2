@@ -131,19 +131,20 @@ export const CartContextProvider: React.VFC<
     dispatch({ type: REMOVE_PRODUCT, productId });
   };
 
+  const cartValue = useMemo(
+    () => ({
+      cart: cartState.cart,
+      addProductToCart,
+      countUpProduct,
+      countDownProduct,
+      removeProductFromCart,
+    }),
+    [cartState]
+  );
+
   const { children } = props;
 
   return (
-    <CartContext.Provider
-      value={{
-        cart: cartState.cart,
-        addProductToCart,
-        countUpProduct,
-        countDownProduct,
-        removeProductFromCart,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={cartValue}>{children}</CartContext.Provider>
   );
 };

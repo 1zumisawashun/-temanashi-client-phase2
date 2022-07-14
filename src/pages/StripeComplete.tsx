@@ -15,7 +15,7 @@ export const Complete: React.VFC = () => {
             <div className="bubble" />
             <div className="bubble" />
             <h1>200</h1>
-            <p>It looks like you're seccess !</p>
+            <p>It looks like you are seccess !</p>
             <Link to="/" className="goback-button">
               Go back
             </Link>

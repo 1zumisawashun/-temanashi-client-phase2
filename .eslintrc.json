@@ -22,31 +22,24 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    // 追加
+    // temanashi-phase2で追加したリント
     "prefer-promise-reject-errors": "off",
     "consistent-return": "off",
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/explicit-module-boundary-types": 0,
-    "react/no-unescaped-entities": 0,
-    "react/jsx-no-constructed-context-values": 0,
-    "react/require-default-props": 0,
+    "react/require-default-props": 0, // 不明
     "@typescript-eslint/no-throw-literal": "off",
     // 追加終わり
     "no-control-regex": "off",
-    "no-nested-ternary": "off",
     "no-console": "off",
     "no-alert": "off",
     "arrow-body-style": "off",
-    "import/prefer-default-export": "off",
-    "import/newline-after-import": "off",
+    "import/prefer-default-export": "off", // named-exportを採用するためoff
     "import/order": "off",
     "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off",
+    "react/jsx-props-no-spreading": "off", // uisのregisterの展開ができなくなるためoff
     "react/react-in-jsx-scope": "off",
     "react/jsx-curly-brace-presence": "off",
-    "react/no-array-index-key": "off",
     "spaced-comment": "off",
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/naming-convention": "off",

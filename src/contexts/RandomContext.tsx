@@ -53,15 +53,18 @@ export const RandomContextProvider: React.VFC<
     dispatch({ type: ADD_PRODUCT, products });
   };
 
+  const randomValue = useMemo(
+    () => ({
+      products: randomState.products,
+      addProductWithRandom,
+    }),
+    [randomState]
+  );
+
   const { children } = props;
 
   return (
-    <RandomContext.Provider
-      value={{
-        products: randomState.products,
-        addProductWithRandom,
-      }}
-    >
+    <RandomContext.Provider value={randomValue}>
       {children}
     </RandomContext.Provider>
   );

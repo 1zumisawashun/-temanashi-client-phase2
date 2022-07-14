@@ -4,6 +4,7 @@ import { Loading } from "../ui";
 import { useRandomContext } from "../../hooks/useContextClient";
 import { useData } from "../../hooks/useData";
 import { productUseCase, StoreProductItem } from "../../utilities/stripeClient";
+
 interface Product {
   id: string;
   name: string;

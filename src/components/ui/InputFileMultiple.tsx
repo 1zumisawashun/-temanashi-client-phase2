@@ -121,7 +121,7 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
       <UploadContainer ref={dragRef}>
         {[...Array(3)].map((_: number, index: number) =>
           files !== null && index < files.length ? (
-            <div key={`select-file-${index}`}>
+            <div key={`select-file-${_}`}>
               <CloseButtonContainer>
                 <ButtonIconClose onClick={() => executeModal.open()} />
               </CloseButtonContainer>
@@ -148,7 +148,7 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
               </UploadWrapper>
             </div>
           ) : (
-            <div key={`no-file-${index}`}>
+            <div key={`no-file-${_}`}>
               <CloseButtonContainerHidden>
                 <ButtonIconClose onClick={() => executeModal.open()} />
               </CloseButtonContainerHidden>

@@ -50,7 +50,11 @@ export const AuthContextProvider: React.VFC<
     });
   }, []);
 
-  const currentUser = useMemo(
+  /**
+   * react/jsx-no-constructed-context-values;
+   * 上記のリントでメモ化が必須になっている
+   */
+  const userValue = useMemo(
     () => ({
       ...state,
       dispatch,
@@ -60,6 +64,6 @@ export const AuthContextProvider: React.VFC<
 
   const { children } = props;
   return (
-    <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={userValue}>{children}</AuthContext.Provider>
   );
 };
