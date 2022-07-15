@@ -1,7 +1,7 @@
-import { SignupTemplate } from '../components/template/Signup'
-import { useAuthContext } from '../hooks'
 import { Redirect } from 'react-router-dom'
 import styled from '@emotion/styled'
+import { SignupTemplate } from '../components/template/Signup'
+import { useAuthContext } from '../hooks'
 import { Head } from '../components/layout'
 
 const Container = styled('div')`

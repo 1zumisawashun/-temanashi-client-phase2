@@ -2,14 +2,14 @@ import * as React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter } from 'react-router-dom'
+import { CookiesProvider } from 'react-cookie'
+import { ThemeProvider } from '@mui/material/styles'
 import { ErrorForbidden, Loading } from '../components/ui'
 import {
   AuthContextProvider,
   CartContextProvider,
   RandomContextProvider
 } from '../contexts'
-import { CookiesProvider } from 'react-cookie'
-import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../utilities/muiThemeClient'
 
 export const ErrorFallback: React.VFC = () => {

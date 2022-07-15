@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Button, Divider, Modal } from '../components/ui'
 import styled from '@emotion/styled'
+import { Button, Divider, Modal } from '../components/ui'
 import {
   SquareIcon,
   SquareIconBlank,

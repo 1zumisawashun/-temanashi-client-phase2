@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { HambergerMenu } from './HambergerMenu'
 import { ButtonIconStore } from '../ui'
-import { useHistory } from 'react-router-dom'
 
 export const Header: React.VFC = () => {
   const history = useHistory()

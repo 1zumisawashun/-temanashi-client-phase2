@@ -1,8 +1,8 @@
+import { css } from '@emotion/css'
+import styled from '@emotion/styled'
 import { db, recommendation } from '../../../utilities/constant'
 import { formatTaxIncludedPrice } from '../../../utilities'
 import { Loading, Image } from '../../ui'
-import { css } from '@emotion/css'
-import styled from '@emotion/styled'
 import {
   DashboardListContainer,
   DashboardListWrapper,

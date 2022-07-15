@@ -1,7 +1,7 @@
+import { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 import { CartContext } from '../contexts/CartContext'
 import { RandomContext } from '../contexts/RandomContext'
-import { useContext } from 'react'
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext)

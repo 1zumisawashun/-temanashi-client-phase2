@@ -1,5 +1,6 @@
 import React, { useState, useRef, useMemo } from 'react'
 import TinderCard from 'react-tinder-card'
+import styled from '@emotion/styled'
 import {
   ProgressBar,
   Loading,
@@ -8,7 +9,6 @@ import {
   ButtonIconUndo
 } from '../../ui'
 // import TinderCard from '../react-tinder-card/index'
-import styled from '@emotion/styled'
 
 const ButtonWrapper = styled('div')`
   display: flex;

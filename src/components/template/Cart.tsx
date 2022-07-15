@@ -1,10 +1,10 @@
 import { useState } from 'react'
+import { useErrorHandler } from 'react-error-boundary'
 import { productUseCase } from '../../utilities/stripeClient'
 import { useAuthContext, useCartContext } from '../../hooks/useContextClient'
 import { useToken } from '../../hooks/useToken'
 import { CartList, CartAgreement } from '../model/cart'
 import { ErrorNotFound } from '../ui'
-import { useErrorHandler } from 'react-error-boundary'
 
 export const CartTemplate: React.VFC = () => {
   const { verifyJWT } = useToken()

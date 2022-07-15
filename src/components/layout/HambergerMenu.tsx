@@ -1,7 +1,7 @@
 import Hamburger from 'hamburger-react'
+import { useHistory } from 'react-router-dom'
 import { ButtonLink, ButtonIconStore } from '../ui'
 import { useAuthContext } from '../../hooks/useContextClient'
-import { useHistory } from 'react-router-dom'
 
 interface HamburgerMenuProp {
   state: boolean

@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import { Comment, CommentToAdd } from '../../../@types/dashboard'
 import { useParams } from 'react-router-dom'
+import { ja } from 'date-fns/locale'
+import styled from '@emotion/styled'
+import { Comment, CommentToAdd } from '../../../@types/dashboard'
 import { useSubCollection, useDisclosure } from '../../../hooks'
 import { formatFirebasePath } from '../../../utilities'
-import { ja } from 'date-fns/locale'
 import { timestamp } from '../../../firebase/config'
 import { useAuthContext } from '../../../hooks/useContextClient'
 import {
@@ -15,7 +16,6 @@ import {
   ButtonIconPerson
 } from '../../ui'
 import { ProductItem } from '../../../utilities/stripeClient'
-import styled from '@emotion/styled'
 
 const ProductCommentContainer = styled('div')`
   width: 100%;

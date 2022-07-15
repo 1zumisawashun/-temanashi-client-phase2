@@ -1,10 +1,10 @@
 import { FormEvent } from 'react'
+import { useHistory } from 'react-router-dom'
+import styled from '@emotion/styled'
 import { projectFunctions, isEmulating } from '../../../firebase/config'
 import { useAuthContext, useToken, useAuth } from '../../../hooks'
-import { useHistory } from 'react-router-dom'
 import axios from '../../../utilities/axiosClient'
 import { Button } from '../../ui'
-import styled from '@emotion/styled'
 
 const UserContainer = styled('div')`
   background: #f4f4f4;

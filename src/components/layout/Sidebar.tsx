@@ -1,5 +1,3 @@
-import { useAuthContext, useCartContext } from '../../hooks/useContextClient'
-import { ButtonNavlink, Divider, Avatar } from '../ui'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import SendIcon from '@mui/icons-material/Send'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
@@ -7,6 +5,8 @@ import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch'
 import styled from '@emotion/styled'
 import Badge from '@mui/material/Badge'
 import { css } from '@emotion/css'
+import { ButtonNavlink, Divider, Avatar } from '../ui'
+import { useAuthContext, useCartContext } from '../../hooks/useContextClient'
 
 const SidebarContainer = styled('div')`
   background: #84bcb4;

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Button, ErrorText } from '.'
 import UploadFileIcon from '@mui/icons-material/UploadFile'
+import { Button, ErrorText } from '.'
 
 interface InputFileSingleProps {
   thumbnail: File | null

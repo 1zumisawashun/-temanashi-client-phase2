@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { InputCheckbox, Button } from '../../ui'
 import styled from '@emotion/styled'
+import { InputCheckbox, Button } from '../../ui'
 
 const CartAgreementContainer = styled('div')`
   background: white;

@@ -1,5 +1,5 @@
-import { filterList } from '../../../utilities/constant'
 import styled from '@emotion/styled'
+import { filterList } from '../../../utilities/constant'
 
 const FilterContainer = styled('div')`
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);

@@ -1,8 +1,8 @@
+import styled from '@emotion/styled'
 import { useCollection } from '../../hooks/useCollection'
 import { Avatar, Divider } from '../ui'
 import { User } from '../../@types/dashboard'
 import { formatFirebasePath } from '../../utilities'
-import styled from '@emotion/styled'
 
 const OnlineUserContainer = styled('div')`
   background: #fbfbfb;

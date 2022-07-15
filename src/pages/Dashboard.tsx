@@ -1,3 +1,5 @@
+import styled from '@emotion/styled'
+import { Redirect } from 'react-router-dom'
 import { DashboardTemplate } from '../components/template/Dashboard'
 import { useAuthContext } from '../hooks'
 import {
@@ -7,9 +9,7 @@ import {
   Footer,
   Head
 } from '../components/layout'
-import styled from '@emotion/styled'
 import { Loading } from '../components/ui'
-import { Redirect } from 'react-router-dom'
 
 const Container = styled('div')`
   flex-grow: 1;

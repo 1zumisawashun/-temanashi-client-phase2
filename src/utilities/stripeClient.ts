@@ -1,5 +1,5 @@
-import type { Comment } from '../@types/dashboard'
 import { loadStripe } from '@stripe/stripe-js'
+import type { Comment } from '../@types/dashboard'
 import {
   CheckoutSessionDoc,
   PriceDoc,

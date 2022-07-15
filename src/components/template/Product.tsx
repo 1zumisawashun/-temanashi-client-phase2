@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
+import styled from '@emotion/styled'
 import { ProductComment, ProductSummary } from '../model/product'
 import { productUseCase, ProductItem } from '../../utilities/stripeClient'
 import { useData } from '../../hooks'
-import styled from '@emotion/styled'
 
 const ProductContainer = styled('div')`
   align-items: start;

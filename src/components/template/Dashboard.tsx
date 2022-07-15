@@ -1,8 +1,8 @@
 import { useState } from 'react'
+import { useErrorHandler } from 'react-error-boundary'
 import { DashboardFilter, DashboardList } from '../model/dashboard'
 import { useAuthContext } from '../../hooks/useContextClient'
 import { productUseCase, ProductItem } from '../../utilities/stripeClient'
-import { useErrorHandler } from 'react-error-boundary'
 import { useData } from '../../hooks/useData'
 
 export const DashboardTemplate: React.VFC = () => {

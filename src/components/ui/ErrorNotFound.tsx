@@ -1,5 +1,5 @@
-import NotFoundIcon from '../../assets/icon/icon_not_found.svg'
 import styled from '@emotion/styled'
+import NotFoundIcon from '../../assets/icon/icon_not_found.svg'
 
 const NotFoundItemContainer = styled('div')`
   margin: 10% 0;

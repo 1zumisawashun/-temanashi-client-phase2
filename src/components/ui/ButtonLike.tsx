@@ -1,10 +1,10 @@
+import { useState, useEffect } from 'react'
 import {
   ProjectType,
   User,
   likedFurnitures,
   likedUsers
 } from '../../@types/dashboard'
-import { useState, useEffect } from 'react'
 import { timestamp, firebase } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useContextClient'
 import { formatFirebasePath } from '../../utilities'

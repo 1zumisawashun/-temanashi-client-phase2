@@ -1,6 +1,6 @@
+import styled from '@emotion/styled'
 import { useCartContext } from '../../../hooks/useContextClient'
 import { ButtonIconCountUp, ButtonIconCountDown } from '../../ui'
-import styled from '@emotion/styled'
 
 const CounterWrapper = styled('div')`
   display: flex;

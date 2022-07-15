@@ -1,3 +1,5 @@
+import { Redirect } from 'react-router-dom'
+import styled from '@emotion/styled'
 import { CartTemplate } from '../components/template/Cart'
 import { useAuthContext } from '../hooks'
 import {
@@ -8,8 +10,6 @@ import {
   Head
 } from '../components/layout'
 import { Loading } from '../components/ui'
-import { Redirect } from 'react-router-dom'
-import styled from '@emotion/styled'
 
 const Container = styled('div')`
   flex-grow: 1;

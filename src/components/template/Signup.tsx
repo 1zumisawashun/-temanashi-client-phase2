@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { useAuth } from '../../hooks/useAuth'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import styled from '@emotion/styled'
 import {
   InputText,
   Button,
@@ -10,7 +10,7 @@ import {
   InputFileSingle,
   ErrorText
 } from '../ui'
-import styled from '@emotion/styled'
+import { useAuth } from '../../hooks/useAuth'
 
 const Container = styled('div')`
   background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);

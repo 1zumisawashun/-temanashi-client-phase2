@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import styled from '@emotion/styled'
 import { ButtonIconClose, Button, Modal, ErrorText } from '.'
 import { useDisclosure, useDragAndDrop } from '../../hooks'
-import styled from '@emotion/styled'
 
 const UploadContainer = styled('div')`
   display: flex;

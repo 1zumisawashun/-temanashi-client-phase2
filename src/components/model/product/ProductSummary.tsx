@@ -1,16 +1,16 @@
+import { useHistory, useParams } from 'react-router-dom'
+import { Carousel } from 'react-responsive-carousel'
+import styled from '@emotion/styled'
 import {
   useAuthContext,
   useCartContext,
   useFirestore,
   useDisclosure
 } from '../../../hooks'
-import { useHistory, useParams } from 'react-router-dom'
 import { Button, ButtonLike, Modal } from '../../ui'
 import { ProductItem } from '../../../utilities/stripeClient'
 import { formatTaxIncludedPrice } from '../../../utilities'
-import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import styled from '@emotion/styled'
 
 const ProductSummaryContainer = styled('div')`
   background-color: white;
