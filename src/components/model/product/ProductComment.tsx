@@ -26,17 +26,17 @@ const ProductCommentWrapper = styled('ul')`
   padding-bottom: 5px;
 `
 const ProductCommentInner = styled('li')`
-  padding: 15px;
-  margin: 10px 0 0 0;
-  border: 1px solid #f2f2f2;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   background: white;
+  border: 1px solid #f2f2f2;
   border-radius: 9px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px 0 0 0;
+  padding: 15px;
 `
 const ProductCommentAuther = styled('div')`
-  display: flex;
   align-items: center;
   color: #444;
+  display: flex;
 `
 const ProductCommentDate = styled('div')`
   color: #999;

@@ -21,17 +21,17 @@ const DisgnoseResultContainer = styled('div')`
 `
 const DisgnoseThumbnail = styled('div')`
   background: white;
+  border-radius: 6px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   padding: 40px 0;
   text-align: center;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
 `
 /*
  * 小コンポーネントに送るために作成
  */
 const styledImageDisgnose = css`
-  width: 700px;
   object-fit: cover;
+  width: 700px;
 `
 const DisgnoseContent = styled('div')`
   margin: 20px 0;
@@ -40,21 +40,21 @@ const DisgnoseName = styled('h2')`
   font-size: 1.6rem;
 `
 const DisgnoseColors = styled('div')`
-  width: 55%;
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
+  width: 55%;
 `
 const DisgnoseItem = styled('div')`
   display: flex;
 `
 const DisgnoseItemCercle = styled('span')`
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
   border: 1px solid #444;
+  border-radius: 50%;
+  display: inline-block;
+  height: 25px;
   margin-left: 10px;
+  width: 25px;
   &.-white {
     background: white;
   }

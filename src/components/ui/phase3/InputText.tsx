@@ -5,16 +5,16 @@ import { UseFormRegisterReturn } from 'react-hook-form'
 
 const Wrapper = styled('div')`
   background-color: transparent;
-  display: flex;
   color: #84bcb4;
-  margin: 20px;
+  display: flex;
   font-weight: bold;
+  margin: 20px;
 `
 
 const Label = styled('label')`
-  width: 20%;
-  margin: auto 0;
   font-size: 16px;
+  margin: auto 0;
+  width: 20%;
 `
 
 const CustomTextField = styled(TextField)`
@@ -34,8 +34,8 @@ const CustomTextField = styled(TextField)`
 `
 
 const CustomInputAdornment = styled(InputAdornment)`
-  position: absolute;
   padding: 0;
+  position: absolute;
   right: 10px;
   top: 50%;
 `

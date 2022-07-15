@@ -3,9 +3,9 @@ import { ErrorNotFound } from '../../ui'
 import styled from '@emotion/styled'
 
 const UserContaienr = styled('div')`
-  width: 100%;
-  min-height: 300px;
   background: #f4f4f4;
+  min-height: 300px;
+  width: 100%;
 `
 interface UserHistoryProps {
   payments: Array<any>

@@ -5,35 +5,35 @@ import { formatFirebasePath } from '../../utilities'
 import styled from '@emotion/styled'
 
 const OnlineUserContainer = styled('div')`
-  width: 250px;
+  background: #fbfbfb;
+  box-sizing: border-box;
+  color: #444;
   min-width: 250px;
   padding: 30px;
-  box-sizing: border-box;
-  background: #fbfbfb;
-  color: #444;
+  width: 250px;
   @media (max-width: 576px) {
     display: none;
   }
 `
 const Title = styled('h2')`
-  text-align: right;
-  margin-bottom: 40px;
   font-size: 1.2em;
+  margin-bottom: 40px;
   margin-right: 10px;
+  text-align: right;
 `
 const OnlineUser = styled('span')`
-  display: inline-block;
-  margin-right: 10px;
-  width: 12px;
-  height: 12px;
   background: #0ebb50;
   border-radius: 50%;
+  display: inline-block;
+  height: 12px;
+  margin-right: 10px;
   margin-top: 2px;
+  width: 12px;
 `
 const OnlineUserItem = styled('div')`
+  align-items: center;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   margin: 20px auto;
 `
 

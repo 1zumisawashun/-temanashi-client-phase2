@@ -29,26 +29,31 @@ export interface IconPeops {
 const CustomSpan = styled('span')<{
   size?: string
 }>`
+  align-items: center;
+  display: flex;
   height: ${(p) => {
     if (p.size === 'small') return 40
     if (p.size === 'medium') return 50
     if (p.size === 'large') return 60
     return 0
   }}px;
-  display: flex;
   justify-content: center;
-  align-items: center;
 `
 const CustomP = styled('p')<{
   size?: string
   shape?: string
   isChecked?: boolean
 }>`
+  background-color: ;
+  background-color: ${(p) => (p.isChecked ? '#84bcb4' : 'gray')};
   border-radius: ${(p) => {
     if (p.shape === 'round') return 50
     if (p.shape === 'square') return 10
     return 0
   }}%;
+  color: white;
+  display: inline-block;
+  font-size: 15px;
   height: ${(p) => {
     if (p.size === 'small') return 40
     if (p.size === 'medium') return 50
@@ -61,14 +66,11 @@ const CustomP = styled('p')<{
     if (p.size === 'large') return 60
     return 0
   }}px;
-  background-color: ;
-  background-color: ${(p) => (p.isChecked ? '#84bcb4' : 'gray')};
-  color: white;
-  display: inline-block;
-  font-size: 15px;
 `
 
-const StyledFormControlLabel = styled(FormControlLabel)``
+const StyledFormControlLabel = styled(FormControlLabel)`
+  display: block;
+`
 
 const StyledCheckBox = styled(Checkbox)`
   padding: 5px;

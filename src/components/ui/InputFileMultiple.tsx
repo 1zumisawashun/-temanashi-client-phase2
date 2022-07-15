@@ -9,16 +9,16 @@ const UploadContainer = styled('div')`
   overflow-x: scroll;
 `
 const UploadWrapper = styled('label')`
-  width: 240px;
-  height: 370px;
-  margin: 0 auto 30px;
   align-items: center;
-  display: flex;
-  justify-content: center;
   background: white;
+  border: 1px solid #84bcb4;
   border-radius: 4px;
   cursor: pointer;
-  border: 1px solid #84bcb4;
+  display: flex;
+  height: 370px;
+  justify-content: center;
+  margin: 0 auto 30px;
+  width: 240px;
 `
 const CloseButtonContainer = styled('div')`
   background: none;

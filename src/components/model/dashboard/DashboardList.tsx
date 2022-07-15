@@ -10,60 +10,62 @@ import { css } from '@emotion/css'
 import styled from '@emotion/styled'
 
 export const DashboardListContainer = styled('div')`
-  margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  margin-top: 30px;
 `
 export const DashboardListWrapper = styled(Link)`
-  display: flex;
-  justify-content: space-between;
   background-color: white;
-  padding: 16px;
   border-radius: 9px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  text-decoration: none;
   color: inherit;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  text-decoration: none;
 `
 export const Thumbnail = styled('div')`
-  width: 70%;
   display: flex;
   margin: auto;
+  width: 70%;
 `
 /*
  * 小コンポーネントに送るために作成
  */
 export const styledImage = css`
-  width: 220px;
+  border-radius: 6px;
   height: 160px;
   object-fit: cover;
-  border-radius: 6px;
+  width: 220px;
 `
 export const Content = styled('div')`
-  width: 30%;
   margin: auto;
+  width: 30%;
 `
 export const Name = styled('p')`
-  font-size: 1.1rem;
+  -webkit-box-orient: vertical;
   color: #444;
-  font-weight: bold;
-  text-decoration: none;
   /*
    * 3点リーダー
    */
   display: -webkit-box;
-  -webkit-box-orient: vertical;
+  font-size: 1.1rem;
+  font-weight: bold;
   -webkit-line-clamp: 1;
   overflow: hidden;
+  text-decoration: none;
 `
 export const Price = styled('span')`
   color: #444;
   font-size: 0.9rem;
 `
-export const DimentionContainer = styled('div')``
+export const DimentionContainer = styled('div')`
+  display: block;
+`
 export const DimentionInner = styled('ul')`
-  margin: 10px 0 0 0;
   font-size: 14px;
+  margin: 10px 0 0 0;
 `
 export const DimentionItem = styled('li')`
   margin-right: 10px;

@@ -7,29 +7,29 @@ import { css } from '@emotion/css'
 import styled from '@emotion/styled'
 
 const CartListContainer = styled('div')`
-  width: 80%;
   margin: 0 auto;
+  width: 80%;
 `
 const CartListWrapper = styled('div')`
+  border-radius: 6px;
   display: flex;
   justify-content: space-between;
   padding: 16px;
-  border-radius: 6px;
 `
 const Thumbnail = styled(Link)`
   display: block;
-  width: 30%;
   display: flex;
   margin: auto;
+  width: 30%;
 `
 /*
  * 小コンポーネントに送るために作成
  */
 const styledImage = css`
-  width: 130px;
+  border-radius: 10px;
   height: 80px;
   object-fit: cover;
-  border-radius: 10px;
+  width: 130px;
 `
 const Content = styled('div')`
   display: flex;
@@ -39,19 +39,21 @@ const Content = styled('div')`
 const Detail = styled('div')`
   margin: auto 0;
 `
-const ButtonWrapper = styled('div')``
+const ButtonWrapper = styled('div')`
+  display: block;
+`
 const Name = styled('p')`
-  font-size: 1.1rem;
+  -webkit-box-orient: vertical;
   color: #444;
-  font-weight: bold;
-  text-decoration: none;
   /*
    * 3点リーダー
    */
   display: -webkit-box;
-  -webkit-box-orient: vertical;
+  font-size: 1.1rem;
+  font-weight: bold;
   -webkit-line-clamp: 1;
   overflow: hidden;
+  text-decoration: none;
 `
 const Price = styled('span')`
   color: #444;

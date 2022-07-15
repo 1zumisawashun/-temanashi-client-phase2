@@ -7,9 +7,9 @@ import { Button } from '../../ui'
 import styled from '@emotion/styled'
 
 const UserContainer = styled('div')`
-  width: 100%;
-  min-height: 300px;
   background: #f4f4f4;
+  min-height: 300px;
+  width: 100%;
 `
 
 type Response = {

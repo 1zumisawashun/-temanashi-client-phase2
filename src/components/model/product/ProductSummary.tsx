@@ -14,30 +14,34 @@ import styled from '@emotion/styled'
 
 const ProductSummaryContainer = styled('div')`
   background-color: white;
-  padding: 30px;
   border-radius: 9px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  padding: 30px;
 `
-const ThumbnailWrapper = styled('div')``
+const ThumbnailWrapper = styled('div')`
+  display: block;
+`
 const Thumbnail = styled('img')`
-  width: 100%;
   border-radius: 6px;
+  width: 100%;
 `
 const Title = styled('h2')`
-  margin-top: 10px;
-  font-size: 1.2em;
   color: #444;
-`
-const ContentWrapper = styled('div')``
-const ContentPrice = styled('div')`
   font-size: 1.2em;
+  margin-top: 10px;
+`
+const ContentWrapper = styled('div')`
+  display: block;
+`
+const ContentPrice = styled('div')`
   color: #999;
+  font-size: 1.2em;
 `
 const ContentDetail = styled('p')`
-  margin: 20px 0;
   color: #999;
-  line-height: 1.8em;
   font-size: 0.9em;
+  line-height: 1.8em;
+  margin: 20px 0;
 `
 const ContentButtonWrapper = styled('div')`
   display: flex;

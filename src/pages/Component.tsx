@@ -16,25 +16,25 @@ import {
 } from '../components/ui/phase3'
 
 const Container = styled('div')`
-  width: 100%;
-  min-height: 300px;
   background: #f4f4f4;
+  min-height: 300px;
+  width: 100%;
 `
 const Inner = styled('div')`
-  width: 60%;
   margin: auto;
+  width: 60%;
 `
 const FormContainer = styled('div')`
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding-bottom: 40px;
 `
 const ButtonWrapper = styled('div')`
-  text-align: end;
   margin: 0 20px 20px;
+  text-align: end;
 `
 const CoutionText = styled('div')`
-  font-size: 14px;
   color: red;
+  font-size: 14px;
   margin: 0 20px 20px;
 `
 const ExampleText = styled('div')`
@@ -42,37 +42,37 @@ const ExampleText = styled('div')`
   margin: 0 20px 20px;
 `
 const ComponentContainer = styled('div')`
-  position: relative;
+  border: 1px solid black;
+  border-radius: 4px;
   margin-top: 40px;
   padding: 16px;
   padding-bottom: 8px;
-  border: 1px solid black;
-  border-radius: 4px;
+  position: relative;
 `
 const ComponentTitle = styled('p')`
-  position: absolute;
-  top: -16px;
-  left: 16px;
-  padding: 0 8px;
+  background-color: #f4f4f4;
   font-size: 20px;
   font-weight: bold;
-  background-color: #f4f4f4;
+  left: 16px;
+  padding: 0 8px;
+  position: absolute;
+  top: -16px;
 `
 const CheckboxGroupWrapper = styled('div')`
   background-color: transparent;
-  display: flex;
   color: #84bcb4;
-  margin: 20px;
+  display: flex;
   font-weight: bold;
+  margin: 20px;
 `
 const CheckboxGroupInner = styled('div')`
-  width: 80%;
   text-align: end;
+  width: 80%;
 `
 const Label = styled('label')`
-  width: 20%;
-  margin: auto 0;
   font-size: 16px;
+  margin: auto 0;
+  width: 20%;
 `
 
 export type OptionProps = {

@@ -5,10 +5,10 @@ import { useData } from '../../hooks'
 import styled from '@emotion/styled'
 
 const ProductContainer = styled('div')`
-  display: grid;
-  grid-template-columns: 3fr 2fr;
   align-items: start;
+  display: grid;
   grid-gap: 60px;
+  grid-template-columns: 3fr 2fr;
   @media (max-width: 576px) {
     display: block;
   }

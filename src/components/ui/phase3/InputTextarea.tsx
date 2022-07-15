@@ -5,19 +5,19 @@ import { UseFormRegisterReturn } from 'react-hook-form'
 const Wrapper = styled('div')`
   background-color: transparent;
   color: #84bcb4;
-  margin: 20px;
   font-weight: bold;
+  margin: 20px;
 `
 
 const Label = styled('label')`
-  width: 20%;
-  margin: auto 0;
   font-size: 16px;
+  margin: auto 0;
+  width: 20%;
 `
 
 const CustomTextField = styled(TextField)`
-  width: 100%;
   margin: 20px auto;
+  width: 100%;
 `
 
 export interface InputTextareaProps {
