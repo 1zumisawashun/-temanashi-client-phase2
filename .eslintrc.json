@@ -8,6 +8,7 @@
     "plugin:@typescript-eslint/recommended",
     // 以下4つのライブラリは次の記事で紹介されている https://zenn.dev/longbridge/articles/ae3aa36cf17d73
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "airbnb",
     "airbnb-typescript",
     "prettier"
@@ -21,9 +22,11 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
     // temanashi-phase2で追加したESLint
+    "react-hooks/rules-of-hooks": "error", //https://ja.reactjs.org/docs/hooks-rules.html
+    "react-hooks/exhaustive-deps": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-throw-literal": "off",
@@ -43,7 +46,7 @@
     "@typescript-eslint/no-unused-vars": "off",
     "react/prop-types": "off", // https://zenn.dev/yuki_tu/scraps/3fff5f0a600388
     "react/jsx-props-no-spreading": "off", // uisのregisterの展開ができなくなるためoff
-    "react/react-in-jsx-scope": "off", // Reactをimportしなくても使えるようにoff
+    "react/react-in-jsx-scope": "off", // Reactをimportしなくても使えるようにoff https://zenn.dev/ryuu/scraps/583dad79532879
     "react/function-component-definition": [
       2,
       { "namedComponents": "arrow-function" }

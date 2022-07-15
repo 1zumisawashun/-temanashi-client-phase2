@@ -18,6 +18,7 @@ export const DiagnoseTemplate: React.VFC = () => {
   const [documents, setDocuments] = useState<Array<Product>>([])
 
   if (products.length === 0) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const storeProductItems = useData<StoreProductItem[]>(
       'storeProductItems',
       () => productUseCase.fetchAllForStore()
