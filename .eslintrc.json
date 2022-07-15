@@ -5,10 +5,13 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    // 以下4つのライブラリは次の記事で紹介されている https://zenn.dev/longbridge/articles/ae3aa36cf17d73
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended", // pluginsに追加されている
+    /**
+     * 以下5つのライブラリは次の記事で紹介されている
+     * https://zenn.dev/longbridge/articles/ae3aa36cf17d73
+     */
+    "plugin:react/recommended", // pluginsに追加されている
+    "plugin:react-hooks/recommended", // pluginsに追加されている https://ja.reactjs.org/docs/hooks-rules.html
     "airbnb",
     "airbnb-typescript",
     "prettier"
@@ -22,9 +25,12 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
+  // 「eslint-plugin-react」>「react」という具合に「eslint-plugins」を省略することができる
   "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
-    // temanashi-phase2で追加したESLint
+    /**
+     * temanashi-phase2で追加したESLint
+     */
     "react-hooks/rules-of-hooks": "error", //https://ja.reactjs.org/docs/hooks-rules.html
     "react-hooks/exhaustive-deps": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -32,9 +38,10 @@
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off", // 関数の返り値の型必須をoffにする https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md
     "react/require-default-props": "off", // コンポーネントの引数が必須ではない時の警告をoff
-    // temanashi-phase1で実装したESLint
+    /**
+     * temanashi-phase1で実装したESLint
+     */
     "spaced-comment": "off",
-    "no-control-regex": "off",
     "no-console": "off",
     "no-alert": "off",
     "arrow-body-style": "off", // returnを無くして強制的に const num = () => 1 にするのをoff
@@ -44,39 +51,11 @@
     "@typescript-eslint/no-unused-expressions": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "react/prop-types": "off", // https://zenn.dev/yuki_tu/scraps/3fff5f0a600388
-    "react/jsx-props-no-spreading": "off", // uisのregisterの展開ができなくなるためoff
+    "react/jsx-props-no-spreading": "off", // RHFのregisterの展開ができなくなるためoff
     "react/react-in-jsx-scope": "off", // Reactをimportしなくても使えるようにoff https://zenn.dev/ryuu/scraps/583dad79532879
     "react/function-component-definition": [
       2,
       { "namedComponents": "arrow-function" }
-    ],
-    "jsx-a11y/label-has-associated-control": [
-      "error",
-      {
-        "required": {
-          "some": ["nesting", "id"]
-        }
-      }
-    ],
-    "jsx-a11y/label-has-for": [
-      "error",
-      {
-        "required": {
-          "some": ["nesting", "id"]
-        }
-      }
-    ]
-  },
-  // settings周りは入れなくても動いている印象だったが...後で調査する
-  "settings": {
-    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
+    ] // https://zenn.dev/ryuu/scraps/3145fc89d96a7a
   }
 }
