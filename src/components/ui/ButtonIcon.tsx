@@ -1,36 +1,36 @@
-import CloseIcon from "@mui/icons-material/Close";
-import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import UndoIcon from "@mui/icons-material/Undo";
-import StorefrontIcon from "@mui/icons-material/Storefront";
+import CloseIcon from '@mui/icons-material/Close'
+import DeleteIcon from '@mui/icons-material/Delete'
+import IconButton from '@mui/material/IconButton'
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import ThumbDownIcon from '@mui/icons-material/ThumbDown'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+import UndoIcon from '@mui/icons-material/Undo'
+import StorefrontIcon from '@mui/icons-material/Storefront'
 
 interface ButtonIconProps {
-  styleName?: string;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  styleName?: string
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   color?:
-    | "inherit"
-    | "default"
-    | "primary"
-    | "secondary"
-    | "error"
-    | "info"
-    | "success"
-    | "warning";
-  size?: "small" | "medium" | "large";
+    | 'inherit'
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'error'
+    | 'info'
+    | 'success'
+    | 'warning'
+  size?: 'small' | 'medium' | 'large'
 }
 
 export const ButtonIconClose: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -43,14 +43,14 @@ export const ButtonIconClose: React.VFC<ButtonIconProps> = ({
         <CloseIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconDelete: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -63,14 +63,14 @@ export const ButtonIconDelete: React.VFC<ButtonIconProps> = ({
         <DeleteIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconCountUp: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -83,14 +83,14 @@ export const ButtonIconCountUp: React.VFC<ButtonIconProps> = ({
         <AddCircleOutlineIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconCountDown: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -103,14 +103,14 @@ export const ButtonIconCountDown: React.VFC<ButtonIconProps> = ({
         <RemoveCircleOutlineIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconFavorite: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -123,14 +123,14 @@ export const ButtonIconFavorite: React.VFC<ButtonIconProps> = ({
         <FavoriteIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconNoFavirute: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -143,14 +143,14 @@ export const ButtonIconNoFavirute: React.VFC<ButtonIconProps> = ({
         <FavoriteBorderIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconPerson: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -163,14 +163,14 @@ export const ButtonIconPerson: React.VFC<ButtonIconProps> = ({
         <AccountCircleIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconThumbDown: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -183,14 +183,14 @@ export const ButtonIconThumbDown: React.VFC<ButtonIconProps> = ({
         <ThumbDownIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconThumbUp: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -203,14 +203,14 @@ export const ButtonIconThumbUp: React.VFC<ButtonIconProps> = ({
         <ThumbUpIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconUndo: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -223,14 +223,14 @@ export const ButtonIconUndo: React.VFC<ButtonIconProps> = ({
         <UndoIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
 export const ButtonIconStore: React.VFC<ButtonIconProps> = ({
   styleName,
   onClick,
   color,
-  size,
+  size
 }) => {
   return (
     <div className={styleName}>
@@ -238,5 +238,5 @@ export const ButtonIconStore: React.VFC<ButtonIconProps> = ({
         <StorefrontIcon />
       </IconButton>
     </div>
-  );
-};
+  )
+}

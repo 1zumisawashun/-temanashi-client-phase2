@@ -36,7 +36,7 @@ jobs:
     parameters:
       env_name:
         type: string
-        default: "stg"
+        default: 'stg'
     steps:
       - checkout
       - run:

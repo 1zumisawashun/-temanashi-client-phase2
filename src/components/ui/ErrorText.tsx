@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
-const ErrorTextBlock = styled("p")`
+const ErrorTextBlock = styled('p')`
   color: #d32f2f;
   font-size: 0.75rem;
   font-weight: 400;
@@ -11,12 +11,12 @@ const ErrorTextBlock = styled("p")`
   margin-right: 14px;
   margin-top: 3px;
   text-align: left;
-`;
+`
 
 export type ErrorTextProps = {
-  error?: boolean | null | string;
-  helperText?: string | null;
-};
+  error?: boolean | null | string
+  helperText?: string | null
+}
 
 /**
  * MUIと同じレイアウトのエラーメッセージ
@@ -24,11 +24,11 @@ export type ErrorTextProps = {
  */
 export const ErrorText: React.VFC<ErrorTextProps> = ({
   error = false,
-  helperText = "エラーが発生しました",
+  helperText = 'エラーが発生しました'
 }) => {
   return error ? (
     <ErrorTextBlock>{helperText}</ErrorTextBlock>
   ) : (
     <ErrorTextBlock />
-  );
-};
+  )
+}

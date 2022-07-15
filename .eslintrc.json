@@ -5,8 +5,13 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended", // pluginsに追加されている
+    /**
+     * 以下5つのライブラリは次の記事で紹介されている
+     * https://zenn.dev/longbridge/articles/ae3aa36cf17d73
+     */
+    "plugin:react/recommended", // pluginsに追加されている
+    "plugin:react-hooks/recommended", // pluginsに追加されている https://ja.reactjs.org/docs/hooks-rules.html
     "airbnb",
     "airbnb-typescript",
     "prettier"
@@ -20,57 +25,37 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  // 「eslint-plugin-react」>「react」という具合に「eslint-plugins」を省略することができる
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
-    // 追加
-    "prefer-promise-reject-errors": "off",
-    "consistent-return": "off",
-    "@typescript-eslint/no-non-null-assertion": 0,
-    "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/explicit-module-boundary-types": 0,
-    "react/no-unescaped-entities": 0,
-    "react/jsx-no-constructed-context-values": 0,
-    "react/require-default-props": 0,
+    /**
+     * temanashi-phase2で追加したESLint
+     */
+    "react-hooks/rules-of-hooks": "error", //https://ja.reactjs.org/docs/hooks-rules.html
+    "react-hooks/exhaustive-deps": "error",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-throw-literal": "off",
-    // 追加終わり
-    "no-control-regex": "off",
-    "no-nested-ternary": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off", // 関数の返り値の型必須をoffにする https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md
+    "react/require-default-props": "off", // コンポーネントの引数が必須ではない時の警告をoff
+    /**
+     * temanashi-phase1で実装したESLint
+     */
+    "spaced-comment": "off",
     "no-console": "off",
     "no-alert": "off",
-    "arrow-body-style": "off",
-    "import/prefer-default-export": "off",
-    "import/newline-after-import": "off",
-    "import/order": "off",
-    "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-curly-brace-presence": "off",
-    "react/no-array-index-key": "off",
-    "spaced-comment": "off",
+    "arrow-body-style": "off", // returnを無くして強制的に const num = () => 1 にするのをoff
+    "import/prefer-default-export": "off", // named-exportを採用するためoff
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-unused-expressions": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "react/prop-types": "off", // https://zenn.dev/yuki_tu/scraps/3fff5f0a600388
+    "react/jsx-props-no-spreading": "off", // RHFのregisterの展開ができなくなるためoff
+    "react/react-in-jsx-scope": "off", // Reactをimportしなくても使えるようにoff https://zenn.dev/ryuu/scraps/583dad79532879
     "react/function-component-definition": [
       2,
       { "namedComponents": "arrow-function" }
-    ],
-    "jsx-a11y/label-has-associated-control": [
-      "error",
-      {
-        "required": {
-          "some": ["nesting", "id"]
-        }
-      }
-    ],
-    "jsx-a11y/label-has-for": [
-      "error",
-      {
-        "required": {
-          "some": ["nesting", "id"]
-        }
-      }
-    ]
+    ] // https://zenn.dev/ryuu/scraps/3145fc89d96a7a
   }
 }

@@ -1,9 +1,9 @@
-describe("Cypress", () => {
-  it("画像のアップロード", () => {
-    cy.visit("/create/furniture");
-    cy.get('[data-cy="file_upload"]').attachFile(["sample.jpg", "sample.jpg"]);
-  });
-});
+describe('Cypress', () => {
+  it('画像のアップロード', () => {
+    cy.visit('/create/furniture')
+    cy.get('[data-cy="file_upload"]').attachFile(['sample.jpg', 'sample.jpg'])
+  })
+})
 
 // describe("stripe", () => {
 //   it("ログインする", () => {

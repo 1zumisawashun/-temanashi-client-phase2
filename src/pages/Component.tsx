@@ -1,153 +1,153 @@
-import { useState } from "react";
-import { Button, Divider, Modal } from "../components/ui";
-import styled from "@emotion/styled";
+import { useState } from 'react'
+import styled from '@emotion/styled'
+import { Button, Divider, Modal } from '../components/ui'
 import {
   SquareIcon,
   SquareIconBlank,
   CircleIcon,
-  CircleIconBlank,
-} from "../components/ui/phase3/CheckboxGroup";
+  CircleIconBlank
+} from '../components/ui/phase3/CheckboxGroup'
 import {
   SwitchForm,
   SelectForm,
   InputText,
   InputTextarea,
-  CheckboxGroup,
-} from "../components/ui/phase3";
+  CheckboxGroup
+} from '../components/ui/phase3'
 
-const Container = styled("div")`
-  width: 100%;
-  min-height: 300px;
+const Container = styled('div')`
   background: #f4f4f4;
-`;
-const Inner = styled("div")`
-  width: 60%;
+  min-height: 300px;
+  width: 100%;
+`
+const Inner = styled('div')`
   margin: auto;
-`;
-const FormContainer = styled("div")`
+  width: 60%;
+`
+const FormContainer = styled('div')`
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding-bottom: 40px;
-`;
-const ButtonWrapper = styled("div")`
+`
+const ButtonWrapper = styled('div')`
+  margin: 0 20px 20px;
   text-align: end;
-  margin: 0 20px 20px;
-`;
-const CoutionText = styled("div")`
-  font-size: 14px;
+`
+const CoutionText = styled('div')`
   color: red;
-  margin: 0 20px 20px;
-`;
-const ExampleText = styled("div")`
   font-size: 14px;
   margin: 0 20px 20px;
-`;
-const ComponentContainer = styled("div")`
-  position: relative;
+`
+const ExampleText = styled('div')`
+  font-size: 14px;
+  margin: 0 20px 20px;
+`
+const ComponentContainer = styled('div')`
+  border: 1px solid black;
+  border-radius: 4px;
   margin-top: 40px;
   padding: 16px;
   padding-bottom: 8px;
-  border: 1px solid black;
-  border-radius: 4px;
-`;
-const ComponentTitle = styled("p")`
-  position: absolute;
-  top: -16px;
-  left: 16px;
-  padding: 0 8px;
+  position: relative;
+`
+const ComponentTitle = styled('p')`
+  background-color: #f4f4f4;
   font-size: 20px;
   font-weight: bold;
-  background-color: #f4f4f4;
-`;
-const CheckboxGroupWrapper = styled("div")`
+  left: 16px;
+  padding: 0 8px;
+  position: absolute;
+  top: -16px;
+`
+const CheckboxGroupWrapper = styled('div')`
   background-color: transparent;
-  display: flex;
   color: #84bcb4;
-  margin: 20px;
+  display: flex;
   font-weight: bold;
-`;
-const CheckboxGroupInner = styled("div")`
-  width: 80%;
+  margin: 20px;
+`
+const CheckboxGroupInner = styled('div')`
   text-align: end;
-`;
-const Label = styled("label")`
-  width: 20%;
-  margin: auto 0;
+  width: 80%;
+`
+const Label = styled('label')`
   font-size: 16px;
-`;
+  margin: auto 0;
+  width: 20%;
+`
 
 export type OptionProps = {
-  value: string;
-  label: string;
-};
+  value: string
+  label: string
+}
 
 const selectOptions: OptionProps[] = [
   {
-    value: "0",
-    label: "神奈川県",
+    value: '0',
+    label: '神奈川県'
   },
   {
-    value: "1",
-    label: "東京都",
+    value: '1',
+    label: '東京都'
   },
   {
-    value: "2",
-    label: "埼玉県",
-  },
-];
-const weekdays = ["月", "火", "水", "木", "金", "土", "日"];
+    value: '2',
+    label: '埼玉県'
+  }
+]
+const weekdays = ['月', '火', '水', '木', '金', '土', '日']
 
 export const Component: React.VFC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [checkedWithText, setCheckedWithText] = useState<boolean>(false);
-  const [selectValue, setSelectValue] = useState("");
-  const [textValue, setTextValue] = useState("");
-  const [textareaValue, setTextareaValue] = useState("");
-  const [textWithButtonValue, setTextWithButtonValue] = useState("");
-  const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([]);
-  const [isSwitch, setIsSwitch] = useState<boolean>(false);
-  const [isMatching, setIsMatching] = useState<boolean>(false);
-  const [isAuto, setIsAuto] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [checkedWithText, setCheckedWithText] = useState<boolean>(false)
+  const [selectValue, setSelectValue] = useState('')
+  const [textValue, setTextValue] = useState('')
+  const [textareaValue, setTextareaValue] = useState('')
+  const [textWithButtonValue, setTextWithButtonValue] = useState('')
+  const [selectedCheckbox, setSelectedCheckbox] = useState<string[]>([])
+  const [isSwitch, setIsSwitch] = useState<boolean>(false)
+  const [isMatching, setIsMatching] = useState<boolean>(false)
+  const [isAuto, setIsAuto] = useState<boolean>(false)
 
   const handleSwitchForm = (state: string) => {
-    if (state === "isSwitch") setIsSwitch((prev) => !prev);
-    if (state === "isMatching") setIsMatching((prev) => !prev);
-    if (state === "isAuto") setIsAuto((prev) => !prev);
-  };
+    if (state === 'isSwitch') setIsSwitch((prev) => !prev)
+    if (state === 'isMatching') setIsMatching((prev) => !prev)
+    if (state === 'isAuto') setIsAuto((prev) => !prev)
+  }
   const handleSwitchForm2 = () => {
-    setCheckedWithText((prev) => !prev);
-  };
+    setCheckedWithText((prev) => !prev)
+  }
   const handleSelectForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectValue(e.target.value);
-  };
+    setSelectValue(e.target.value)
+  }
   const onInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextValue(e.target.value);
-  };
+    setTextValue(e.target.value)
+  }
   const onInputText2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextWithButtonValue(e.target.value);
-  };
+    setTextWithButtonValue(e.target.value)
+  }
   const onInputTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setTextareaValue(e.target.value);
-  };
+    setTextareaValue(e.target.value)
+  }
   const handleClick = () => {
-    alert("handleClick");
-  };
+    alert('handleClick')
+  }
   const handleOpen = () => {
-    setIsOpen((prev) => !prev);
-  };
+    setIsOpen((prev) => !prev)
+  }
 
   const handleCheckboxGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
     // checkされた場合
     if (e.target.checked) {
-      const newSelectedCheckLists = [...selectedCheckbox, e.target.value];
-      setSelectedCheckbox(newSelectedCheckLists);
-      return;
+      const newSelectedCheckLists = [...selectedCheckbox, e.target.value]
+      setSelectedCheckbox(newSelectedCheckLists)
+      return
     }
     // checkが解除された場合
     const newSelectedCheckLists = selectedCheckbox.filter(
       (value) => value !== e.target.value
-    );
-    setSelectedCheckbox(newSelectedCheckLists);
-  };
+    )
+    setSelectedCheckbox(newSelectedCheckLists)
+  }
 
   return (
     <Container>
@@ -157,7 +157,7 @@ export const Component: React.VFC = () => {
             <ComponentTitle>SwitchForm</ComponentTitle>
             <SwitchForm
               value={isSwitch}
-              onChange={() => handleSwitchForm("isSwitch")}
+              onChange={() => handleSwitchForm('isSwitch')}
             />
           </ComponentContainer>
 
@@ -279,18 +279,18 @@ export const Component: React.VFC = () => {
               <Label>オープン</Label>
               <CheckboxGroupInner>
                 <CheckboxGroup
-                  value={""}
+                  value=""
                   label="マッチング"
                   checked={isMatching}
-                  onChange={() => handleSwitchForm("isMatching")}
+                  onChange={() => handleSwitchForm('isMatching')}
                   icon={<SquareIcon content="ON" />}
                   checkedIcon={<SquareIconBlank content="OFF" />}
                 />
                 <CheckboxGroup
-                  value={""}
+                  value=""
                   label="オート"
                   checked={isAuto}
-                  onChange={() => handleSwitchForm("isAuto")}
+                  onChange={() => handleSwitchForm('isAuto')}
                   icon={<SquareIcon content="ON" />}
                   checkedIcon={<SquareIconBlank content="OFF" />}
                 />
@@ -317,5 +317,5 @@ export const Component: React.VFC = () => {
         </FormContainer>
       </Inner>
     </Container>
-  );
-};
+  )
+}

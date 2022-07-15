@@ -1,26 +1,26 @@
-import { useState } from "react";
-import { ButtonIconClose, Button, Modal, ErrorText } from ".";
-import { useDisclosure, useDragAndDrop } from "../../hooks";
-import styled from "@emotion/styled";
+import { useState } from 'react'
+import styled from '@emotion/styled'
+import { ButtonIconClose, Button, Modal, ErrorText } from '.'
+import { useDisclosure, useDragAndDrop } from '../../hooks'
 
-const UploadContainer = styled("div")`
+const UploadContainer = styled('div')`
   display: flex;
   justify-content: space-between;
   overflow-x: scroll;
-`;
-const UploadWrapper = styled("label")`
-  width: 240px;
-  height: 370px;
-  margin: 0 auto 30px;
+`
+const UploadWrapper = styled('label')`
   align-items: center;
-  display: flex;
-  justify-content: center;
   background: white;
+  border: 1px solid #84bcb4;
   border-radius: 4px;
   cursor: pointer;
-  border: 1px solid #84bcb4;
-`;
-const CloseButtonContainer = styled("div")`
+  display: flex;
+  height: 370px;
+  justify-content: center;
+  margin: 0 auto 30px;
+  width: 240px;
+`
+const CloseButtonContainer = styled('div')`
   background: none;
   border: none;
   cursor: pointer;
@@ -28,8 +28,8 @@ const CloseButtonContainer = styled("div")`
   left: 79%;
   position: relative;
   top: 11%;
-`;
-const CloseButtonContainerHidden = styled("div")`
+`
+const CloseButtonContainerHidden = styled('div')`
   background: none;
   border: none;
   cursor: pointer;
@@ -39,89 +39,89 @@ const CloseButtonContainerHidden = styled("div")`
   pointer-events: none;
   position: relative;
   top: 11%;
-`;
+`
 
 interface PhotosUploadProps {
-  name?: string; // NOTE:input["file"]とlabelをリンクさせるためのフラグ
-  files: File[];
-  onInputFileChange: (files: File[]) => void;
+  name?: string // NOTE:input["file"]とlabelをリンクさせるためのフラグ
+  files: File[]
+  onInputFileChange: (files: File[]) => void
 }
 
 const mineType = [
-  "image/gif",
-  "image/jpeg",
-  "image/png",
-  "image/bmp",
-  "image/svg+xml",
-];
+  'image/gif',
+  'image/jpeg',
+  'image/png',
+  'image/bmp',
+  'image/svg+xml'
+]
 
 export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
-  name = "photos",
+  name = 'photos',
   files,
-  onInputFileChange,
+  onInputFileChange
 }): React.ReactElement => {
-  const executeModal = useDisclosure();
-  const { dragRef } = useDragAndDrop();
-  const [isError, setIsError] = useState<string>("");
+  const executeModal = useDisclosure()
+  const { dragRef } = useDragAndDrop()
+  const [isError, setIsError] = useState<string>('')
 
   const handleCancel = (photoIndex: number) => {
-    setIsError("");
-    if (!files) return;
-    const modifyPhotos = files.filter((file, index) => photoIndex !== index);
-    onInputFileChange(modifyPhotos);
-    executeModal.close();
-  };
+    setIsError('')
+    if (!files) return
+    const modifyPhotos = files.filter((file, index) => photoIndex !== index)
+    onInputFileChange(modifyPhotos)
+    executeModal.close()
+  }
 
   const handleFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    let newFiles: File[] = [];
+    let newFiles: File[] = []
 
     if (event.target.files === null || event.target.files.length === 0) {
-      return;
+      return
     }
 
-    const copiedFiles = Object.values(event.target.files).concat();
-    // eslint-disable-next-line
-    event.target.value = "";
-    setIsError("");
+    const copiedFiles = Object.values(event.target.files).concat()
+    // eslint-disable-next-line no-param-reassign
+    event.target.value = ''
+    setIsError('')
 
     const checkedFiles = copiedFiles.filter((copiedFile) => {
       if (!mineType.includes(copiedFile.type)) {
         setIsError(
-          "※jpeg, png, bmp, gif, svg以外のファイル形式は表示されません"
-        );
-        return false;
+          '※jpeg, png, bmp, gif, svg以外のファイル形式は表示されません'
+        )
+        return false
       }
       if (files.length !== 0) {
         const existsSameSize = files.some(
           (file) => file.size === copiedFile.size
-        );
+        )
         if (existsSameSize) {
-          setIsError("※既に選択された画像と同じものは表示されません");
-          return false;
+          setIsError('※既に選択された画像と同じものは表示されません')
+          return false
         }
       }
-      return true;
-    });
+      return true
+    })
 
     if (checkedFiles.length === 0) {
-      return;
+      return
     }
 
-    newFiles = [...files, ...checkedFiles];
+    newFiles = [...files, ...checkedFiles]
 
     if (newFiles.length >= 4) {
-      setIsError("※3枚を超えて選択された画像は表示されません");
-      return;
+      setIsError('※3枚を超えて選択された画像は表示されません')
+      return
     }
 
-    onInputFileChange(newFiles.slice(0, 3));
-  };
+    onInputFileChange(newFiles.slice(0, 3))
+  }
   return (
     <>
       <UploadContainer ref={dragRef}>
         {[...Array(3)].map((_: number, index: number) =>
           files !== null && index < files.length ? (
-            <div key={`select-file-${index}`}>
+            <div key={`select-file-${_}`}>
               <CloseButtonContainer>
                 <ButtonIconClose onClick={() => executeModal.open()} />
               </CloseButtonContainer>
@@ -148,7 +148,7 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
               </UploadWrapper>
             </div>
           ) : (
-            <div key={`no-file-${index}`}>
+            <div key={`no-file-${_}`}>
               <CloseButtonContainerHidden>
                 <ButtonIconClose onClick={() => executeModal.open()} />
               </CloseButtonContainerHidden>
@@ -177,5 +177,5 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
         hidden
       />
     </>
-  );
-};
+  )
+}

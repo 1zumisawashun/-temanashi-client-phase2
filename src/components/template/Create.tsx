@@ -1,169 +1,169 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { useStorage, useReactScroll, useToken } from "../../hooks";
-import { categoryOptions } from "../../utilities/constant";
+import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
+import { MultiValue } from 'react-select'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import styled from '@emotion/styled'
+import { useErrorHandler } from 'react-error-boundary'
+import { OptionProps } from '../ui/InputSelect'
 import {
   InputSelect,
   InputText,
   InputTextarea,
   InputFileMultiple,
-  Button,
-} from "../ui";
-import { OptionProps } from "../ui/InputSelect";
-import { MultiValue } from "react-select";
-import { useForm, SubmitHandler } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import styled from "@emotion/styled";
-import { useErrorHandler } from "react-error-boundary";
+  Button
+} from '../ui'
+import { categoryOptions } from '../../utilities/constant'
+import { useStorage, useReactScroll, useToken } from '../../hooks'
 
-const FormContainer = styled("div")`
+const FormContainer = styled('div')`
   display: grid;
   gap: 10px;
-`;
+`
 
 interface FormData {
-  name: string;
-  description: string;
-  price: string;
-  width: string;
-  length: string;
-  height: string;
-  stock: string;
+  name: string
+  description: string
+  price: string
+  width: string
+  length: string
+  height: string
+  stock: string
 }
 
 export const CreateTemplate: React.VFC = () => {
-  const history = useHistory();
-  const { getStorageUrl } = useStorage();
-  const { cookies } = useToken();
-  const handleError = useErrorHandler();
+  const history = useHistory()
+  const { getStorageUrl } = useStorage()
+  const { cookies } = useToken()
+  const handleError = useErrorHandler()
 
-  const scrollToPhotos = useReactScroll("photos");
-  const scrollToName = useReactScroll("name");
-  const scrollToDescription = useReactScroll("description");
-  const scrollToPrice = useReactScroll("price");
-  const scrollToStock = useReactScroll("stock");
+  const scrollToPhotos = useReactScroll('photos')
+  const scrollToName = useReactScroll('name')
+  const scrollToDescription = useReactScroll('description')
+  const scrollToPrice = useReactScroll('price')
+  const scrollToStock = useReactScroll('stock')
 
   const getSchema = () => {
     return yup.object({
-      name: yup.string().required("名前を入力してください。"),
-      description: yup.string().required("説明を入力してください。"),
-      price: yup.string().required("価格を入力してください。"),
-      width: yup.string().required("幅を入力してください。"),
-      length: yup.string().required("深さを入力してください。"),
-      height: yup.string().required("高さを入力してください。"),
-      stock: yup.string().required("在庫を入力してください。"),
-    });
-  };
+      name: yup.string().required('名前を入力してください。'),
+      description: yup.string().required('説明を入力してください。'),
+      price: yup.string().required('価格を入力してください。'),
+      width: yup.string().required('幅を入力してください。'),
+      length: yup.string().required('深さを入力してください。'),
+      height: yup.string().required('高さを入力してください。'),
+      stock: yup.string().required('在庫を入力してください。')
+    })
+  }
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>({
-    mode: "onChange",
-    resolver: yupResolver(getSchema()),
-  });
+    mode: 'onChange',
+    resolver: yupResolver(getSchema())
+  })
 
-  const [formError, setFromError] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [formError, setFromError] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [formData, setFormData] = useState<FormData>({
-    name: "",
-    description: "",
-    price: "",
-    width: "",
-    length: "",
-    height: "",
-    stock: "",
-  });
-  const [files, setFiles] = useState<File[]>([]);
-  const [categories, setCategories] = useState<MultiValue<string>>([]);
+    name: '',
+    description: '',
+    price: '',
+    width: '',
+    length: '',
+    height: '',
+    stock: ''
+  })
+  const [files, setFiles] = useState<File[]>([])
+  const [categories, setCategories] = useState<MultiValue<string>>([])
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
-    }));
-  };
+      [name]: value
+    }))
+  }
 
   const onInputChangeSelect = (option: MultiValue<OptionProps>) => {
-    const multivalue = option.map((item) => item.value);
-    setCategories(multivalue);
-  };
+    const multivalue = option.map((item) => item.value)
+    setCategories(multivalue)
+  }
 
   const onInputFileChange = (value: File[]) => {
-    setFiles(value);
-  };
+    setFiles(value)
+  }
 
   const onSubmit = async () => {
-    setIsLoading(true);
-    setFromError("");
+    setIsLoading(true)
+    setFromError('')
 
-    const result = await getStorageUrl(files);
+    const result = await getStorageUrl(files)
 
     if (!result) {
-      setFromError("画像を処理できませんでした。");
-      setIsLoading(false);
-      return;
+      setFromError('画像を処理できませんでした。')
+      setIsLoading(false)
+      return
     }
 
     if (categories.length === 0) {
-      setFromError("カテゴリーを選択してください。");
-      setIsLoading(false);
-      return;
+      setFromError('カテゴリーを選択してください。')
+      setIsLoading(false)
+      return
     }
 
     // NOTE:複数選択できるが全体の型は修正していないので一旦一個のみポストする
     const furniture = {
       ...formData,
       photos: result,
-      category: categories[0],
-    };
+      category: categories[0]
+    }
 
     try {
       const headers = {
-        Authorization: `Bearer ${cookies.jwt}`,
-      };
+        Authorization: `Bearer ${cookies.jwt}`
+      }
       await axios.post(
-        "https://us-central1-temanashi-phase2.cloudfunctions.net/api/stripe-post",
+        'https://us-central1-temanashi-phase2.cloudfunctions.net/api/stripe-post',
         furniture,
         { headers }
-      );
-      setIsLoading(false);
-      history.push("/");
+      )
+      setIsLoading(false)
+      history.push('/')
     } catch (error) {
-      handleError("onSubmit Error");
-      setIsLoading(false);
+      handleError('onSubmit Error')
+      setIsLoading(false)
     }
-  };
+  }
 
   const onPreSubmit: SubmitHandler<FormData> = () => {
-    onSubmit();
-  };
+    onSubmit()
+  }
 
   const checkOnPreSubmit = () => {
     if (files.length === 0) {
-      scrollToPhotos.scrollHook();
-      return;
+      scrollToPhotos.scrollHook()
+      return
     }
-    if (formData.name === "") {
-      scrollToName.scrollHook();
-      return;
+    if (formData.name === '') {
+      scrollToName.scrollHook()
+      return
     }
-    if (formData.description === "") {
-      scrollToDescription.scrollHook();
-      return;
+    if (formData.description === '') {
+      scrollToDescription.scrollHook()
+      return
     }
-    if (formData.price === "") {
-      scrollToPrice.scrollHook();
-      return;
+    if (formData.price === '') {
+      scrollToPrice.scrollHook()
+      return
     }
-    if (formData.stock === "") {
-      scrollToStock.scrollHook();
+    if (formData.stock === '') {
+      scrollToStock.scrollHook()
     }
-  };
+  }
 
   /**
    * RHFはvalueを使わずライブラリ内で処理するので無駄なレンダリングをしなくて済む
@@ -180,61 +180,61 @@ export const CreateTemplate: React.VFC = () => {
         {scrollToName.renderScrollElement()}
         <InputText
           label="name"
-          register={register("name", {
-            onChange: (e) => onInputChange(e),
+          register={register('name', {
+            onChange: (e) => onInputChange(e)
           })}
-          error={"name" in errors}
+          error={'name' in errors}
           helperText={errors.name?.message}
         />
         {scrollToDescription.renderScrollElement()}
         <InputTextarea
           label="description"
-          register={register("description", {
-            onChange: (e) => onInputChange(e),
+          register={register('description', {
+            onChange: (e) => onInputChange(e)
           })}
-          error={"description" in errors}
+          error={'description' in errors}
           helperText={errors.description?.message}
         />
         {scrollToPrice.renderScrollElement()}
         <InputText
           label="price"
-          register={register("price", {
-            onChange: (e) => onInputChange(e),
+          register={register('price', {
+            onChange: (e) => onInputChange(e)
           })}
-          error={"price" in errors}
+          error={'price' in errors}
           helperText={errors.price?.message}
         />
         {scrollToStock.renderScrollElement()}
         <InputText
           label="stock"
-          register={register("stock", {
-            onChange: (e) => onInputChange(e),
+          register={register('stock', {
+            onChange: (e) => onInputChange(e)
           })}
-          error={"stock" in errors}
+          error={'stock' in errors}
           helperText={errors.stock?.message}
         />
         <InputText
           label="width"
-          register={register("width", {
-            onChange: (e) => onInputChange(e),
+          register={register('width', {
+            onChange: (e) => onInputChange(e)
           })}
-          error={"width" in errors}
+          error={'width' in errors}
           helperText={errors.width?.message}
         />
         <InputText
           label="length"
-          register={register("length", {
-            onChange: (e) => onInputChange(e),
+          register={register('length', {
+            onChange: (e) => onInputChange(e)
           })}
-          error={"length" in errors}
+          error={'length' in errors}
           helperText={errors.length?.message}
         />
         <InputText
           label="height"
-          register={register("height", {
-            onChange: (e) => onInputChange(e),
+          register={register('height', {
+            onChange: (e) => onInputChange(e)
           })}
-          error={"height" in errors}
+          error={'height' in errors}
           helperText={errors.height?.message}
         />
         <InputSelect
@@ -247,13 +247,13 @@ export const CreateTemplate: React.VFC = () => {
         <Button
           isLoading={isLoading}
           onClick={() => {
-            checkOnPreSubmit();
-            handleSubmit(onPreSubmit)();
+            checkOnPreSubmit()
+            handleSubmit(onPreSubmit)()
           }}
         >
           完了
         </Button>
       </FormContainer>
     </>
-  );
-};
+  )
+}

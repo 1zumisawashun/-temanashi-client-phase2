@@ -1,21 +1,21 @@
-import { TextField, InputAdornment, IconButton } from "@mui/material";
-import styled from "@emotion/styled";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { TextField, InputAdornment, IconButton } from '@mui/material'
+import styled from '@emotion/styled'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { UseFormRegisterReturn } from 'react-hook-form'
 
-const Wrapper = styled("div")`
+const Wrapper = styled('div')`
   background-color: transparent;
-  display: flex;
   color: #84bcb4;
-  margin: 20px;
+  display: flex;
   font-weight: bold;
-`;
+  margin: 20px;
+`
 
-const Label = styled("label")`
-  width: 20%;
-  margin: auto 0;
+const Label = styled('label')`
   font-size: 16px;
-`;
+  margin: auto 0;
+  width: 20%;
+`
 
 const CustomTextField = styled(TextField)`
   width: 80%;
@@ -31,39 +31,39 @@ const CustomTextField = styled(TextField)`
       border: none;
     } */
   }
-`;
+`
 
 const CustomInputAdornment = styled(InputAdornment)`
-  position: absolute;
   padding: 0;
+  position: absolute;
   right: 10px;
   top: 50%;
-`;
+`
 
 export type InputTextProps = {
   // NOTE:アクション
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
   // NOTE:エラーハンドリング
-  register?: UseFormRegisterReturn;
-  error?: boolean;
-  helperText?: string;
+  register?: UseFormRegisterReturn
+  error?: boolean
+  helperText?: string
   // NOTE:必須項目
-  label?: string;
-  value?: string;
-  disabled?: boolean;
-  placeholder?: string;
-  type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search";
+  label?: string
+  value?: string
+  disabled?: boolean
+  placeholder?: string
+  type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search'
   //NOTE:追加項目
-  autoFocus?: boolean;
-  name?: string;
-  pattern?: string;
-  maxLength?: number;
-  inputRef?: React.RefObject<HTMLInputElement>;
-  size?: "small";
-};
+  autoFocus?: boolean
+  name?: string
+  pattern?: string
+  maxLength?: number
+  inputRef?: React.RefObject<HTMLInputElement>
+  size?: 'small'
+}
 
 export const InputText: React.VFC<InputTextProps> = ({
   onChange,
@@ -72,18 +72,18 @@ export const InputText: React.VFC<InputTextProps> = ({
   onFocus,
   register,
   error = false,
-  helperText = "",
-  label = "店舗名（30文字）",
+  helperText = '',
+  label = '店舗名（30文字）',
   value,
   disabled = false,
   placeholder,
-  type = "text",
+  type = 'text',
   autoFocus = false,
   name,
   // pattern,
   // maxLength = 255,
   inputRef = null,
-  size,
+  size
 }) => {
   return (
     <Wrapper>
@@ -113,10 +113,10 @@ export const InputText: React.VFC<InputTextProps> = ({
                 <ArrowForwardIosIcon />
               </IconButton>
             </CustomInputAdornment>
-          ),
+          )
         }}
         {...register}
       />
     </Wrapper>
-  );
-};
+  )
+}

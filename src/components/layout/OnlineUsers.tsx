@@ -1,44 +1,44 @@
-import { useCollection } from "../../hooks/useCollection";
-import { Avatar, Divider } from "../ui";
-import { User } from "../../@types/dashboard";
-import { formatFirebasePath } from "../../utilities";
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
+import { useCollection } from '../../hooks/useCollection'
+import { Avatar, Divider } from '../ui'
+import { User } from '../../@types/dashboard'
+import { formatFirebasePath } from '../../utilities'
 
-const OnlineUserContainer = styled("div")`
-  width: 250px;
+const OnlineUserContainer = styled('div')`
+  background: #fbfbfb;
+  box-sizing: border-box;
+  color: #444;
   min-width: 250px;
   padding: 30px;
-  box-sizing: border-box;
-  background: #fbfbfb;
-  color: #444;
+  width: 250px;
   @media (max-width: 576px) {
     display: none;
   }
-`;
-const Title = styled("h2")`
-  text-align: right;
-  margin-bottom: 40px;
+`
+const Title = styled('h2')`
   font-size: 1.2em;
+  margin-bottom: 40px;
   margin-right: 10px;
-`;
-const OnlineUser = styled("span")`
-  display: inline-block;
-  margin-right: 10px;
-  width: 12px;
-  height: 12px;
+  text-align: right;
+`
+const OnlineUser = styled('span')`
   background: #0ebb50;
   border-radius: 50%;
+  display: inline-block;
+  height: 12px;
+  margin-right: 10px;
   margin-top: 2px;
-`;
-const OnlineUserItem = styled("div")`
+  width: 12px;
+`
+const OnlineUserItem = styled('div')`
+  align-items: center;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   margin: 20px auto;
-`;
+`
 
 export const OnlineUsers: React.VFC = () => {
-  const { documents } = useCollection<User>(formatFirebasePath("/users"));
+  const { documents } = useCollection<User>(formatFirebasePath('/users'))
 
   return (
     <OnlineUserContainer>
@@ -53,5 +53,5 @@ export const OnlineUsers: React.VFC = () => {
           </OnlineUserItem>
         ))}
     </OnlineUserContainer>
-  );
-};
+  )
+}

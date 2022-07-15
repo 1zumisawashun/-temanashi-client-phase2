@@ -1,33 +1,33 @@
-import { useHistory } from "react-router-dom";
-import styled from "@emotion/styled";
-import { Button } from "./index";
+import { useHistory } from 'react-router-dom'
+import styled from '@emotion/styled'
+import { Button } from './index'
 
-const ContentWrapper = styled("div")`
+const ContentWrapper = styled('div')`
   background: #84bcb4;
   display: flex;
   height: 100%;
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-`;
+`
 
-const Content = styled("div")`
+const Content = styled('div')`
   background-color: white;
   border-radius: 10px;
   height: 388px;
   margin: 120px 340px;
   max-width: 1100px;
   width: 100%;
-`;
+`
 
-const Title = styled("h1")`
+const Title = styled('h1')`
   font-size: 24px;
   font-weight: 700;
   margin-top: 40px;
   text-align: center;
-`;
+`
 
-const FirstParagraph = styled("p")`
+const FirstParagraph = styled('p')`
   color: black;
   font-size: 16px;
   font-style: normal;
@@ -35,16 +35,16 @@ const FirstParagraph = styled("p")`
   line-height: 21px;
   margin-top: 63px;
   text-align: center;
-`;
+`
 
-const FooterContent = styled("div")`
+const FooterContent = styled('div')`
   margin-bottom: 40px;
   margin-top: 47px;
   text-align: center;
-`;
+`
 
 export const ErrorForbidden: React.VFC = () => {
-  const history = useHistory();
+  const history = useHistory()
   return (
     <ContentWrapper>
       <Content>
@@ -58,11 +58,11 @@ export const ErrorForbidden: React.VFC = () => {
           <p>トップ画面へ戻り本サービスをご利用ください。</p>
         </FirstParagraph>
         <FooterContent>
-          <Button onClick={() => history.push("/dammy")} size="large">
+          <Button onClick={() => history.push('/dammy')} size="large">
             トップ画面に戻る
           </Button>
         </FooterContent>
       </Content>
     </ContentWrapper>
-  );
-};
+  )
+}

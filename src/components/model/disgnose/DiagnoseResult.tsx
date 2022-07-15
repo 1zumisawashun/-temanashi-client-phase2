@@ -1,61 +1,128 @@
-import { Link } from "react-router-dom";
-import { db, recommendation } from "../../../utilities/constant";
-import { formatTaxIncludedPrice } from "../../../utilities";
-import { Loading, Image } from "../../ui";
+import { css } from '@emotion/css'
+import styled from '@emotion/styled'
+import { db, recommendation } from '../../../utilities/constant'
+import { formatTaxIncludedPrice } from '../../../utilities'
+import { Loading, Image } from '../../ui'
+import {
+  DashboardListContainer,
+  DashboardListWrapper,
+  Thumbnail,
+  styledImage,
+  Content,
+  Name,
+  Price,
+  DimentionContainer,
+  DimentionInner,
+  DimentionItem
+} from '../dashboard/DashboardList'
+
+const DisgnoseResultContainer = styled('div')`
+  font-size: 16px;
+`
+const DisgnoseThumbnail = styled('div')`
+  background: white;
+  border-radius: 6px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  padding: 40px 0;
+  text-align: center;
+`
+/*
+ * 小コンポーネントに送るために作成
+ */
+const styledImageDisgnose = css`
+  object-fit: cover;
+  width: 700px;
+`
+const DisgnoseContent = styled('div')`
+  margin: 20px 0;
+`
+const DisgnoseName = styled('h2')`
+  font-size: 1.6rem;
+`
+const DisgnoseColors = styled('div')`
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  width: 55%;
+`
+const DisgnoseItem = styled('div')`
+  display: flex;
+`
+const DisgnoseItemCercle = styled('span')`
+  border: 1px solid #444;
+  border-radius: 50%;
+  display: inline-block;
+  height: 25px;
+  margin-left: 10px;
+  width: 25px;
+  &.-white {
+    background: white;
+  }
+  &.-grey {
+    background: grey;
+  }
+`
+const DisgnoseTotal = styled('span')`
+  font-weight: bold;
+  margin: 0 10px;
+`
 
 export const DiagnoseResult: React.VFC = () => {
   return (
     <>
       {db.length === 0 && recommendation && <Loading />}
-      <div className="diagnose-result">
-        <div className="thumbnail">
-          <img src={recommendation.imageUrl} alt="" />
-        </div>
-        <div className="content">
-          <h1 className="name">シンプル風</h1>
+      <DisgnoseResultContainer>
+        <DisgnoseThumbnail>
+          <Image
+            src={recommendation.imageUrl!}
+            className={styledImageDisgnose}
+          />
+        </DisgnoseThumbnail>
+        <DisgnoseContent>
+          <DisgnoseName>シンプル風</DisgnoseName>
           <p className="text">{recommendation.details}</p>
-          <div className="colors">
-            <div className="item">
+          <DisgnoseColors>
+            <DisgnoseItem>
               <p className="text">ベースカラー：{recommendation.baseColor}</p>
-              <span className="cercle -white" />
-            </div>
-            <div className="item">
+              <DisgnoseItemCercle />
+            </DisgnoseItem>
+            <DisgnoseItem>
               <p className="text">サブカラー：{recommendation.subColor}</p>
-              <span className="cercle -grey" />
-            </div>
-          </div>
+              <DisgnoseItemCercle />
+            </DisgnoseItem>
+          </DisgnoseColors>
           <div className="price">
-            <p className="item">
+            <DisgnoseItem>
               この組み合わせで
-              <span className="total">{formatTaxIncludedPrice(1200000)}円</span>
-            </p>
+              <DisgnoseTotal>{formatTaxIncludedPrice(1200000)}円</DisgnoseTotal>
+            </DisgnoseItem>
           </div>
-        </div>
-      </div>
-      <div className="product-list">
+        </DisgnoseContent>
+      </DisgnoseResultContainer>
+      <DashboardListContainer>
         {db.map((furniture) => (
-          <Link to="/diagnose" key={furniture.name} className="wrapper">
-            <div className="thumbnail">
-              {furniture.imageUrl && <Image src={furniture.imageUrl} />}
-            </div>
-            <div className="content">
-              <h4 className="name">{furniture.name}</h4>
-              {furniture.price && (
-                <p className="price">
-                  {formatTaxIncludedPrice(furniture.price)}
-                </p>
+          <DashboardListWrapper to="/diagnose" key={furniture.name}>
+            <Thumbnail>
+              {furniture.imageUrl && (
+                <Image src={furniture.imageUrl} className={styledImage} />
               )}
-              <div className="dimentions">
-                <ul>
-                  <li>幅 {furniture.width}cm</li>
-                  <li>深さ {furniture.depth}cm</li>
-                  <li>高さ {furniture.height}cm</li>
-                </ul>
-              </div>
-            </div>
-          </Link>
+            </Thumbnail>
+            <Content>
+              <Name>{furniture.name}</Name>
+              {furniture.price && (
+                <Price>{formatTaxIncludedPrice(furniture.price)}</Price>
+              )}
+              <DimentionContainer>
+                <DimentionInner>
+                  <DimentionItem>幅 {furniture.width}cm</DimentionItem>
+                  <DimentionItem>深さ {furniture.depth}cm</DimentionItem>
+                  <DimentionItem>高さ {furniture.height}cm</DimentionItem>
+                </DimentionInner>
+              </DimentionContainer>
+            </Content>
+          </DashboardListWrapper>
         ))}
-      </div>
+      </DashboardListContainer>
     </>
-  );
-};
+  )
+}

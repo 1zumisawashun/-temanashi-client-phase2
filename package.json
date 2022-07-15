@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/css": "^11.9.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@firebase/firestore-types": "^2.5.0",
@@ -58,8 +59,8 @@
     "start:stg": "dotenv -e .env.staging react-scripts start",
     "build": "npm run clean && dotenv -e .env.development react-scripts build",
     "build:stg": "npm run clean && dotenv -e .env.staging react-scripts build",
-    "deploy": "npm run build && firebase deploy　--project=temanashi-phase2",
-    "deploy:stg": "npm run build:stg && firebase deploy --project=temanashi-phase2-development",
+    "deploy": "npm run build && firebase deploy",
+    "deploy:stg": "npm run build:stg && firebase deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "emulators": "cd functions && npm run emulators",
@@ -71,7 +72,8 @@
     "lint:css": "stylelint --ignore-path .gitignore \"src/**/*.+(css|ts|tsx)\"",
     "lint:css:fix": "npm run lint:css -- --fix",
     "lint:js": "./node_modules/.bin/eslint --ext .tsx,.ts src/",
-    "lint:js:fix": "npm run lint:js -- --fix"
+    "lint:js:fix": "npm run lint:js -- --fix",
+    "format": "prettier --write \"**/*.+(js|json|yml|ts|tsx)\""
   },
   "eslintConfig": {
     "extends": [
@@ -111,10 +113,12 @@
     "firebase-tools": "^10.2.0",
     "postcss": "^8.4.14",
     "postcss-syntax": "^0.36.2",
+    "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "stylelint": "^14.9.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended": "^8.0.0",
-    "stylelint-config-standard": "^26.0.0"
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-order": "^5.0.0"
   }
 }

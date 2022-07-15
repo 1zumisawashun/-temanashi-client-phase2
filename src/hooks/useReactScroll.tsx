@@ -1,4 +1,4 @@
-import { scroller, Element } from "react-scroll";
+import { scroller, Element } from 'react-scroll'
 
 /**
  * render-hooksパターンを採用している
@@ -9,17 +9,17 @@ export const useReactScroll = (data: string) => {
     duration: 1000,
     delay: 0,
     smooth: true,
-    offset: -10,
-  };
+    offset: -10
+  }
 
-  const renderScrollElement = () => <Element name={data} />;
+  const renderScrollElement = () => <Element name={data} />
 
   const scrollHook = () => {
-    scroller.scrollTo(data, options);
-  };
+    scroller.scrollTo(data, options)
+  }
 
   return {
     renderScrollElement,
-    scrollHook,
-  };
-};
+    scrollHook
+  }
+}

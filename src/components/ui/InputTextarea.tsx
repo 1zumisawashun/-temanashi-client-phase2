@@ -1,41 +1,41 @@
-import { TextField } from "@mui/material";
-import styled from "@emotion/styled";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { TextField } from '@mui/material'
+import styled from '@emotion/styled'
+import { UseFormRegisterReturn } from 'react-hook-form'
 
 const StyledTextField = styled(TextField)`
   background-color: white;
   font-size: 16px;
   margin-top: 6px;
   width: 100%;
-`;
+`
 
-const StyledLabelText = styled("label")`
+const StyledLabelText = styled('label')`
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 4px;
-`;
+`
 
 export interface InputTextareaProps {
   // NOTE:アクション
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
-  onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
+  onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void
+  onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void
+  onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void
   // NOTE:エラーハンドリング
-  register?: UseFormRegisterReturn;
-  error?: boolean;
-  helperText?: string;
+  register?: UseFormRegisterReturn
+  error?: boolean
+  helperText?: string
   // NOTE:必須項目
-  label?: string;
-  value?: string;
-  disabled?: boolean;
-  placeholder?: string;
-  type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search";
+  label?: string
+  value?: string
+  disabled?: boolean
+  placeholder?: string
+  type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search'
   //NOTE:追加項目
-  autoFocus?: boolean;
-  maxLength?: number;
-  maxRows?: number;
-  readOnly?: boolean;
+  autoFocus?: boolean
+  maxLength?: number
+  maxRows?: number
+  readOnly?: boolean
 }
 
 export const InputTextarea: React.VFC<InputTextareaProps> = ({
@@ -45,16 +45,16 @@ export const InputTextarea: React.VFC<InputTextareaProps> = ({
   onFocus,
   register,
   error = false,
-  helperText = "",
+  helperText = '',
   label,
   value,
   disabled = false,
   placeholder,
-  type = "text",
+  type = 'text',
   autoFocus = false,
   maxLength = 1000,
   maxRows = 50,
-  readOnly,
+  readOnly
 }) => {
   return (
     <div>
@@ -79,12 +79,12 @@ export const InputTextarea: React.VFC<InputTextareaProps> = ({
         inputProps={{
           maxLength,
           style: {
-            height: "127px",
+            height: '127px'
           },
-          readOnly,
+          readOnly
         }}
         {...register}
       />
     </div>
-  );
-};
+  )
+}

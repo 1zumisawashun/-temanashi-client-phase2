@@ -1,31 +1,31 @@
-import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import { useForm, SubmitHandler } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import styled from '@emotion/styled'
 import {
   InputText,
   Button,
   ButtonLink,
   InputFileSingle,
-  ErrorText,
-} from "../ui";
-import styled from "@emotion/styled";
+  ErrorText
+} from '../ui'
+import { useAuth } from '../../hooks/useAuth'
 
-const Container = styled("div")`
+const Container = styled('div')`
   background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);
   height: 100vh;
   margin: 0;
   position: relative;
-`;
-const Inner = styled("div")`
+`
+const Inner = styled('div')`
   left: 50%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%) translateX(-50%);
   width: 30%;
-`;
-const FormContainer = styled("form")`
+`
+const FormContainer = styled('form')`
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -34,60 +34,60 @@ const FormContainer = styled("form")`
   border-right: 1px solid rgba(255, 255, 255, 0.3);
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: auto;
   padding: 50px;
-`;
-const Title = styled("h1")`
+`
+const Title = styled('h1')`
   color: white;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   letter-spacing: 2px;
   margin-top: 0;
-`;
+`
 interface FormData {
-  email: string;
-  password: string;
-  displayName: string;
-  thumbnail: File | null;
+  email: string
+  password: string
+  displayName: string
+  thumbnail: File | null
 }
 
 export const SignupTemplate: React.VFC = () => {
-  const { signup, isPending, error } = useAuth();
+  const { signup, isPending, error } = useAuth()
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [displayName, setDisplayName] = useState<string>("");
-  const [thumbnail, setThumbnail] = useState<File | null>(null);
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [displayName, setDisplayName] = useState<string>('')
+  const [thumbnail, setThumbnail] = useState<File | null>(null)
 
   const getSchema = () => {
     return yup.object({
-      email: yup.string().email("emailの形式で入力してください。"),
-      password: yup.string().required("パスワードを入力してください。"),
-      displayName: yup.string().required("名前を入力してください。"),
-    });
-  };
+      email: yup.string().email('emailの形式で入力してください。'),
+      password: yup.string().required('パスワードを入力してください。'),
+      displayName: yup.string().required('名前を入力してください。')
+    })
+  }
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>({
-    mode: "onChange",
-    resolver: yupResolver(getSchema()),
-  });
+    mode: 'onChange',
+    resolver: yupResolver(getSchema())
+  })
 
   const onSubmit = () => {
-    if (thumbnail === null) return;
-    signup(email, password, displayName, thumbnail);
-  };
+    if (thumbnail === null) return
+    signup(email, password, displayName, thumbnail)
+  }
 
   const onPreSubmit: SubmitHandler<FormData> = () => {
-    onSubmit();
-  };
+    onSubmit()
+  }
 
   const onInputFileChange = (file: File) => {
-    setThumbnail(file);
-  };
+    setThumbnail(file)
+  }
 
   return (
     <Container>
@@ -96,28 +96,28 @@ export const SignupTemplate: React.VFC = () => {
           <Title>Sign Up</Title>
           <InputText
             size="small"
-            register={register("email", {
-              onChange: (e) => setEmail(e.target.value),
+            register={register('email', {
+              onChange: (e) => setEmail(e.target.value)
             })}
-            error={"email" in errors}
+            error={'email' in errors}
             helperText={errors.email?.message}
             placeholder="xyz@gmail.com"
           />
           <InputText
             size="small"
-            register={register("password", {
-              onChange: (e) => setPassword(e.target.value),
+            register={register('password', {
+              onChange: (e) => setPassword(e.target.value)
             })}
-            error={"password" in errors}
+            error={'password' in errors}
             helperText={errors.password?.message}
             placeholder="Must have atleast 6 characters"
           />
           <InputText
             size="small"
-            register={register("displayName", {
-              onChange: (e) => setDisplayName(e.target.value),
+            register={register('displayName', {
+              onChange: (e) => setDisplayName(e.target.value)
             })}
-            error={"displayName" in errors}
+            error={'displayName' in errors}
             helperText={errors.displayName?.message}
             placeholder="your name or nick name"
           />
@@ -130,7 +130,7 @@ export const SignupTemplate: React.VFC = () => {
             size="large"
             fullWidth
             onClick={() => {
-              handleSubmit(onPreSubmit)();
+              handleSubmit(onPreSubmit)()
             }}
           >
             Sign Up
@@ -140,5 +140,5 @@ export const SignupTemplate: React.VFC = () => {
         </FormContainer>
       </Inner>
     </Container>
-  );
-};
+  )
+}

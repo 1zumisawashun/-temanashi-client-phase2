@@ -1,11 +1,11 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled'
 
 const breakpoints = {
   iphone5: 320,
   sp: 576,
   tab: 768,
-  pc: 1042,
-} as const;
+  pc: 1042
+} as const
 
 /**
  * mediaQueryの方が直感的に使いやすいのでそちらを採用する
@@ -16,11 +16,11 @@ export const device = {
   iphone5: `(min-width: ${breakpoints.iphone5}px)`,
   sp: `(min-width: ${breakpoints.sp}px)`,
   tab: `(min-width: ${breakpoints.tab}px)`,
-  pc: `(min-width: ${breakpoints.pc}px)`,
-};
+  pc: `(min-width: ${breakpoints.pc}px)`
+}
 
 // eslint-disable-next-line
-const FirstTextWrapper = styled("div")`
+const FirstTextWrapper = styled('div')`
   margin: auto;
   @media ${device.tab} {
     max-width: 800px;
@@ -28,19 +28,19 @@ const FirstTextWrapper = styled("div")`
   @media ${device.pc} {
     max-width: 1400px;
   }
-`;
+`
 
 export const mediaQuery = (key: keyof typeof breakpoints) =>
-  `@media (min-width: ${breakpoints[key]}px)`;
+  `@media (min-width: ${breakpoints[key]}px)`
 
 // eslint-disable-next-line
-const SecondTestWrapper = styled("div")`
+const SecondTestWrapper = styled('div')`
   color: 'green';
   margin: auto;
-  ${mediaQuery("iphone5")}: {
+  ${mediaQuery('iphone5')}: {
     color: 'gray';
   }
-  ${mediaQuery("sp")}: {
+  ${mediaQuery('sp')}: {
     color: 'hotpink';
   }
-`;
+`

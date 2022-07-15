@@ -1,68 +1,71 @@
-import { createContext, useReducer, useMemo } from "react";
+import { createContext, useReducer, useMemo } from 'react'
 
 interface Action {
-  type: string;
-  products: Array<Product>;
+  type: string
+  products: Array<Product>
 }
 interface State {
-  products: Array<Product>;
+  products: Array<Product>
 }
 interface Product {
-  id: string;
-  name: string;
-  random: number;
-  image: string;
+  id: string
+  name: string
+  random: number
+  image: string
 }
 interface RandomContextInterface {
-  products: Array<Product>;
-  addProductWithRandom: (products: Array<Product>) => void;
+  products: Array<Product>
+  addProductWithRandom: (products: Array<Product>) => void
 }
 
 export const RandomContext = createContext<RandomContextInterface>({
   products: [],
-  addProductWithRandom: (products) => {},
-});
+  addProductWithRandom: (products) => {}
+})
 
 const addProductWithRandom = (products: Array<Product>, state: State) => {
   // NOTE:2重でrandomの更新をしているのでここで追加しなくても良いかもしれない
   const results = products.map((product, index) => {
     return {
       ...product,
-      random: index,
-    };
-  });
-  return { ...state, products: results };
-};
+      random: index
+    }
+  })
+  return { ...state, products: results }
+}
 
-export const ADD_PRODUCT = "ADD_PRODUCT";
+export const ADD_PRODUCT = 'ADD_PRODUCT'
 
 export const randomReducer = (state: State, action: Action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      return addProductWithRandom(action.products, state);
+      return addProductWithRandom(action.products, state)
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const RandomContextProvider: React.VFC<
   React.PropsWithChildren<React.ReactNode>
 > = (props) => {
-  const [randomState, dispatch] = useReducer(randomReducer, { products: [] });
+  const [randomState, dispatch] = useReducer(randomReducer, { products: [] })
   const addProductWithRandom = (products: Array<Product>) => {
-    dispatch({ type: ADD_PRODUCT, products });
-  };
+    dispatch({ type: ADD_PRODUCT, products })
+  }
 
-  const { children } = props;
+  const randomValue = useMemo(
+    () => ({
+      products: randomState.products,
+      addProductWithRandom
+    }),
+    [randomState]
+  )
+
+  const { children } = props
 
   return (
-    <RandomContext.Provider
-      value={{
-        products: randomState.products,
-        addProductWithRandom,
-      }}
-    >
+    <RandomContext.Provider value={randomValue}>
       {children}
     </RandomContext.Provider>
-  );
-};
+  )
+}

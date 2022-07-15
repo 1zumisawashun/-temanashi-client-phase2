@@ -1,5 +1,5 @@
-import { ErrorForbidden } from "../components/ui";
-import { Head } from "../components/layout";
+import { ErrorForbidden } from '../components/ui'
+import { Head } from '../components/layout'
 
 export const Error: React.VFC = () => {
   return (
@@ -7,5 +7,5 @@ export const Error: React.VFC = () => {
       <Head title="StripeError.tsx" />
       <ErrorForbidden />
     </>
-  );
-};
+  )
+}

@@ -1,32 +1,32 @@
-import { Route, Switch, Redirect } from "react-router-dom";
-import { lazyImport } from "../utilities";
-import styled from "@emotion/styled";
+import { Route, Switch, Redirect } from 'react-router-dom'
+import styled from '@emotion/styled'
+import { lazyImport } from '../utilities'
 
-const { Cart } = lazyImport(() => import("../pages/Cart"), "Cart");
+const { Cart } = lazyImport(() => import('../pages/Cart'), 'Cart')
 const { Complete } = lazyImport(
-  () => import("../pages/StripeComplete"),
-  "Complete"
-);
-const { Create } = lazyImport(() => import("../pages/Create"), "Create");
+  () => import('../pages/StripeComplete'),
+  'Complete'
+)
+const { Create } = lazyImport(() => import('../pages/Create'), 'Create')
 const { Dashboard } = lazyImport(
-  () => import("../pages/Dashboard"),
-  "Dashboard"
-);
-const { Diagnose } = lazyImport(() => import("../pages/Diagnose"), "Diagnose");
-const { Error } = lazyImport(() => import("../pages/StripeError"), "Error");
-const { Login } = lazyImport(() => import("../pages/Login"), "Login");
-const { Product } = lazyImport(() => import("../pages/Product"), "Product");
-const { Signup } = lazyImport(() => import("../pages/Signup"), "Signup");
-const { User } = lazyImport(() => import("../pages/User"), "User");
+  () => import('../pages/Dashboard'),
+  'Dashboard'
+)
+const { Diagnose } = lazyImport(() => import('../pages/Diagnose'), 'Diagnose')
+const { Error } = lazyImport(() => import('../pages/StripeError'), 'Error')
+const { Login } = lazyImport(() => import('../pages/Login'), 'Login')
+const { Product } = lazyImport(() => import('../pages/Product'), 'Product')
+const { Signup } = lazyImport(() => import('../pages/Signup'), 'Signup')
+const { User } = lazyImport(() => import('../pages/User'), 'User')
 const { Component } = lazyImport(
-  () => import("../pages/Component"),
-  "Component"
-);
+  () => import('../pages/Component'),
+  'Component'
+)
 
-const AppContainer = styled("div")`
+const AppContainer = styled('div')`
   display: flex;
   min-height: 100vh;
-`;
+`
 
 export const AppRoute: React.VFC = () => {
   return (
@@ -48,5 +48,5 @@ export const AppRoute: React.VFC = () => {
         </Route>
       </Switch>
     </AppContainer>
-  );
-};
+  )
+}

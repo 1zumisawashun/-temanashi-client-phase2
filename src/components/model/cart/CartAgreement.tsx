@@ -1,31 +1,31 @@
-import { useState } from "react";
-import { InputCheckbox, Button } from "../../ui";
-import styled from "@emotion/styled";
+import { useState } from 'react'
+import styled from '@emotion/styled'
+import { InputCheckbox, Button } from '../../ui'
 
-const CartAgreementContainer = styled("div")`
-  width: 100%;
-  margin: 30px auto 0;
-  padding: 20px 0;
-  text-align: center;
+const CartAgreementContainer = styled('div')`
   background: white;
   border-radius: 12px;
   box-shadow: 0 13px 21px rgba(0, 0, 0, 0.1);
-`;
+  margin: 30px auto 0;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
+`
 
 interface CartAgreementProps {
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  isLoading: boolean;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+  isLoading: boolean
 }
 
 export const CartAgreement: React.VFC<CartAgreementProps> = ({
   onClick,
-  isLoading,
+  isLoading
 }) => {
-  const [isAccepted, setIsAccepted] = useState<boolean>(false);
+  const [isAccepted, setIsAccepted] = useState<boolean>(false)
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsAccepted(!isAccepted);
-  };
+    setIsAccepted(!isAccepted)
+  }
 
   return (
     <CartAgreementContainer>
@@ -40,5 +40,5 @@ export const CartAgreement: React.VFC<CartAgreementProps> = ({
         購入する
       </Button>
     </CartAgreementContainer>
-  );
-};
+  )
+}

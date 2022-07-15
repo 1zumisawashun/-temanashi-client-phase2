@@ -1,111 +1,113 @@
+import { useState, useEffect } from 'react'
 import {
   ProjectType,
   User,
   likedFurnitures,
-  likedUsers,
-} from "../../@types/dashboard";
-import { useState, useEffect } from "react";
-import { timestamp, firebase } from "../../firebase/config";
-import { useAuthContext } from "../../hooks/useContextClient";
-import { formatFirebasePath } from "../../utilities";
-import { useSubDocument } from "../../hooks/useSubDocument";
-import { ProductItem } from "../../utilities/stripeClient";
-import { ButtonIconFavorite, ButtonIconNoFavirute } from ".";
+  likedUsers
+} from '../../@types/dashboard'
+import { timestamp, firebase } from '../../firebase/config'
+import { useAuthContext } from '../../hooks/useContextClient'
+import { formatFirebasePath } from '../../utilities'
+import { useSubDocument } from '../../hooks/useSubDocument'
+import { ProductItem } from '../../utilities/stripeClient'
+import { ButtonIconFavorite, ButtonIconNoFavirute } from '.'
 
 type LikeButtonProp = {
-  furniture: ProductItem;
-};
+  furniture: ProductItem
+}
 type Id = {
-  id: string;
-};
+  id: string
+}
 type LikedUser = {
-  documents: (likedUsers & Id) | undefined;
-  error: string | null;
-  referense: firebase.firestore.DocumentReference<likedUsers> | null;
-};
+  documents: (likedUsers & Id) | undefined
+  error: string | null
+  referense: firebase.firestore.DocumentReference<likedUsers> | null
+}
 type LikedFuritures = {
-  documents: (likedFurnitures & Id) | undefined;
-  error: string | null;
-  referense: firebase.firestore.DocumentReference<likedFurnitures> | null;
-};
+  documents: (likedFurnitures & Id) | undefined
+  error: string | null
+  referense: firebase.firestore.DocumentReference<likedFurnitures> | null
+}
 
 export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
-  const [like, setLike] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const { user } = useAuthContext();
-  if (!user) throw new Error("we cant find your account");
+  const [like, setLike] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { user } = useAuthContext()
+  if (!user) throw new Error('we cant find your account')
 
   const likedUser: LikedUser = useSubDocument<ProjectType, likedUsers>(
     formatFirebasePath(
       `/products/${furniture.product.id}/liked_users/${user.uid}`
     )
-  );
+  )
 
   const likedFurniture: LikedFuritures = useSubDocument<User, likedFurnitures>(
     formatFirebasePath(
       `/users/${user.uid}/liked_furnitures/${furniture.product.id}`
     )
-  );
+  )
 
   const addLikedUser = () => {
     // NOTE:set中にconverterで定義している型と違う値を入れるとエラーになる
-    if (!likedUser.referense) return;
+    if (!likedUser.referense) return
     likedUser.referense.set({
       liked_user: {
         uid: user.uid,
-        displayName: user.displayName,
+        displayName: user.displayName
       },
-      createdAt: timestamp.fromDate(new Date()),
-    });
-  };
+      createdAt: timestamp.fromDate(new Date())
+    })
+  }
 
   const addLikedFurniture = () => {
-    if (!likedFurniture.referense) return;
+    if (!likedFurniture.referense) return
     likedFurniture.referense.set({
       liked_furniture: furniture,
-      createdAt: timestamp.fromDate(new Date()),
-    });
-  };
+      createdAt: timestamp.fromDate(new Date())
+    })
+  }
 
   const removeLikedUser = () => {
-    if (!likedFurniture.referense) return;
-    likedFurniture.referense.delete();
-  };
+    if (!likedFurniture.referense) return
+    likedFurniture.referense.delete()
+  }
 
   const removeLikedFurniture = () => {
-    if (!likedUser.referense) return;
-    likedUser.referense.delete();
-  };
+    if (!likedUser.referense) return
+    likedUser.referense.delete()
+  }
 
   const handleClick = () => {
-    setLike(!like);
+    setLike(!like)
     if (like === true) {
       // FIXME:バッチ書き込み処理なのか、同じ情報ならトップに持ってきてもいいかもしれない
-      removeLikedUser();
-      removeLikedFurniture();
+      removeLikedUser()
+      removeLikedFurniture()
     }
     if (like === false) {
-      addLikedUser();
-      addLikedFurniture();
+      addLikedUser()
+      addLikedFurniture()
     }
-  };
+  }
 
   useEffect(() => {
-    if (!likedFurniture.referense) return;
+    if (!likedFurniture.referense) return
     const unsubscribe = likedFurniture.referense.onSnapshot(
       (snapshot) => {
         if (snapshot.exists) {
-          setLike(true);
+          setLike(true)
         } else {
-          setLike(false);
+          setLike(false)
         }
       },
       (error) => {
-        setError("could not push like button, try again");
+        setError('could not push like button, try again')
       }
-    );
-    return () => unsubscribe();
-  }, [likedFurniture.referense]);
+    )
+    // eslint-disable-next-line consistent-return
+    return () => unsubscribe()
+  }, [likedFurniture.referense])
 
   return (
     <>
@@ -124,5 +126,5 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
       )}
       {error && <div className="error">{error}</div>}
     </>
-  );
-};
+  )
+}

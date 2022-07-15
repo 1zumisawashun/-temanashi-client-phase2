@@ -1,5 +1,5 @@
-declare module "csstype" {
+declare module 'csstype' {
   interface Properties {
-    contentVisibility?: "visible" | "auto" | "hidden";
+    contentVisibility?: 'visible' | 'auto' | 'hidden'
   }
 }
