@@ -81,7 +81,8 @@
     "src/**/*.{js,jsx,ts,tsx}": [
       "npm run format",
       "npm run lint:js:fix",
-      "npm run lint:css:fix"
+      "npm run lint:css:fix",
+      "git add"
     ]
   },
   "eslintConfig": {
