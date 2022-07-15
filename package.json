@@ -59,8 +59,8 @@
     "start:stg": "dotenv -e .env.staging react-scripts start",
     "build": "npm run clean && dotenv -e .env.development react-scripts build",
     "build:stg": "npm run clean && dotenv -e .env.staging react-scripts build",
-    "deploy": "npm run build && firebase deploy",
-    "deploy:stg": "npm run build:stg && firebase deploy",
+    "deploy": "npm run build && firebase deploy --project=temanashi-phase2",
+    "deploy:stg": "npm run build:stg && firebase deploy --project=temanashi-phase2-development",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "emulators": "cd functions && npm run emulators",
@@ -73,7 +73,21 @@
     "lint:css:fix": "npm run lint:css -- --fix",
     "lint:js": "./node_modules/.bin/eslint --ext .tsx,.ts src/",
     "lint:js:fix": "npm run lint:js -- --fix",
-    "format": "prettier --write \"**/*.+(js|json|yml|ts|tsx)\""
+    "format": "prettier --write \"**/*.+(js|json|yml|ts|tsx)\"",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npm run lint:js",
+      "npm run lint:css",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -111,6 +125,8 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "firebase-tools": "^10.2.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.14",
     "postcss-syntax": "^0.36.2",
     "prettier": "^2.7.1",
