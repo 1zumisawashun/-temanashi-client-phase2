@@ -78,10 +78,10 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run format",
       "npm run lint:js:fix",
-      "npm run lint:css:fix",
-      "git add"
+      "npm run lint:css:fix"
     ]
   },
   "eslintConfig": {
