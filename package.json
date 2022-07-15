@@ -77,15 +77,10 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "npm run lint:js",
-      "npm run lint:css",
+      "npm run lint:js:fix",
+      "npm run lint:css:fix",
       "git add"
     ]
   },
