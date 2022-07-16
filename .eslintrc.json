@@ -44,7 +44,7 @@
     "spaced-comment": "off",
     "no-console": "off",
     "no-alert": "off",
-    "arrow-body-style": "off", // returnを無くして強制的に const num = () => 1 にするのをoff
+    "arrow-body-style": "off", // アロー関数の省略形へ強制的に整形するのをoff > ex) const num = () => 1;
     "import/prefer-default-export": "off", // named-exportを採用するためoff
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/naming-convention": "off",
