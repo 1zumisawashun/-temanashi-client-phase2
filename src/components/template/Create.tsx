@@ -88,6 +88,8 @@ export const CreateTemplate: React.VFC = () => {
     }))
   }
 
+  console.log('test')
+
   const onInputChangeSelect = (option: MultiValue<OptionProps>) => {
     const multivalue = option.map((item) => item.value)
     setCategories(multivalue)
@@ -180,60 +182,67 @@ export const CreateTemplate: React.VFC = () => {
         {scrollToName.renderScrollElement()}
         <InputText
           label="name"
-          register={register('name', {
-            onChange: (e) => onInputChange(e)
-          })}
+          register={register('name')}
+          // register={register('name', {
+          //   onChange: (e) => onInputChange(e)
+          // })}
           error={'name' in errors}
           helperText={errors.name?.message}
         />
         {scrollToDescription.renderScrollElement()}
         <InputTextarea
           label="description"
-          register={register('description', {
-            onChange: (e) => onInputChange(e)
-          })}
+          register={register('description')}
+          // register={register('description', {
+          //   onChange: (e) => onInputChange(e)
+          // })}
           error={'description' in errors}
           helperText={errors.description?.message}
         />
         {scrollToPrice.renderScrollElement()}
         <InputText
           label="price"
-          register={register('price', {
-            onChange: (e) => onInputChange(e)
-          })}
+          register={register('price')}
+          // register={register('price', {
+          //   onChange: (e) => onInputChange(e)
+          // })}
           error={'price' in errors}
           helperText={errors.price?.message}
         />
         {scrollToStock.renderScrollElement()}
         <InputText
           label="stock"
-          register={register('stock', {
-            onChange: (e) => onInputChange(e)
-          })}
+          register={register('stock')}
+          // register={register('stock', {
+          //   onChange: (e) => onInputChange(e)
+          // })}
           error={'stock' in errors}
           helperText={errors.stock?.message}
         />
         <InputText
           label="width"
-          register={register('width', {
-            onChange: (e) => onInputChange(e)
-          })}
+          register={register('width')}
+          // register={register('width', {
+          //   onChange: (e) => onInputChange(e)
+          // })}
           error={'width' in errors}
           helperText={errors.width?.message}
         />
         <InputText
           label="length"
-          register={register('length', {
-            onChange: (e) => onInputChange(e)
-          })}
+          register={register('length')}
+          // register={register('length', {
+          //   onChange: (e) => onInputChange(e)
+          // })}
           error={'length' in errors}
           helperText={errors.length?.message}
         />
         <InputText
           label="height"
-          register={register('height', {
-            onChange: (e) => onInputChange(e)
-          })}
+          register={register('height')}
+          // register={register('height', {
+          //   onChange: (e) => onInputChange(e)
+          // })}
           error={'height' in errors}
           helperText={errors.height?.message}
         />

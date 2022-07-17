@@ -2,7 +2,7 @@ import React, { useState, useRef, useMemo } from 'react'
 import TinderCard from 'react-tinder-card'
 import styled from '@emotion/styled'
 import {
-  ProgressBar,
+  Progressbar,
   Loading,
   ButtonIconThumbDown,
   ButtonIconThumbUp,
@@ -48,7 +48,6 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
     })
   /**
    * レンダリングされても状態を保つ（記録する）
-   *
    */
   const currentIndexRef = useRef(currentIndex)
   /**
@@ -134,7 +133,7 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
     <CommonWrapper>
       {isLoading && <Loading />}
       <div className="tinder-swipe">
-        <ProgressBar width={100} percent={percent} />
+        <Progressbar width={100} percent={percent} />
         <div className="cardContainer">
           {db.map((character, index) => (
             <TinderCard

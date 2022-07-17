@@ -23,7 +23,7 @@ type ProgressBarProps = {
   percent: number
 }
 
-export const ProgressBar: React.VFC<ProgressBarProps> = ({
+export const Progressbar: React.VFC<ProgressBarProps> = ({
   width,
   percent
 }) => {

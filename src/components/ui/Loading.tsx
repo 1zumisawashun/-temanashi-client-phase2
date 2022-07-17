@@ -1,4 +1,4 @@
-import Loader from 'react-loader-spinner'
+import { Oval } from 'react-loader-spinner'
 import styled from '@emotion/styled'
 import * as React from 'react'
 
@@ -46,7 +46,14 @@ export const Loading: React.VFC<LoadingProps> = ({ color = '#84bcb4' }) => {
     <LoadingContainer>
       <Backdrop>
         <Inner>
-          <Loader type="RevolvingDot" color={color} height={100} width={100} />
+          <Oval
+            ariaLabel="loading-indicator"
+            height={70}
+            width={70}
+            strokeWidth={3}
+            color={color}
+            secondaryColor="white"
+          />
         </Inner>
       </Backdrop>
     </LoadingContainer>

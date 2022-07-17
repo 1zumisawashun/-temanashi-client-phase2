@@ -32,7 +32,7 @@ export { ErrorText } from './ErrorText'
 export { ErrorForbidden } from './ErrorForbidden'
 
 /* other */
-export { ProgressBar } from './ProgressBar'
+export { Progressbar } from './Progressbar'
 export { Loading } from './Loading'
 export { Avatar } from './Avatar'
 export { Modal } from './Modal'

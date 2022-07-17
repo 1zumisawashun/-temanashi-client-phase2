@@ -91,7 +91,6 @@ export const ProductSummary: React.VFC<ProductSummaryProps> = ({
             src={furniture.product.images[0]}
             alt=""
             onClick={() => previewModal.open()}
-            // 追加しないとlintエラーになる
             aria-hidden="true"
           />
         ) : (

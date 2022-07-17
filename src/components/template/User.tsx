@@ -37,6 +37,7 @@ export const UserTemplate: React.VFC = () => {
     return likedFurnitures
   }
 
+  // NOTE:suspenseの対象外(throwしていない)なので一瞬だけNotFoundがちらつく
   const likedProductsList = getLikedFurnitures(documents)
 
   return (
