@@ -1,10 +1,23 @@
 {
+  "stylelint.stylelintPath": "node_modules/stylelint",
+  "stylelint.validate": ["css", "scss", "postcss"],
+  "scss.validate": false,
+  "css.validate": false,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode" // フォーマッタをprettierに指定
   },
-  "editor.formatOnSave": true, // ファイル保存時にPrettierでフォーマット
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "editor.formatOnSave": true, // ファイル保存時にPrettierでフォーマット
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": false, // ファイル保存時にESLintでフォーマット
+    "source.fixAll.eslint": true, // ファイル保存時にESLintでフォーマット
     "source.fixAll.stylelint": true // ファイル保存時にStylelintでフォーマット
-  }
+  },
+  // eslintが効いているのは確認済み
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll": true
+  // },
+  "typescript.tsdk": "QandA/frontend/node_modules/typescript/lib"
 }

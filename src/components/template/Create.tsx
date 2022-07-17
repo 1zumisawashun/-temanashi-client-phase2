@@ -118,6 +118,8 @@ export const CreateTemplate: React.VFC = () => {
     }
 
     // NOTE:複数選択できるが全体の型は修正していないので一旦一個のみポストする
+    // NOTE:RHFのgetValueで取得する？
+    // NOTE:もう少し調査が必要そう
     const furniture = {
       ...formData,
       photos: result,

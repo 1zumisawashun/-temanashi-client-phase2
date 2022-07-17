@@ -40,6 +40,8 @@ export interface LoadingProps {
 /**
  * 読み込み系のローディングはライブラリのローディング（バックドロップあり）を使う
  * 追加・更新・削除時のローディングはMUIのローティング（バックドロップなし）を使う
+ * https://github.com/mhnpd/react-loader-spinner
+ * https://mhnpd.github.io/react-loader-spinner/
  */
 export const Loading: React.VFC<LoadingProps> = ({ color = '#84bcb4' }) => {
   return (

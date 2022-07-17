@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
+import React from 'react'
 import {
   ProductItem,
   ProductItemWithoutComment
 } from '../../../utilities/stripeClient'
-import { useAuthContext } from '../../../hooks/useContextClient'
 import { formatTaxIncludedPrice } from '../../../utilities'
 import { Image, Divider } from '../../ui'
 
@@ -75,55 +75,53 @@ type DashboardListProps = {
   productItems: Array<ProductItem | ProductItemWithoutComment>
 }
 
-export const DashboardList: React.VFC<DashboardListProps> = ({
-  productItems
-}) => {
-  const { user } = useAuthContext()
-  // nullチェック・通常のreturnだとエラーになる
-  if (!user) throw new Error('we cant find your account')
-
-  return (
-    <DashboardListContainer>
-      {productItems &&
-        productItems.map((item: ProductItem | ProductItemWithoutComment) => (
-          <DashboardListWrapper
-            to={`/products/${item.product.id}`}
-            key={item.product.id}
-          >
-            <Thumbnail>
-              {item.product.images.length > 0 ? (
-                <Image src={item.product.images[0]} className={styledImage} />
-              ) : (
-                <Image
-                  src="https://placehold.jp/230x160.png"
-                  className={styledImage}
-                />
-              )}
-            </Thumbnail>
-            <Content>
-              <Name>{item.product.name}</Name>
-              {Object.keys(item.prices).map((priceIndex) => (
-                <Price key={priceIndex}>
-                  {formatTaxIncludedPrice(item.prices[priceIndex].unit_amount)}
-                </Price>
-              ))}
-              <Divider />
-              <DimentionContainer>
-                <DimentionInner>
-                  <DimentionItem>
-                    横幅 {item.product.metadata?.width ?? 111}cm
-                  </DimentionItem>
-                  <DimentionItem>
-                    深さ {item.product.metadata?.length ?? 222}cm
-                  </DimentionItem>
-                  <DimentionItem>
-                    高さ {item.product.metadata?.height ?? 333}cm
-                  </DimentionItem>
-                </DimentionInner>
-              </DimentionContainer>
-            </Content>
-          </DashboardListWrapper>
-        ))}
-    </DashboardListContainer>
-  )
-}
+export const DashboardList: React.VFC<DashboardListProps> = React.memo(
+  ({ productItems }) => {
+    return (
+      <DashboardListContainer>
+        {productItems &&
+          productItems.map((item: ProductItem | ProductItemWithoutComment) => (
+            <DashboardListWrapper
+              to={`/products/${item.product.id}`}
+              key={item.product.id}
+            >
+              <Thumbnail>
+                {item.product.images.length > 0 ? (
+                  <Image src={item.product.images[0]} className={styledImage} />
+                ) : (
+                  <Image
+                    src="https://placehold.jp/230x160.png"
+                    className={styledImage}
+                  />
+                )}
+              </Thumbnail>
+              <Content>
+                <Name>{item.product.name}</Name>
+                {Object.keys(item.prices).map((priceIndex) => (
+                  <Price key={priceIndex}>
+                    {formatTaxIncludedPrice(
+                      item.prices[priceIndex].unit_amount
+                    )}
+                  </Price>
+                ))}
+                <Divider />
+                <DimentionContainer>
+                  <DimentionInner>
+                    <DimentionItem>
+                      横幅 {item.product.metadata?.width ?? 111}cm
+                    </DimentionItem>
+                    <DimentionItem>
+                      深さ {item.product.metadata?.length ?? 222}cm
+                    </DimentionItem>
+                    <DimentionItem>
+                      高さ {item.product.metadata?.height ?? 333}cm
+                    </DimentionItem>
+                  </DimentionInner>
+                </DimentionContainer>
+              </Content>
+            </DashboardListWrapper>
+          ))}
+      </DashboardListContainer>
+    )
+  }
+)
