@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { ProductComment, ProductSummary } from '../model/product'
 import { productUseCase, ProductItem } from '../../utilities/stripeClient'
-import { useData } from '../../hooks'
+import { useData, useAuthContext } from '../../hooks'
 
 const ProductContainer = styled('div')`
   align-items: start;
@@ -16,6 +16,9 @@ const ProductContainer = styled('div')`
 
 export const ProductTemplate: React.VFC = () => {
   const { id } = useParams<{ id: string }>()
+  const { user } = useAuthContext()
+
+  if (!user) throw new Error('we cant find your account')
 
   const productItem = useData<ProductItem>(id, () =>
     productUseCase.fetchProductItem(id)
@@ -25,8 +28,8 @@ export const ProductTemplate: React.VFC = () => {
     <ProductContainer>
       {productItem && (
         <>
-          <ProductSummary furniture={productItem} />
-          <ProductComment furniture={productItem} />
+          <ProductSummary furniture={productItem} productId={id} />
+          <ProductComment furniture={productItem} productId={id} user={user} />
         </>
       )}
     </ProductContainer>

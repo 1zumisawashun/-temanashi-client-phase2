@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import styled from '@emotion/styled'
-import { Button, Divider, Modal } from '../components/ui'
+import {
+  Button,
+  Divider,
+  Modal,
+  CircleDotSpiner,
+  RevolvingDotSpiner
+} from '../components/ui'
 import {
   SquareIcon,
   SquareIconBlank,
@@ -14,6 +20,7 @@ import {
   InputTextarea,
   CheckboxGroup
 } from '../components/ui/phase3'
+import { categoryOptions, weekdaysOptions } from '../utilities/constant'
 
 const Container = styled('div')`
   background: #f4f4f4;
@@ -49,6 +56,10 @@ const ComponentContainer = styled('div')`
   padding-bottom: 8px;
   position: relative;
 `
+const ComponentFlex = styled('div')`
+  display: flex;
+  gap: 10px;
+`
 const ComponentTitle = styled('p')`
   background-color: #f4f4f4;
   font-size: 20px;
@@ -66,7 +77,8 @@ const CheckboxGroupWrapper = styled('div')`
   margin: 20px;
 `
 const CheckboxGroupInner = styled('div')`
-  text-align: end;
+  display: flex;
+  justify-content: end;
   width: 80%;
 `
 const Label = styled('label')`
@@ -74,27 +86,6 @@ const Label = styled('label')`
   margin: auto 0;
   width: 20%;
 `
-
-export type OptionProps = {
-  value: string
-  label: string
-}
-
-const selectOptions: OptionProps[] = [
-  {
-    value: '0',
-    label: '神奈川県'
-  },
-  {
-    value: '1',
-    label: '東京都'
-  },
-  {
-    value: '2',
-    label: '埼玉県'
-  }
-]
-const weekdays = ['月', '火', '水', '木', '金', '土', '日']
 
 export const Component: React.VFC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -164,13 +155,13 @@ export const Component: React.VFC = () => {
           <ComponentContainer>
             <ComponentTitle>SelectForm</ComponentTitle>
             <SelectForm
-              options={selectOptions}
+              options={categoryOptions}
               value={selectValue}
               onChange={handleSelectForm}
             />
             <Divider />
             <SelectForm
-              options={selectOptions}
+              options={categoryOptions}
               value={selectValue}
               onChange={handleSelectForm}
               error
@@ -178,7 +169,7 @@ export const Component: React.VFC = () => {
             />
             <Divider />
             <SelectForm
-              options={selectOptions}
+              options={categoryOptions}
               value={selectValue}
               onChange={handleSelectForm}
               isLoading
@@ -245,6 +236,14 @@ export const Component: React.VFC = () => {
           </ComponentContainer>
 
           <ComponentContainer>
+            <ComponentTitle>Spiner</ComponentTitle>
+            <ComponentFlex>
+              <CircleDotSpiner />
+              <RevolvingDotSpiner />
+            </ComponentFlex>
+          </ComponentContainer>
+
+          <ComponentContainer>
             <ComponentTitle>Button & BasicModal</ComponentTitle>
             <Button onClick={handleOpen}>primary</Button>
             <Divider />
@@ -300,7 +299,7 @@ export const Component: React.VFC = () => {
             <CheckboxGroupWrapper>
               <Label>定休日</Label>
               <CheckboxGroupInner>
-                {weekdays.map((weekday) => (
+                {weekdaysOptions.map((weekday) => (
                   <CheckboxGroup
                     value={weekday}
                     checked={selectedCheckbox.includes(weekday)}

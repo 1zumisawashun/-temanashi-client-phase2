@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useErrorHandler } from 'react-error-boundary'
+import { useState, useCallback } from 'react'
 import { DashboardFilter, DashboardList } from '../model/dashboard'
 import { useAuthContext } from '../../hooks/useContextClient'
 import { productUseCase, ProductItem } from '../../utilities/stripeClient'
@@ -7,17 +6,16 @@ import { useData } from '../../hooks/useData'
 
 export const DashboardTemplate: React.VFC = () => {
   const { user } = useAuthContext()
-  const handleError = useErrorHandler()
   const [currentFilter, setCurrentFilter] = useState<string>('all')
 
   const productItems = useData<ProductItem[]>('productItems', () =>
     productUseCase.fetchAll()
   )
 
-  const changeFilter = (newFilter: string) => {
-    if (!newFilter) handleError('changeFilter Error')
+  // FIXME:一旦dashboardでパフォーマンスチューニングの検証を行う
+  const changeFilter = useCallback((newFilter: string) => {
     setCurrentFilter(newFilter)
-  }
+  }, [])
 
   if (!user) throw new Error('we cant find your account')
 

@@ -32,8 +32,8 @@ export { ErrorText } from './ErrorText'
 export { ErrorForbidden } from './ErrorForbidden'
 
 /* other */
-export { ProgressBar } from './ProgressBar'
-export { Loading } from './Loading'
+export { Progressbar } from './Progressbar'
+export { Loading, RevolvingDotSpiner, CircleDotSpiner } from './Loading'
 export { Avatar } from './Avatar'
 export { Modal } from './Modal'
 export { Divider } from './Divider'

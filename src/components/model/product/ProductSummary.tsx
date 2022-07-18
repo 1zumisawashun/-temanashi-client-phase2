@@ -1,12 +1,7 @@
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Carousel } from 'react-responsive-carousel'
 import styled from '@emotion/styled'
-import {
-  useAuthContext,
-  useCartContext,
-  useFirestore,
-  useDisclosure
-} from '../../../hooks'
+import { useCartContext, useFirestore, useDisclosure } from '../../../hooks'
 import { Button, ButtonLike, Modal } from '../../ui'
 import { ProductItem } from '../../../utilities/stripeClient'
 import { formatTaxIncludedPrice } from '../../../utilities'
@@ -50,6 +45,7 @@ const ContentButtonWrapper = styled('div')`
 
 interface ProductSummaryProps {
   furniture: ProductItem
+  productId: string
 }
 interface Product {
   id: string
@@ -61,17 +57,14 @@ interface Product {
 }
 
 export const ProductSummary: React.VFC<ProductSummaryProps> = ({
-  furniture
+  furniture,
+  productId
 }) => {
   const history = useHistory()
   const { addProductToCart } = useCartContext()
   const { deleteDocument } = useFirestore()
-  const { id } = useParams<{ id: string }>()
-  const { user } = useAuthContext()
   const executeModal = useDisclosure()
   const previewModal = useDisclosure()
-
-  if (!user) throw new Error('we cant find your account')
 
   const addCart = async (product: Product) => {
     addProductToCart(product)
@@ -79,7 +72,8 @@ export const ProductSummary: React.VFC<ProductSummaryProps> = ({
 
   const handleDelete = async () => {
     executeModal.close()
-    if (furniture.product) await deleteDocument<ProductItem>('products', id)
+    if (furniture.product)
+      await deleteDocument<ProductItem>('products', productId)
     history.push('/')
   }
 
@@ -91,7 +85,6 @@ export const ProductSummary: React.VFC<ProductSummaryProps> = ({
             src={furniture.product.images[0]}
             alt=""
             onClick={() => previewModal.open()}
-            // 追加しないとlintエラーになる
             aria-hidden="true"
           />
         ) : (

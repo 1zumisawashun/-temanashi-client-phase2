@@ -80,6 +80,7 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
     }
 
     const copiedFiles = Object.values(event.target.files).concat()
+    // NOTE:refからDOMを取得してvalueを空文字にすれば良いかも
     // eslint-disable-next-line no-param-reassign
     event.target.value = ''
     setIsError('')
@@ -148,7 +149,8 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
               </UploadWrapper>
             </div>
           ) : (
-            <div key={`no-file-${_}`}>
+            // eslint-disable-next-line react/no-array-index-key
+            <div key={`no-file-${index}`}>
               <CloseButtonContainerHidden>
                 <ButtonIconClose onClick={() => executeModal.open()} />
               </CloseButtonContainerHidden>

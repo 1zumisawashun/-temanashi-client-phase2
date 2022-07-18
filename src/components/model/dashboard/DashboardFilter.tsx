@@ -1,3 +1,4 @@
+import * as React from 'react'
 import styled from '@emotion/styled'
 import { filterList } from '../../../utilities/constant'
 
@@ -53,27 +54,27 @@ type DashboardFilterProps = {
   changeFilter: (newFilter: string) => void
 }
 
-export const DashboardFilter: React.VFC<DashboardFilterProps> = ({
-  currentFilter,
-  changeFilter
-}) => {
-  const handleClick = (newFilter: string) => {
-    changeFilter(newFilter)
+export const DashboardFilter: React.VFC<DashboardFilterProps> = React.memo(
+  ({ currentFilter, changeFilter }) => {
+    const handleClick = (newFilter: string) => {
+      changeFilter(newFilter)
+    }
+
+    return (
+      <FilterContainer>
+        <FilterNav>
+          <FilterTitle>FILTER BY</FilterTitle>
+          {filterList.map((f) => (
+            <FilterButton
+              key={f}
+              onClick={() => handleClick(f)}
+              className={currentFilter === f ? 'active' : ''}
+            >
+              {f}
+            </FilterButton>
+          ))}
+        </FilterNav>
+      </FilterContainer>
+    )
   }
-  return (
-    <FilterContainer>
-      <FilterNav>
-        <FilterTitle>FILTER BY</FilterTitle>
-        {filterList.map((f) => (
-          <FilterButton
-            key={f}
-            onClick={() => handleClick(f)}
-            className={currentFilter === f ? 'active' : ''}
-          >
-            {f}
-          </FilterButton>
-        ))}
-      </FilterNav>
-    </FilterContainer>
-  )
-}
+)

@@ -1,20 +1,10 @@
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
-import { db, recommendation } from '../../../utilities/constant'
+import { recommendation } from '../../../utilities/constant'
 import { formatTaxIncludedPrice } from '../../../utilities'
-import { Loading, Image } from '../../ui'
-import {
-  DashboardListContainer,
-  DashboardListWrapper,
-  Thumbnail,
-  styledImage,
-  Content,
-  Name,
-  Price,
-  DimentionContainer,
-  DimentionInner,
-  DimentionItem
-} from '../dashboard/DashboardList'
+import { Image } from '../../ui'
+import { ProductItem } from '../../../utilities/stripeClient'
+import { DashboardList } from '../dashboard'
 
 const DisgnoseResultContainer = styled('div')`
   font-size: 16px;
@@ -66,11 +56,13 @@ const DisgnoseTotal = styled('span')`
   font-weight: bold;
   margin: 0 10px;
 `
+type DiagnoseResultProps = {
+  db: Array<ProductItem>
+}
 
-export const DiagnoseResult: React.VFC = () => {
+export const DiagnoseResult: React.VFC<DiagnoseResultProps> = ({ db }) => {
   return (
     <>
-      {db.length === 0 && recommendation && <Loading />}
       <DisgnoseResultContainer>
         <DisgnoseThumbnail>
           <Image
@@ -99,30 +91,7 @@ export const DiagnoseResult: React.VFC = () => {
           </div>
         </DisgnoseContent>
       </DisgnoseResultContainer>
-      <DashboardListContainer>
-        {db.map((furniture) => (
-          <DashboardListWrapper to="/diagnose" key={furniture.name}>
-            <Thumbnail>
-              {furniture.imageUrl && (
-                <Image src={furniture.imageUrl} className={styledImage} />
-              )}
-            </Thumbnail>
-            <Content>
-              <Name>{furniture.name}</Name>
-              {furniture.price && (
-                <Price>{formatTaxIncludedPrice(furniture.price)}</Price>
-              )}
-              <DimentionContainer>
-                <DimentionInner>
-                  <DimentionItem>幅 {furniture.width}cm</DimentionItem>
-                  <DimentionItem>深さ {furniture.depth}cm</DimentionItem>
-                  <DimentionItem>高さ {furniture.height}cm</DimentionItem>
-                </DimentionInner>
-              </DimentionContainer>
-            </Content>
-          </DashboardListWrapper>
-        ))}
-      </DashboardListContainer>
+      <DashboardList productItems={db} />
     </>
   )
 }
