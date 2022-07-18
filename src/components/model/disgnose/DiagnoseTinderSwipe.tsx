@@ -2,10 +2,10 @@ import React, { useState, useRef, useMemo } from 'react'
 import TinderCard from 'react-tinder-card'
 import styled from '@emotion/styled'
 import {
-  Progressbar,
   ButtonIconThumbDown,
   ButtonIconThumbUp,
-  ButtonIconUndo
+  ButtonIconUndo,
+  Progressbar
 } from '../../ui'
 import { ProductItem } from '../../../utilities/stripeClient'
 import { delay } from '../../../utilities'
@@ -55,21 +55,25 @@ type TinderSwipeProps = {
   changePendingDiagnose: () => void
 }
 
+/**
+ * 手動でスワイプ=swiped>outOfFrameの順番で関数が発火する
+ * ボタンでスワイプ=swipe>swiped>outOfFrameの順番で関数が発火する
+ * swipedがcurrentIndexを更新する責務を持っている
+ */
 export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
   db,
   changePendingDiagnose
 }) => {
-  // eslint-disable-next-line
   const [lastDirection, setLastDirection] = useState<string>()
   const [currentIndex, setCurrentIndex] = useState<number>(db.length - 1)
   const [percent, setPercent] = useState<number>(0)
 
   /**
-   * レンダリングされても状態を保つ（記録する）
+   * stateの即時反映されない時のために用意している？
    */
   const currentIndexRef = useRef(currentIndex)
   /**
-   * dbのlengthだけuseRefを生成する
+   * dbのlengthだけRefを生成する
    * TinderSwipeを通すことでswipeメソッドとrestoreCardメソッドを付与する(useImperativeHandle)
    */
   const childRefs = useMemo<any>(
@@ -80,61 +84,38 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
     [db.length]
   )
   /**
-   * プログレスバーの進捗率を計算する
+   * プログレスバーの進捗率を計算・表示する
    */
-  const progressBarCalclation = (val: number) => {
-    const result = val + 1
-    const result2 = result / db.length
-    const result3 = 1 - result2
-    setPercent(result3)
+  const progressbarCalclation = (val: number) => {
+    const result = 1 - (val + 1) / db.length
+    setPercent(result)
   }
   /**
-   * useRefを更新する（valは基本1 or -1になる）
+   * state(currentIndex)を更新し連動している
+   * useRef(currentIndexRef)も更新する
    */
   const updateCurrentIndex = async (val: number) => {
     setCurrentIndex(val)
-    currentIndexRef.current = val
-    progressBarCalclation(val)
+    currentIndexRef.current = val // NOTE:stateだと即時反映されないからRefを使っている？
+    progressbarCalclation(val)
     if (currentIndexRef.current === -1) {
-      await delay(300) // progressbarのアニメーションを待つ
+      await delay(300) // NOTE:progressbarのアニメーションを待つ
       changePendingDiagnose()
     }
   }
   /**
-   * goback可能かを監視する
-   * DBが5の場合4の時はgobackできない（初期gobackを不可にする）
+   * goback可能かを判定する
+   * DBが5の場合3の時はgobackできない
+   * 初手gobackを不可にするために設置している
    */
   const canGoBack = currentIndex < db.length - 1
   /**
-   * スワイプ可能かを監視する
-   * DBが5の場合4,3,2,1,0と減っていく
+   * スワイプ可能かを判定する
+   * DBが5の場合3,2,1,0,-1と減っていく
    */
   const canSwipe = currentIndex >= 0
-
-  const outOfFrame = (idx: number) => {
-    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
-  }
   /**
-   * 手動でのスワイプの処理（押下式のスワイプも最終的にはこの関数を叩いている）
-   * currentIndexを-1する
-   */
-  const swiped = (direction: string, index: number) => {
-    setLastDirection(direction)
-    updateCurrentIndex(index - 1)
-  }
-  /**
-   * ライブラリのonSwipeメソッドを叩く>ローカルのswipeメソッドを叩く
-   */
-  const swipe = async (direction: string) => {
-    if (canSwipe && currentIndex < db.length) {
-      await childRefs[currentIndex].current.swipe(direction)
-      // NOTE:swipeの処理が終わる前に別のページに遷移するとバグる
-      // NOTE:cartでのみ発生して他のページはレンダリングするからなかったことになるっぽい
-      console.log('swipeが完了しました')
-    }
-  }
-  /**
-   * gobackする
+   * ボタンを押下してスワイプした時に発火する
    * currentIndexを+1する
    */
   const goBack = async () => {
@@ -142,6 +123,32 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
     const newIndex = currentIndex + 1
     updateCurrentIndex(newIndex)
     await childRefs[newIndex].current.restoreCard()
+  }
+  /**
+   * ボタンを押下してスワイプした時に発火する
+   * ライブラリのonSwipeメソッドを叩く=ローカルのswipeメソッドを叩く
+   * FIXME:swipeの処理が終わる前に別のページに遷移するとバグる
+   */
+  const swipe = async (direction: string) => {
+    if (canSwipe && currentIndex < db.length) {
+      await childRefs[currentIndex].current.swipe(direction)
+    }
+  }
+  /**
+   * 1,手動でのスワイプした時に発火する
+   * 2,ボタンを押下してスワイプした時に発火する（条件2の時swipe関数も発火する）
+   * currentIndexを-1減らす
+   */
+  const swiped = (direction: string, index: number) => {
+    setLastDirection(direction)
+    updateCurrentIndex(index - 1)
+  }
+  /**
+   * 1,手動でのスワイプした時に発火する
+   * 2,ボタンを押下してスワイプした時に発火する（条件2の時swipe関数も発火する）
+   */
+  const outOfFrame = (index: number) => {
+    currentIndexRef.current >= index && childRefs[index].current.restoreCard()
   }
 
   return (
@@ -168,7 +175,7 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
         </CardContainer>
         <ButtonWrapper>
           <ButtonIconThumbDown size="large" onClick={() => swipe('left')} />
-          <ButtonIconUndo size="large" onClick={() => goBack()} />
+          <ButtonIconUndo size="large" onClick={goBack} />
           <ButtonIconThumbUp size="large" onClick={() => swipe('right')} />
         </ButtonWrapper>
       </TinderSwipeContainer>
