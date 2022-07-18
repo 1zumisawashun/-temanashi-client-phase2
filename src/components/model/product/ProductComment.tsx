@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import { useParams } from 'react-router-dom'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
 import { Comment, CommentToAdd } from '../../../@types/dashboard'
 import { useSubCollection, useDisclosure } from '../../../hooks'
 import { formatFirebasePath } from '../../../utilities'
-import { timestamp } from '../../../firebase/config'
-import { useAuthContext } from '../../../hooks/useContextClient'
+import { timestamp, firebase } from '../../../firebase/config'
 import {
   Button,
   Modal,
@@ -50,16 +48,18 @@ const ProductCommentContent = styled('div')`
 
 type ProductCommentProps = {
   furniture: ProductItem
+  productId: string
+  user: firebase.User
 }
 
 export const ProductComment: React.VFC<ProductCommentProps> = ({
-  furniture
+  furniture,
+  productId,
+  user
 }) => {
   const commentModal = useDisclosure()
-  const { id } = useParams<{ id: string }>()
-  const { user } = useAuthContext()
   const { referense } = useSubCollection<any, any>(
-    formatFirebasePath(`/products/${id}/comments`)
+    formatFirebasePath(`/products/${productId}/comments`)
   )
 
   const [comments, setComments] = useState<Comment[]>(furniture.comments)
@@ -67,8 +67,8 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
 
   const handleSubmit = async () => {
     const commentToAdd: CommentToAdd = {
-      displayName: user?.displayName,
-      photoURL: user?.photoURL,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
       content: newComment,
       createdAt: timestamp.fromDate(new Date()),
       id: Math.random()

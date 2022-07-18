@@ -46,7 +46,7 @@ class ProductUseCase {
 
     const productSnapshot = await productQuery.get()
     return Promise.all(
-      productSnapshot.docs.map(async (doc) => {
+      productSnapshot.docs.map(async (doc, index) => {
         const priceRef = doc.ref.collection('prices')
         const priceSnapshot = await priceRef.where('active', '==', true).get()
         const priceMap = priceSnapshot.docs.reduce((acc, v) => {
@@ -57,6 +57,7 @@ class ProductUseCase {
         const productItem: ProductItem = {
           product: {
             id: doc.id,
+            random: index,
             ...doc.data()
           } as ProductDoc,
           prices: priceMap,
@@ -142,19 +143,6 @@ class ProductUseCase {
       }
     })
     return payments
-  }
-
-  /**
-   * 参照⑤
-   */
-  async fetchAllForStore(): Promise<Array<StoreProductItem>> {
-    const productsRef = projectFirestore.collection('products')
-    const querySnapshot = await productsRef.get()
-    const results = querySnapshot.docs.map((doc, index) => {
-      const { name, images } = doc.data()
-      return { name, image: images[0], id: doc.id, random: index }
-    })
-    return results
   }
 
   /**

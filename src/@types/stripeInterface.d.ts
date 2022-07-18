@@ -65,6 +65,7 @@ export interface Product {
   id: string
   comments?: Array<Comment>
   metadata?: Metadata
+  random?: number
   /**
    * stripe properties
    */

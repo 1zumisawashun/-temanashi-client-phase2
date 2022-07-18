@@ -32,6 +32,54 @@ const Inner = styled('div')`
   top: 50%;
   transform: translate(-50%, -50%);
 `
+// NOTE:ローカルで作成したローディングアニメーション
+export const CircleDotSpiner = styled('div')`
+  animation: rotate 2s infinite;
+  background: transparent;
+  border: 3px dotted #84bcb4;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  @keyframes rotate {
+    from {
+      transform: rotateZ(0deg);
+    }
+    to {
+      transform: rotateZ(360deg);
+    }
+  }
+`
+
+// NOTE:ローカルで作成したローディングアニメーション2
+export const RevolvingDotSpiner = styled('div')`
+  animation: loading ease 1.5s infinite;
+  border: 1px solid #84bcb4;
+  border-radius: 50%;
+  height: 40px;
+  margin: auto 0;
+  position: relative;
+  width: 40px;
+  &::before {
+    background-color: #84bcb4;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 10px;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: 10px;
+  }
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`
 
 export interface LoadingProps {
   color?: string

@@ -1,21 +1,17 @@
 import { createContext, useReducer, useMemo } from 'react'
+import { ProductItem } from '../utilities/stripeClient'
 
 interface Action {
   type: string
-  products: Array<Product>
+  products: Array<ProductItem>
 }
 interface State {
-  products: Array<Product>
+  products: Array<ProductItem>
 }
-interface Product {
-  id: string
-  name: string
-  random: number
-  image: string
-}
+
 interface RandomContextInterface {
-  products: Array<Product>
-  addProductWithRandom: (products: Array<Product>) => void
+  products: Array<ProductItem>
+  addProductWithRandom: (products: Array<ProductItem>) => void
 }
 
 export const RandomContext = createContext<RandomContextInterface>({
@@ -23,7 +19,7 @@ export const RandomContext = createContext<RandomContextInterface>({
   addProductWithRandom: (products) => {}
 })
 
-const addProductWithRandom = (products: Array<Product>, state: State) => {
+const addProductWithRandom = (products: Array<ProductItem>, state: State) => {
   // NOTE:2重でrandomの更新をしているのでここで追加しなくても良いかもしれない
   const results = products.map((product, index) => {
     return {
@@ -49,7 +45,7 @@ export const RandomContextProvider: React.VFC<
   React.PropsWithChildren<React.ReactNode>
 > = (props) => {
   const [randomState, dispatch] = useReducer(randomReducer, { products: [] })
-  const addProductWithRandom = (products: Array<Product>) => {
+  const addProductWithRandom = (products: Array<ProductItem>) => {
     dispatch({ type: ADD_PRODUCT, products })
   }
 

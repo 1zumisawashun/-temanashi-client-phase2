@@ -3,12 +3,12 @@ import TinderCard from 'react-tinder-card'
 import styled from '@emotion/styled'
 import {
   Progressbar,
-  Loading,
   ButtonIconThumbDown,
   ButtonIconThumbUp,
   ButtonIconUndo
 } from '../../ui'
-// import TinderCard from '../react-tinder-card/index'
+import { ProductItem } from '../../../utilities/stripeClient'
+import { delay } from '../../../utilities'
 
 const ButtonWrapper = styled('div')`
   display: flex;
@@ -19,33 +19,51 @@ const ButtonWrapper = styled('div')`
 const CommonWrapper = styled('div')`
   width: 100%;
 `
-
-interface Product {
-  id: string
-  name: string
-  random: number
-  image: string
-}
+const TinderSwipeContainer = styled('div')`
+  margin: 50px 0 0 0;
+  text-align: center;
+`
+const CardContainer = styled('div')`
+  height: 400px;
+  margin: 0 auto;
+  max-width: 280px;
+  width: 300px;
+`
+const CustomTinderCard = styled(TinderCard)`
+  position: absolute;
+`
+const Card = styled('div')`
+  background-color: white;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  height: 400px;
+  max-width: 280px;
+  position: relative;
+  width: 300px;
+`
+const Title = styled('h3')`
+  bottom: 0;
+  color: white;
+  margin: 10px;
+  position: absolute;
+`
 
 type TinderSwipeProps = {
-  db: Array<Product>
-  setIsPendingDiagnose: any
+  db: Array<ProductItem>
+  changePendingDiagnose: () => void
 }
 
 export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
   db,
-  setIsPendingDiagnose
+  changePendingDiagnose
 }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   // eslint-disable-next-line
   const [lastDirection, setLastDirection] = useState<string>()
   const [currentIndex, setCurrentIndex] = useState<number>(db.length - 1)
   const [percent, setPercent] = useState<number>(0)
 
-  const delay = (time: number) =>
-    new Promise((resolve) => {
-      setTimeout(resolve, time)
-    })
   /**
    * レンダリングされても状態を保つ（記録する）
    */
@@ -78,11 +96,8 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
     currentIndexRef.current = val
     progressBarCalclation(val)
     if (currentIndexRef.current === -1) {
-      await delay(300) // progressbarのdelayを待つ
-      setIsLoading(true)
-      await delay(2000) // NOTE:意図的ナビゲーションを遅らせないとレンダリングについてこれずに固まる
-      setIsLoading(false)
-      setIsPendingDiagnose(true)
+      await delay(300) // progressbarのアニメーションを待つ
+      changePendingDiagnose()
     }
   }
   /**
@@ -131,33 +146,32 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
 
   return (
     <CommonWrapper>
-      {isLoading && <Loading />}
-      <div className="tinder-swipe">
+      <TinderSwipeContainer>
         <Progressbar width={100} percent={percent} />
-        <div className="cardContainer">
+        <CardContainer>
           {db.map((character, index) => (
-            <TinderCard
+            <CustomTinderCard
               ref={childRefs[index]}
-              className="swipe"
-              key={character.name}
+              key={character.product.name}
               onSwipe={(dir) => swiped(dir, index)}
               onCardLeftScreen={() => outOfFrame(index)}
             >
-              <div
-                style={{ backgroundImage: `url(${character.image})` }}
-                className="card"
+              <Card
+                style={{
+                  backgroundImage: `url(${character.product.images[0]})`
+                }}
               >
-                <h3>{character.name}</h3>
-              </div>
-            </TinderCard>
+                <Title>{character.product.name}</Title>
+              </Card>
+            </CustomTinderCard>
           ))}
-        </div>
+        </CardContainer>
         <ButtonWrapper>
           <ButtonIconThumbDown size="large" onClick={() => swipe('left')} />
           <ButtonIconUndo size="large" onClick={() => goBack()} />
           <ButtonIconThumbUp size="large" onClick={() => swipe('right')} />
         </ButtonWrapper>
-      </div>
+      </TinderSwipeContainer>
     </CommonWrapper>
   )
 }
