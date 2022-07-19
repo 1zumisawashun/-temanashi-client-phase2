@@ -32,9 +32,9 @@ export { ErrorText } from './ErrorText'
 export { ErrorForbidden } from './ErrorForbidden'
 
 /* other */
-export { Progressbar } from './Progressbar'
 export { Loading, RevolvingDotSpiner, CircleDotSpiner } from './Loading'
 export { Avatar } from './Avatar'
 export { Modal } from './Modal'
 export { Divider } from './Divider'
+export { BasicProgressbar } from './BasicProgressbar'
 export { default as Image } from './Image'

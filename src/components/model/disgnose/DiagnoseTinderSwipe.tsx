@@ -5,7 +5,7 @@ import {
   ButtonIconThumbDown,
   ButtonIconThumbUp,
   ButtonIconUndo,
-  Progressbar
+  BasicProgressbar
 } from '../../ui'
 import { ProductItem } from '../../../utilities/stripeClient'
 import { delay } from '../../../utilities'
@@ -154,7 +154,7 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
   return (
     <CommonWrapper>
       <TinderSwipeContainer>
-        <Progressbar width={100} percent={percent} />
+        <BasicProgressbar width={100} percent={percent} />
         <CardContainer>
           {db.map((character, index) => (
             <CustomTinderCard
