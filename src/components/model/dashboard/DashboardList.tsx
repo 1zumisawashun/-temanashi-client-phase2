@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
 import React from 'react'
-import {
-  ProductItem,
-  ProductItemWithoutComment
-} from '../../../utilities/stripeClient'
+import { ProductItem } from '../../../utilities/stripeClient'
 import { formatTaxIncludedPrice } from '../../../utilities'
 import { Image, Divider } from '../../ui'
 
@@ -72,7 +69,7 @@ export const DimentionItem = styled('li')`
 `
 
 type DashboardListProps = {
-  productItems: Array<ProductItem | ProductItemWithoutComment>
+  productItems: Array<ProductItem>
 }
 
 export const DashboardList: React.VFC<DashboardListProps> = React.memo(
@@ -80,7 +77,7 @@ export const DashboardList: React.VFC<DashboardListProps> = React.memo(
     return (
       <DashboardListContainer>
         {productItems &&
-          productItems.map((item: ProductItem | ProductItemWithoutComment) => (
+          productItems.map((item: ProductItem) => (
             <DashboardListWrapper
               to={`/products/${item.product.id}`}
               key={item.product.id}

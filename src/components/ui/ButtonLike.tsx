@@ -1,56 +1,34 @@
 import { useState, useEffect } from 'react'
-import {
-  ProjectType,
-  User,
-  likedFurnitures,
-  likedUsers
-} from '../../@types/dashboard'
-import { timestamp, firebase } from '../../firebase/config'
+import { timestamp } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useContextClient'
-import { formatFirebasePath } from '../../utilities'
-import { useSubDocument } from '../../hooks/useSubDocument'
-import { ProductItem } from '../../utilities/stripeClient'
+import { useData } from '../../hooks'
+import {
+  productUseCase,
+  ProductItem,
+  CustomLikedUser,
+  CustomLikedFuriture
+} from '../../utilities/stripeClient'
 import { ButtonIconFavorite, ButtonIconNoFavirute } from '.'
 
 type LikeButtonProp = {
   furniture: ProductItem
 }
-type Id = {
-  id: string
-}
-type LikedUser = {
-  documents: (likedUsers & Id) | undefined
-  error: string | null
-  referense: firebase.firestore.DocumentReference<likedUsers> | null
-}
-type LikedFuritures = {
-  documents: (likedFurnitures & Id) | undefined
-  error: string | null
-  referense: firebase.firestore.DocumentReference<likedFurnitures> | null
-}
 
 export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   const [like, setLike] = useState<boolean>(false)
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { user } = useAuthContext()
   if (!user) throw new Error('we cant find your account')
 
-  const likedUser: LikedUser = useSubDocument<ProjectType, likedUsers>(
-    formatFirebasePath(
-      `/products/${furniture.product.id}/liked_users/${user.uid}`
-    )
+  const likedUser = useData<CustomLikedUser>('likedUser', () =>
+    productUseCase.fetchLikedUser(user.uid, furniture.product.id)
   )
 
-  const likedFurniture: LikedFuritures = useSubDocument<User, likedFurnitures>(
-    formatFirebasePath(
-      `/users/${user.uid}/liked_furnitures/${furniture.product.id}`
-    )
+  const likedFurniture = useData<CustomLikedFuriture>('LikedProduct', () =>
+    productUseCase.fetchLikedProduct(user.uid, furniture.product.id)
   )
 
+  // NOTE:set中にconverterで定義している型と違う値を入れるとエラーになることを確認できる
   const addLikedUser = () => {
-    // NOTE:set中にconverterで定義している型と違う値を入れるとエラーになる
-    if (!likedUser.referense) return
     likedUser.referense.set({
       liked_user: {
         uid: user.uid,
@@ -61,7 +39,6 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   }
 
   const addLikedFurniture = () => {
-    if (!likedFurniture.referense) return
     likedFurniture.referense.set({
       liked_furniture: furniture,
       createdAt: timestamp.fromDate(new Date())
@@ -69,19 +46,16 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   }
 
   const removeLikedUser = () => {
-    if (!likedFurniture.referense) return
     likedFurniture.referense.delete()
   }
 
   const removeLikedFurniture = () => {
-    if (!likedUser.referense) return
     likedUser.referense.delete()
   }
 
   const handleClick = () => {
     setLike(!like)
     if (like === true) {
-      // FIXME:バッチ書き込み処理なのか、同じ情報ならトップに持ってきてもいいかもしれない
       removeLikedUser()
       removeLikedFurniture()
     }
@@ -92,7 +66,6 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   }
 
   useEffect(() => {
-    if (!likedFurniture.referense) return
     const unsubscribe = likedFurniture.referense.onSnapshot(
       (snapshot) => {
         if (snapshot.exists) {
@@ -102,15 +75,14 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
         }
       },
       (error) => {
-        setError('could not push like button, try again')
+        console.log(error)
       }
     )
-    // eslint-disable-next-line consistent-return
     return () => unsubscribe()
   }, [likedFurniture.referense])
 
   return (
-    <>
+    <div>
       {like ? (
         <ButtonIconFavorite
           color="primary"
@@ -124,7 +96,6 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
           onClick={handleClick}
         />
       )}
-      {error && <div className="error">{error}</div>}
-    </>
+    </div>
   )
 }

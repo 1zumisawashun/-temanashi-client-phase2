@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import styled from '@emotion/styled'
 import {
   InputText,
   Button,
@@ -11,39 +10,8 @@ import {
   ErrorText
 } from '../ui'
 import { useAuth } from '../../hooks/useAuth'
+import { AuthContainer, AuthFormContainer, AuthInner, AuthTitle } from './Login'
 
-const Container = styled('div')`
-  background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);
-  height: 100vh;
-  margin: 0;
-  position: relative;
-`
-const Inner = styled('div')`
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  width: 30%;
-`
-const FormContainer = styled('form')`
-  backdrop-filter: blur(12px);
-  background: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
-  font-family: 'Montserrat', sans-serif;
-  margin: auto;
-  padding: 50px;
-`
-const Title = styled('h1')`
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 2px;
-  margin-top: 0;
-`
 interface FormData {
   email: string
   password: string
@@ -54,9 +22,6 @@ interface FormData {
 export const SignupTemplate: React.VFC = () => {
   const { signup, isPending, error } = useAuth()
 
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [displayName, setDisplayName] = useState<string>('')
   const [thumbnail, setThumbnail] = useState<File | null>(null)
 
   const getSchema = () => {
@@ -76,13 +41,14 @@ export const SignupTemplate: React.VFC = () => {
     resolver: yupResolver(getSchema())
   })
 
-  const onSubmit = () => {
+  const onSubmit = (data: FormData) => {
     if (thumbnail === null) return
+    const { email, password, displayName } = data
     signup(email, password, displayName, thumbnail)
   }
 
-  const onPreSubmit: SubmitHandler<FormData> = () => {
-    onSubmit()
+  const onPreSubmit: SubmitHandler<FormData> = (data: FormData) => {
+    onSubmit(data)
   }
 
   const onInputFileChange = (file: File) => {
@@ -90,33 +56,27 @@ export const SignupTemplate: React.VFC = () => {
   }
 
   return (
-    <Container>
-      <Inner>
-        <FormContainer>
-          <Title>Sign Up</Title>
+    <AuthContainer>
+      <AuthInner>
+        <AuthFormContainer>
+          <AuthTitle>Sign Up</AuthTitle>
           <InputText
             size="small"
-            register={register('email', {
-              onChange: (e) => setEmail(e.target.value)
-            })}
+            register={register('email')}
             error={'email' in errors}
             helperText={errors.email?.message}
             placeholder="xyz@gmail.com"
           />
           <InputText
             size="small"
-            register={register('password', {
-              onChange: (e) => setPassword(e.target.value)
-            })}
+            register={register('password')}
             error={'password' in errors}
             helperText={errors.password?.message}
             placeholder="Must have atleast 6 characters"
           />
           <InputText
             size="small"
-            register={register('displayName', {
-              onChange: (e) => setDisplayName(e.target.value)
-            })}
+            register={register('displayName')}
             error={'displayName' in errors}
             helperText={errors.displayName?.message}
             placeholder="your name or nick name"
@@ -137,8 +97,8 @@ export const SignupTemplate: React.VFC = () => {
           </Button>
           <ErrorText error={error} helperText={error} />
           <ButtonLink path="/login">Move To Login</ButtonLink>
-        </FormContainer>
-      </Inner>
-    </Container>
+        </AuthFormContainer>
+      </AuthInner>
+    </AuthContainer>
   )
 }

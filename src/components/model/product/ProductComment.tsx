@@ -3,8 +3,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
 import { Comment, CommentToAdd } from '../../../@types/dashboard'
-import { useSubCollection, useDisclosure } from '../../../hooks'
-import { formatFirebasePath } from '../../../utilities'
+import { useData, useDisclosure } from '../../../hooks'
 import { timestamp, firebase } from '../../../firebase/config'
 import {
   Button,
@@ -13,7 +12,7 @@ import {
   Avatar,
   ButtonIconPerson
 } from '../../ui'
-import { ProductItem } from '../../../utilities/stripeClient'
+import { productUseCase, ProductItem } from '../../../utilities/stripeClient'
 
 const ProductCommentContainer = styled('div')`
   width: 100%;
@@ -58,8 +57,9 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
   user
 }) => {
   const commentModal = useDisclosure()
-  const { referense } = useSubCollection<any, any>(
-    formatFirebasePath(`/products/${productId}/comments`)
+  const commentRef = useData<firebase.firestore.CollectionReference<Comment>>(
+    'commentRef',
+    () => productUseCase.fetchAllCommentsRef(productId)
   )
 
   const [comments, setComments] = useState<Comment[]>(furniture.comments)
@@ -74,7 +74,7 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
       id: Math.random()
     }
     try {
-      referense?.add(commentToAdd)
+      commentRef.add(commentToAdd)
       const updateComments = [...comments, commentToAdd]
       setComments(updateComments)
       setNewComment('')

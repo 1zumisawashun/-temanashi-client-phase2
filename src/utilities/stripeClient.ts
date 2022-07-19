@@ -1,12 +1,20 @@
+/* eslint-disable*/
 import { loadStripe } from '@stripe/stripe-js'
-import type { Comment } from '../@types/dashboard'
+import type {
+  Comment,
+  likedFurnitures,
+  User,
+  likedUsers
+} from '../@types/dashboard'
 import {
   CheckoutSessionDoc,
   PriceDoc,
   ProductDoc,
-  SubscriptionDoc
+  PaymentDoc,
+  CustomerDoc
 } from '../@types/stripe'
-import { projectFirestore } from '../firebase/config'
+import { projectFirestore, firebase } from '../firebase/config'
+import { subCollectionPoint, subDocumentPoint } from './converterClient'
 
 export type ProductItem = {
   product: ProductDoc
@@ -14,30 +22,25 @@ export type ProductItem = {
   comments: Array<Comment>
 }
 
-export type ProductItemWithoutComment = Pick<ProductItem, 'product' | 'prices'>
-
-export type SubscriptionItem = {
-  subscription: SubscriptionDoc
-  product: ProductDoc
-  price: PriceDoc
-}
-
 export type line_item = {
   price: string
   quantity: number
 }
 
-export type StoreProductItem = {
-  name: string
-  image: string
-  id: string
-  random: number
+export type CustomLikedUser = {
+  documents: likedUsers
+  referense: firebase.firestore.DocumentReference<likedUsers>
 }
 
-/* eslint-disable */
+export type CustomLikedFuriture = {
+  documents: likedFurnitures
+  referense: firebase.firestore.DocumentReference<likedFurnitures>
+}
+
 class ProductUseCase {
   /**
-   * 参照①
+   * コレクション参照①
+   * 全ての商品情報を取得する（Product+Price）
    */
   async fetchAll(): Promise<ProductItem[]> {
     const productQuery = projectFirestore
@@ -61,7 +64,7 @@ class ProductUseCase {
             ...doc.data()
           } as ProductDoc,
           prices: priceMap,
-          comments: [] // FIXME:PickでCommentを省く
+          comments: [] // NOTE:型定義を崩したくないため空の配列を入れる
         }
 
         return productItem
@@ -70,7 +73,8 @@ class ProductUseCase {
   }
 
   /**
-   * 参照②
+   * ドキュメント参照②
+   * 特定の商品情報を取得する（Product+Price+Comment）
    */
   async fetchProductItem(id: string): Promise<ProductItem> {
     const productItemRef = projectFirestore.collection('products').doc(id)
@@ -101,55 +105,99 @@ class ProductUseCase {
   }
 
   /**
-   * 参照③
+   * サブコレクション参照③
+   * 商品の購入履歴を全て取得する
    */
-  async fetchProductItemWitoutComment(
-    id: string
-  ): Promise<ProductItemWithoutComment> {
-    const productItemRef = projectFirestore.collection('products').doc(id)
-    const productItemSnapshot = await productItemRef.get()
-    const priceRef = await productItemSnapshot.ref.collection('prices')
-    const priceSnapshot = await priceRef.get()
-    const priceMap = await priceSnapshot.docs.reduce((acc, v) => {
-      // @ts-ignore
-      acc[v.id] = v.data() as PriceDoc
-      return acc
-    }, {})
-
-    const productItem: ProductItemWithoutComment = {
-      product: {
-        id: productItemSnapshot.id,
-        ...productItemSnapshot.data()
-      } as ProductDoc,
-      prices: priceMap
-    }
-    return productItem
-  }
-
-  /**
-   * 参照④
-   */
-  async fetchPayments(uid: string): Promise<any> {
-    const paymentsRef = await projectFirestore
-      .collection('customers')
-      .doc(uid)
-      .collection('payments')
-      .where('status', '==', 'succeeded')
-    const paymentSnapshot = await paymentsRef.get()
-    const payments = await paymentSnapshot.docs.map((doc) => {
-      return {
-        id: doc.id,
-        ...doc.data()
-      }
+  async fetchAllPayments(uid: string): Promise<Array<PaymentDoc>> {
+    const paymentsRef = subCollectionPoint<CustomerDoc, PaymentDoc>(
+      'customers',
+      uid,
+      'payments'
+    )
+    const queryPaymentsRef = paymentsRef.where('status', '==', 'succeeded')
+    const paymentsSnapshot = await queryPaymentsRef.get()
+    const payments = await paymentsSnapshot.docs.map((doc) => {
+      return doc.data()
     })
     return payments
   }
 
   /**
-   * 更新①
+   * サブコレクション参照④
+   * いいねした商品を全て取得する
    */
-  // NOTE:購入後にメールを送る
-  // NOTE:stockの項目を作り0になったらsctive:falseにして購入不可にする
+  async fetchAllFavoriteProducts(uid: string): Promise<Array<ProductItem>> {
+    const favoriteProductsRef = subCollectionPoint<User, likedFurnitures>(
+      'users',
+      uid,
+      'liked_furnitures'
+    )
+    const favoriteProductsSnapshot = await favoriteProductsRef.get()
+    const favoriteProducts = await favoriteProductsSnapshot.docs.map((doc) => {
+      return doc.data().liked_furniture
+    })
+    return favoriteProducts
+  }
+
+  /**
+   * サブコレクション参照⑤
+   * 商品に対するコメントの「参照」のみを取得する
+   */
+  async fetchAllCommentsRef(
+    productId: string
+  ): Promise<firebase.firestore.CollectionReference<Comment>> {
+    const CommentsRef = subCollectionPoint<ProductDoc, Comment>(
+      'products',
+      productId,
+      'comments'
+    )
+    return CommentsRef
+  }
+
+  /**
+   * サブドキュメント参照⑥
+   * いいねしたユーザーを取得する
+   */
+  async fetchLikedUser(
+    uid: string,
+    productId: string
+  ): Promise<CustomLikedUser> {
+    const LikedUserRef = subDocumentPoint<ProductDoc, likedUsers>(
+      'products',
+      productId,
+      'liked_users',
+      uid
+    )
+    const likedUserSnapshot = await LikedUserRef.get()
+    return { referense: LikedUserRef, documents: likedUserSnapshot.data()! }
+  }
+
+  /**
+   * サブドキュメント参照⑦
+   * いいねされた商品を取得する
+   */
+  async fetchLikedProduct(
+    uid: string,
+    productId: string
+  ): Promise<CustomLikedFuriture> {
+    const LikedProductRef = subDocumentPoint<User, likedFurnitures>(
+      'users',
+      uid,
+      'liked_furnitures',
+      productId
+    )
+    const likedProductSnapshot = await LikedProductRef.get()
+    return {
+      referense: LikedProductRef,
+      documents: likedProductSnapshot.data()!
+    }
+  }
+
+  /**
+   * 更新①
+   * NOTE:購入後にメールを送る実装が未着手
+   * NOTE:stockの項目を作り0になったらsctive:falseにして購入不可にする
+   */
   async buy(
     uid: string,
     line_items: Array<line_item>,

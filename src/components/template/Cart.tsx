@@ -12,12 +12,12 @@ export const CartTemplate: React.VFC = () => {
   const { user } = useAuthContext()
   const handleError = useErrorHandler()
 
-  const [isPendingBuy, setIsPendingBuy] = useState<boolean>(false)
+  const [isPending, setIsPending] = useState<boolean>(false)
 
   if (!user) throw new Error('we cant find your account')
 
   const onClickBuy = async () => {
-    setIsPendingBuy(true)
+    setIsPending(true)
 
     const line_items = cart.map((item) => {
       return {
@@ -34,7 +34,7 @@ export const CartTemplate: React.VFC = () => {
      */
     const token = await verifyJWT()
     if (token) {
-      setIsPendingBuy(false)
+      setIsPending(false)
       handleError('onClickBuy Error')
       return
     }
@@ -44,9 +44,9 @@ export const CartTemplate: React.VFC = () => {
       const seccess_url = `${window.location.origin}/complete`
       const cancel_url = `${window.location.origin}/error`
       await productUseCase.buy(uid, line_items, seccess_url, cancel_url)
-      setIsPendingBuy(false)
+      setIsPending(false)
     } catch (error) {
-      setIsPendingBuy(false)
+      setIsPending(false)
       handleError('onClickBuy Error')
     }
   }
@@ -56,7 +56,7 @@ export const CartTemplate: React.VFC = () => {
       {cart.length !== 0 ? (
         <>
           <CartList productItems={cart} />
-          <CartAgreement onClick={onClickBuy} isLoading={isPendingBuy} />
+          <CartAgreement onClick={onClickBuy} isLoading={isPending} />
         </>
       ) : (
         <ErrorNotFound />

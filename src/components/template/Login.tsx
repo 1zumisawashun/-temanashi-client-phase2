@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -6,20 +5,20 @@ import styled from '@emotion/styled'
 import { InputText, Button, ButtonLink, ErrorText } from '../ui'
 import { useAuth } from '../../hooks/useAuth'
 
-const Container = styled('div')`
+export const AuthContainer = styled('div')`
   background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);
   height: 100vh;
   margin: 0;
   position: relative;
 `
-const Inner = styled('div')`
+export const AuthInner = styled('div')`
   left: 50%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%) translateX(-50%);
   width: 30%;
 `
-const FormContainer = styled('form')`
+export const AuthFormContainer = styled('form')`
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -31,7 +30,7 @@ const FormContainer = styled('form')`
   margin: auto;
   padding: 50px;
 `
-const Title = styled('h1')`
+export const AuthTitle = styled('h1')`
   color: white;
   letter-spacing: 2px;
   margin-top: 0;
@@ -43,8 +42,6 @@ interface FormData {
 }
 
 export const LoginTemplate: React.VFC = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
   const { login, error, isPending } = useAuth()
 
   const getSchema = () => {
@@ -63,24 +60,23 @@ export const LoginTemplate: React.VFC = () => {
     resolver: yupResolver(getSchema())
   })
 
-  const onSubmit = () => {
+  const onSubmit = (data: FormData) => {
+    const { email, password } = data
     login(email, password)
   }
 
-  const onPreSubmit: SubmitHandler<FormData> = () => {
-    onSubmit()
+  const onPreSubmit: SubmitHandler<FormData> = (data: FormData) => {
+    onSubmit(data)
   }
 
   return (
-    <Container>
-      <Inner>
-        <FormContainer data-cy="login">
-          <Title>login</Title>
+    <AuthContainer>
+      <AuthInner>
+        <AuthFormContainer data-cy="login">
+          <AuthTitle>login</AuthTitle>
           <InputText
             size="small"
-            register={register('email', {
-              onChange: (e) => setEmail(e.target.value)
-            })}
+            register={register('email')}
             error={'email' in errors}
             helperText={errors.email?.message}
             placeholder="xyz@gmail.com"
@@ -88,9 +84,7 @@ export const LoginTemplate: React.VFC = () => {
           />
           <InputText
             size="small"
-            register={register('password', {
-              onChange: (e) => setPassword(e.target.value)
-            })}
+            register={register('password')}
             error={'password' in errors}
             helperText={errors.password?.message}
             placeholder="Must have atleast 6 characters"
@@ -109,8 +103,8 @@ export const LoginTemplate: React.VFC = () => {
           </Button>
           <ErrorText error={error} helperText={error} />
           <ButtonLink path="/signup">Move To Sign Up</ButtonLink>
-        </FormContainer>
-      </Inner>
-    </Container>
+        </AuthFormContainer>
+      </AuthInner>
+    </AuthContainer>
   )
 }
