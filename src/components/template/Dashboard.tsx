@@ -9,7 +9,7 @@ export const DashboardTemplate: React.VFC = () => {
   const [currentFilter, setCurrentFilter] = useState<string>('all')
 
   const productItems = useData<ProductItem[]>('productItems', () =>
-    productUseCase.fetchAll()
+    productUseCase.fetchAllProduct()
   )
 
   // FIXME:一旦dashboardでパフォーマンスチューニングの検証を行う

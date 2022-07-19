@@ -3,12 +3,15 @@ import styled from '@emotion/styled'
 import { filterList } from '../../../utilities/constant'
 
 const FilterContainer = styled('div')`
+  border-radius: 4px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  margin: 30px auto 0;
-  overflow-x: auto;
-  white-space: nowrap;
   width: 100%;
+`
+const FilterNav = styled('nav')`
+  background-color: white;
+  display: flex;
+  overflow-x: auto;
+  padding: 10px;
   &::-webkit-scrollbar {
     height: 5px;
   }
@@ -16,18 +19,6 @@ const FilterContainer = styled('div')`
     background-color: #84bcb4;
     border-radius: 100px;
   }
-`
-const FilterNav = styled('nav')`
-  background-color: white;
-  border-radius: 4px;
-  display: flex;
-  padding: 10px;
-  width: fit-content;
-`
-const FilterTitle = styled('p')`
-  font-size: 0.9em;
-  font-weight: bold;
-  width: 90px;
 `
 const FilterButton = styled('button')`
   background: transparent;
@@ -63,7 +54,6 @@ export const DashboardFilter: React.VFC<DashboardFilterProps> = React.memo(
     return (
       <FilterContainer>
         <FilterNav>
-          <FilterTitle>FILTER BY</FilterTitle>
           {filterList.map((f) => (
             <FilterButton
               key={f}

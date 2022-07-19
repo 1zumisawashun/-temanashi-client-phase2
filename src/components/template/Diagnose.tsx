@@ -16,7 +16,7 @@ export const DiagnoseTemplate: React.VFC = () => {
   if (products.length === 0) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const storeProductItems = useData<ProductItem[]>('ProductItems', () =>
-      productUseCase.fetchAll()
+      productUseCase.fetchAllProduct()
     )
     addProductWithRandom(storeProductItems)
   }

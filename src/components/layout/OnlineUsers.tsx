@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import { useCollection } from '../../hooks/useCollection'
+import { useData } from '../../hooks'
 import { Avatar, Divider } from '../ui'
 import { User } from '../../@types/dashboard'
-import { formatFirebasePath } from '../../utilities'
+import { productUseCase } from '../../utilities/stripeClient'
 
 const OnlineUserContainer = styled('div')`
   background: #fbfbfb;
@@ -38,14 +38,16 @@ const OnlineUserItem = styled('div')`
 `
 
 export const OnlineUsers: React.VFC = () => {
-  const { documents } = useCollection<User>(formatFirebasePath('/users'))
+  const users = useData<Array<User>>('users', () =>
+    productUseCase.fetchAllUser()
+  )
 
   return (
     <OnlineUserContainer>
       <Title>All Users</Title>
       <Divider />
-      {documents &&
-        documents.map((user) => (
+      {users &&
+        users.map((user) => (
           <OnlineUserItem key={user.id}>
             {user.online && <OnlineUser />}
             <span>{user.displayName}</span>
