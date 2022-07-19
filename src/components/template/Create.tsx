@@ -68,27 +68,8 @@ export const CreateTemplate: React.VFC = () => {
 
   const [formError, setFromError] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    description: '',
-    price: '',
-    width: '',
-    length: '',
-    height: '',
-    stock: ''
-  })
   const [files, setFiles] = useState<File[]>([])
   const [categories, setCategories] = useState<MultiValue<string>>([])
-
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
-
-  console.log('test')
 
   const onInputChangeSelect = (option: MultiValue<OptionProps>) => {
     const multivalue = option.map((item) => item.value)
@@ -99,7 +80,7 @@ export const CreateTemplate: React.VFC = () => {
     setFiles(value)
   }
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: FormData) => {
     setIsLoading(true)
     setFromError('')
 
@@ -117,11 +98,9 @@ export const CreateTemplate: React.VFC = () => {
       return
     }
 
-    // NOTE:複数選択できるが全体の型は修正していないので一旦一個のみポストする
-    // NOTE:RHFのgetValueで取得する？
-    // NOTE:もう少し調査が必要そう
+    // NOTE:selectで複数選択できるが全体の型は修正していないので一旦一個のみポストする
     const furniture = {
-      ...formData,
+      ...data,
       photos: result,
       category: categories[0]
     }
@@ -143,30 +122,32 @@ export const CreateTemplate: React.VFC = () => {
     }
   }
 
-  const onPreSubmit: SubmitHandler<FormData> = () => {
-    onSubmit()
-  }
-
-  const checkOnPreSubmit = () => {
+  const checkOnPreSubmit = (data: FormData) => {
+    const { name, description, price, stock } = data
     if (files.length === 0) {
       scrollToPhotos.scrollHook()
       return
     }
-    if (formData.name === '') {
+    if (name === '') {
       scrollToName.scrollHook()
       return
     }
-    if (formData.description === '') {
+    if (description === '') {
       scrollToDescription.scrollHook()
       return
     }
-    if (formData.price === '') {
+    if (price === '') {
       scrollToPrice.scrollHook()
       return
     }
-    if (formData.stock === '') {
+    if (stock === '') {
       scrollToStock.scrollHook()
     }
+  }
+
+  const onPreSubmit: SubmitHandler<FormData> = (data: FormData) => {
+    checkOnPreSubmit(data)
+    onSubmit(data)
   }
 
   /**
@@ -185,9 +166,6 @@ export const CreateTemplate: React.VFC = () => {
         <InputText
           label="name"
           register={register('name')}
-          // register={register('name', {
-          //   onChange: (e) => onInputChange(e)
-          // })}
           error={'name' in errors}
           helperText={errors.name?.message}
         />
@@ -195,9 +173,6 @@ export const CreateTemplate: React.VFC = () => {
         <InputTextarea
           label="description"
           register={register('description')}
-          // register={register('description', {
-          //   onChange: (e) => onInputChange(e)
-          // })}
           error={'description' in errors}
           helperText={errors.description?.message}
         />
@@ -205,9 +180,6 @@ export const CreateTemplate: React.VFC = () => {
         <InputText
           label="price"
           register={register('price')}
-          // register={register('price', {
-          //   onChange: (e) => onInputChange(e)
-          // })}
           error={'price' in errors}
           helperText={errors.price?.message}
         />
@@ -215,36 +187,24 @@ export const CreateTemplate: React.VFC = () => {
         <InputText
           label="stock"
           register={register('stock')}
-          // register={register('stock', {
-          //   onChange: (e) => onInputChange(e)
-          // })}
           error={'stock' in errors}
           helperText={errors.stock?.message}
         />
         <InputText
           label="width"
           register={register('width')}
-          // register={register('width', {
-          //   onChange: (e) => onInputChange(e)
-          // })}
           error={'width' in errors}
           helperText={errors.width?.message}
         />
         <InputText
           label="length"
           register={register('length')}
-          // register={register('length', {
-          //   onChange: (e) => onInputChange(e)
-          // })}
           error={'length' in errors}
           helperText={errors.length?.message}
         />
         <InputText
           label="height"
           register={register('height')}
-          // register={register('height', {
-          //   onChange: (e) => onInputChange(e)
-          // })}
           error={'height' in errors}
           helperText={errors.height?.message}
         />
@@ -258,7 +218,6 @@ export const CreateTemplate: React.VFC = () => {
         <Button
           isLoading={isLoading}
           onClick={() => {
-            checkOnPreSubmit()
             handleSubmit(onPreSubmit)()
           }}
         >

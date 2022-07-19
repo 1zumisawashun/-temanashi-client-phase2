@@ -22,7 +22,7 @@ type AppProviderProps = {
 
 export const AppProvider: React.VFC<AppProviderProps> = ({ children }) => {
   return (
-    <React.Suspense fallback={<Loading color="blue" />}>
+    <React.Suspense fallback={<Loading />}>
       <ThemeProvider theme={theme}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <HelmetProvider>

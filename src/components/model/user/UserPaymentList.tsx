@@ -3,6 +3,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
 import { Divider } from '../../ui'
+import type { PaymentDoc } from '../../../@types/stripe'
 
 const PaymentContaienr = styled('div')`
   padding: 30px 15px;
@@ -34,7 +35,7 @@ const PaymentLink = styled(Link)`
   text-decoration: none;
 `
 interface PaymentListProp {
-  paymentItems: Array<any>
+  paymentItems: Array<PaymentDoc>
 }
 
 export const UserPaymentList: React.VFC<PaymentListProp> = ({
@@ -43,6 +44,7 @@ export const UserPaymentList: React.VFC<PaymentListProp> = ({
   return (
     <PaymentContaienr>
       {paymentItems &&
+        // FIXME:型定義の見直しをする,PaymentDocと異なる
         paymentItems.map((payment: any) => (
           <PaymentWrapper key={payment.id}>
             {payment.items.map((item: any) => (

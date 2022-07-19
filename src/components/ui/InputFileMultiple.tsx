@@ -4,9 +4,11 @@ import { ButtonIconClose, Button, Modal, ErrorText } from '.'
 import { useDisclosure, useDragAndDrop } from '../../hooks'
 
 const UploadContainer = styled('div')`
+  width: 100%;
+`
+const UploadContainerInner = styled('div')`
   display: flex;
   justify-content: space-between;
-  overflow-x: scroll;
 `
 const UploadWrapper = styled('label')`
   align-items: center;
@@ -118,8 +120,8 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
     onInputFileChange(newFiles.slice(0, 3))
   }
   return (
-    <>
-      <UploadContainer ref={dragRef}>
+    <UploadContainer>
+      <UploadContainerInner ref={dragRef}>
         {[...Array(3)].map((_: number, index: number) =>
           files !== null && index < files.length ? (
             <div key={`select-file-${_}`}>
@@ -164,7 +166,7 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
             </div>
           )
         )}
-      </UploadContainer>
+      </UploadContainerInner>
 
       <ErrorText error={isError} helperText={isError} />
 
@@ -178,6 +180,6 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
         multiple
         hidden
       />
-    </>
+    </UploadContainer>
   )
 }

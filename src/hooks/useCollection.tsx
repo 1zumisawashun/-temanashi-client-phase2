@@ -3,6 +3,11 @@ import { firebase } from '../firebase/config'
 import { collectionPoint } from '../utilities/converterClient'
 import { firebasePath } from '../@types/dashboard'
 
+/**
+ * suspenseでデータフェッチをする（useEffectでデータフェッチをしない）ため未使用_20220719
+ * _queryが配列なので関数が呼ばれるたびに「違う配列」として認識されるため
+ * useRef未使用の場合useEffectで無限ループが発生してしまう
+ */
 export const useCollection = <T,>(
   { collection }: firebasePath,
   _query?: [string, WhereFilterOp, any],
@@ -11,8 +16,6 @@ export const useCollection = <T,>(
   const [documents, setDocuments] = useState<Array<T>>([])
   const [error, setError] = useState<string | null>(null)
 
-  // if we don't use a ref --> infinite loop in useEffect
-  // _query is an array and is "different" on every function call
   const query = useRef(_query).current
   const orderBy = useRef(_orderBy).current
 
@@ -33,7 +36,7 @@ export const useCollection = <T,>(
         setError(null)
       },
       (error) => {
-        setError('could not fetch the data')
+        setError('データの取得に失敗しました。')
       }
     )
     return () => unsubscribe()

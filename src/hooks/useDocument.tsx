@@ -6,6 +6,9 @@ type Id = {
   id: string
 }
 
+/**
+ * suspenseでデータフェッチをする（useEffectでデータフェッチをしない）ため未使用_20220719
+ */
 export const useDocument = <T,>({ collection, document }: firebasePath) => {
   const [documents, setDocuments] = useState<T & Id>()
   const [error, setError] = useState<string | null>(null)
@@ -21,12 +24,11 @@ export const useDocument = <T,>({ collection, document }: firebasePath) => {
           })
           setError(null)
         } else {
-          setError('no such socument exist')
+          setError('データの取得に失敗しました。')
         }
       },
-      (err) => {
-        console.log(err)
-        setError('failed to get document')
+      (error) => {
+        setError('データの取得に失敗しました。')
       }
     )
     return () => unsubscribe()

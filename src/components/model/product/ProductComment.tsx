@@ -59,7 +59,7 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
   const commentModal = useDisclosure()
   const commentRef = useData<firebase.firestore.CollectionReference<Comment>>(
     'commentRef',
-    () => productUseCase.fetchAllCommentsRef(productId)
+    () => productUseCase.fetchCommentsRef(productId)
   )
 
   const [comments, setComments] = useState<Comment[]>(furniture.comments)

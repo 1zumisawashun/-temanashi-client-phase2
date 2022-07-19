@@ -6,9 +6,8 @@ import {
   UserAccount,
   UserFilter
 } from '../model/user'
-import { User, likedFurnitures } from '../../@types/dashboard'
-import { useSubCollection, useAuthContext, useData } from '../../hooks'
-import { formatFirebasePath } from '../../utilities'
+import { useAuthContext, useData } from '../../hooks'
+import type { PaymentDoc } from '../../@types/stripe'
 
 export const UserTemplate: React.VFC = () => {
   const { user } = useAuthContext()
@@ -20,33 +19,20 @@ export const UserTemplate: React.VFC = () => {
     setCurrentFilter(newFilter)
   }
 
-  const { documents } = useSubCollection<User, likedFurnitures>(
-    formatFirebasePath(`/users/${user.uid}/liked_furnitures`)
+  const payments = useData<Array<PaymentDoc>>(user.displayName!, () =>
+    productUseCase.fetchAllPayment(user.uid)
   )
-
-  const paymentsList = useData<any[]>(user.uid, () =>
-    productUseCase.fetchPayments(user.uid)
+  const favoriteProducts = useData<Array<ProductItem>>(user.uid, () =>
+    productUseCase.fetchAllFavoriteProduct(user.uid)
   )
-
-  const getLikedFurnitures = (
-    documents: Array<likedFurnitures>
-  ): Array<ProductItem> => {
-    const likedFurnitures = documents.map((p) => {
-      return p.liked_furniture
-    })
-    return likedFurnitures
-  }
-
-  // NOTE:suspenseの対象外(throwしていない)なので一瞬だけNotFoundがちらつく
-  const likedProductsList = getLikedFurnitures(documents)
 
   return (
     <>
       <UserFilter currentFilter={currentFilter} changeFilter={changeFilter} />
       {currentFilter === 'favorite' && (
-        <UserFavorite productItems={likedProductsList} />
+        <UserFavorite productItems={favoriteProducts} />
       )}
-      {currentFilter === 'history' && <UserHistory payments={paymentsList} />}
+      {currentFilter === 'history' && <UserHistory payments={payments} />}
       {currentFilter === 'account' && <UserAccount />}
     </>
   )

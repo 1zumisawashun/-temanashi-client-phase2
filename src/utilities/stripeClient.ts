@@ -14,7 +14,11 @@ import {
   CustomerDoc
 } from '../@types/stripe'
 import { projectFirestore, firebase } from '../firebase/config'
-import { subCollectionPoint, subDocumentPoint } from './converterClient'
+import {
+  subCollectionPoint,
+  subDocumentPoint,
+  collectionPoint
+} from './converterClient'
 
 export type ProductItem = {
   product: ProductDoc
@@ -42,7 +46,7 @@ class ProductUseCase {
    * コレクション参照①
    * 全ての商品情報を取得する（Product+Price）
    */
-  async fetchAll(): Promise<ProductItem[]> {
+  async fetchAllProduct(): Promise<ProductItem[]> {
     const productQuery = projectFirestore
       .collection('products')
       .orderBy('metadata.createdAt', 'desc')
@@ -73,7 +77,23 @@ class ProductUseCase {
   }
 
   /**
-   * ドキュメント参照②
+   * コレクション参照②
+   * 全てのユーザー情報を取得する（User）
+   */
+  async fetchAllUser(): Promise<User[]> {
+    const usersRef = collectionPoint<User>('users')
+    const usersSnapshot = await usersRef.get()
+    const usersMap = await usersSnapshot.docs.map((snapshot) => {
+      return {
+        id: snapshot.id,
+        ...(snapshot.data() as User)
+      }
+    })
+    return usersMap
+  }
+
+  /**
+   * ドキュメント参照③
    * 特定の商品情報を取得する（Product+Price+Comment）
    */
   async fetchProductItem(id: string): Promise<ProductItem> {
@@ -105,10 +125,10 @@ class ProductUseCase {
   }
 
   /**
-   * サブコレクション参照③
+   * サブコレクション参照④
    * 商品の購入履歴を全て取得する
    */
-  async fetchAllPayments(uid: string): Promise<Array<PaymentDoc>> {
+  async fetchAllPayment(uid: string): Promise<Array<PaymentDoc>> {
     const paymentsRef = subCollectionPoint<CustomerDoc, PaymentDoc>(
       'customers',
       uid,
@@ -123,10 +143,10 @@ class ProductUseCase {
   }
 
   /**
-   * サブコレクション参照④
+   * サブコレクション参照⑤
    * いいねした商品を全て取得する
    */
-  async fetchAllFavoriteProducts(uid: string): Promise<Array<ProductItem>> {
+  async fetchAllFavoriteProduct(uid: string): Promise<Array<ProductItem>> {
     const favoriteProductsRef = subCollectionPoint<User, likedFurnitures>(
       'users',
       uid,
@@ -140,10 +160,10 @@ class ProductUseCase {
   }
 
   /**
-   * サブコレクション参照⑤
+   * サブコレクション参照⑥
    * 商品に対するコメントの「参照」のみを取得する
    */
-  async fetchAllCommentsRef(
+  async fetchCommentsRef(
     productId: string
   ): Promise<firebase.firestore.CollectionReference<Comment>> {
     const CommentsRef = subCollectionPoint<ProductDoc, Comment>(
@@ -155,7 +175,7 @@ class ProductUseCase {
   }
 
   /**
-   * サブドキュメント参照⑥
+   * サブドキュメント参照⑦
    * いいねしたユーザーを取得する
    */
   async fetchLikedUser(
@@ -173,7 +193,7 @@ class ProductUseCase {
   }
 
   /**
-   * サブドキュメント参照⑦
+   * サブドキュメント参照⑧
    * いいねされた商品を取得する
    */
   async fetchLikedProduct(
