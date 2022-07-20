@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as functions from 'firebase-functions'
 import { Request, Response } from 'express'
 import * as express from 'express'

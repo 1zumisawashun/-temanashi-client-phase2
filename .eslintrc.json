@@ -14,7 +14,7 @@
     "plugin:react-hooks/recommended", // pluginsに追加されている https://ja.reactjs.org/docs/hooks-rules.html
     "airbnb",
     "airbnb-typescript",
-    "prettier"
+    "prettier" // eslint-config-prettier
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
