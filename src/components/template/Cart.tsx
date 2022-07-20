@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useErrorHandler } from 'react-error-boundary'
 import { productUseCase } from '../../utilities/stripeClient'
-import { useAuthContext, useCartContext } from '../../hooks/useContextClient'
-import { useToken } from '../../hooks/useToken'
+import { useToken, useAuthContext, useCartContext } from '../../hooks'
 import { CartList, CartAgreement } from '../model/cart'
 import { ErrorNotFound } from '../ui'
 
@@ -27,13 +26,14 @@ export const CartTemplate: React.VFC = () => {
     })
 
     /**
-     * 今はトークン認証バグっているのであとで修正が必要_20220713
+     * トークンの有効期限は「5分」なので注意
+     * 正常に動いていることは確認済み_20220719
      * 購入画面へ繊維する時にトークンチェックがないので直接ハンドリングする必要がある
      * https://ja.reactjs.org/docs/error-boundaries.html
      * react-dom.development.jsでエラーが発生している模様
      */
     const token = await verifyJWT()
-    if (token) {
+    if (!token) {
       setIsPending(false)
       handleError('onClickBuy Error')
       return

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
-import { useAuthContext, useCartContext } from '../../../hooks/useContextClient'
+import { useCartContext } from '../../../hooks/useContextClient'
 import { formatTaxIncludedPrice } from '../../../utilities'
 import { CartCounter } from './CartCounter'
 import { Divider, Image, ButtonIconDelete } from '../../ui'
@@ -73,10 +73,7 @@ interface CartListProps {
 }
 
 export const CartList: React.VFC<CartListProps> = ({ productItems }) => {
-  const { user } = useAuthContext()
   const { removeProductFromCart } = useCartContext()
-
-  if (!user) throw new Error('we cant find your account')
 
   const HandleRemove = (productId: string) => {
     removeProductFromCart(productId)

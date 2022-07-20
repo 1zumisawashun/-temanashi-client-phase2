@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 import { MultiValue } from 'react-select'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styled from '@emotion/styled'
@@ -16,7 +15,7 @@ import {
   Button
 } from '../ui'
 import { categoryOptions } from '../../utilities/constant'
-import { useStorage, useReactScroll, useToken } from '../../hooks'
+import { useStorage, useReactScroll, useAxios } from '../../hooks'
 
 const FormContainer = styled('div')`
   display: grid;
@@ -35,9 +34,9 @@ interface FormData {
 
 export const CreateTemplate: React.VFC = () => {
   const history = useHistory()
-  const { getStorageUrl } = useStorage()
-  const { cookies } = useToken()
   const handleError = useErrorHandler()
+  const { getStorageUrl } = useStorage()
+  const { axios } = useAxios()
 
   const scrollToPhotos = useReactScroll('photos')
   const scrollToName = useReactScroll('name')
@@ -80,7 +79,7 @@ export const CreateTemplate: React.VFC = () => {
     setFiles(value)
   }
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsLoading(true)
     setFromError('')
 
@@ -99,21 +98,14 @@ export const CreateTemplate: React.VFC = () => {
     }
 
     // NOTE:selectで複数選択できるが全体の型は修正していないので一旦一個のみポストする
-    const furniture = {
+    const product = {
       ...data,
       photos: result,
       category: categories[0]
     }
 
     try {
-      const headers = {
-        Authorization: `Bearer ${cookies.jwt}`
-      }
-      await axios.post(
-        'https://us-central1-temanashi-phase2.cloudfunctions.net/api/stripe-post',
-        furniture,
-        { headers }
-      )
+      await axios.post('/api/stripe-post', product)
       setIsLoading(false)
       history.push('/')
     } catch (error) {
@@ -122,32 +114,27 @@ export const CreateTemplate: React.VFC = () => {
     }
   }
 
-  const checkOnPreSubmit = (data: FormData) => {
-    const { name, description, price, stock } = data
+  const onError: SubmitErrorHandler<FormData> = (errors) => {
+    const { name, description, price, stock } = errors
     if (files.length === 0) {
       scrollToPhotos.scrollHook()
       return
     }
-    if (name === '') {
+    if (name) {
       scrollToName.scrollHook()
       return
     }
-    if (description === '') {
+    if (description) {
       scrollToDescription.scrollHook()
       return
     }
-    if (price === '') {
+    if (price) {
       scrollToPrice.scrollHook()
       return
     }
-    if (stock === '') {
+    if (stock) {
       scrollToStock.scrollHook()
     }
-  }
-
-  const onPreSubmit: SubmitHandler<FormData> = (data: FormData) => {
-    checkOnPreSubmit(data)
-    onSubmit(data)
   }
 
   /**
@@ -215,12 +202,7 @@ export const CreateTemplate: React.VFC = () => {
           error={formError.length !== 0}
           helperText={formError}
         />
-        <Button
-          isLoading={isLoading}
-          onClick={() => {
-            handleSubmit(onPreSubmit)()
-          }}
-        >
+        <Button isLoading={isLoading} onClick={handleSubmit(onSubmit, onError)}>
           完了
         </Button>
       </FormContainer>

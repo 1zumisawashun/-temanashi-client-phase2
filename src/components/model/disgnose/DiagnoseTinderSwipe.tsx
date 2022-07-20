@@ -52,7 +52,7 @@ const Title = styled('h3')`
 
 type TinderSwipeProps = {
   db: Array<ProductItem>
-  changePendingDiagnose: () => void
+  changeHandler: () => void
 }
 
 /**
@@ -62,7 +62,7 @@ type TinderSwipeProps = {
  */
 export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
   db,
-  changePendingDiagnose
+  changeHandler
 }) => {
   const [lastDirection, setLastDirection] = useState<string>()
   const [currentIndex, setCurrentIndex] = useState<number>(db.length - 1)
@@ -100,7 +100,7 @@ export const DiagnoseTinderSwipe: React.VFC<TinderSwipeProps> = ({
     progressbarCalclation(val)
     if (currentIndexRef.current === -1) {
       await delay(300) // NOTE:progressbarのアニメーションを待つ
-      changePendingDiagnose()
+      changeHandler()
     }
   }
   /**

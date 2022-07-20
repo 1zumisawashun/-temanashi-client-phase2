@@ -41,14 +41,10 @@ export const SignupTemplate: React.VFC = () => {
     resolver: yupResolver(getSchema())
   })
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     if (thumbnail === null) return
     const { email, password, displayName } = data
     signup(email, password, displayName, thumbnail)
-  }
-
-  const onPreSubmit: SubmitHandler<FormData> = (data: FormData) => {
-    onSubmit(data)
   }
 
   const onInputFileChange = (file: File) => {
@@ -89,9 +85,7 @@ export const SignupTemplate: React.VFC = () => {
             isLoading={isPending}
             size="large"
             fullWidth
-            onClick={() => {
-              handleSubmit(onPreSubmit)()
-            }}
+            onClick={handleSubmit(onSubmit)}
           >
             Sign Up
           </Button>

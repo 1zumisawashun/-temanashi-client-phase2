@@ -60,13 +60,9 @@ export const LoginTemplate: React.VFC = () => {
     resolver: yupResolver(getSchema())
   })
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     const { email, password } = data
     login(email, password)
-  }
-
-  const onPreSubmit: SubmitHandler<FormData> = (data: FormData) => {
-    onSubmit(data)
   }
 
   return (
@@ -95,9 +91,7 @@ export const LoginTemplate: React.VFC = () => {
             data-cy="login"
             size="large"
             fullWidth
-            onClick={() => {
-              handleSubmit(onPreSubmit)()
-            }}
+            onClick={handleSubmit(onSubmit)}
           >
             Login
           </Button>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as functions from 'firebase-functions'
 import { Request, Response } from 'express'
 import * as express from 'express'
@@ -52,8 +53,8 @@ app.get(
   }
 )
 
-app.use('/', stripeRoute)
-// app.use("/", [authenticateWithJWT, authenticateWithFirebase], stripeRoute);
+// app.use('/', stripeRoute)
+app.use('/', [authenticateWithJWT, authenticateWithFirebase], stripeRoute)
 
 const api = functions.https.onRequest(app)
 module.exports = { api, logActivities, helloOnCall, helloOnRequest }
