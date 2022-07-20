@@ -21,7 +21,7 @@ export const DiagnoseTemplate: React.VFC = () => {
     addProductWithRandom(storeProductItems)
   }
 
-  const changePendingDiagnose = useCallback(async () => {
+  const changeHandler = useCallback(async () => {
     setIsLoading(true)
     await delay(1000)
     setIsLoading(false)
@@ -58,10 +58,7 @@ export const DiagnoseTemplate: React.VFC = () => {
       {documents.length === 0 && <Loading />}
       {isLoading && <Loading />}
       {!isVisibleDisagnoseResult && documents.length > 0 && (
-        <DiagnoseTinderSwipe
-          db={documents}
-          changePendingDiagnose={changePendingDiagnose}
-        />
+        <DiagnoseTinderSwipe db={documents} changeHandler={changeHandler} />
       )}
       {isVisibleDisagnoseResult && documents.length > 0 && (
         <DiagnoseResult db={documents} />

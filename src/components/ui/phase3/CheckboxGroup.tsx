@@ -44,7 +44,6 @@ const CustomP = styled('p')<{
   shape?: string
   isChecked?: boolean
 }>`
-  background-color: ;
   background-color: ${(p) => (p.isChecked ? '#84bcb4' : 'gray')};
   border-radius: ${(p) => {
     if (p.shape === 'round') return 50

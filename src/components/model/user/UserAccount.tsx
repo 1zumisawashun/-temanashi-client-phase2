@@ -1,9 +1,7 @@
-import { FormEvent } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { projectFunctions, isEmulating } from '../../../firebase/config'
-import { useAuthContext, useToken, useAuth } from '../../../hooks'
-import axios from '../../../utilities/axiosClient'
+import { useAuthContext, useToken, useAuth, useAxios } from '../../../hooks'
 import { Button } from '../../ui'
 
 const UserContainer = styled('div')`
@@ -19,60 +17,65 @@ type Response = {
 
 export const UserAccount: React.VFC = () => {
   const { user } = useAuthContext()
-  if (!user) throw new Error('we cant find your account')
+  const { axios } = useAxios()
   const { logout, isPending } = useAuth()
   const { setJWT } = useToken()
   const history = useHistory()
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
+  if (!user) throw new Error('we cant find your account')
+
+  const handleSubmit = () => {
     logout()
     history.push('/login')
   }
-
+  /**
+   * エラーが発生している_20220719
+   */
   const onCallTest = () => {
     const helloOnCall = projectFunctions.httpsCallable('helloOnCall')
     helloOnCall({ name: `shun` }).then((result) => {
-      console.log(result.data)
+      console.log(result.data, 'onCallTest')
     })
   }
+  /**
+   * useAxiosでhttp通信成功している_20220719
+   * jwt必要なし
+   */
   const onRequestTest = async () => {
     const result = await axios.get(`/helloOnRequest`)
-    console.log(result, 'result')
+    console.log(result, 'onRequestTest')
   }
+  /**
+   * useAxiosでhttp通信成功している_20220719
+   * jwt必要あり
+   */
   const getAxiosTest = async () => {
     const result = await axios.get(`/api/hello`)
-    console.log(result, 'result')
+    console.log(result, 'getAxiosTest')
   }
+  /**
+   * useAxiosでhttp通信成功している_20220719
+   * jwt必要なし
+   */
   const createJWT = async () => {
     const params = {
       uid: user.uid,
       name: user.displayName
     }
-    const result = await axios.post<Response>(`/api/jwt`, params)
-    setJWT(result.data.jwt)
-    console.log(result, 'result')
+    const result: Response = await axios.post(`/api/jwt`, params)
+    setJWT(result.jwt)
+    console.log(result, 'createJWT')
   }
+  /**
+   * useAxiosでhttp通信成功している_20220719
+   * jwt必要あり
+   */
   const verifyJWT = async () => {
-    const path = `/api/jwt/check`
-    const result = await axios.get(path).catch((err) => {
-      return err.response
-    })
-    if (result.status !== 200) {
-      history.push('/error')
-    }
-    console.log(result, 'check JWT')
+    const result = await axios.get(`/api/jwt/check`)
+    console.log(result, 'verifyJWT')
   }
-  const Emulating = async () => {
-    const path = `/api/hello`
-    const result = await axios.get(path).catch((err) => {
-      return err.response
-    })
-    if (result.status !== 200) {
-      history.push('/error')
-    }
-    console.log(result, 'check Emulator')
-  }
+
+  const Emulating = () => console.log('Emulating')
 
   return (
     <UserContainer>
