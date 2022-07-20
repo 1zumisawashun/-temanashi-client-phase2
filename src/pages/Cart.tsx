@@ -16,7 +16,8 @@ const Container = styled('div')`
   width: calc(100% - 650px);
 `
 const Inner = styled('div')`
-  padding: 0 50px 50px;
+  min-height: calc(100vh - 100px);
+  padding: 0 50px;
   ${mediaQuery('sp')} {
     padding: 0;
   }

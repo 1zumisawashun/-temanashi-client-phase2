@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styled from '@emotion/styled'
 import { InputText, Button, ButtonLink, ErrorText } from '../ui'
-import { useAuth } from '../../hooks/useAuth'
+import { useAuth, mediaQuery } from '../../hooks'
 
 export const AuthContainer = styled('div')`
   background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);
@@ -17,6 +17,9 @@ export const AuthInner = styled('div')`
   top: 50%;
   transform: translateY(-50%) translateX(-50%);
   width: 30%;
+  ${mediaQuery('sp')} {
+    width: 80%;
+  }
 `
 export const AuthFormContainer = styled('form')`
   backdrop-filter: blur(12px);
@@ -29,6 +32,9 @@ export const AuthFormContainer = styled('form')`
   box-shadow: 0 26px 42px rgba(0, 0, 0, 0.1);
   margin: auto;
   padding: 50px;
+  ${mediaQuery('sp')} {
+    padding: 30px;
+  }
 `
 export const AuthTitle = styled('h1')`
   color: white;
