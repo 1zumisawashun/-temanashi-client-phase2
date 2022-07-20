@@ -45,6 +45,7 @@ const FooterContent = styled('div')`
 
 export const ErrorForbidden: React.VFC = () => {
   const history = useHistory()
+  const clickHandler = () => console.log('clickしています')
   return (
     <ContentWrapper>
       <Content>
@@ -58,7 +59,10 @@ export const ErrorForbidden: React.VFC = () => {
           <p>トップ画面へ戻り本サービスをご利用ください。</p>
         </FirstParagraph>
         <FooterContent>
-          <Button onClick={() => history.push('/dammy')} size="large">
+          {/* <Button onClick={clickHandler} size="large">
+            click handler
+          </Button> */}
+          <Button onClick={() => history.push('/cart/')} size="large">
             トップ画面に戻る
           </Button>
         </FooterContent>

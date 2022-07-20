@@ -13,10 +13,10 @@ const breakpoints = {
  * https://github.com/emotion-js/emotion/blob/main/docs/media-queries.mdx
  */
 export const device = {
-  iphone5: `(min-width: ${breakpoints.iphone5}px)`,
-  sp: `(min-width: ${breakpoints.sp}px)`,
-  tab: `(min-width: ${breakpoints.tab}px)`,
-  pc: `(min-width: ${breakpoints.pc}px)`
+  iphone5: `(max-width: ${breakpoints.iphone5}px)`,
+  sp: `(max-width: ${breakpoints.sp}px)`,
+  tab: `(max-width: ${breakpoints.tab}px)`,
+  pc: `(max-width: ${breakpoints.pc}px)`
 }
 
 // eslint-disable-next-line
@@ -31,16 +31,16 @@ const FirstTextWrapper = styled('div')`
 `
 
 export const mediaQuery = (key: keyof typeof breakpoints) =>
-  `@media (min-width: ${breakpoints[key]}px)`
+  `@media (max-width: ${breakpoints[key]}px)`
 
 // eslint-disable-next-line
 const SecondTestWrapper = styled('div')`
   color: 'green';
   margin: auto;
-  ${mediaQuery('iphone5')}: {
+  ${mediaQuery('iphone5')} {
     color: 'gray';
   }
-  ${mediaQuery('sp')}: {
+  ${mediaQuery('sp')} {
     color: 'hotpink';
   }
 `

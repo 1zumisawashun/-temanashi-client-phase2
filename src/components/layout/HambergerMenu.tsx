@@ -4,21 +4,23 @@ import { ButtonLink, ButtonIconStore } from '../ui'
 import { useAuthContext } from '../../hooks/useContextClient'
 
 interface HamburgerMenuProp {
-  state: boolean
-  setState: React.Dispatch<React.SetStateAction<boolean>>
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * stateとsetStateをhamburger-reactのコンポーネントに投げると
+ * よしなに表示・非表示のハンドリングをしてくれる
+ */
 export const HambergerMenu: React.VFC<HamburgerMenuProp> = ({
-  state,
-  setState
+  isOpen,
+  setIsOpen
 }) => {
   const history = useHistory()
   const { user } = useAuthContext()
   if (!user) throw new Error('we cant find your account')
 
   const closeHamburger = (path: string) => {
-    document.body.style.overflow = ''
-    setState(!state)
     history.push(path)
   }
 
@@ -30,10 +32,10 @@ export const HambergerMenu: React.VFC<HamburgerMenuProp> = ({
           <span>Temanashi</span>
         </li>
         <li className="hamburger-box">
-          <Hamburger toggled={state} toggle={setState} color="#f4f4f4" />
+          <Hamburger toggled={isOpen} toggle={setIsOpen} color="#f4f4f4" />
         </li>
       </ul>
-      {state && (
+      {isOpen && (
         <div className="responsive-overlay">
           <ul className="menu">
             <li className="hamburger-link">
@@ -42,26 +44,22 @@ export const HambergerMenu: React.VFC<HamburgerMenuProp> = ({
               </ButtonLink>
             </li>
             <li className="hamburger-link">
-              <ButtonLink onClick={() => closeHamburger('/create/furniture')}>
+              <ButtonLink onClick={() => closeHamburger('/create/product/')}>
                 New Furniture
               </ButtonLink>
             </li>
             <li className="hamburger-link">
-              <ButtonLink onClick={() => closeHamburger('/diagnose')}>
+              <ButtonLink onClick={() => closeHamburger('/diagnose/')}>
                 Diagnose
               </ButtonLink>
             </li>
             <li className="hamburger-link">
-              <ButtonLink
-                onClick={() => closeHamburger(`/users/${user.uid}/cart`)}
-              >
+              <ButtonLink onClick={() => closeHamburger('/cart')}>
                 Shopping Cart
               </ButtonLink>
             </li>
             <li className="hamburger-link">
-              <ButtonLink
-                onClick={() => closeHamburger(`/users/${user.uid}/favorite`)}
-              >
+              <ButtonLink onClick={() => closeHamburger(`/users/${user.uid}/`)}>
                 My Page
               </ButtonLink>
             </li>

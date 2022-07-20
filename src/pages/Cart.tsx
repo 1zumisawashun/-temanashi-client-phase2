@@ -1,7 +1,7 @@
 import { Redirect } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { CartTemplate } from '../components/template/Cart'
-import { useAuthContext } from '../hooks'
+import { useAuthContext, mediaQuery } from '../hooks'
 import {
   Sidebar,
   OnlineUsers,
@@ -17,6 +17,9 @@ const Container = styled('div')`
 `
 const Inner = styled('div')`
   padding: 0 50px 50px;
+  ${mediaQuery('sp')} {
+    padding: 0;
+  }
 `
 
 export const Cart: React.VFC = () => {
