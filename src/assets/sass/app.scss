@@ -1,25 +1,24 @@
 // settings
-@import "settings/color";
-@import "settings/font";
-@import "settings/media";
-@import "settings/shadow";
+@import 'settings/color';
+@import 'settings/font';
+@import 'settings/media';
+@import 'settings/shadow';
 
 // tools
-// @import "tools/main";
+@import 'tools/main';
 
 // generic
-// NOTE:レイアウトが崩れるため一旦コメントアウト
-// @import "generics/reset";
+@import 'generics/reset';
 
 // elements
-@import "elements/main";
+@import 'elements/main';
 
 // objects
 // @import "objects/common-container";
 // @import "objects/flex-container";
 
 // components
-@import "components/main";
+// @import 'components/main';
 
 // utilities
-@import "utilities/main";
+@import 'utilities/main';

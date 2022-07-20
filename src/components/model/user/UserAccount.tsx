@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom'
 import styled from '@emotion/styled'
+import { useState } from 'react'
 import { projectFunctions, isEmulating } from '../../../firebase/config'
 import { useAuthContext, useToken, useAuth, useAxios } from '../../../hooks'
 import { Button } from '../../ui'
@@ -15,12 +16,17 @@ type Response = {
   jwt: string
 }
 
+export const Bomb: React.VFC = () => {
+  throw new Error('💥 CABOOM 💥')
+}
+
 export const UserAccount: React.VFC = () => {
   const { user } = useAuthContext()
   const { axios } = useAxios()
   const { logout, isPending } = useAuth()
   const { setJWT } = useToken()
   const history = useHistory()
+  const [explode, setExplode] = useState(false)
 
   if (!user) throw new Error('we cant find your account')
 
@@ -90,6 +96,8 @@ export const UserAccount: React.VFC = () => {
       <Button onClick={handleSubmit} isDisabled={isPending}>
         Logout
       </Button>
+      <Button onClick={() => setExplode((e) => !e)}>bomb</Button>
+      {explode ? <Bomb /> : null}
     </UserContainer>
   )
 }

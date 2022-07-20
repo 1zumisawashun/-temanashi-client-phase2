@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import Badge from '@mui/material/Badge'
 import { css } from '@emotion/css'
 import { ButtonNavlink, Divider, Avatar } from '../ui'
-import { useAuthContext, useCartContext } from '../../hooks/useContextClient'
+import { useAuthContext, useCartContext, mediaQuery } from '../../hooks'
 
 const SidebarContainer = styled('div')`
   background: #84bcb4;
@@ -15,6 +15,9 @@ const SidebarContainer = styled('div')`
   min-width: 300px;
   position: relative;
   width: 300px;
+  ${mediaQuery('sp')} {
+    display: none;
+  }
 `
 const SidebarInner = styled('div')`
   position: fixed;

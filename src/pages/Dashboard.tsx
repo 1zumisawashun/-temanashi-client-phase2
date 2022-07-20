@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Redirect } from 'react-router-dom'
 import { DashboardTemplate } from '../components/template/Dashboard'
-import { useAuthContext } from '../hooks'
+import { useAuthContext, mediaQuery } from '../hooks'
 import {
   Sidebar,
   OnlineUsers,
@@ -16,7 +16,11 @@ const Container = styled('div')`
   width: calc(100% - 650px);
 `
 const Inner = styled('div')`
-  padding: 0 50px 50px;
+  min-height: calc(100vh - 100px);
+  padding: 0 50px;
+  ${mediaQuery('sp')} {
+    padding: 0;
+  }
 `
 
 export const Dashboard: React.VFC = () => {

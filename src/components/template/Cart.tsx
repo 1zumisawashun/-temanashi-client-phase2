@@ -12,7 +12,6 @@ export const CartTemplate: React.VFC = () => {
   const handleError = useErrorHandler()
 
   const [isPending, setIsPending] = useState<boolean>(false)
-
   if (!user) throw new Error('we cant find your account')
 
   const onClickBuy = async () => {

@@ -14,14 +14,13 @@ const ButtonWrapper = styled('div')`
   display: flex;
   gap: 30px;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 10px;
 `
 const CommonWrapper = styled('div')`
-  width: 100%;
+  display: block;
 `
 const TinderSwipeContainer = styled('div')`
-  margin: 50px 0 0 0;
-  text-align: center;
+  display: block;
 `
 const CardContainer = styled('div')`
   height: 400px;

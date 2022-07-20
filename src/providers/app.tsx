@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
@@ -12,8 +12,13 @@ import {
 } from '../contexts'
 import { theme } from '../utilities/muiThemeClient'
 
-export const ErrorFallback: React.VFC = () => {
-  return <ErrorForbidden />
+export const ErrorFallback: React.VFC<FallbackProps> = ({
+  error,
+  resetErrorBoundary
+}) => {
+  return (
+    <ErrorForbidden error={error} resetErrorBoundary={resetErrorBoundary} />
+  )
 }
 
 type AppProviderProps = {

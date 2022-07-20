@@ -1,66 +1,85 @@
-import { useHistory } from 'react-router-dom'
 import styled from '@emotion/styled'
+import { FallbackProps } from 'react-error-boundary'
 import { Button } from './index'
 
 const ContentWrapper = styled('div')`
+  /* header・footer・sidebar関係なく中央に寄せる */
+  align-items: center;
   background: #84bcb4;
+  bottom: 0;
   display: flex;
-  height: 100%;
   justify-content: center;
+  left: 0;
   min-height: 100vh;
-  width: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
 `
 
 const Content = styled('div')`
   background-color: white;
   border-radius: 10px;
-  height: 388px;
-  margin: 120px 340px;
+  display: grid;
   max-width: 1100px;
-  width: 100%;
+  padding: 60px;
+  row-gap: 30px;
 `
 
 const Title = styled('h1')`
   font-size: 24px;
-  font-weight: 700;
-  margin-top: 40px;
+  font-weight: bold;
   text-align: center;
 `
 
-const FirstParagraph = styled('p')`
+const Paragraph = styled('p')`
   color: black;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 21px;
-  margin-top: 63px;
   text-align: center;
 `
 
 const FooterContent = styled('div')`
-  margin-bottom: 40px;
-  margin-top: 47px;
-  text-align: center;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
 `
 
-export const ErrorForbidden: React.VFC = () => {
-  const history = useHistory()
+export const ErrorForbidden: React.VFC<Partial<FallbackProps>> = ({
+  error,
+  resetErrorBoundary
+}) => {
+  /**
+   * react-routerで繊維するのではなくwidndowオブジェクトを使って遷移する
+   * browserrouterより上の階層で使うことが想定されるためreact-routerでの繊維ができないため
+   * react-error-boundlyのfallbackがIframeでラップされるためreset CSSでIframeを無効化する必要がある
+   */
+  const moveToTop = () => {
+    window.location.href = '/'
+  }
+
   return (
     <ContentWrapper>
       <Content>
         <Title>アクセスしようとしたページが見つかりません</Title>
-        <FirstParagraph>
+        {error && <Paragraph>{error.message}</Paragraph>}
+        <Paragraph>
           <p>以下の原因が考えられます。</p>
           <p> 1.URLが間違っているか、古い</p>
           <p>2.権限が与えられていない操作</p>
-          <br />
+        </Paragraph>
+        <Paragraph>
           <p>ご不便をおかけしますが、アドレスをご確認いただくか、</p>
           <p>トップ画面へ戻り本サービスをご利用ください。</p>
-        </FirstParagraph>
+        </Paragraph>
         <FooterContent>
-          <Button onClick={() => history.push('/dammy')} size="large">
+          <Button onClick={moveToTop} size="large" variant="error">
             トップ画面に戻る
           </Button>
+          {resetErrorBoundary && (
+            <Button onClick={resetErrorBoundary} size="large" variant="error">
+              もう一度試す
+            </Button>
+          )}
         </FooterContent>
       </Content>
     </ContentWrapper>
