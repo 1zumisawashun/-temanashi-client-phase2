@@ -1,8 +1,8 @@
 import { Redirect } from 'react-router-dom'
 import styled from '@emotion/styled'
-import { SignupTemplate } from '../components/template/Signup'
+import { SignupTemplate } from '../components/templates/Signup'
 import { useAuthContext } from '../hooks'
-import { Head } from '../components/layout'
+import { Head } from '../components/layouts'
 
 const Container = styled('div')`
   flex-grow: 1;

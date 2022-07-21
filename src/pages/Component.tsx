@@ -6,20 +6,20 @@ import {
   Modal,
   CircleDotSpiner,
   RevolvingDotSpiner
-} from '../components/ui'
+} from '../components/uis'
 import {
   SquareIcon,
   SquareIconBlank,
   CircleIcon,
   CircleIconBlank
-} from '../components/ui/phase3/CheckboxGroup'
+} from '../components/uis/phase3/CheckboxGroup'
 import {
   SwitchForm,
   SelectForm,
   InputText,
   InputTextarea,
   CheckboxGroup
-} from '../components/ui/phase3'
+} from '../components/uis/phase3'
 import { categoryOptions, weekdaysOptions } from '../utilities/constant'
 
 const Container = styled('div')`
