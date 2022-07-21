@@ -9,9 +9,8 @@ export const useStorage = () => {
   const [error, setError] = useState<string | null>(null)
   const [isPending, setIsPending] = useState(false)
   const { user } = useAuthContext()
-  if (!user) {
-    throw new Error('Could not complete signup')
-  }
+
+  if (!user) throw new Error('Could not complete signup')
 
   /**
    * データを圧縮する画像を返す

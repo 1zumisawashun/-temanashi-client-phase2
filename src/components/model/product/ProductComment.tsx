@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { useQuery } from 'react-query'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
 import { Comment, CommentToAdd } from '../../../@types/dashboard'
-import { useData, useDisclosure } from '../../../hooks'
+import { useDisclosure } from '../../../hooks'
 import { timestamp, firebase } from '../../../firebase/config'
 import {
   Button,
@@ -57,9 +58,8 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
   user
 }) => {
   const commentModal = useDisclosure()
-  const commentRef = useData<firebase.firestore.CollectionReference<Comment>>(
-    'commentRef',
-    () => productUseCase.fetchCommentsRef(productId)
+  const { data } = useQuery('commentRef', () =>
+    productUseCase.fetchCommentsRef(productId)
   )
 
   const [comments, setComments] = useState<Comment[]>(furniture.comments)
@@ -74,7 +74,7 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
       id: Math.random()
     }
     try {
-      commentRef.add(commentToAdd)
+      data?.add(commentToAdd)
       const updateComments = [...comments, commentToAdd]
       setComments(updateComments)
       setNewComment('')

@@ -1,9 +1,9 @@
 import Axios, { AxiosRequestConfig } from 'axios'
-import { useToken } from './useToken'
+import { useCookies } from 'react-cookie'
 
 /* eslint-disable no-param-reassign */
 export const useAxios = () => {
-  const { cookies } = useToken()
+  const [cookies] = useCookies(['jwt'])
 
   const useAuthRequestInterceptor = (config: AxiosRequestConfig) => {
     if (cookies.jwt) {
@@ -23,11 +23,11 @@ export const useAxios = () => {
   // NOTE:intercepterを使って返り値をカスタムすることができる
   axios.interceptors.response.use(
     (response) => {
-      console.log(response, 'response')
+      console.log(response, 'axios response')
       return response.data
     },
     (error) => {
-      console.log(error, 'error')
+      console.log(error, 'axios error')
       const message = error.response?.data?.message || error.message
       return Promise.reject(message)
     }

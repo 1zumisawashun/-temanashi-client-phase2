@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styled from '@emotion/styled'
 import { ButtonIconClose, Button, Modal, ErrorText } from '.'
 import { useDisclosure, useDragAndDrop } from '../../hooks'
+import { mineType } from '../../utilities/constant'
 
 const UploadContainer = styled('div')`
   width: 100%;
@@ -44,47 +45,32 @@ const CloseButtonContainerHidden = styled('div')`
 `
 
 interface PhotosUploadProps {
-  name?: string // NOTE:input["file"]とlabelをリンクさせるためのフラグ
+  name?: string
   files: File[]
   onInputFileChange: (files: File[]) => void
 }
 
-const mineType = [
-  'image/gif',
-  'image/jpeg',
-  'image/png',
-  'image/bmp',
-  'image/svg+xml'
-]
+/* eslint-disable no-param-reassign */
+/* eslint-disable react/no-array-index-key */
 
+/**
+ * DD対応の複数画像アップロード機能
+ * DDと手動アップロードでロジックを分岐させonChangeFilesでFilelistを受け取りマージさせている
+ * DDと手動アップロードで挟み込むバリデーションが未実装
+ */
 export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
   name = 'photos',
   files,
   onInputFileChange
 }): React.ReactElement => {
   const executeModal = useDisclosure()
-  const { dragRef } = useDragAndDrop()
   const [isError, setIsError] = useState<string>('')
 
-  const handleCancel = (photoIndex: number) => {
-    setIsError('')
-    if (!files) return
-    const modifyPhotos = files.filter((file, index) => photoIndex !== index)
-    onInputFileChange(modifyPhotos)
-    executeModal.close()
-  }
-
-  const handleFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeFiles = async (event: FileList) => {
     let newFiles: File[] = []
 
-    if (event.target.files === null || event.target.files.length === 0) {
-      return
-    }
+    const copiedFiles = Object.values(event).concat()
 
-    const copiedFiles = Object.values(event.target.files).concat()
-    // NOTE:refからDOMを取得してvalueを空文字にすれば良いかも
-    // eslint-disable-next-line no-param-reassign
-    event.target.value = ''
     setIsError('')
 
     const checkedFiles = copiedFiles.filter((copiedFile) => {
@@ -119,12 +105,32 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
 
     onInputFileChange(newFiles.slice(0, 3))
   }
+
+  const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = event.target.files
+    if (selectedFiles) {
+      // FIXME:バリデーションを挟みたい
+      onChangeFiles(selectedFiles)
+    }
+    event.target.value = ''
+  }
+
+  const handleCancel = (photoIndex: number) => {
+    setIsError('')
+    if (!files) return
+    const modifyPhotos = files.filter((file, index) => photoIndex !== index)
+    onInputFileChange(modifyPhotos)
+    executeModal.close()
+  }
+
+  const { dragRef } = useDragAndDrop(onChangeFiles)
+
   return (
     <UploadContainer>
       <UploadContainerInner ref={dragRef}>
         {[...Array(3)].map((_: number, index: number) =>
           files !== null && index < files.length ? (
-            <div key={`select-file-${_}`}>
+            <div key={`select-file-${index}`}>
               <CloseButtonContainer>
                 <ButtonIconClose onClick={() => executeModal.open()} />
               </CloseButtonContainer>
@@ -151,7 +157,6 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
               </UploadWrapper>
             </div>
           ) : (
-            // eslint-disable-next-line react/no-array-index-key
             <div key={`no-file-${index}`}>
               <CloseButtonContainerHidden>
                 <ButtonIconClose onClick={() => executeModal.open()} />
@@ -176,7 +181,7 @@ export const InputFileMultiple: React.VFC<PhotosUploadProps> = ({
         name={name}
         id={name}
         accept="image/*"
-        onChange={handleFile}
+        onChange={handleUpload}
         multiple
         hidden
       />

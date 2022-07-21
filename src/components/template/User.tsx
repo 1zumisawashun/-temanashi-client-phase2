@@ -1,17 +1,26 @@
 import { useState } from 'react'
-import { productUseCase, ProductItem } from '../../utilities/stripeClient'
+import { useQuery } from 'react-query'
+import { productUseCase } from '../../utilities/stripeClient'
 import {
   UserFavorite,
   UserHistory,
   UserAccount,
   UserFilter
 } from '../model/user'
-import { useAuthContext, useData } from '../../hooks'
-import type { PaymentDoc } from '../../@types/stripe'
+import { useAuthContext } from '../../hooks'
 
 export const UserTemplate: React.VFC = () => {
   const { user } = useAuthContext()
   if (!user) throw new Error('we cant find your account')
+
+  // https://react-query-v3.tanstack.com/guides/parallel-queries
+  // パラレルクエリの場合は下記のように必要に応じてuseQueryを呼ぶが正解ぽい
+  const favoriteProducts = useQuery(['favoriteProducts', user.uid], () =>
+    productUseCase.fetchAllFavoriteProduct(user.uid)
+  )
+  const payments = useQuery(['payments', user.uid], () =>
+    productUseCase.fetchAllPayment(user.uid)
+  )
 
   const [currentFilter, setCurrentFilter] = useState<string>('favorite')
 
@@ -19,20 +28,15 @@ export const UserTemplate: React.VFC = () => {
     setCurrentFilter(newFilter)
   }
 
-  const payments = useData<Array<PaymentDoc>>(user.displayName!, () =>
-    productUseCase.fetchAllPayment(user.uid)
-  )
-  const favoriteProducts = useData<Array<ProductItem>>(user.uid, () =>
-    productUseCase.fetchAllFavoriteProduct(user.uid)
-  )
-
   return (
     <>
       <UserFilter currentFilter={currentFilter} changeFilter={changeFilter} />
-      {currentFilter === 'favorite' && (
-        <UserFavorite productItems={favoriteProducts} />
+      {currentFilter === 'favorite' && favoriteProducts.data && (
+        <UserFavorite productItems={favoriteProducts.data} />
       )}
-      {currentFilter === 'history' && <UserHistory payments={payments} />}
+      {currentFilter === 'history' && payments.data && (
+        <UserHistory payments={payments.data} />
+      )}
       {currentFilter === 'account' && <UserAccount />}
     </>
   )

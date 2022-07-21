@@ -4,7 +4,7 @@ import { collectionPoint } from '../utilities/converterClient'
 import { firebasePath } from '../@types/dashboard'
 
 /**
- * suspenseでデータフェッチをする（useEffectでデータフェッチをしない）ため未使用_20220719
+ * useEffectでデータフェッチをしない仕様にする為、現在は未使用
  * _queryが配列なので関数が呼ばれるたびに「違う配列」として認識されるため
  * useRef未使用の場合useEffectで無限ループが発生してしまう
  */

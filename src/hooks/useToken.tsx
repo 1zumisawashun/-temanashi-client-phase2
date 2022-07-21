@@ -1,46 +1,23 @@
 import { useCookies } from 'react-cookie'
-import axios from 'axios'
+import { useAxios } from './useAxios'
 
-type Response = {
+export type JwtResponse = {
   message: string
   jwt: string
 }
 
-type Params = {
+export type JwtParams = {
   uid: string
   name: string
 }
 
 /**
- * useCookieの責務をこのファイルに閉じ込める
+ * useCookiesの責務をこのファイルに閉じ込める
+ * useAxiosでのみcookie取得のため使用しているが基本はこのファイルでuseCookiesを使う
  */
 export const useToken = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['jwt'])
-
-  const createJWT = async (params: Params) => {
-    const result = await axios.post<Response>(
-      `${process.env.REACT_APP_BASE_URL}/api/jwt`,
-      params
-    )
-    console.log(result, 'createJWT')
-    setCookie('jwt', result.data.jwt, { path: '/' })
-  }
-
-  const verifyJWT = async (): Promise<string | null> => {
-    try {
-      const headers = {
-        Authorization: `Bearer ${cookies.jwt}`
-      }
-      const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/jwt/check`,
-        { headers }
-      )
-      console.log(result, 'result')
-      return result.data.message // Promise.resolveを返す
-    } catch (error) {
-      return null // Promise.rejectを返す
-    }
-  }
+  const { axios } = useAxios()
 
   const removeJWT = () => {
     removeCookie('jwt', { path: '/' })
@@ -48,6 +25,25 @@ export const useToken = () => {
 
   const setJWT = (jwt: string) => {
     setCookie('jwt', jwt, { path: '/' })
+  }
+
+  const createJWT = async (params: JwtParams): Promise<string | null> => {
+    try {
+      const result: JwtResponse = await axios.post(`/api/jwt`, params)
+      setJWT(result.jwt)
+      return result.message // NOTE:Promise.resolveを返す
+    } catch (error) {
+      return null // NOTE:Promise.rejectを返す
+    }
+  }
+
+  const verifyJWT = async (): Promise<string | null> => {
+    try {
+      const result: JwtResponse = await axios.get(`/api/jwt/check`)
+      return result.message
+    } catch (error) {
+      return null
+    }
   }
 
   return { cookies, verifyJWT, createJWT, removeJWT, setJWT }

@@ -9,7 +9,7 @@ const breakpoints = {
 
 /**
  * mediaQueryの方が直感的に使いやすいのでそちらを採用する
- * deviceもmediaQueryも補完（予測変換）できている
+ * deviceもmediaQueryも自動補完（予測変換）できている
  * https://github.com/emotion-js/emotion/blob/main/docs/media-queries.mdx
  */
 export const device = {
@@ -19,7 +19,6 @@ export const device = {
   pc: `(max-width: ${breakpoints.pc}px)`
 }
 
-// eslint-disable-next-line
 const FirstTextWrapper = styled('div')`
   margin: auto;
   @media ${device.tab} {
@@ -33,7 +32,6 @@ const FirstTextWrapper = styled('div')`
 export const mediaQuery = (key: keyof typeof breakpoints) =>
   `@media (max-width: ${breakpoints[key]}px)`
 
-// eslint-disable-next-line
 const SecondTestWrapper = styled('div')`
   color: 'green';
   margin: auto;

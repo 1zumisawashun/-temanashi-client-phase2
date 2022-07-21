@@ -30,15 +30,17 @@ E2Eテスト： Cypress
 
 ### phase-2 でアップデートした内容（未実装も含む）
 
+- React.Suspense, React.lazy を用いたダイナミックインポートの実装
 - phase1 ではほぼ未実装だった useMemo, useCallback を用いたパフォーマンスチューニング
-- React.Suspense（react-query）, React.lazy を用いたダイナミックインポートの実装
+- useEffect でのデータフェッチを全廃、react-query に切り替え
 - エラーハンドリング（react-error-boundly）の強化
-- CSS フレームワークである MUI と CSSinJS（emotion）を用いた UI の改善・統一
-- Cypress のクオリティの強化
-- ディレクトリ構成の全面的な見直し（後述）
-- フォームバリデーションの強化（react-hook-form・yup）
-- リンター系の実装（StyleLint, ESLint, husky, Prettier）
-- Circle CIを活用し自動デプロイ・自動テストの実装、さらに本番環境だけでなく開発環境も設置
+- CSS フレームワークである MUI と CSSinJS（emotion）を用いた UI の改善・統一（レスポンシブ対応済み）
+- Cypress のクオリティを強化
+- ディレクトリ構成の全面的な見直し（※後述）
+- フォームバリデーション（react-hook-form, yup）の強化
+- リンター系（StyleLint, ESLint, husky, lint-staged, Prettier）の実装
+- CircleCI を活用し自動デプロイ・自動テストの実装
+- 本番環境だけでなく開発環境のインフラを用意
 
 ### phase-2 で採用しているアーキテクチャ
 

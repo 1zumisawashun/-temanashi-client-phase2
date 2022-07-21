@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
-import { useData } from '../../hooks'
+import { useQuery } from 'react-query'
+import { mediaQuery } from '../../hooks'
 import { Avatar, Divider } from '../ui'
 import { User } from '../../@types/dashboard'
 import { productUseCase } from '../../utilities/stripeClient'
@@ -11,7 +12,7 @@ const OnlineUserContainer = styled('div')`
   min-width: 250px;
   padding: 30px;
   width: 250px;
-  @media (max-width: 576px) {
+  ${mediaQuery('sp')} {
     display: none;
   }
 `
@@ -38,16 +39,14 @@ const OnlineUserItem = styled('div')`
 `
 
 export const OnlineUsers: React.VFC = () => {
-  const users = useData<Array<User>>('users', () =>
-    productUseCase.fetchAllUser()
-  )
+  const { data } = useQuery('users', productUseCase.fetchAllUser)
 
   return (
     <OnlineUserContainer>
       <Title>All Users</Title>
       <Divider />
-      {users &&
-        users.map((user) => (
+      {data &&
+        data.map((user) => (
           <OnlineUserItem key={user.id}>
             {user.online && <OnlineUser />}
             <span>{user.displayName}</span>

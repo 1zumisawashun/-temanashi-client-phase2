@@ -33,7 +33,5 @@ export const Avatar: React.VFC<AvatarProps> = ({ src, size = 'small' }) => {
     <AvatarWrapper size={size}>
       <AvatarImage src={src} />
     </AvatarWrapper>
-  ) : (
-    <AvatarWrapper size={size} />
-  )
+  ) : null
 }

@@ -1,16 +1,13 @@
 import { useState, useCallback } from 'react'
+import { useQuery } from 'react-query'
 import { DashboardFilter, DashboardList } from '../model/dashboard'
 import { useAuthContext } from '../../hooks/useContextClient'
 import { productUseCase, ProductItem } from '../../utilities/stripeClient'
-import { useData } from '../../hooks/useData'
 
 export const DashboardTemplate: React.VFC = () => {
   const { user } = useAuthContext()
   const [currentFilter, setCurrentFilter] = useState<string>('all')
-
-  const productItems = useData<ProductItem[]>('productItems', () =>
-    productUseCase.fetchAllProduct()
-  )
+  const { data } = useQuery('productItems', productUseCase.fetchAllProduct)
 
   // FIXME:一旦dashboardでパフォーマンスチューニングの検証を行う
   const changeFilter = useCallback((newFilter: string) => {
@@ -19,8 +16,8 @@ export const DashboardTemplate: React.VFC = () => {
 
   if (!user) throw new Error('we cant find your account')
 
-  const filteredProductItems = productItems
-    ? productItems.filter((productItem: ProductItem) => {
+  const filteredProductItems = data
+    ? data.filter((productItem: ProductItem) => {
         switch (currentFilter) {
           case 'all':
             return true
