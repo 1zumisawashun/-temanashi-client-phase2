@@ -11,11 +11,6 @@ const UserContainer = styled('div')`
   width: 100%;
 `
 
-type Response = {
-  message: string
-  jwt: string
-}
-
 export const Bomb: React.VFC = () => {
   throw new Error('💥 CABOOM 💥')
 }
@@ -24,7 +19,7 @@ export const UserAccount: React.VFC = () => {
   const { user } = useAuthContext()
   const { axios } = useAxios()
   const { logout, isPending } = useAuth()
-  const { setJWT } = useToken()
+  const { createJWT, verifyJWT } = useToken()
   const history = useHistory()
   const [explode, setExplode] = useState(false)
 
@@ -43,43 +38,31 @@ export const UserAccount: React.VFC = () => {
       console.log(result.data, 'onCallTest')
     })
   }
+
   /**
    * useAxiosでhttp通信成功している_20220719
    * jwt必要なし
    */
-  const onRequestTest = async () => {
-    const result = await axios.get(`/helloOnRequest`)
-    console.log(result, 'onRequestTest')
-  }
+  const onRequestTest = () => axios.get(`/helloOnRequest`)
+
   /**
    * useAxiosでhttp通信成功している_20220719
    * jwt必要あり
    */
-  const getAxiosTest = async () => {
-    const result = await axios.get(`/api/hello`)
-    console.log(result, 'getAxiosTest')
-  }
+  const handleAxios = () => axios.get(`/api/hello`)
+
   /**
    * useAxiosでhttp通信成功している_20220719
    * jwt必要なし
    */
-  const createJWT = async () => {
-    const params = {
-      uid: user.uid,
-      name: user.displayName
-    }
-    const result: Response = await axios.post(`/api/jwt`, params)
-    setJWT(result.jwt)
-    console.log(result, 'createJWT')
-  }
+  const handleCreateJwt = () =>
+    createJWT({ uid: user.uid, name: user.displayName! })
+
   /**
    * useAxiosでhttp通信成功している_20220719
    * jwt必要あり
    */
-  const verifyJWT = async () => {
-    const result = await axios.get(`/api/jwt/check`)
-    console.log(result, 'verifyJWT')
-  }
+  const handleVerifyJwt = async () => verifyJWT()
 
   const Emulating = () => console.log('Emulating')
 
@@ -87,9 +70,9 @@ export const UserAccount: React.VFC = () => {
     <UserContainer>
       <Button onClick={onCallTest}>OnCallTest</Button>
       <Button onClick={onRequestTest}>OnRequestTest</Button>
-      <Button onClick={getAxiosTest}>GetAxiosTest</Button>
-      <Button onClick={createJWT}>CreateJWT</Button>
-      <Button onClick={verifyJWT}>verifyJWT</Button>
+      <Button onClick={handleAxios}>GetAxiosTest</Button>
+      <Button onClick={handleCreateJwt}>CreateJWT</Button>
+      <Button onClick={handleVerifyJwt}>verifyJWT</Button>
       <Button onClick={Emulating} isDisabled={isEmulating}>
         emulatingTest
       </Button>

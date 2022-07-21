@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useQuery } from 'react-query'
 import { DiagnoseResult, DiagnoseTinderSwipe } from '../model/disgnose'
 import { Loading } from '../ui'
 import { useRandomContext } from '../../hooks/useContextClient'
-import { useData } from '../../hooks/useData'
 import { productUseCase, ProductItem } from '../../utilities/stripeClient'
 import { delay } from '../../utilities'
 
@@ -12,14 +12,14 @@ export const DiagnoseTemplate: React.VFC = () => {
     useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [documents, setDocuments] = useState<Array<ProductItem>>([])
+  const { data } = useQuery('productItems', productUseCase.fetchAllProduct)
 
-  if (products.length === 0) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const storeProductItems = useData<ProductItem[]>('ProductItems', () =>
-      productUseCase.fetchAllProduct()
-    )
-    addProductWithRandom(storeProductItems)
-  }
+  /* eslint-disable */
+  useEffect(() => {
+    if (data && products.length === 0) {
+      addProductWithRandom(data)
+    }
+  }, [data])
 
   const changeHandler = useCallback(async () => {
     setIsLoading(true)

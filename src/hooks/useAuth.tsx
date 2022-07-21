@@ -32,9 +32,7 @@ export const useAuth = () => {
       }
     } catch (err) {
       if (!isCancelled) {
-        if (err instanceof Error) {
-          setError(err.message)
-        }
+        setError('エラーが発生しました。')
         setIsPending(false)
       }
     }
@@ -59,7 +57,6 @@ export const useAuth = () => {
       const img = await projectStorage.ref(uploadPath).put(thumbnail)
       const imgUrl = await img.ref.getDownloadURL()
 
-      // add display name to user
       await res.user.updateProfile({ displayName, photoURL: imgUrl })
       await documentPoint<addUser>('users', res.user.uid).set({
         online: true,
@@ -76,9 +73,7 @@ export const useAuth = () => {
       }
     } catch (err) {
       if (!isCancelled) {
-        if (err instanceof Error) {
-          setError(err.message)
-        }
+        setError('エラーが発生しました。')
         setIsPending(false)
       }
     }
@@ -103,9 +98,7 @@ export const useAuth = () => {
       }
     } catch (err) {
       if (!isCancelled) {
-        if (err instanceof Error) {
-          setError(err.message)
-        }
+        setError('エラーが発生しました。')
         setIsPending(false)
       }
     }

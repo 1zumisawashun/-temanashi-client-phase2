@@ -38,17 +38,18 @@ interface PaymentListProp {
   paymentItems: Array<PaymentDoc>
 }
 
+/* eslint-disable react/no-array-index-key */
+// FIXME:型定義の見直しをする,PaymentDocと異なる
 export const UserPaymentList: React.VFC<PaymentListProp> = ({
   paymentItems
 }) => {
   return (
     <PaymentContaienr>
       {paymentItems &&
-        // FIXME:型定義の見直しをする,PaymentDocと異なる
-        paymentItems.map((payment: any) => (
-          <PaymentWrapper key={payment.id}>
-            {payment.items.map((item: any) => (
-              <PaymentInner key={item.id}>
+        paymentItems.map((payment: any, index: number) => (
+          <PaymentWrapper key={`payments-${index}`}>
+            {payment.items.map((item: any, index: number) => (
+              <PaymentInner key={`items-${index}`}>
                 <PaymentName>
                   {item.description}
                   <PaymentDate>

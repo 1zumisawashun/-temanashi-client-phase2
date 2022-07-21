@@ -38,6 +38,16 @@
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off", // 関数の返り値の型必須をoffにする https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md
     "react/require-default-props": "off", // コンポーネントの引数が必須ではない時の警告をoff
+    // 下記でもエイリアスを作成することができる（exportファイルは適用されないっぽい）
+    // "import/parsers": {
+    //   "@typescript-eslint/parser": [".ts", ".tsx"]
+    // },
+    // "import/resolver": {
+    //   "alias": {
+    //     "map": [["@/components", "./src/components"]],
+    //     "extensions": [".ts", ".js", ".json"]
+    //   }
+    // },
     /**
      * temanashi-phase1で実装したESLint
      */

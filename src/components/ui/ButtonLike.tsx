@@ -1,13 +1,8 @@
 import { useState, useEffect } from 'react'
+import { useQuery } from 'react-query'
 import { timestamp } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useContextClient'
-import { useData } from '../../hooks'
-import {
-  productUseCase,
-  ProductItem,
-  CustomLikedUser,
-  CustomLikedFuriture
-} from '../../utilities/stripeClient'
+import { productUseCase, ProductItem } from '../../utilities/stripeClient'
 import { ButtonIconFavorite, ButtonIconNoFavirute } from '.'
 
 type LikeButtonProp = {
@@ -19,17 +14,16 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   const { user } = useAuthContext()
   if (!user) throw new Error('we cant find your account')
 
-  const likedUser = useData<CustomLikedUser>('likedUser', () =>
+  const likedUser = useQuery('likedUser', () =>
     productUseCase.fetchLikedUser(user.uid, furniture.product.id)
   )
-
-  const likedFurniture = useData<CustomLikedFuriture>('LikedProduct', () =>
+  const likedFurniture = useQuery('LikedProduct', () =>
     productUseCase.fetchLikedProduct(user.uid, furniture.product.id)
   )
 
   // NOTE:set中にconverterで定義している型と違う値を入れるとエラーになることを確認できる
   const addLikedUser = () => {
-    likedUser.referense.set({
+    likedUser.data!.referense.set({
       liked_user: {
         uid: user.uid,
         displayName: user.displayName
@@ -39,18 +33,18 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   }
 
   const addLikedFurniture = () => {
-    likedFurniture.referense.set({
+    likedFurniture.data!.referense.set({
       liked_furniture: furniture,
       createdAt: timestamp.fromDate(new Date())
     })
   }
 
   const removeLikedUser = () => {
-    likedFurniture.referense.delete()
+    likedFurniture.data!.referense.delete()
   }
 
   const removeLikedFurniture = () => {
-    likedUser.referense.delete()
+    likedUser.data!.referense.delete()
   }
 
   const handleClick = () => {
@@ -66,7 +60,7 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   }
 
   useEffect(() => {
-    const unsubscribe = likedFurniture.referense.onSnapshot(
+    const unsubscribe = likedFurniture.data!.referense.onSnapshot(
       (snapshot) => {
         if (snapshot.exists) {
           setLike(true)
@@ -79,7 +73,8 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
       }
     )
     return () => unsubscribe()
-  }, [likedFurniture.referense])
+    /*eslint-disable*/
+  }, [likedFurniture])
 
   return (
     <div>

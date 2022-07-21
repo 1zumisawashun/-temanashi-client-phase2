@@ -4,6 +4,8 @@ import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
 import { ThemeProvider } from '@mui/material/styles'
+import { QueryClient, QueryClientProvider, DefaultOptions } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { ErrorForbidden, Loading } from '../components/ui'
 import {
   AuthContextProvider,
@@ -11,6 +13,19 @@ import {
   RandomContextProvider
 } from '../contexts'
 import { theme } from '../utilities/muiThemeClient'
+
+const queryConfig: DefaultOptions = {
+  queries: {
+    useErrorBoundary: true,
+    refetchOnWindowFocus: false,
+    retry: false,
+    // cacheTime: 0,
+    // staleTime: 1000,
+    suspense: true
+  }
+}
+
+const queryClient = new QueryClient({ defaultOptions: queryConfig })
 
 export const ErrorFallback: React.VFC<FallbackProps> = ({
   error,
@@ -31,15 +46,18 @@ export const AppProvider: React.VFC<AppProviderProps> = ({ children }) => {
       <ThemeProvider theme={theme}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <HelmetProvider>
-            <CartContextProvider>
-              <AuthContextProvider>
-                <RandomContextProvider>
-                  <CookiesProvider>
-                    <BrowserRouter>{children}</BrowserRouter>
-                  </CookiesProvider>
-                </RandomContextProvider>
-              </AuthContextProvider>
-            </CartContextProvider>
+            <QueryClientProvider client={queryClient}>
+              <ReactQueryDevtools initialIsOpen={false} />
+              <CartContextProvider>
+                <AuthContextProvider>
+                  <RandomContextProvider>
+                    <CookiesProvider>
+                      <BrowserRouter>{children}</BrowserRouter>
+                    </CookiesProvider>
+                  </RandomContextProvider>
+                </AuthContextProvider>
+              </CartContextProvider>
+            </QueryClientProvider>
           </HelmetProvider>
         </ErrorBoundary>
       </ThemeProvider>

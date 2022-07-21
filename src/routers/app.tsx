@@ -44,7 +44,7 @@ export const AppRoute: React.VFC = () => {
         <Route path="/cart" component={Cart} />
         <Route path="/component" component={Component} />
         <Route path="*">
-          <Redirect to="/" />
+          <Redirect to="/error" />
         </Route>
       </Switch>
     </AppContainer>

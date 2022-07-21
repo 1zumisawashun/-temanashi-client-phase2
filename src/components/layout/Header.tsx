@@ -12,7 +12,6 @@ const HeaderContainer = styled('div')`
   ${mediaQuery('sp')} {
     background: #84bcb4;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
-    height: 75px;
     padding: 0;
     transition-duration: 100ms;
     &.-active {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 
-export const useDragAndDrop = () => {
-  const [isDragging, setIsDragging] = useState<boolean>(false) // eslint-disable-line
+export const useDragAndDrop = (onChangeFiles: (e: FileList) => void) => {
+  const [isDragging, setIsDragging] = useState<boolean>(false)
   const dragRef = useRef<HTMLDivElement | null>(null)
 
   const handleDragIn = useCallback((e: DragEvent): void => {
@@ -31,24 +31,13 @@ export const useDragAndDrop = () => {
       e.stopPropagation()
       if (e.dataTransfer) {
         const selectedFiles = e.dataTransfer.files
-        console.log(selectedFiles, 'selectedFiles')
-        // const validateSelectedFiles = checkSelectFiles(selectedFiles);
-        // onChangeFiles(validateSelectedFiles);
+        // FIXME:バリデーションを挟みたい
+        onChangeFiles(selectedFiles)
       }
       setIsDragging(false)
     },
-    // [onChangeFiles]
-    []
+    [onChangeFiles]
   )
-
-  // const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const selectedFiles = e.target.files;
-  //   if (selectedFiles) {
-  //     const validateSelectedFiles = checkSelectFiles(selectedFiles);
-  //     onChangeFiles(validateSelectedFiles);
-  //   }
-  //   e.target.value = '';
-  // };
 
   const initDragEvents = useCallback((): void => {
     if (dragRef.current !== null) {
@@ -75,5 +64,3 @@ export const useDragAndDrop = () => {
 
   return { dragRef }
 }
-
-export default useDragAndDrop

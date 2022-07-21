@@ -7,7 +7,7 @@ type Id = {
 }
 
 /**
- * suspenseでデータフェッチをする（useEffectでデータフェッチをしない）ため未使用_20220719
+ *  useEffectでデータフェッチをしない仕様にする為、現在は未使用
  */
 export const useDocument = <T,>({ collection, document }: firebasePath) => {
   const [documents, setDocuments] = useState<T & Id>()
