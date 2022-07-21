@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { Head } from '../components/layout'
-import { Button } from '../components/ui'
+import { Head } from '../components/layouts'
+import { Button } from '../components/uis'
 
 const CompleteContainer = styled('div')`
   background: #84bcb4;

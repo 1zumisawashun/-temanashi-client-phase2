@@ -1,6 +1,6 @@
 import { Redirect } from 'react-router-dom'
 import styled from '@emotion/styled'
-import { DiagnoseTemplate } from '../components/template/Diagnose'
+import { DiagnoseTemplate } from '../components/templates/Diagnose'
 import { useAuthContext, mediaQuery } from '../hooks'
 import {
   Sidebar,
@@ -8,8 +8,8 @@ import {
   Header,
   Footer,
   Head
-} from '../components/layout'
-import { Loading } from '../components/ui'
+} from '../components/layouts'
+import { Loading } from '../components/uis'
 
 const Container = styled('div')`
   flex-grow: 1;

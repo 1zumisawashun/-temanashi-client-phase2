@@ -6,7 +6,7 @@ import { CookiesProvider } from 'react-cookie'
 import { ThemeProvider } from '@mui/material/styles'
 import { QueryClient, QueryClientProvider, DefaultOptions } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { ErrorForbidden, Loading } from '../components/ui'
+import { ErrorForbidden, Loading } from '../components/uis'
 import {
   AuthContextProvider,
   CartContextProvider,

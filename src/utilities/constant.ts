@@ -1,5 +1,5 @@
 import { Furniture } from '../@types/dashboard'
-import { OptionProps } from '../components/ui/InputSelect'
+import { OptionProps } from '../components/uis/InputSelect'
 import theme_1 from '../assets/image/furniture_1.jpg'
 
 export const recommendation: Partial<Furniture> = {
