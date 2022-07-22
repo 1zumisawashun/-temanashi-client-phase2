@@ -1,13 +1,16 @@
 import { useState, useCallback } from 'react'
 import { useQuery } from 'react-query'
-import { DashboardFilter, DashboardList } from '../models/dashboard'
+import { DashboardList } from '../models/dashboard'
 import { useAuthContext } from '../../hooks/useContextClient'
-import { productUseCase, ProductItem } from '../../utilities/stripeClient'
+import { ProductItem } from '../../@types/dashboard'
+import { fetchAllProduct } from '../../api/fetchAllProduct'
+import { filterList } from '../../utilities/constant'
+import { BasicFilter } from '../uis'
 
 export const DashboardTemplate: React.VFC = () => {
   const { user } = useAuthContext()
   const [currentFilter, setCurrentFilter] = useState<string>('all')
-  const { data } = useQuery('productItems', productUseCase.fetchAllProduct)
+  const { data } = useQuery('productItems', fetchAllProduct)
 
   // FIXME:一旦dashboardでパフォーマンスチューニングの検証を行う
   const changeFilter = useCallback((newFilter: string) => {
@@ -44,9 +47,10 @@ export const DashboardTemplate: React.VFC = () => {
   return (
     <>
       {filteredProductItems && (
-        <DashboardFilter
+        <BasicFilter
           currentFilter={currentFilter}
           changeFilter={changeFilter}
+          items={filterList}
         />
       )}
       {filteredProductItems && (

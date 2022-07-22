@@ -18,7 +18,11 @@ import {
   SelectForm,
   InputText,
   InputTextarea,
-  CheckboxGroup
+  CheckboxGroup,
+  LinkCardNormal,
+  LinkCardNormalWithoutBackground,
+  LinkCardFlex,
+  LinkCardFlexWithoutBackground
 } from '../components/uis/phase3'
 import { categoryOptions, weekdaysOptions } from '../utilities/constant'
 
@@ -144,6 +148,17 @@ export const Component: React.VFC = () => {
     <Container>
       <Inner>
         <FormContainer>
+          <ComponentContainer>
+            <ComponentTitle>Card</ComponentTitle>
+            <LinkCardNormal />
+            <Divider />
+            <LinkCardNormalWithoutBackground />
+            <Divider />
+            <LinkCardFlex />
+            <Divider />
+            <LinkCardFlexWithoutBackground />
+          </ComponentContainer>
+
           <ComponentContainer>
             <ComponentTitle>SwitchForm</ComponentTitle>
             <SwitchForm

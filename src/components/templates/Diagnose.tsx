@@ -3,8 +3,9 @@ import { useQuery } from 'react-query'
 import { DiagnoseResult, DiagnoseTinderSwipe } from '../models/disgnose'
 import { Loading } from '../uis'
 import { useRandomContext } from '../../hooks/useContextClient'
-import { productUseCase, ProductItem } from '../../utilities/stripeClient'
+import { ProductItem } from '../../@types/dashboard'
 import { delay } from '../../utilities'
+import { fetchAllProduct } from '../../api/fetchAllProduct'
 
 export const DiagnoseTemplate: React.VFC = () => {
   const { products, addProductWithRandom } = useRandomContext()
@@ -12,7 +13,7 @@ export const DiagnoseTemplate: React.VFC = () => {
     useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [documents, setDocuments] = useState<Array<ProductItem>>([])
-  const { data } = useQuery('productItems', productUseCase.fetchAllProduct)
+  const { data } = useQuery('productItems', fetchAllProduct)
 
   /* eslint-disable */
   useEffect(() => {

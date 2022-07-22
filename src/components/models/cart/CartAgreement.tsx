@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { useState } from 'react'
 import { InputCheckbox, Button } from '../../uis'
 import { SquareIcon, SquareIconBlank } from '../../uis/InputCheckbox'
+import { mediaQuery } from '../../../hooks'
 
 const CartAgreementContainer = styled('div')`
   background: white;
@@ -12,6 +13,9 @@ const CartAgreementContainer = styled('div')`
   margin: 30px auto 0;
   padding: 20px 0;
   width: 100%;
+  ${mediaQuery('sp')} {
+    flex-wrap: wrap;
+  }
 `
 
 interface CartAgreementProps {

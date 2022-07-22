@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { userList } from '../../../utilities/constant'
 
 const FilterContainer = styled('div')`
   border-radius: 4px;
@@ -39,14 +38,16 @@ const FilterButton = styled('button')`
   }
 `
 
-interface UserFilterProps {
+interface BasicFilterProps {
   currentFilter: string
   changeFilter: (newFilter: string) => void
+  items: Array<string>
 }
 
-export const UserFilter: React.VFC<UserFilterProps> = ({
+export const BasicFilter: React.VFC<BasicFilterProps> = ({
   currentFilter,
-  changeFilter
+  changeFilter,
+  items
 }) => {
   const handleClick = (newFilter: string) => {
     changeFilter(newFilter)
@@ -54,7 +55,7 @@ export const UserFilter: React.VFC<UserFilterProps> = ({
   return (
     <FilterContainer>
       <FilterNav>
-        {userList.map((f) => (
+        {items.map((f) => (
           <FilterButton
             key={f}
             onClick={() => handleClick(f)}

@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
-import { Comment, CommentToAdd } from '../../../@types/dashboard'
+import { Comment, CommentToAdd, ProductItem } from '../../../@types/dashboard'
 import { useDisclosure } from '../../../hooks'
 import { timestamp, firebase } from '../../../firebase/config'
 import {
@@ -13,7 +13,7 @@ import {
   Avatar,
   ButtonIconPerson
 } from '../../uis'
-import { productUseCase, ProductItem } from '../../../utilities/stripeClient'
+import { fetchCommentReference } from '../../../api/fetchCommentReference'
 
 const ProductCommentContainer = styled('div')`
   width: 100%;
@@ -59,7 +59,7 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
 }) => {
   const commentModal = useDisclosure()
   const { data } = useQuery('commentRef', () =>
-    productUseCase.fetchCommentsRef(productId)
+    fetchCommentReference(productId)
   )
 
   const [comments, setComments] = useState<Comment[]>(furniture.comments)

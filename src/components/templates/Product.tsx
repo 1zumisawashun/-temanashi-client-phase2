@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { useQuery } from 'react-query'
 import { ProductComment, ProductSummary } from '../models/product'
-import { productUseCase } from '../../utilities/stripeClient'
 import { useAuthContext, mediaQuery } from '../../hooks'
+import { fetchProductItem } from '../../api/fetchProductItem'
 
 const ProductContainer = styled('div')`
   align-items: start;
@@ -18,9 +18,7 @@ const ProductContainer = styled('div')`
 export const ProductTemplate: React.VFC = () => {
   const { id } = useParams<{ id: string }>()
   const { user } = useAuthContext()
-  const { data } = useQuery(['productItem', id], () =>
-    productUseCase.fetchProductItem(id)
-  )
+  const { data } = useQuery(['productItem', id], () => fetchProductItem(id))
 
   if (!user) throw new Error('we cant find your account')
 

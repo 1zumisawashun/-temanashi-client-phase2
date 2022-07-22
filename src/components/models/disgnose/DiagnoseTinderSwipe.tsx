@@ -7,17 +7,15 @@ import {
   ButtonIconUndo,
   BasicProgressbar
 } from '../../uis'
-import { ProductItem } from '../../../utilities/stripeClient'
+import { ProductItem } from '../../../@types/dashboard'
 import { delay } from '../../../utilities'
 
-const ButtonWrapper = styled('div')`
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  padding-top: 10px;
-`
 const CommonWrapper = styled('div')`
-  display: block;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  /* innerHeaderとfooterを足すと200になる */
+  min-height: calc(100vh - 200px);
 `
 const TinderSwipeContainer = styled('div')`
   display: block;
@@ -47,6 +45,12 @@ const Title = styled('h3')`
   color: white;
   margin: 10px;
   position: absolute;
+`
+const ButtonWrapper = styled('div')`
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding-top: 10px;
 `
 
 type TinderSwipeProps = {

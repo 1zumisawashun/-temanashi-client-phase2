@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
-import { useCartContext } from '../../../hooks/useContextClient'
+import { useCartContext, mediaQuery } from '../../../hooks'
 import { formatTaxIncludedPrice } from '../../../utilities'
 import { CartCounter } from './CartCounter'
 import { Divider, Image, ButtonIconDelete } from '../../uis'
@@ -9,6 +9,9 @@ import { Divider, Image, ButtonIconDelete } from '../../uis'
 const CartListContainer = styled('div')`
   margin: 0 auto;
   width: 80%;
+  ${mediaQuery('sp')} {
+    width: 100%;
+  }
 `
 const CartListWrapper = styled('div')`
   border-radius: 6px;
@@ -35,6 +38,9 @@ const Content = styled('div')`
   display: flex;
   justify-content: space-between;
   width: 70%;
+  ${mediaQuery('sp')} {
+    width: auto;
+  }
 `
 const Detail = styled('div')`
   margin: auto 0;

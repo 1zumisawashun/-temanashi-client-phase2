@@ -2,8 +2,7 @@ import styled from '@emotion/styled'
 import { useQuery } from 'react-query'
 import { mediaQuery } from '../../hooks'
 import { Avatar, Divider } from '../uis'
-import { User } from '../../@types/dashboard'
-import { productUseCase } from '../../utilities/stripeClient'
+import { fetchAllUser } from '../../api/fetchAllUser'
 
 const OnlineUserContainer = styled('div')`
   background: #fbfbfb;
@@ -39,7 +38,7 @@ const OnlineUserItem = styled('div')`
 `
 
 export const OnlineUsers: React.VFC = () => {
-  const { data } = useQuery('users', productUseCase.fetchAllUser)
+  const { data } = useQuery('users', fetchAllUser)
 
   return (
     <OnlineUserContainer>

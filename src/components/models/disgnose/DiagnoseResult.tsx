@@ -3,28 +3,36 @@ import styled from '@emotion/styled'
 import { recommendation } from '../../../utilities/constant'
 import { formatTaxIncludedPrice } from '../../../utilities'
 import { Image } from '../../uis'
-import { ProductItem } from '../../../utilities/stripeClient'
+import { ProductItem } from '../../../@types/dashboard'
 import { DashboardList } from '../dashboard'
+import { mediaQuery } from '../../../hooks'
 
 const DisgnoseResultContainer = styled('div')`
   font-size: 16px;
 `
 const DisgnoseThumbnail = styled('div')`
   background: white;
-  border-radius: 6px;
+  border-radius: 9px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  padding: 40px 0;
+  padding: 40px;
   text-align: center;
+  ${mediaQuery('sp')} {
+    padding: 20px;
+  }
 `
 /*
  * 小コンポーネントに送るために作成
  */
 const styledImageDisgnose = css`
+  border-radius: 6px;
   object-fit: cover;
-  width: 700px;
+  width: 100%;
 `
 const DisgnoseContent = styled('div')`
   margin: 20px 0;
+  ${mediaQuery('sp')} {
+    margin: 20px;
+  }
 `
 const DisgnoseName = styled('h2')`
   font-size: 1.6rem;
@@ -34,6 +42,11 @@ const DisgnoseColors = styled('div')`
   justify-content: space-between;
   margin: 10px 0;
   width: 55%;
+  ${mediaQuery('sp')} {
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
 `
 const DisgnoseItem = styled('div')`
   display: flex;

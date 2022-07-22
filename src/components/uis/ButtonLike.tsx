@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { timestamp } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useContextClient'
-import { productUseCase, ProductItem } from '../../utilities/stripeClient'
-import { ButtonIconFavorite, ButtonIconNoFavirute } from '.'
+import { ProductItem } from '../../@types/dashboard'
+import { fetchLikedProduct } from '../../api/fetchLikedProduct'
+import { fetchLikedUser } from '../../api/fetchLikedUser'
+import { ButtonIconFavorite, ButtonIconNoFavirute } from './ButtonIcon'
 
 type LikeButtonProp = {
   furniture: ProductItem
@@ -15,10 +17,10 @@ export const ButtonLike: React.VFC<LikeButtonProp> = ({ furniture }) => {
   if (!user) throw new Error('we cant find your account')
 
   const likedUser = useQuery('likedUser', () =>
-    productUseCase.fetchLikedUser(user.uid, furniture.product.id)
+    fetchLikedUser(user.uid, furniture.product.id)
   )
   const likedFurniture = useQuery('LikedProduct', () =>
-    productUseCase.fetchLikedProduct(user.uid, furniture.product.id)
+    fetchLikedProduct(user.uid, furniture.product.id)
   )
 
   // NOTE:set中にconverterで定義している型と違う値を入れるとエラーになることを確認できる
