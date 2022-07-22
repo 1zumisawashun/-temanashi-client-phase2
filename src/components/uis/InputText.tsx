@@ -8,9 +8,21 @@ const Text = styled(TextField)`
   margin-top: 6px;
   width: 100%;
 `
+const SubText = styled('p')`
+  color: #999;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.03333em;
+  line-height: 1.66;
+  margin-bottom: 0;
+  margin-left: 14px;
+  margin-right: 14px;
+  margin-top: 3px;
+  text-align: left;
+`
 
 const Label = styled('label')`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: 4px;
 `
@@ -38,6 +50,7 @@ export interface InputTextProps {
   maxLength?: number
   inputRef?: React.RefObject<HTMLInputElement>
   size?: 'small'
+  subText?: string
 }
 
 export const InputText: React.VFC<InputTextProps> = ({
@@ -58,11 +71,13 @@ export const InputText: React.VFC<InputTextProps> = ({
   pattern,
   maxLength = 255,
   inputRef = null,
-  size
+  size,
+  subText = '※これはテストこれはテストこれはテスト'
 }) => {
   return (
     <div>
       {label && <Label htmlFor={label}>{label}</Label>}
+      {subText && <SubText>{subText}</SubText>}
       <Text
         onChange={onChange}
         onKeyDown={onKeyDown}

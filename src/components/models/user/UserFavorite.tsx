@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { DashboardList } from '../dashboard'
-import { ProductItem } from '../../../utilities/stripeClient'
+import { ProductItem } from '../../../@types/dashboard'
 import { ErrorNotFound } from '../../uis'
 
 const UserContaienr = styled('div')`

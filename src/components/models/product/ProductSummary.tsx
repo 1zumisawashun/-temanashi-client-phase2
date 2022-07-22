@@ -3,7 +3,7 @@ import { Carousel } from 'react-responsive-carousel'
 import styled from '@emotion/styled'
 import { useCartContext, useFirestore, useDisclosure } from '../../../hooks'
 import { Button, ButtonLike, Modal } from '../../uis'
-import { ProductItem } from '../../../utilities/stripeClient'
+import { ProductItem } from '../../../@types/dashboard'
 import { formatTaxIncludedPrice } from '../../../utilities'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 

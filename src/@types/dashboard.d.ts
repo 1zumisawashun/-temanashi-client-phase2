@@ -1,5 +1,12 @@
 import { firebase } from '../firebase/config'
-import { ProductItem } from '../utilities/stripeClient'
+import { ProductDoc, PriceDoc } from './stripe'
+
+// 最終的にプロダクトが持っている値の集合体
+export type ProductItem = {
+  product: ProductDoc
+  prices: { [key: string]: PriceDoc }
+  comments: Array<Comment>
+}
 
 // NOTE:CreatedByなどAssignedUserで使うためidを付与
 export type User = {

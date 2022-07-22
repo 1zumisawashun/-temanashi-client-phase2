@@ -1,5 +1,5 @@
 import { createContext, useReducer, useMemo } from 'react'
-import { ProductItem } from '../utilities/stripeClient'
+import { ProductItem } from '../@types/dashboard'
 
 interface Action {
   type: string
