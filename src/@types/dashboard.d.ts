@@ -16,33 +16,13 @@ export type User = {
   photoURL: firebase.UserInfo.photoURL
 }
 
+// stripe.d.tsにも同じ型定義があるので統一させたい
 export type Comment = {
   displayName: firebase.UserInfo.displayName
   photoURL: firebase.UserInfo.photoURL
   content: string
   createdAt: firebase.firestore.Timestamp
   id: number
-}
-
-export type CommentToAdd = {
-  displayName: firebase.UserInfo.displayName
-  photoURL: firebase.UserInfo.photoURL
-  content: string
-  createdAt: firebase.firestore.Timestamp
-  id: number
-}
-
-export type ProjectType = {
-  assignedUsersList: Array<User>
-  category: string
-  comments: Array<Comment>
-  createdAt: firebase.firestore.Timestamp
-  createdBy: User
-  details: string
-  dueDate: firebase.firestore.Timestamp
-  id: string
-  name: string
-  likedCount: firebase.firestore.FieldValue //初期値としては追加されていないためoptional-chine
 }
 
 export type likedUsers = {

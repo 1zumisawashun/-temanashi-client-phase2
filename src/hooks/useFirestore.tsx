@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useState } from 'react'
-import { firebase, timestamp } from '../firebase/config'
+import { timestamp } from '../firebase/config'
 import { documentPoint, collectionPoint } from '../utilities/converterClient'
 
 const initialState = {
@@ -9,13 +9,10 @@ const initialState = {
   success: null
 }
 
-type CreatedAt = {
-  createdAt: firebase.firestore.Timestamp
-}
-
 /**
  * useReducerのテスト
  * reducerもhooksディレクトリとして切り出しているが正解かは不明
+ * 今のところdeleteしか使っていない
  */
 const firestoreReducer = (state: any, action: any) => {
   switch (action.type) {
@@ -60,11 +57,10 @@ export const useFirestore = () => {
   }
 
   const addDocument = async <T,>(collection: string, doc: T) => {
-    type TWithCreatedAt = CreatedAt & T
     dispatch({ type: 'IS_PENDING' })
     try {
       const createdAt = timestamp.fromDate(new Date())
-      const addedDocument = collectionPoint<TWithCreatedAt>(collection).add({
+      const addedDocument = collectionPoint<T>(collection).add({
         ...doc,
         createdAt
       })
@@ -72,10 +68,11 @@ export const useFirestore = () => {
         type: 'ADDED_DOCUMENT',
         payload: addedDocument
       })
-    } catch (err) {
-      if (err instanceof Error) {
-        dispatchIfNotCancelled({ type: 'ERROR', payload: err.message })
-      }
+    } catch (error) {
+      dispatchIfNotCancelled({
+        type: 'ERROR',
+        payload: (error as Error).message
+      })
     }
   }
 
@@ -84,15 +81,18 @@ export const useFirestore = () => {
     try {
       await documentPoint<T>(collection, id).delete()
       dispatchIfNotCancelled({ type: 'DELETED_DOCUMENT' })
-    } catch (err) {
-      dispatchIfNotCancelled({ type: 'ERROR', payload: 'could not delete' })
+    } catch (error) {
+      dispatchIfNotCancelled({
+        type: 'ERROR',
+        payload: (error as Error).message
+      })
     }
   }
 
   const updateDocument = async <T,>(
     collection: string,
     id: string,
-    updates: any
+    updates: T
   ) => {
     dispatch({ type: 'IS_PENDING' })
     try {
@@ -104,10 +104,11 @@ export const useFirestore = () => {
         payload: updatedDocument
       })
       return updatedDocument
-    } catch (err) {
-      if (err instanceof Error) {
-        dispatchIfNotCancelled({ type: 'ERROR', payload: err.message })
-      }
+    } catch (error) {
+      dispatchIfNotCancelled({
+        type: 'ERROR',
+        payload: (error as Error).message
+      })
       return null
     }
   }
