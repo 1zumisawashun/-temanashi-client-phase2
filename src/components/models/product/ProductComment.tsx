@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
-import { Comment, CommentToAdd, ProductItem } from '../../../@types/dashboard'
+import { Comment, ProductItem } from '../../../@types/dashboard'
 import { useDisclosure } from '../../../hooks'
 import { timestamp, firebase } from '../../../firebase/config'
 import {
@@ -66,7 +66,7 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
   const [newComment, setNewComment] = useState('')
 
   const handleSubmit = async () => {
-    const commentToAdd: CommentToAdd = {
+    const commentToAdd: Comment = {
       displayName: user.displayName,
       photoURL: user.photoURL,
       content: newComment,

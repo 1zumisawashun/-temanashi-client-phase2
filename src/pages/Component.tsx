@@ -22,7 +22,8 @@ import {
   LinkCardNormal,
   LinkCardNormalWithoutBackground,
   LinkCardFlex,
-  LinkCardFlexWithoutBackground
+  LinkCardFlexWithoutBackground,
+  Datetimepicker
 } from '../components/uis/phase3'
 import { categoryOptions, weekdaysOptions } from '../utilities/constant'
 
@@ -102,6 +103,7 @@ export const Component: React.VFC = () => {
   const [isSwitch, setIsSwitch] = useState<boolean>(false)
   const [isMatching, setIsMatching] = useState<boolean>(false)
   const [isAuto, setIsAuto] = useState<boolean>(false)
+  const [datetimepicker, setDatetimepicker] = useState<Date | null>(new Date())
 
   const handleSwitchForm = (state: string) => {
     if (state === 'isSwitch') setIsSwitch((prev) => !prev)
@@ -144,6 +146,11 @@ export const Component: React.VFC = () => {
     setSelectedCheckbox(newSelectedCheckLists)
   }
 
+  const onChangeStartDate = (date: Date | null) => {
+    if (!date) return
+    setDatetimepicker(date)
+  }
+
   return (
     <Container>
       <Inner>
@@ -157,6 +164,18 @@ export const Component: React.VFC = () => {
             <LinkCardFlex />
             <Divider />
             <LinkCardFlexWithoutBackground />
+          </ComponentContainer>
+
+          <ComponentContainer>
+            <ComponentTitle>Datetimepicker</ComponentTitle>
+            <Datetimepicker
+              label="配信開始日"
+              minDate={new Date()}
+              minTime={new Date(0, 0, 0, 9)}
+              maxTime={new Date(0, 0, 0, 19)}
+              value={datetimepicker}
+              onChange={onChangeStartDate}
+            />
           </ComponentContainer>
 
           <ComponentContainer>

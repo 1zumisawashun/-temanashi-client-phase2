@@ -3,8 +3,6 @@ import loadImage from 'blueimp-load-image'
 import { projectStorage } from '../firebase/config'
 import { useAuthContext } from './useContextClient'
 
-type addPhoto = File[] | null
-
 export const useStorage = () => {
   const [error, setError] = useState<string | null>(null)
   const [isPending, setIsPending] = useState(false)
@@ -15,7 +13,7 @@ export const useStorage = () => {
   /**
    * データを圧縮する画像を返す
    */
-  const getStorageUrl = async (state: addPhoto) => {
+  const getStorageUrl = async (state: Array<File>) => {
     setError(null)
     setIsPending(true)
 
@@ -60,7 +58,7 @@ export const useStorage = () => {
   /**
    * base64のdataURLを返す関数
    */
-  const getBase64 = async (state: addPhoto) => {
+  const getBase64 = async (state: Array<File>) => {
     setError(null)
     setIsPending(true)
 
@@ -68,6 +66,7 @@ export const useStorage = () => {
       setError('state is null!')
       throw new Error()
     }
+
     const promises = state.map(
       async (file): Promise<string | ArrayBuffer | null> => {
         return new Promise((resolve, reject) => {

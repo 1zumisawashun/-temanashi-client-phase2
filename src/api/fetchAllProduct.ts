@@ -1,5 +1,4 @@
-/* eslint-disable */
-import { ProductDoc } from '../@types/stripe'
+import { PriceDoc, ProductDoc } from '../@types/stripe'
 import { projectFirestore } from '../firebase/config'
 import { ProductItem } from '../@types/dashboard'
 
@@ -17,11 +16,13 @@ export const fetchAllProduct = async (): Promise<ProductItem[]> => {
     productSnapshot.docs.map(async (doc, index) => {
       const priceRef = doc.ref.collection('prices')
       const priceSnapshot = await priceRef.where('active', '==', true).get()
-      const priceMap = priceSnapshot.docs.reduce((acc, v) => {
-        // @ts-ignore
-        acc[v.id] = v.data() as PriceDoc
-        return acc
-      }, {})
+      const priceMap = priceSnapshot.docs.reduce<Record<string, PriceDoc>>(
+        (acc, v) => {
+          acc[v.id] = v.data() as PriceDoc
+          return acc
+        },
+        {}
+      )
       const productItem: ProductItem = {
         product: {
           id: doc.id,

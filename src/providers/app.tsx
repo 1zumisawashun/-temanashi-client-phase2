@@ -21,7 +21,7 @@ const queryConfig: DefaultOptions = {
     retry: false,
     // cacheTime: 0,
     // staleTime: 1000,
-    suspense: true
+    suspense: true // ver18から
   }
 }
 

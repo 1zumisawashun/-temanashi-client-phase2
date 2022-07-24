@@ -2,15 +2,11 @@ import { useEffect, useState } from 'react'
 import { documentPoint } from '../utilities/converterClient'
 import { firebasePath } from '../@types/dashboard'
 
-type Id = {
-  id: string
-}
-
 /**
  *  useEffectでデータフェッチをしない仕様にする為、現在は未使用
  */
 export const useDocument = <T,>({ collection, document }: firebasePath) => {
-  const [documents, setDocuments] = useState<T & Id>()
+  const [documents, setDocuments] = useState<T>({} as T)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
