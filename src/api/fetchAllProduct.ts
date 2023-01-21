@@ -12,28 +12,27 @@ export const fetchAllProduct = async (): Promise<ProductItem[]> => {
     .orderBy('metadata.createdAt', 'desc')
 
   const productSnapshot = await productQuery.get()
-  return Promise.all(
-    productSnapshot.docs.map(async (doc, index) => {
-      const priceRef = doc.ref.collection('prices')
-      const priceSnapshot = await priceRef.where('active', '==', true).get()
-      const priceMap = priceSnapshot.docs.reduce<Record<string, PriceDoc>>(
-        (acc, v) => {
-          acc[v.id] = v.data() as PriceDoc
-          return acc
-        },
-        {}
-      )
-      const productItem: ProductItem = {
-        product: {
-          id: doc.id,
-          random: index,
-          ...doc.data()
-        } as ProductDoc,
-        prices: priceMap,
-        comments: [] // NOTE:型定義を崩したくないため空の配列を入れる
-      }
 
-      return productItem
-    })
-  )
+  const promises = productSnapshot.docs.map(async (doc, index) => {
+    const priceRef = doc.ref.collection('prices')
+    const priceSnapshot = await priceRef.where('active', '==', true).get()
+    const priceMap = priceSnapshot.docs.reduce<PriceDoc>((acc, v) => {
+      acc[v.id] = v.data()
+      return acc
+    }, {} as PriceDoc)
+
+    const product = {
+      id: doc.id,
+      random: index,
+      ...doc.data()
+    } as ProductDoc
+
+    return {
+      product,
+      prices: priceMap,
+      comments: []
+    }
+  })
+
+  return Promise.all(promises)
 }

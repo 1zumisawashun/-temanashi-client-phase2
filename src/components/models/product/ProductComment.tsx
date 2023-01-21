@@ -88,18 +88,6 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
   return (
     <ProductCommentContainer>
       <ProductCommentWrapper>
-        <ProductCommentInner>
-          <ProductCommentAuther>
-            <ButtonIconPerson />
-            <p>temanashi-tester</p>
-          </ProductCommentAuther>
-          <ProductCommentDate>
-            <p>約5分前</p>
-          </ProductCommentDate>
-          <ProductCommentContent>
-            <p>free comment area !</p>
-          </ProductCommentContent>
-        </ProductCommentInner>
         {comments?.length > 0 &&
           comments?.map((comment: Comment) => (
             <ProductCommentInner key={comment.id}>

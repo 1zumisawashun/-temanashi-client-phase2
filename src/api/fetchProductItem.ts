@@ -20,7 +20,10 @@ export const fetchProductItem = async (id: string): Promise<ProductItem> => {
     {}
   )
 
-  const commentRef = await productItemSnapshot.ref.collection('comments')
+  const commentRef = await productItemSnapshot.ref
+    .collection('comments')
+    .orderBy('createdAt', 'desc')
+
   const commentSnapshot = await commentRef.get()
 
   const commentMap = await commentSnapshot.docs.map((snapshot) => {

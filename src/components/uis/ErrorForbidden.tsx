@@ -36,6 +36,7 @@ const Paragraph = styled('p')`
   font-size: 16px;
   line-height: 21px;
   text-align: center;
+  word-break: break-all;
 `
 
 const FooterContent = styled('div')`
