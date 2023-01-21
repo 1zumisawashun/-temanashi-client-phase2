@@ -3,7 +3,7 @@ import { css } from '@emotion/css'
 import styled from '@emotion/styled'
 import React from 'react'
 import { ProductItem } from '../../../@types/dashboard'
-import { formatTaxIncludedPrice } from '../../../functions/utilities'
+import { formatTaxIncludedPrice } from '../../../functions/helpers'
 import { Image, Divider } from '../../uis'
 
 export const DashboardListContainer = styled('div')`

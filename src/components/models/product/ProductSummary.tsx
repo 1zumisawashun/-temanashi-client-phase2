@@ -8,7 +8,7 @@ import {
 } from '../../../functions/hooks'
 import { Button, ButtonLike, Modal } from '../../uis'
 import { ProductItem } from '../../../@types/dashboard'
-import { formatTaxIncludedPrice } from '../../../functions/utilities'
+import { formatTaxIncludedPrice } from '../../../functions/helpers'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 const ProductSummaryContainer = styled('div')`

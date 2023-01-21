@@ -1,7 +1,7 @@
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
 import { recommendation } from '../../../functions/constants/recommendation'
-import { formatTaxIncludedPrice } from '../../../functions/utilities'
+import { formatTaxIncludedPrice } from '../../../functions/helpers'
 import { Image } from '../../uis'
 import { ProductItem } from '../../../@types/dashboard'
 import { DashboardList } from '../dashboard'

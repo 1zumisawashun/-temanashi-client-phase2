@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
 import { useCartContext, mediaQuery } from '../../../functions/hooks'
-import { formatTaxIncludedPrice } from '../../../functions/utilities'
+import { formatTaxIncludedPrice } from '../../../functions/helpers'
 import { CartCounter } from './CartCounter'
 import { Divider, Image, ButtonIconDelete } from '../../uis'
 
