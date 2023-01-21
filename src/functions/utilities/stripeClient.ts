@@ -1,6 +1,6 @@
 /* eslint-disable*/
 import { loadStripe } from '@stripe/stripe-js'
-import { CheckoutSessionDoc, CustomerDoc } from '../@types/stripe'
+import { CheckoutSessionDoc, CustomerDoc } from '../../@types/stripe'
 import { subCollectionPoint } from './converterClient'
 
 export type line_item = {

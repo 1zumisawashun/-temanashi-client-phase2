@@ -1,4 +1,4 @@
-import { PaymentDoc, CustomerDoc } from '../@types/stripe'
+import { PaymentDoc, CustomerDoc } from '../../@types/stripe'
 import { subCollectionPoint } from '../utilities/converterClient'
 
 /**

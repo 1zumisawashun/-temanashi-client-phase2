@@ -1,10 +1,14 @@
 import { useHistory } from 'react-router-dom'
 import { Carousel } from 'react-responsive-carousel'
 import styled from '@emotion/styled'
-import { useCartContext, useFirestore, useDisclosure } from '../../../hooks'
+import {
+  useCartContext,
+  useFirestore,
+  useDisclosure
+} from '../../../functions/hooks'
 import { Button, ButtonLike, Modal } from '../../uis'
 import { ProductItem } from '../../../@types/dashboard'
-import { formatTaxIncludedPrice } from '../../../utilities'
+import { formatTaxIncludedPrice } from '../../../functions/utilities'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 const ProductSummaryContainer = styled('div')`

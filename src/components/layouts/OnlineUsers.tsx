@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { useQuery } from 'react-query'
-import { mediaQuery } from '../../hooks'
+import { mediaQuery } from '../../functions/hooks'
 import { Avatar, Divider } from '../uis'
-import { fetchAllUser } from '../../api/fetchAllUser'
+import { fetchAllUser } from '../../functions/api/fetchAllUser'
 
 const OnlineUserContainer = styled('div')`
   background: #fbfbfb;

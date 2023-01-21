@@ -1,4 +1,4 @@
-import { likedFurnitures, User, ProductItem } from '../@types/dashboard'
+import { likedFurnitures, User, ProductItem } from '../../@types/dashboard'
 import { subCollectionPoint } from '../utilities/converterClient'
 
 /**

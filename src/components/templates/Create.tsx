@@ -14,8 +14,8 @@ import {
   InputFileMultiple,
   Button
 } from '../uis'
-import { categoryOptions } from '../../utilities/constant'
-import { useStorage, useReactScroll, useAxios } from '../../hooks'
+import { categoryOptions } from '../../functions/utilities/constant'
+import { useStorage, useReactScroll, useAxios } from '../../functions/hooks'
 
 const FormContainer = styled('div')`
   display: grid;

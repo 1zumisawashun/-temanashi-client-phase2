@@ -1,4 +1,4 @@
-import { firebase } from '../firebase/config'
+import { firebase } from '../functions/firebase/config'
 import { ProductDoc, PriceDoc } from './stripe'
 
 // 最終的にプロダクトが持っている値の集合体

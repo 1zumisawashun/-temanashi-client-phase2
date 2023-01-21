@@ -1,7 +1,7 @@
 import { Redirect } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { CartTemplate } from '../components/templates/Cart'
-import { useAuthContext, mediaQuery } from '../hooks'
+import { useAuthContext, mediaQuery } from '../functions/hooks'
 import {
   Sidebar,
   OnlineUsers,

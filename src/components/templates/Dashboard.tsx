@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react'
 import { useQuery } from 'react-query'
 import { DashboardList } from '../models/dashboard'
-import { useAuthContext } from '../../hooks/useContextClient'
+import { useAuthContext } from '../../functions/hooks/useContextClient'
 import { ProductItem } from '../../@types/dashboard'
-import { fetchAllProduct } from '../../api/fetchAllProduct'
-import { filterList } from '../../utilities/constant'
+import { fetchAllProduct } from '../../functions/api/fetchAllProduct'
+import { filterList } from '../../functions/utilities/constant'
 import { BasicFilter } from '../uis'
 
 export const DashboardTemplate: React.VFC = () => {

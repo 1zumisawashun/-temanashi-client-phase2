@@ -1,5 +1,5 @@
-import { likedUsers } from '../@types/dashboard'
-import { ProductDoc } from '../@types/stripe'
+import { likedUsers } from '../../@types/dashboard'
+import { ProductDoc } from '../../@types/stripe'
 import { subDocumentPoint } from '../utilities/converterClient'
 import { firebase } from '../firebase/config'
 

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { firebase } from '../firebase/config'
 import { collectionPoint } from '../utilities/converterClient'
-import { firebasePath } from '../@types/dashboard'
+import { firebasePath } from '../../@types/dashboard'
 
 /**
  * useEffectでデータフェッチをしない仕様にする為、現在は未使用

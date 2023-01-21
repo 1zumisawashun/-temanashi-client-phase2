@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { UserFavorite, UserHistory, UserAccount } from '../models/user'
-import { useAuthContext } from '../../hooks'
-import { fetchAllPayment } from '../../api/fetchAllPayment'
-import { fetchAllFavoriteProduct } from '../../api/fetchAllFavoriteProduct'
-import { userList } from '../../utilities/constant'
+import { useAuthContext } from '../../functions/hooks'
+import { fetchAllPayment } from '../../functions/api/fetchAllPayment'
+import { fetchAllFavoriteProduct } from '../../functions/api/fetchAllFavoriteProduct'
+import { userList } from '../../functions/utilities/constant'
 import { BasicFilter } from '../uis'
 
 export const UserTemplate: React.VFC = () => {

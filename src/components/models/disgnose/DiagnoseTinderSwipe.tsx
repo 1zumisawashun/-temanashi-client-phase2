@@ -8,7 +8,7 @@ import {
   BasicProgressbar
 } from '../../uis'
 import { ProductItem } from '../../../@types/dashboard'
-import { delay } from '../../../utilities'
+import { delay } from '../../../functions/utilities'
 
 const CommonWrapper = styled('div')`
   align-items: center;

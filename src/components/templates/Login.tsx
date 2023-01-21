@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styled from '@emotion/styled'
 import { InputText, Button, ButtonLink, ErrorText } from '../uis'
-import { useAuth, mediaQuery } from '../../hooks'
+import { useAuth, mediaQuery } from '../../functions/hooks'
 
 export const AuthContainer = styled('div')`
   background: linear-gradient(to right, #84bcb4, #84bcb4, #84bcb4);

@@ -1,11 +1,11 @@
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
-import { recommendation } from '../../../utilities/constant'
-import { formatTaxIncludedPrice } from '../../../utilities'
+import { recommendation } from '../../../functions/utilities/constant'
+import { formatTaxIncludedPrice } from '../../../functions/utilities'
 import { Image } from '../../uis'
 import { ProductItem } from '../../../@types/dashboard'
 import { DashboardList } from '../dashboard'
-import { mediaQuery } from '../../../hooks'
+import { mediaQuery } from '../../../functions/hooks'
 
 const DisgnoseResultContainer = styled('div')`
   font-size: 16px;

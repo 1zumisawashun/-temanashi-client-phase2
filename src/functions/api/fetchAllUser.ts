@@ -1,4 +1,4 @@
-import { User } from '../@types/dashboard'
+import { User } from '../../@types/dashboard'
 import { collectionPoint } from '../utilities/converterClient'
 
 /**

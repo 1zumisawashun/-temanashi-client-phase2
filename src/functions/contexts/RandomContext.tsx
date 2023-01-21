@@ -1,5 +1,5 @@
 import { createContext, useReducer, useMemo } from 'react'
-import { ProductItem } from '../@types/dashboard'
+import { ProductItem } from '../../@types/dashboard'
 
 interface Action {
   type: string

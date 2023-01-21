@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect } from 'react-router-dom'
 import styled from '@emotion/styled'
-import { lazyImport } from '../utilities'
+import { lazyImport } from '../functions/utilities'
 
 const { Cart } = lazyImport(() => import('../pages/Cart'), 'Cart')
 const { Complete } = lazyImport(
