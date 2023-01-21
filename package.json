@@ -64,6 +64,7 @@
     "build:stg": "npm run clean && dotenv -e .env.staging react-scripts build",
     "deploy": "npm run build && firebase deploy --project=temanashi-phase2",
     "deploy:stg": "npm run build:stg && firebase deploy --project=temanashi-phase2-development",
+    "firestore:indexes": "firebase firestore:indexes > firestore.indexes.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "emulators": "cd functions && npm run emulators",
