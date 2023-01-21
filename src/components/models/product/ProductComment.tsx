@@ -5,7 +5,7 @@ import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
 import { Comment, ProductItem } from '../../../@types/dashboard'
 import { useDisclosure } from '../../../functions/hooks'
-import { timestamp, firebase } from '../../../functions/firebase/config'
+import { timestamp, firebase } from '../../../functions/libs/config'
 import {
   Button,
   Modal,
@@ -13,7 +13,7 @@ import {
   Avatar,
   ButtonIconPerson
 } from '../../uis'
-import { fetchCommentReference } from '../../../functions/api/fetchCommentReference'
+import { fetchCommentReference } from '../../../functions/services/fetchCommentReference'
 
 const ProductCommentContainer = styled('div')`
   width: 100%;

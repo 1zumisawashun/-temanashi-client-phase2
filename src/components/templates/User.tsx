@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { UserFavorite, UserHistory, UserAccount } from '../models/user'
 import { useAuthContext } from '../../functions/hooks'
-import { fetchAllPayment } from '../../functions/api/fetchAllPayment'
-import { fetchAllFavoriteProduct } from '../../functions/api/fetchAllFavoriteProduct'
-import { userList } from '../../functions/utilities/constant'
+import { fetchAllPayment } from '../../functions/services/fetchAllPayment'
+import { fetchAllFavoriteProduct } from '../../functions/services/fetchAllFavoriteProduct'
+import { userFilterOptions } from '../../functions/constants/userFilterOptions'
 import { BasicFilter } from '../uis'
 
 export const UserTemplate: React.VFC = () => {
@@ -31,7 +31,7 @@ export const UserTemplate: React.VFC = () => {
       <BasicFilter
         currentFilter={currentFilter}
         changeFilter={changeFilter}
-        items={userList}
+        items={userFilterOptions}
       />
       {currentFilter === 'favorite' && favoriteProducts.data && (
         <UserFavorite productItems={favoriteProducts.data} />

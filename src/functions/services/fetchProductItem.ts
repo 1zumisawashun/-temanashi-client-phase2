@@ -1,6 +1,6 @@
 import { ProductDoc, PriceDoc } from '../../@types/stripe'
 import { Comment, ProductItem } from '../../@types/dashboard'
-import { projectFirestore } from '../firebase/config'
+import { projectFirestore } from '../libs/config'
 
 /**
  * ドキュメント参照③

@@ -14,7 +14,7 @@ import {
   InputFileMultiple,
   Button
 } from '../uis'
-import { categoryOptions } from '../../functions/utilities/constant'
+import { categoryOptions } from '../../functions/constants/categoryOptions'
 import { useStorage, useReactScroll, useAxios } from '../../functions/hooks'
 
 const FormContainer = styled('div')`

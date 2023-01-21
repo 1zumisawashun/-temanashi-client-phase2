@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useState } from 'react'
-import { timestamp } from '../firebase/config'
+import { timestamp } from '../libs/config'
 import { documentPoint, collectionPoint } from '../utilities/converterClient'
 
 const initialState = {

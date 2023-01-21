@@ -1,7 +1,7 @@
 import { likedUsers } from '../../@types/dashboard'
 import { ProductDoc } from '../../@types/stripe'
 import { subDocumentPoint } from '../utilities/converterClient'
-import { firebase } from '../firebase/config'
+import { firebase } from '../libs/config'
 
 export type CustomLikedUser = {
   documents: likedUsers

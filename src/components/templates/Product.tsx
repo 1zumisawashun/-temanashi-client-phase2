@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { useQuery } from 'react-query'
 import { ProductComment, ProductSummary } from '../models/product'
 import { useAuthContext, mediaQuery } from '../../functions/hooks'
-import { fetchProductItem } from '../../functions/api/fetchProductItem'
+import { fetchProductItem } from '../../functions/services/fetchProductItem'
 
 const ProductContainer = styled('div')`
   align-items: start;

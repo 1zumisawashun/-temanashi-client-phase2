@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from '@emotion/styled'
 import { ButtonIconClose, Button, Modal, ErrorText } from '.'
 import { useDisclosure, useDragAndDrop } from '../../functions/hooks'
-import { mineType } from '../../functions/utilities/constant'
+import { mineType } from '../../functions/constants/minetype'
 
 const UploadContainer = styled('div')`
   width: 100%;

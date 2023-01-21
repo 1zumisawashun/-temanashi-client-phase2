@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { firebase } from '../firebase/config'
+import { firebase } from '../libs/config'
 import { collectionPoint } from '../utilities/converterClient'
 import { firebasePath } from '../../@types/dashboard'
 

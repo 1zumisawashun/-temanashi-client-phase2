@@ -5,7 +5,7 @@ import { Loading } from '../uis'
 import { useRandomContext } from '../../functions/hooks/useContextClient'
 import { ProductItem } from '../../@types/dashboard'
 import { delay } from '../../functions/utilities'
-import { fetchAllProduct } from '../../functions/api/fetchAllProduct'
+import { fetchAllProduct } from '../../functions/services/fetchAllProduct'
 
 export const DiagnoseTemplate: React.VFC = () => {
   const { products, addProductWithRandom } = useRandomContext()

@@ -1,4 +1,4 @@
-import { firebase, projectFirestore } from '../firebase/config'
+import { firebase, projectFirestore } from '../libs/config'
 
 const converter = <T>() => ({
   toFirestore: (data: T) => data,

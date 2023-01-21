@@ -1,6 +1,6 @@
 import { likedFurnitures, User } from '../../@types/dashboard'
 import { subDocumentPoint } from '../utilities/converterClient'
-import { firebase } from '../firebase/config'
+import { firebase } from '../libs/config'
 
 export type CustomLikedFuriture = {
   documents: likedFurnitures

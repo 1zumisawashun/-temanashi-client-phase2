@@ -3,8 +3,8 @@ import { useQuery } from 'react-query'
 import { DashboardList } from '../models/dashboard'
 import { useAuthContext } from '../../functions/hooks/useContextClient'
 import { ProductItem } from '../../@types/dashboard'
-import { fetchAllProduct } from '../../functions/api/fetchAllProduct'
-import { filterList } from '../../functions/utilities/constant'
+import { fetchAllProduct } from '../../functions/services/fetchAllProduct'
+import { dashboardFilterOptions } from '../../functions/constants/dashboardFilterOptions'
 import { BasicFilter } from '../uis'
 
 export const DashboardTemplate: React.VFC = () => {
@@ -50,7 +50,7 @@ export const DashboardTemplate: React.VFC = () => {
         <BasicFilter
           currentFilter={currentFilter}
           changeFilter={changeFilter}
-          items={filterList}
+          items={dashboardFilterOptions}
         />
       )}
       {filteredProductItems && (

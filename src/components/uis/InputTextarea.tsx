@@ -1,7 +1,6 @@
 import { TextField } from '@mui/material'
 import styled from '@emotion/styled'
 import { UseFormRegisterReturn } from 'react-hook-form'
-import { error } from 'console'
 
 const StyledTextField = styled(TextField)`
   background-color: white;
