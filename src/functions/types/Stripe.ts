@@ -1,5 +1,5 @@
 import Stripe from 'stripe'
-import interfaces from './stripeInterface'
+import interfaces from '../../@types/stripeInterface'
 
 // /customers/{uid}/
 export type CustomerDoc = {

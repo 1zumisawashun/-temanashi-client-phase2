@@ -7,7 +7,7 @@ import {
   ButtonIconUndo,
   BasicProgressbar
 } from '../../uis'
-import { ProductItem } from '../../../@types/dashboard'
+import { ProductItem } from '../../../functions/types/Product'
 import { delay } from '../../../functions/helpers'
 
 const CommonWrapper = styled('div')`

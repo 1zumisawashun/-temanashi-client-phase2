@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
-import { Comment, ProductItem } from '../../../@types/dashboard'
+import { ProductItem, Comment } from '../../../functions/types/Product'
 import { useDisclosure } from '../../../functions/hooks'
 import { timestamp, firebase } from '../../../functions/libs/config'
 import {
@@ -92,7 +92,7 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
           comments?.map((comment: Comment) => (
             <ProductCommentInner key={comment.id}>
               <ProductCommentAuther>
-                <Avatar src={comment.photoURL} size="small" />
+                <Avatar src={comment.photoURL || ''} size="small" />
                 <p>{comment.displayName}</p>
               </ProductCommentAuther>
               <ProductCommentDate>

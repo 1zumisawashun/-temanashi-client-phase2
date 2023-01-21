@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { projectAuth, projectStorage } from '../libs/config'
 import { documentPoint } from '../utilities/converterClient'
-import { User } from '../../@types/dashboard'
+import { User } from '../types/User'
 import { useToken, useAuthContext } from '.'
 
 export const useAuth = () => {

@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { DiagnoseResult, DiagnoseTinderSwipe } from '../models/disgnose'
 import { Loading } from '../uis'
 import { useRandomContext } from '../../functions/hooks/useContextClient'
-import { ProductItem } from '../../@types/dashboard'
+import { ProductItem } from '../../functions/types/Product'
 import { delay } from '../../functions/helpers'
 import { fetchAllProduct } from '../../functions/services/fetchAllProduct'
 

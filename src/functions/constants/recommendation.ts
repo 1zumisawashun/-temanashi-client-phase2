@@ -1,4 +1,4 @@
-import { Furniture } from '../../@types/dashboard'
+import { Furniture } from '../types/Product'
 import theme_1 from '../../assets/image/furniture_1.jpg'
 
 export const recommendation: Partial<Furniture> = {

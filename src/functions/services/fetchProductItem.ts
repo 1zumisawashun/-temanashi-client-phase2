@@ -1,5 +1,5 @@
-import { ProductDoc, PriceDoc } from '../../@types/stripe'
-import { Comment, ProductItem } from '../../@types/dashboard'
+import { ProductDoc, PriceDoc } from '../types/Stripe'
+import { Comment, ProductItem } from '../types/Product'
 import { projectFirestore } from '../libs/config'
 
 /**

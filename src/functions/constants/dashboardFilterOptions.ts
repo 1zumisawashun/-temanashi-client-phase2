@@ -1,4 +1,4 @@
-export const dashboardFilterOptions: Array<string> = [
+export const dashboardFilterOptions = [
   'all',
   'bed',
   'blanket',

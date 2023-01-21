@@ -1,7 +1,11 @@
 import { useEffect, useState, useRef } from 'react'
-import { firebase } from '../libs/config'
+import {
+  CollectionReference,
+  WhereFilterOp,
+  OrderByDirection
+} from '@firebase/firestore-types'
 import { collectionPoint } from '../utilities/converterClient'
-import { firebasePath } from '../../@types/dashboard'
+import { firebasePath } from '../types/Common'
 
 /**
  * useEffectでデータフェッチをしない仕様にする為、現在は未使用
@@ -22,10 +26,10 @@ export const useCollection = <T,>(
   useEffect(() => {
     let ref = collectionPoint<T>(collection)
     if (query) {
-      ref = ref.where(...query) as firebase.firestore.CollectionReference<T>
+      ref = ref.where(...query) as CollectionReference<T>
     }
     if (orderBy) {
-      ref = ref.orderBy(...orderBy) as firebase.firestore.CollectionReference<T>
+      ref = ref.orderBy(...orderBy) as CollectionReference<T>
     }
     const unsubscribe = ref.onSnapshot(
       (snapshot) => {

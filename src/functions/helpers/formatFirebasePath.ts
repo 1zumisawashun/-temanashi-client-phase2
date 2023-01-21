@@ -1,4 +1,4 @@
-import type { firebasePath } from '../../@types/dashboard'
+import { firebasePath } from '../types/Common'
 
 export const formatFirebasePath = (path: string): firebasePath => {
   const result = path.split('/')

@@ -1,6 +1,6 @@
-import { PriceDoc, ProductDoc } from '../../@types/stripe'
+import { PriceDoc, ProductDoc } from '../types/Stripe'
 import { projectFirestore } from '../libs/config'
-import { ProductItem } from '../../@types/dashboard'
+import { ProductItem } from '../types/Product'
 
 /**
  * コレクション参照①

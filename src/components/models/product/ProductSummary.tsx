@@ -7,7 +7,7 @@ import {
   useDisclosure
 } from '../../../functions/hooks'
 import { Button, ButtonLike, Modal } from '../../uis'
-import { ProductItem } from '../../../@types/dashboard'
+import { ProductItem } from '../../../functions/types/Product'
 import { formatTaxIncludedPrice } from '../../../functions/helpers'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 

@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styled from '@emotion/styled'
 import { useErrorHandler } from 'react-error-boundary'
-import { OptionProps } from '../uis/InputSelect'
+import { OptionProps } from '../../functions/types/Common'
 import {
   InputSelect,
   InputText,

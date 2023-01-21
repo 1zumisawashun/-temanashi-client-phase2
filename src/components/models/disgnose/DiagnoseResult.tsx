@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { recommendation } from '../../../functions/constants/recommendation'
 import { formatTaxIncludedPrice } from '../../../functions/helpers'
 import { Image } from '../../uis'
-import { ProductItem } from '../../../@types/dashboard'
+import { ProductItem } from '../../../functions/types/Product'
 import { DashboardList } from '../dashboard'
 import { mediaQuery } from '../../../functions/hooks'
 

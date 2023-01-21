@@ -49,7 +49,7 @@ export const OnlineUsers: React.VFC = () => {
           <OnlineUserItem key={user.id}>
             {user.online && <OnlineUser />}
             <span>{user.displayName}</span>
-            <Avatar src={user.photoURL} />
+            <Avatar src={user.photoURL || ''} />
           </OnlineUserItem>
         ))}
     </OnlineUserContainer>

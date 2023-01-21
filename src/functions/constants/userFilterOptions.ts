@@ -1,5 +1,1 @@
-export const userFilterOptions: Array<string> = [
-  'favorite',
-  'history',
-  'account'
-]
+export const userFilterOptions = ['favorite', 'history', 'account']

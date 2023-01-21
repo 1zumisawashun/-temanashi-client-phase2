@@ -1,9 +1,9 @@
-import { firebase, projectFirestore } from '../libs/config'
+import { FirestoreDataConverter, DocumentData } from '@firebase/firestore-types'
+import { projectFirestore } from '../libs/config'
 
-const converter = <T>() => ({
-  toFirestore: (data: T) => data,
-  fromFirestore: (snap: firebase.firestore.QueryDocumentSnapshot) =>
-    snap.data() as T
+const converter = <T>(): FirestoreDataConverter<T> => ({
+  toFirestore: (data) => data as DocumentData,
+  fromFirestore: (snap) => snap.data() as T
 })
 
 const collectionPoint = <T>(collection: string) =>

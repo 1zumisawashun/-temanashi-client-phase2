@@ -1,7 +1,7 @@
 import { firebase } from '../libs/config'
-import { ProductDoc } from '../../@types/stripe'
+import { ProductDoc } from '../types/Stripe'
 import { subCollectionPoint } from '../utilities/converterClient'
-import { Comment } from '../../@types/dashboard'
+import { Comment } from '../types/Product'
 
 /**
  * サブコレクション参照⑥

@@ -1,10 +1,11 @@
-import { likedFurnitures, User } from '../../@types/dashboard'
+import { DocumentReference } from '@firebase/firestore-types'
+import { User } from '../types/User'
+import { likedFurnitures } from '../types/Product'
 import { subDocumentPoint } from '../utilities/converterClient'
-import { firebase } from '../libs/config'
 
 export type CustomLikedFuriture = {
-  documents: likedFurnitures
-  referense: firebase.firestore.DocumentReference<likedFurnitures>
+  documents?: likedFurnitures
+  referense: DocumentReference<likedFurnitures>
 }
 
 /**
@@ -24,6 +25,6 @@ export const fetchLikedProduct = async (
   const likedProductSnapshot = await LikedProductRef.get()
   return {
     referense: LikedProductRef,
-    documents: likedProductSnapshot.data()!
+    documents: likedProductSnapshot.data()
   }
 }

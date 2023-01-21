@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { documentPoint } from '../utilities/converterClient'
-import { firebasePath } from '../../@types/dashboard'
+import { firebasePath } from '../types/Common'
 
 /**
  *  useEffectでデータフェッチをしない仕様にする為、現在は未使用

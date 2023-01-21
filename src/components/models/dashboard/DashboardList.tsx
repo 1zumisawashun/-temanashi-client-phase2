@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
 import React from 'react'
-import { ProductItem } from '../../../@types/dashboard'
+import { ProductItem } from '../../../functions/types/Product'
 import { formatTaxIncludedPrice } from '../../../functions/helpers'
 import { Image, Divider } from '../../uis'
 

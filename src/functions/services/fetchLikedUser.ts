@@ -1,11 +1,11 @@
-import { likedUsers } from '../../@types/dashboard'
-import { ProductDoc } from '../../@types/stripe'
+import { DocumentReference } from '@firebase/firestore-types'
+import { likedUsers } from '../types/User'
+import { ProductDoc } from '../types/Stripe'
 import { subDocumentPoint } from '../utilities/converterClient'
-import { firebase } from '../libs/config'
 
 export type CustomLikedUser = {
-  documents: likedUsers
-  referense: firebase.firestore.DocumentReference<likedUsers>
+  documents?: likedUsers
+  referense: DocumentReference<likedUsers>
 }
 
 /**
@@ -23,5 +23,5 @@ export const fetchLikedUser = async (
     uid
   )
   const likedUserSnapshot = await LikedUserRef.get()
-  return { referense: LikedUserRef, documents: likedUserSnapshot.data()! }
+  return { referense: LikedUserRef, documents: likedUserSnapshot.data() }
 }

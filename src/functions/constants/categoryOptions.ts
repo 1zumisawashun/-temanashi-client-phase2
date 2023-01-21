@@ -1,6 +1,6 @@
-import { OptionProps } from '../../components/uis/InputSelect'
+import { OptionProps } from '../types/Common'
 
-export const categoryOptions: Array<OptionProps> = [
+export const categoryOptions: OptionProps[] = [
   { value: 'bed', label: 'Bed' },
   { value: 'blanket', label: 'Blanket' },
   { value: 'chair', label: 'Chair' },
