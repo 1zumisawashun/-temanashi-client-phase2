@@ -1,4 +1,4 @@
-import { Timestamp, FieldValue } from '@firebase/firestore-types'
+import { Timestamp } from '@firebase/firestore-types'
 import { UserInfo } from '@firebase/auth-types'
 import { ProductDoc, PriceDoc } from './Stripe'
 

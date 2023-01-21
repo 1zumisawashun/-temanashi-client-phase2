@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
-import { timestamp } from '../../functions/libs/config'
+import { timestamp } from '../../functions/libs/firebase'
 import { useAuthContext } from '../../functions/hooks/useContextClient'
 import { ProductItem } from '../../functions/types/Product'
 import { fetchLikedProduct } from '../../functions/services/fetchLikedProduct'

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { projectAuth, projectStorage } from '../libs/config'
+import { projectAuth, projectStorage } from '../libs/firebase'
 import { documentPoint } from '../utilities/converterClient'
 import { User } from '../types/User'
 import { useToken, useAuthContext } from '.'

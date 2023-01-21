@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { projectFunctions, isEmulating } from '../../../functions/libs/config'
+import { projectFunctions, isEmulating } from '../../../functions/libs/firebase'
 import {
   useAuthContext,
   useToken,

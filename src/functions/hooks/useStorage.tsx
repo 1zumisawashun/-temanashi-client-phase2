@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import loadImage from 'blueimp-load-image'
-import { projectStorage } from '../libs/config'
+import { projectStorage } from '../libs/firebase'
 import { useAuthContext } from './useContextClient'
 
 export const useStorage = () => {

@@ -1,5 +1,5 @@
 import { FirestoreDataConverter, DocumentData } from '@firebase/firestore-types'
-import { projectFirestore } from '../libs/config'
+import { projectFirestore } from '../libs/firebase'
 
 const converter = <T>(): FirestoreDataConverter<T> => ({
   toFirestore: (data) => data as DocumentData,

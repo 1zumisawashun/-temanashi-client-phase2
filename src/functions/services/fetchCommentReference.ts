@@ -1,4 +1,4 @@
-import { firebase } from '../libs/config'
+import { firebase } from '../libs/firebase'
 import { ProductDoc } from '../types/Stripe'
 import { subCollectionPoint } from '../utilities/converterClient'
 import { Comment } from '../types/Product'

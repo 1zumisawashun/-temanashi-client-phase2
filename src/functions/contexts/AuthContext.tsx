@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect, useMemo } from 'react'
-import { firebase, projectAuth } from '../libs/config'
+import { firebase, projectAuth } from '../libs/firebase'
 
 interface Action {
   type: string

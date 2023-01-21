@@ -5,7 +5,7 @@ import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
 import { ProductItem, Comment } from '../../../functions/types/Product'
 import { useDisclosure } from '../../../functions/hooks'
-import { timestamp, firebase } from '../../../functions/libs/config'
+import { timestamp, firebase } from '../../../functions/libs/firebase'
 import {
   Button,
   Modal,

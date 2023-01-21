@@ -1,5 +1,5 @@
 import { PriceDoc, ProductDoc } from '../types/Stripe'
-import { projectFirestore } from '../libs/config'
+import { projectFirestore } from '../libs/firebase'
 import { ProductItem } from '../types/Product'
 
 /**
