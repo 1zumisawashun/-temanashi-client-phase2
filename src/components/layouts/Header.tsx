@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { HambergerMenu } from './HambergerMenu'
 import { ButtonIconStore } from '../uis'
-import { mediaQuery } from '../../hooks'
+import { mediaQuery } from '../../functionals/hooks'
 
 const HeaderContainer = styled('div')`
   box-sizing: border-box;

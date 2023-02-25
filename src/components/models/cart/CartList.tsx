@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
-import { useCartContext, mediaQuery } from '../../../hooks'
-import { formatTaxIncludedPrice } from '../../../utilities'
+import { useCartContext, mediaQuery } from '../../../functionals/hooks'
+import { formatTaxIncludedPrice } from '../../../functionals/helpers'
 import { CartCounter } from './CartCounter'
 import { Divider, Image, ButtonIconDelete } from '../../uis'
 

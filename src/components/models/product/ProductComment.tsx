@@ -3,9 +3,9 @@ import { useQuery } from 'react-query'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
-import { Comment, ProductItem } from '../../../@types/dashboard'
-import { useDisclosure } from '../../../hooks'
-import { timestamp, firebase } from '../../../firebase/config'
+import { ProductItem, Comment } from '../../../functionals/types/Product'
+import { useDisclosure } from '../../../functionals/hooks'
+import { timestamp, firebase } from '../../../functionals/libs/firebase'
 import {
   Button,
   Modal,
@@ -13,7 +13,7 @@ import {
   Avatar,
   ButtonIconPerson
 } from '../../uis'
-import { fetchCommentReference } from '../../../api/fetchCommentReference'
+import { fetchCommentReference } from '../../../functionals/services/fetchCommentReference'
 
 const ProductCommentContainer = styled('div')`
   width: 100%;
@@ -88,23 +88,11 @@ export const ProductComment: React.VFC<ProductCommentProps> = ({
   return (
     <ProductCommentContainer>
       <ProductCommentWrapper>
-        <ProductCommentInner>
-          <ProductCommentAuther>
-            <ButtonIconPerson />
-            <p>temanashi-tester</p>
-          </ProductCommentAuther>
-          <ProductCommentDate>
-            <p>約5分前</p>
-          </ProductCommentDate>
-          <ProductCommentContent>
-            <p>free comment area !</p>
-          </ProductCommentContent>
-        </ProductCommentInner>
         {comments?.length > 0 &&
           comments?.map((comment: Comment) => (
             <ProductCommentInner key={comment.id}>
               <ProductCommentAuther>
-                <Avatar src={comment.photoURL} size="small" />
+                <Avatar src={comment.photoURL || ''} size="small" />
                 <p>{comment.displayName}</p>
               </ProductCommentAuther>
               <ProductCommentDate>

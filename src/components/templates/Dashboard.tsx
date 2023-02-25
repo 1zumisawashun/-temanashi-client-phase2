@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react'
 import { useQuery } from 'react-query'
 import { DashboardList } from '../models/dashboard'
-import { useAuthContext } from '../../hooks/useContextClient'
-import { ProductItem } from '../../@types/dashboard'
-import { fetchAllProduct } from '../../api/fetchAllProduct'
-import { filterList } from '../../utilities/constant'
+import { useAuthContext } from '../../functionals/hooks/useContextClient'
+import { ProductItem } from '../../functionals/types/Product'
+import { fetchAllProduct } from '../../functionals/services/fetchAllProduct'
+import { dashboardFilterOptions } from '../../functionals/constants/dashboardFilterOptions'
 import { BasicFilter } from '../uis'
 
 export const DashboardTemplate: React.VFC = () => {
@@ -50,7 +50,7 @@ export const DashboardTemplate: React.VFC = () => {
         <BasicFilter
           currentFilter={currentFilter}
           changeFilter={changeFilter}
-          items={filterList}
+          items={dashboardFilterOptions}
         />
       )}
       {filteredProductItems && (

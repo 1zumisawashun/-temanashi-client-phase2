@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Select, { MultiValue } from 'react-select'
 import { CSSProperties } from 'react'
 import { ErrorText } from './index'
+import { OptionProps } from '../../functionals/types/Common'
 
 const StyledFormControl = styled(FormControl)`
   font-size: 16px;
@@ -27,11 +28,6 @@ const customStyles = (error = false) => {
       borderColor: error ? '#d32f2f' : '#999'
     })
   }
-}
-
-export type OptionProps = {
-  value: string
-  label: string
 }
 
 export type SelectFormProps = {

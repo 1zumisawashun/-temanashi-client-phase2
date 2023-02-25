@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styled from '@emotion/styled'
 import { useErrorHandler } from 'react-error-boundary'
-import { OptionProps } from '../uis/InputSelect'
+import { OptionProps } from '../../functionals/types/Common'
 import {
   InputSelect,
   InputText,
@@ -14,8 +14,8 @@ import {
   InputFileMultiple,
   Button
 } from '../uis'
-import { categoryOptions } from '../../utilities/constant'
-import { useStorage, useReactScroll, useAxios } from '../../hooks'
+import { categoryOptions } from '../../functionals/constants/categoryOptions'
+import { useStorage, useReactScroll, useAxios } from '../../functionals/hooks'
 
 const FormContainer = styled('div')`
   display: grid;

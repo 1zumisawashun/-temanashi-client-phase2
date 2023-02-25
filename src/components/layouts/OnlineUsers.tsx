@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { useQuery } from 'react-query'
-import { mediaQuery } from '../../hooks'
+import { mediaQuery } from '../../functionals/hooks'
 import { Avatar, Divider } from '../uis'
-import { fetchAllUser } from '../../api/fetchAllUser'
+import { fetchAllUser } from '../../functionals/services/fetchAllUser'
 
 const OnlineUserContainer = styled('div')`
   background: #fbfbfb;
@@ -49,7 +49,7 @@ export const OnlineUsers: React.VFC = () => {
           <OnlineUserItem key={user.id}>
             {user.online && <OnlineUser />}
             <span>{user.displayName}</span>
-            <Avatar src={user.photoURL} />
+            <Avatar src={user.photoURL || ''} />
           </OnlineUserItem>
         ))}
     </OnlineUserContainer>

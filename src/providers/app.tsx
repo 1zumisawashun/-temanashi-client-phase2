@@ -11,8 +11,8 @@ import {
   AuthContextProvider,
   CartContextProvider,
   RandomContextProvider
-} from '../contexts'
-import { theme } from '../utilities/muiThemeClient'
+} from '../functionals/contexts'
+import { theme } from '../functionals/utilities/muiThemeClient'
 
 const queryConfig: DefaultOptions = {
   queries: {

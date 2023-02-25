@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { useState } from 'react'
 import { InputCheckbox, Button } from '../../uis'
 import { SquareIcon, SquareIconBlank } from '../../uis/InputCheckbox'
-import { mediaQuery } from '../../../hooks'
+import { mediaQuery } from '../../../functionals/hooks'
 
 const CartAgreementContainer = styled('div')`
   background: white;
