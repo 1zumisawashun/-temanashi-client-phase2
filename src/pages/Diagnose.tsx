@@ -1,7 +1,7 @@
 import { Redirect } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { DiagnoseTemplate } from '../components/templates/Diagnose'
-import { useAuthContext, mediaQuery } from '../functions/hooks'
+import { useAuthContext, mediaQuery } from '../functionals/hooks'
 import {
   Sidebar,
   OnlineUsers,

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { DashboardList } from '../dashboard'
-import { ProductItem } from '../../../functions/types/Product'
+import { ProductItem } from '../../../functionals/types/Product'
 import { ErrorNotFound } from '../../uis'
 
 const UserContaienr = styled('div')`

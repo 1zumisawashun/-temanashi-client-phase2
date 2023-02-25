@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useQuery } from 'react-query'
 import { DiagnoseResult, DiagnoseTinderSwipe } from '../models/disgnose'
 import { Loading } from '../uis'
-import { useRandomContext } from '../../functions/hooks/useContextClient'
-import { ProductItem } from '../../functions/types/Product'
-import { delay } from '../../functions/helpers'
-import { fetchAllProduct } from '../../functions/services/fetchAllProduct'
+import { useRandomContext } from '../../functionals/hooks/useContextClient'
+import { ProductItem } from '../../functionals/types/Product'
+import { delay } from '../../functionals/helpers'
+import { fetchAllProduct } from '../../functionals/services/fetchAllProduct'
 
 export const DiagnoseTemplate: React.VFC = () => {
   const { products, addProductWithRandom } = useRandomContext()

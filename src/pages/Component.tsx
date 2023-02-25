@@ -25,8 +25,8 @@ import {
   LinkCardFlexWithoutBackground,
   Datetimepicker
 } from '../components/uis/phase3'
-import { categoryOptions } from '../functions/constants/categoryOptions'
-import { weekdaysOptions } from '../functions/constants/weekdaysOptions'
+import { categoryOptions } from '../functionals/constants/categoryOptions'
+import { weekdaysOptions } from '../functionals/constants/weekdaysOptions'
 
 const Container = styled('div')`
   background: #f4f4f4;

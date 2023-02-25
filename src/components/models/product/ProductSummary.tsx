@@ -5,10 +5,10 @@ import {
   useCartContext,
   useFirestore,
   useDisclosure
-} from '../../../functions/hooks'
+} from '../../../functionals/hooks'
 import { Button, ButtonLike, Modal } from '../../uis'
-import { ProductItem } from '../../../functions/types/Product'
-import { formatTaxIncludedPrice } from '../../../functions/helpers'
+import { ProductItem } from '../../../functionals/types/Product'
+import { formatTaxIncludedPrice } from '../../../functionals/helpers'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 const ProductSummaryContainer = styled('div')`

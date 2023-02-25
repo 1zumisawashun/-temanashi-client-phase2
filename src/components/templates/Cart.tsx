@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { useErrorHandler } from 'react-error-boundary'
-import { productUseCase } from '../../functions/utilities/stripeClient'
-import { useToken, useAuthContext, useCartContext } from '../../functions/hooks'
+import { productUseCase } from '../../functionals/utilities/stripeClient'
+import {
+  useToken,
+  useAuthContext,
+  useCartContext
+} from '../../functionals/hooks'
 import { CartList, CartAgreement } from '../models/cart'
 import { ErrorNotFound } from '../uis'
 

@@ -1,13 +1,16 @@
 import { useHistory } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { projectFunctions, isEmulating } from '../../../functions/libs/firebase'
+import {
+  projectFunctions,
+  isEmulating
+} from '../../../functionals/libs/firebase'
 import {
   useAuthContext,
   useToken,
   useAuth,
   useAxios
-} from '../../../functions/hooks'
+} from '../../../functionals/hooks'
 import { Button } from '../../uis'
 
 const UserContainer = styled('div')`

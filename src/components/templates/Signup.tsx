@@ -9,7 +9,7 @@ import {
   InputFileSingle,
   ErrorText
 } from '../uis'
-import { useAuth } from '../../functions/hooks/useAuth'
+import { useAuth } from '../../functionals/hooks/useAuth'
 import { AuthContainer, AuthFormContainer, AuthInner, AuthTitle } from './Login'
 
 interface FormData {

@@ -10,7 +10,7 @@ import {
   useAuthContext,
   useCartContext,
   mediaQuery
-} from '../../functions/hooks'
+} from '../../functionals/hooks'
 
 const SidebarContainer = styled('div')`
   background: #84bcb4;

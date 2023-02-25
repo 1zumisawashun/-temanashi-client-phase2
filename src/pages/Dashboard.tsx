@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Redirect } from 'react-router-dom'
 import { DashboardTemplate } from '../components/templates/Dashboard'
-import { useAuthContext, mediaQuery } from '../functions/hooks'
+import { useAuthContext, mediaQuery } from '../functionals/hooks'
 import {
   Sidebar,
   OnlineUsers,

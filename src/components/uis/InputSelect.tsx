@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import Select, { MultiValue } from 'react-select'
 import { CSSProperties } from 'react'
 import { ErrorText } from './index'
-import { OptionProps } from '../../functions/types/Common'
+import { OptionProps } from '../../functionals/types/Common'
 
 const StyledFormControl = styled(FormControl)`
   font-size: 16px;

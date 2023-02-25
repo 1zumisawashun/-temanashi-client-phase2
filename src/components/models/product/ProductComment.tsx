@@ -3,9 +3,9 @@ import { useQuery } from 'react-query'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
-import { ProductItem, Comment } from '../../../functions/types/Product'
-import { useDisclosure } from '../../../functions/hooks'
-import { timestamp, firebase } from '../../../functions/libs/firebase'
+import { ProductItem, Comment } from '../../../functionals/types/Product'
+import { useDisclosure } from '../../../functionals/hooks'
+import { timestamp, firebase } from '../../../functionals/libs/firebase'
 import {
   Button,
   Modal,
@@ -13,7 +13,7 @@ import {
   Avatar,
   ButtonIconPerson
 } from '../../uis'
-import { fetchCommentReference } from '../../../functions/services/fetchCommentReference'
+import { fetchCommentReference } from '../../../functionals/services/fetchCommentReference'
 
 const ProductCommentContainer = styled('div')`
   width: 100%;

@@ -3,7 +3,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import styled from '@emotion/styled'
 import { Divider } from '../../uis'
-import { PaymentDoc } from '../../../functions/types/Stripe'
+import { PaymentDoc } from '../../../functionals/types/Stripe'
 
 const PaymentContaienr = styled('div')`
   padding: 30px 15px;

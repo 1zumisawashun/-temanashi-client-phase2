@@ -7,8 +7,8 @@ import {
   ButtonIconUndo,
   BasicProgressbar
 } from '../../uis'
-import { ProductItem } from '../../../functions/types/Product'
-import { delay } from '../../../functions/helpers'
+import { ProductItem } from '../../../functionals/types/Product'
+import { delay } from '../../../functionals/helpers'
 
 const CommonWrapper = styled('div')`
   align-items: center;

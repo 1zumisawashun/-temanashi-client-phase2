@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
-import { timestamp } from '../../functions/libs/firebase'
-import { useAuthContext } from '../../functions/hooks/useContextClient'
-import { ProductItem } from '../../functions/types/Product'
-import { fetchLikedProduct } from '../../functions/services/fetchLikedProduct'
-import { fetchLikedUser } from '../../functions/services/fetchLikedUser'
+import { timestamp } from '../../functionals/libs/firebase'
+import { useAuthContext } from '../../functionals/hooks/useContextClient'
+import { ProductItem } from '../../functionals/types/Product'
+import { fetchLikedProduct } from '../../functionals/services/fetchLikedProduct'
+import { fetchLikedUser } from '../../functionals/services/fetchLikedUser'
 import { ButtonIconFavorite, ButtonIconNoFavirute } from './ButtonIcon'
 
 type LikeButtonProp = {
